@@ -92,6 +92,13 @@ def main():
         raise RuntimeError("Could not inspect the materials branch")
     old = library / "manifest.json"
     previous = {item["sha256"]: item for item in json.loads(old.read_text()).get("assets", [])} if old.exists() else {}
+    for item in manifest["assets"]:
+        prior = previous.get(item["sha256"])
+        if item["mode"] == "repository" and prior and prior.get("mode") == "repository" and prior["repositoryPath"] != item["repositoryPath"]:
+            source_path, target_path = library / prior["repositoryPath"], library / item["repositoryPath"]
+            if verify(source_path, item):
+                target_path.parent.mkdir(parents=True, exist_ok=True)
+                shutil.copyfile(source_path, target_path); source_path.unlink()
     bundle_zip = None
     needs_bundle = any(item.get("localEntry") and (
         (item["mode"] == "repository" and not verify(library / item["repositoryPath"], item)) or

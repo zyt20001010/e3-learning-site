@@ -1,5 +1,5 @@
 {
-  "version": "learning-materials-2026-11-03-complete",
+  "version": "learning-materials-2026-11-03-corrected-type",
   "assets": [
     {
       "sha256": "9307fc9bb2fb9d7ea2b7680e8ddf1bf2594127bae0b748dcbe8f3f71def6d154",
@@ -2804,9 +2804,9 @@
     {
       "sha256": "c277bb8cdacd499d13a48148009be41a7f672a2acdb22d21e0fb8fc19306c7c2",
       "bytes": 15817,
-      "format": "pdf",
-      "filename": "u511-c277bb8cdacd499d.pdf",
-      "repositoryPath": "files/u511-c277bb8cdacd499d.pdf",
+      "format": "tex",
+      "filename": "u511-c277bb8cdacd499d.tex",
+      "repositoryPath": "files/u511-c277bb8cdacd499d.tex",
       "mode": "repository",
       "localEntry": "local/c277bb8cdacd499d13a48148009be41a7f672a2acdb22d21e0fb8fc19306c7c2.pdf",
       "resourceIds": [
