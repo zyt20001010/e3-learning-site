@@ -93,7 +93,11 @@ def main():
     old = library / "manifest.json"
     previous = {item["sha256"]: item for item in json.loads(old.read_text()).get("assets", [])} if old.exists() else {}
     bundle_zip = None
-    if manifest.get("bundle"):
+    needs_bundle = any(item.get("localEntry") and (
+        (item["mode"] == "repository" and not verify(library / item["repositoryPath"], item)) or
+        (item["mode"] == "release" and previous.get(item["sha256"], {}).get("state") != "ready"))
+        for item in manifest["assets"])
+    if manifest.get("bundle") and needs_bundle:
         bundle = manifest["bundle"]
         archive = root / "local-materials.zip"
         with archive.open("wb") as stream:
