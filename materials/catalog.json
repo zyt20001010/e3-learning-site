@@ -7,6 +7,7 @@
       "status": "downloadable",
       "note": "官方整本 PDF，可直接下载；当前小节仍可通过原有网页正文入口阅读。",
       "multipart": false,
+      "personalImportAllowed": false,
       "files": [
         {
           "label": "Precalculus 2e · 官方整本 PDF",
@@ -25,10 +26,27 @@
     {
       "resourceId": "PROOF",
       "title": "Daniel J. Velleman · How to Prove It, 3rd ed. (2019)",
-      "status": "library",
-      "note": "可使用你已有的第三版教材 PDF：点击“导入本地 PDF”后，在网页内阅读；文件只保存在当前浏览器。",
+      "status": "downloadable",
+      "note": "直接读取 GitHub 仓库中的第三版教材，点击即可阅读，无需本地导入。本文件共541页，按章、节定位。",
       "multipart": false,
-      "files": []
+      "personalImportAllowed": true,
+      "files": [
+        {
+          "label": "How to Prove It · 第三版 (2019)",
+          "href": "materials/how-to-prove-it-3rd-2019.pdf",
+          "sourceUrl": "https://www.cambridge.org/highereducation/books/how-to-prove-it/6D2965D625C6836CD4A785A2C843B3DA",
+          "sourceKind": "user-provided",
+          "repositoryUrl": "https://github.com/zyt20001010/e3-learning-site/blob/main/materials/how-to-prove-it-3rd-2019.pdf",
+          "format": "pdf",
+          "bytes": 9705372,
+          "pages": 541,
+          "sha256": "3f309cb4fd37ac3e73dfd93b25a99e06aa2c4f322e3d61b50117f06f3ff2d2c1",
+          "hosting": "site",
+          "attribution": "Daniel J. Velleman © 2019；用户提供的现有文件，保留原版权页与内容",
+          "creditUrl": "https://www.cambridge.org/highereducation/books/how-to-prove-it/6D2965D625C6836CD4A785A2C843B3DA",
+          "creditLabel": "出版信息"
+        }
+      ]
     },
     {
       "resourceId": "LA",
@@ -36,6 +54,7 @@
       "status": "downloadable",
       "note": "官方课程资料 ZIP，含课程网页、课件与练习等；具体内容以该课程资料包为准。",
       "multipart": false,
+      "personalImportAllowed": false,
       "files": [
         {
           "label": "完整课程资料 ZIP",
@@ -54,6 +73,7 @@
       "status": "downloadable",
       "note": "官方课程资料 ZIP，含课程网页、课件与练习等；具体内容以该课程资料包为准。",
       "multipart": false,
+      "personalImportAllowed": false,
       "files": [
         {
           "label": "完整课程资料 ZIP",
@@ -72,6 +92,7 @@
       "status": "downloadable",
       "note": "官方课程资料 ZIP，含课程网页、课件与练习等；具体内容以该课程资料包为准。",
       "multipart": false,
+      "personalImportAllowed": false,
       "files": [
         {
           "label": "完整课程资料 ZIP",
@@ -90,6 +111,7 @@
       "status": "web-only",
       "note": "该资源提供官方网页正文，本轮未接入可下载的整本文件。",
       "multipart": false,
+      "personalImportAllowed": false,
       "files": []
     },
     {
@@ -98,6 +120,7 @@
       "status": "downloadable",
       "note": "官方离线 HTML 文档包含教程和参考文档；也可选择 EPUB。",
       "multipart": false,
+      "personalImportAllowed": false,
       "files": [
         {
           "label": "离线 HTML 文档包",
@@ -125,6 +148,7 @@
       "status": "library",
       "note": "出版版仍需图书馆或购书权限；当前未集成整本公开 PDF。",
       "multipart": false,
+      "personalImportAllowed": false,
       "files": []
     },
     {
@@ -133,6 +157,7 @@
       "status": "web-only",
       "note": "该资源提供官方网页正文，本轮未接入可下载的整本文件。",
       "multipart": false,
+      "personalImportAllowed": false,
       "files": []
     },
     {
@@ -141,6 +166,7 @@
       "status": "private",
       "note": "原课程文件未公开上传；请使用自己的课程权限或本地原课件。",
       "multipart": false,
+      "personalImportAllowed": false,
       "files": []
     },
     {
@@ -149,6 +175,7 @@
       "status": "private",
       "note": "原课程文件未公开上传；请使用自己的课程权限或本地原课件。",
       "multipart": false,
+      "personalImportAllowed": false,
       "files": []
     },
     {
@@ -157,6 +184,7 @@
       "status": "private",
       "note": "原课程文件未公开上传；请使用自己的课程权限或本地原课件。",
       "multipart": false,
+      "personalImportAllowed": false,
       "files": []
     },
     {
@@ -165,6 +193,7 @@
       "status": "private",
       "note": "原课程文件未公开上传；请使用自己的课程权限或本地原课件。",
       "multipart": false,
+      "personalImportAllowed": false,
       "files": []
     },
     {
@@ -173,6 +202,7 @@
       "status": "web-only",
       "note": "该资源提供官方网页正文，本轮未接入可下载的整本文件。",
       "multipart": false,
+      "personalImportAllowed": false,
       "files": []
     },
     {
@@ -181,6 +211,7 @@
       "status": "private",
       "note": "原课程文件未公开上传；请使用自己的课程权限或本地原课件。",
       "multipart": false,
+      "personalImportAllowed": false,
       "files": []
     },
     {
@@ -189,6 +220,7 @@
       "status": "private",
       "note": "原课程文件未公开上传；请使用自己的课程权限或本地原课件。",
       "multipart": false,
+      "personalImportAllowed": false,
       "files": []
     },
     {
@@ -197,6 +229,7 @@
       "status": "private",
       "note": "原课程文件未公开上传；请使用自己的课程权限或本地原课件。",
       "multipart": false,
+      "personalImportAllowed": false,
       "files": []
     },
     {
@@ -205,6 +238,7 @@
       "status": "private",
       "note": "原课程文件未公开上传；请使用自己的课程权限或本地原课件。",
       "multipart": false,
+      "personalImportAllowed": false,
       "files": []
     },
     {
@@ -213,6 +247,7 @@
       "status": "private",
       "note": "原课程文件未公开上传；请使用自己的课程权限或本地原课件。",
       "multipart": false,
+      "personalImportAllowed": false,
       "files": []
     },
     {
@@ -221,6 +256,7 @@
       "status": "web-only",
       "note": "该资源提供官方网页正文，本轮未接入可下载的整本文件。",
       "multipart": false,
+      "personalImportAllowed": false,
       "files": []
     },
     {
@@ -229,6 +265,7 @@
       "status": "downloadable",
       "note": "官方1.0.3版 PyTorch PDF，保留原作者和 CC BY-SA 4.0 许可。",
       "multipart": false,
+      "personalImportAllowed": false,
       "files": [
         {
           "label": "Dive into Deep Learning · 1.0.3 PyTorch 完整 PDF",
@@ -250,6 +287,7 @@
       "status": "downloadable",
       "note": "官方当前公开讲义；原2025主题范围保留，具体年份和内容以各文件为准。",
       "multipart": true,
+      "personalImportAllowed": false,
       "files": [
         {
           "label": "官方讲义 · 01-intro.pdf",
@@ -379,6 +417,7 @@
       "status": "web-only",
       "note": "该资源提供官方网页正文，本轮未接入可下载的整本文件。",
       "multipart": false,
+      "personalImportAllowed": false,
       "files": []
     },
     {
@@ -387,6 +426,7 @@
       "status": "library",
       "note": "出版版仍需图书馆或购书权限；当前未集成整本公开 PDF。",
       "multipart": false,
+      "personalImportAllowed": false,
       "files": []
     },
     {
@@ -395,6 +435,7 @@
       "status": "downloadable",
       "note": "资料已从作者或官方来源下载核验，按原有阅读范围选用。",
       "multipart": false,
+      "personalImportAllowed": false,
       "files": [
         {
           "label": "作者第 5 版 PDF",
@@ -414,6 +455,7 @@
       "status": "downloadable",
       "note": "官方课程资料 ZIP，含课程网页、课件与练习等；具体内容以该课程资料包为准。",
       "multipart": false,
+      "personalImportAllowed": false,
       "files": [
         {
           "label": "完整课程资料 ZIP",
@@ -432,6 +474,7 @@
       "status": "downloadable",
       "note": "作者公开的非商业阅读版本；按钮连接作者原文件。",
       "multipart": false,
+      "personalImportAllowed": false,
       "files": [
         {
           "label": "作者公开 PDF",
@@ -451,6 +494,7 @@
       "status": "downloadable",
       "note": "作者注明仅供个人阅读和下载；按钮连接作者原文件。",
       "multipart": false,
+      "personalImportAllowed": false,
       "files": [
         {
           "label": "全文 PDF",
@@ -470,6 +514,7 @@
       "status": "downloadable",
       "note": "作者提供的个人阅读稿；按钮连接作者原文件。",
       "multipart": false,
+      "personalImportAllowed": false,
       "files": [
         {
           "label": "全文 PDF",
@@ -489,6 +534,7 @@
       "status": "library",
       "note": "出版版仍需图书馆或购书权限；当前未集成整本公开 PDF。",
       "multipart": false,
+      "personalImportAllowed": false,
       "files": []
     },
     {
@@ -497,6 +543,7 @@
       "status": "web-only",
       "note": "该资源提供官方网页正文，本轮未接入可下载的整本文件。",
       "multipart": false,
+      "personalImportAllowed": false,
       "files": []
     },
     {
@@ -505,6 +552,7 @@
       "status": "library",
       "note": "出版版仍需图书馆或购书权限；当前未集成整本公开 PDF。",
       "multipart": false,
+      "personalImportAllowed": false,
       "files": []
     },
     {
@@ -513,6 +561,7 @@
       "status": "library",
       "note": "出版版仍需图书馆或购书权限；当前未集成整本公开 PDF。",
       "multipart": false,
+      "personalImportAllowed": false,
       "files": []
     },
     {
@@ -521,6 +570,7 @@
       "status": "downloadable",
       "note": "作者滚动更新稿；原任务按2023版定位，使用 PDF 时请对照章节目录。",
       "multipart": false,
+      "personalImportAllowed": false,
       "files": [
         {
           "label": "作者更新稿 PDF",
@@ -540,6 +590,7 @@
       "status": "library",
       "note": "出版版仍需图书馆或购书权限；当前未集成整本公开 PDF。",
       "multipart": false,
+      "personalImportAllowed": false,
       "files": []
     },
     {
@@ -548,6 +599,7 @@
       "status": "downloadable",
       "note": "作者2006年预备稿，非2008出版版；按原任务和稿内目录核对范围。仅链接作者原文件。",
       "multipart": false,
+      "personalImportAllowed": false,
       "files": [
         {
           "label": "作者2006年预备稿（非2008出版版）",
@@ -567,6 +619,7 @@
       "status": "library",
       "note": "出版版仍需图书馆或购书权限；当前未集成整本公开 PDF。",
       "multipart": false,
+      "personalImportAllowed": false,
       "files": []
     },
     {
@@ -575,6 +628,7 @@
       "status": "library",
       "note": "出版版仍需图书馆或购书权限；当前未集成整本公开 PDF。",
       "multipart": false,
+      "personalImportAllowed": false,
       "files": []
     },
     {
@@ -583,6 +637,7 @@
       "status": "downloadable",
       "note": "作者2026-08-19更新版；按钮连接作者提供的完整文件。",
       "multipart": false,
+      "personalImportAllowed": false,
       "files": [
         {
           "label": "作者更新版 PDF（2026-08-19）",
@@ -602,6 +657,7 @@
       "status": "downloadable",
       "note": "官方当前可下载的讲义与作业；按原任务选择，不据文件数量推断课程已学完。",
       "multipart": true,
+      "personalImportAllowed": false,
       "files": [
         {
           "label": "第3讲 PDF",
@@ -741,6 +797,7 @@
       "status": "downloadable",
       "note": "资料已从作者或官方来源下载核验，按原有阅读范围选用。",
       "multipart": false,
+      "personalImportAllowed": false,
       "files": [
         {
           "label": "arXiv PDF",
@@ -760,6 +817,7 @@
       "status": "downloadable",
       "note": "资料已从作者或官方来源下载核验，按原有阅读范围选用。",
       "multipart": false,
+      "personalImportAllowed": false,
       "files": [
         {
           "label": "arXiv PDF",
@@ -779,6 +837,7 @@
       "status": "downloadable",
       "note": "资料已从作者或官方来源下载核验，按原有阅读范围选用。",
       "multipart": false,
+      "personalImportAllowed": false,
       "files": [
         {
           "label": "arXiv PDF",
@@ -798,6 +857,7 @@
       "status": "downloadable",
       "note": "资料已从作者或官方来源下载核验，按原有阅读范围选用。",
       "multipart": false,
+      "personalImportAllowed": false,
       "files": [
         {
           "label": "arXiv PDF",
@@ -817,6 +877,7 @@
       "status": "downloadable",
       "note": "资料已从作者或官方来源下载核验，按原有阅读范围选用。",
       "multipart": false,
+      "personalImportAllowed": false,
       "files": [
         {
           "label": "全文 PDF",
@@ -836,6 +897,7 @@
       "status": "downloadable",
       "note": "资料已从作者或官方来源下载核验，按原有阅读范围选用。",
       "multipart": false,
+      "personalImportAllowed": false,
       "files": [
         {
           "label": "arXiv PDF",
@@ -855,6 +917,7 @@
       "status": "library",
       "note": "出版版仍需图书馆或购书权限；当前未集成整本公开 PDF。",
       "multipart": false,
+      "personalImportAllowed": false,
       "files": []
     },
     {
@@ -863,6 +926,7 @@
       "status": "downloadable",
       "note": "资料已从作者或官方来源下载核验，按原有阅读范围选用。",
       "multipart": false,
+      "personalImportAllowed": false,
       "files": [
         {
           "label": "arXiv PDF",
@@ -882,6 +946,7 @@
       "status": "downloadable",
       "note": "资料已从作者或官方来源下载核验，按原有阅读范围选用。",
       "multipart": false,
+      "personalImportAllowed": false,
       "files": [
         {
           "label": "arXiv PDF",
@@ -901,6 +966,7 @@
       "status": "downloadable",
       "note": "资料已从作者或官方来源下载核验，按原有阅读范围选用。",
       "multipart": false,
+      "personalImportAllowed": false,
       "files": [
         {
           "label": "arXiv PDF",
@@ -920,6 +986,7 @@
       "status": "downloadable",
       "note": "资料已从作者或官方来源下载核验，按原有阅读范围选用。",
       "multipart": false,
+      "personalImportAllowed": false,
       "files": [
         {
           "label": "arXiv PDF",
@@ -939,6 +1006,7 @@
       "status": "downloadable",
       "note": "资料已从作者或官方来源下载核验，按原有阅读范围选用。",
       "multipart": false,
+      "personalImportAllowed": false,
       "files": [
         {
           "label": "作者预出版稿（2023）",
@@ -958,6 +1026,7 @@
       "status": "downloadable",
       "note": "资料已从作者或官方来源下载核验，按原有阅读范围选用。",
       "multipart": false,
+      "personalImportAllowed": false,
       "files": [
         {
           "label": "pdf",
@@ -977,6 +1046,7 @@
       "status": "web-only",
       "note": "该资源提供官方网页正文，本轮未接入可下载的整本文件。",
       "multipart": false,
+      "personalImportAllowed": false,
       "files": []
     },
     {
@@ -985,6 +1055,7 @@
       "status": "downloadable",
       "note": "作者按章节开放的 PDF；可逐章选择下载。",
       "multipart": true,
+      "personalImportAllowed": false,
       "files": [
         {
           "label": "Processes",
@@ -1674,6 +1745,7 @@
       "status": "downloadable",
       "note": "官方课程资料 ZIP，含课程网页、课件与练习等；具体内容以该课程资料包为准。",
       "multipart": false,
+      "personalImportAllowed": false,
       "files": [
         {
           "label": "完整课程资料 ZIP",
@@ -1692,6 +1764,7 @@
       "status": "downloadable",
       "note": "资料已从作者或官方来源下载核验，按原有阅读范围选用。",
       "multipart": false,
+      "personalImportAllowed": false,
       "files": [
         {
           "label": "2010 课程整本讲义 PDF",
@@ -1720,6 +1793,7 @@
       "status": "downloadable",
       "note": "官方课程资料 ZIP，含课程网页、课件与练习等；具体内容以该课程资料包为准。",
       "multipart": false,
+      "personalImportAllowed": false,
       "files": [
         {
           "label": "完整课程资料 ZIP",
@@ -1738,6 +1812,7 @@
       "status": "downloadable",
       "note": "官方课程资料 ZIP，含课程网页、课件与练习等；具体内容以该课程资料包为准。",
       "multipart": false,
+      "personalImportAllowed": false,
       "files": [
         {
           "label": "完整课程资料 ZIP",
@@ -1756,6 +1831,7 @@
       "status": "downloadable",
       "note": "作者按章节公开的书稿；Practical QMC 单列为另一本补充读物。",
       "multipart": true,
+      "personalImportAllowed": false,
       "files": [
         {
           "label": "第1章 · 蒙特卡洛入门",
@@ -1885,6 +1961,7 @@
       "status": "library",
       "note": "出版版仍需图书馆或购书权限；当前未集成整本公开 PDF。",
       "multipart": false,
+      "personalImportAllowed": false,
       "files": []
     },
     {
@@ -1893,6 +1970,7 @@
       "status": "downloadable",
       "note": "资料已从作者或官方来源下载核验，按原有阅读范围选用。",
       "multipart": false,
+      "personalImportAllowed": false,
       "files": [
         {
           "label": "arXiv PDF",
@@ -1912,6 +1990,7 @@
       "status": "downloadable",
       "note": "资料已从作者或官方来源下载核验，按原有阅读范围选用。",
       "multipart": false,
+      "personalImportAllowed": false,
       "files": [
         {
           "label": "arXiv PDF",
@@ -1931,6 +2010,7 @@
       "status": "downloadable",
       "note": "资料已从作者或官方来源下载核验，按原有阅读范围选用。",
       "multipart": false,
+      "personalImportAllowed": false,
       "files": [
         {
           "label": "2011 课程教材 PDF",
@@ -1959,6 +2039,7 @@
       "status": "downloadable",
       "note": "资料已从作者或官方来源下载核验，按原有阅读范围选用。",
       "multipart": false,
+      "personalImportAllowed": false,
       "files": [
         {
           "label": "全文 PDF",
@@ -1978,6 +2059,7 @@
       "status": "downloadable",
       "note": "资料已从作者或官方来源下载核验，按原有阅读范围选用。",
       "multipart": false,
+      "personalImportAllowed": false,
       "files": [
         {
           "label": "arXiv PDF",
@@ -1997,6 +2079,7 @@
       "status": "downloadable",
       "note": "作者公开稿保留原署名及 GNU 自由文档许可，文件未修改。",
       "multipart": false,
+      "personalImportAllowed": false,
       "files": [
         {
           "label": "Abstract Algebra · 作者2026-08-11公开稿",
@@ -2018,6 +2101,7 @@
       "status": "downloadable",
       "note": "资料已从作者或官方来源下载核验，按原有阅读范围选用。",
       "multipart": false,
+      "personalImportAllowed": false,
       "files": [
         {
           "label": "arXiv PDF",
@@ -2037,6 +2121,7 @@
       "status": "downloadable",
       "note": "资料已从作者或官方来源下载核验，按原有阅读范围选用。",
       "multipart": false,
+      "personalImportAllowed": false,
       "files": [
         {
           "label": "arXiv PDF",
@@ -2056,6 +2141,7 @@
       "status": "downloadable",
       "note": "作者当前公开的章节讲义；年份与修订情况分别保留在文件中。",
       "multipart": true,
+      "personalImportAllowed": false,
       "files": [
         {
           "label": "Chapter 1. Introduction and Overview",
@@ -2155,6 +2241,7 @@
       "status": "downloadable",
       "note": "资料已从作者或官方来源下载核验，按原有阅读范围选用。",
       "multipart": false,
+      "personalImportAllowed": false,
       "files": [
         {
           "label": "完整讲义 PDF",
@@ -2224,6 +2311,7 @@
       "status": "downloadable",
       "note": "资料已从作者或官方来源下载核验，按原有阅读范围选用。",
       "multipart": false,
+      "personalImportAllowed": false,
       "files": [
         {
           "label": "Download the AI RMF 1.0",
@@ -2245,6 +2333,7 @@
       "status": "downloadable",
       "note": "资料已从作者或官方来源下载核验，按原有阅读范围选用。",
       "multipart": false,
+      "personalImportAllowed": false,
       "files": [
         {
           "label": "官方2025版 PDF",
@@ -2264,6 +2353,7 @@
       "status": "web-only",
       "note": "该资源提供官方网页正文，本轮未接入可下载的整本文件。",
       "multipart": false,
+      "personalImportAllowed": false,
       "files": []
     },
     {
@@ -2272,6 +2362,7 @@
       "status": "inline",
       "note": "本页已提供正文与练习。",
       "multipart": false,
+      "personalImportAllowed": false,
       "files": []
     },
     {
@@ -2280,6 +2371,7 @@
       "status": "library",
       "note": "出版版仍需图书馆或购书权限；当前未集成整本公开 PDF。",
       "multipart": false,
+      "personalImportAllowed": false,
       "files": []
     },
     {
@@ -2288,6 +2380,7 @@
       "status": "library",
       "note": "出版版仍需图书馆或购书权限；当前未集成整本公开 PDF。",
       "multipart": false,
+      "personalImportAllowed": false,
       "files": []
     },
     {
@@ -2296,6 +2389,7 @@
       "status": "downloadable",
       "note": "资料已从作者或官方来源下载核验，按原有阅读范围选用。",
       "multipart": false,
+      "personalImportAllowed": false,
       "files": [
         {
           "label": "CRAN 官方文档 PDF",
@@ -2315,6 +2409,7 @@
       "status": "downloadable",
       "note": "作者2015年预印本，区别于出版版；原章节任务保持不变。",
       "multipart": false,
+      "personalImportAllowed": false,
       "files": [
         {
           "label": "作者2015年预印本（非出版版）",
@@ -2334,6 +2429,7 @@
       "status": "downloadable",
       "note": "资料已从作者或官方来源下载核验，按原有阅读范围选用。",
       "multipart": false,
+      "personalImportAllowed": false,
       "files": [
         {
           "label": "作者公开 PDF",
@@ -2353,6 +2449,7 @@
       "status": "downloadable",
       "note": "资料已从作者或官方来源下载核验，按原有阅读范围选用。",
       "multipart": false,
+      "personalImportAllowed": false,
       "files": [
         {
           "label": "arXiv PDF",
@@ -2372,6 +2469,7 @@
       "status": "downloadable",
       "note": "资料已从作者或官方来源下载核验，按原有阅读范围选用。",
       "multipart": false,
+      "personalImportAllowed": false,
       "files": [
         {
           "label": "arXiv PDF",
@@ -2391,6 +2489,7 @@
       "status": "library",
       "note": "出版版仍需图书馆或购书权限；当前未集成整本公开 PDF。",
       "multipart": false,
+      "personalImportAllowed": false,
       "files": []
     },
     {
@@ -2399,6 +2498,7 @@
       "status": "web-only",
       "note": "该资源提供官方网页正文，本轮未接入可下载的整本文件。",
       "multipart": false,
+      "personalImportAllowed": false,
       "files": []
     },
     {
@@ -2407,6 +2507,7 @@
       "status": "downloadable",
       "note": "资料已从作者或官方来源下载核验，按原有阅读范围选用。",
       "multipart": false,
+      "personalImportAllowed": false,
       "files": [
         {
           "label": "arXiv PDF",
@@ -2426,6 +2527,7 @@
       "status": "library",
       "note": "出版版仍需图书馆或购书权限；当前未集成整本公开 PDF。",
       "multipart": false,
+      "personalImportAllowed": false,
       "files": []
     },
     {
@@ -2434,6 +2536,7 @@
       "status": "library",
       "note": "出版版仍需图书馆或购书权限；当前未集成整本公开 PDF。",
       "multipart": false,
+      "personalImportAllowed": false,
       "files": []
     },
     {
@@ -2442,6 +2545,7 @@
       "status": "inline",
       "note": "本页已提供正文与练习。",
       "multipart": false,
+      "personalImportAllowed": false,
       "files": []
     },
     {
@@ -2450,6 +2554,7 @@
       "status": "inline",
       "note": "本页已提供正文与练习。",
       "multipart": false,
+      "personalImportAllowed": false,
       "files": []
     },
     {
@@ -2458,6 +2563,7 @@
       "status": "inline",
       "note": "本页已提供正文与练习。",
       "multipart": false,
+      "personalImportAllowed": false,
       "files": []
     },
     {
@@ -2466,6 +2572,7 @@
       "status": "inline",
       "note": "本页已提供正文与练习。",
       "multipart": false,
+      "personalImportAllowed": false,
       "files": []
     },
     {
@@ -2474,6 +2581,7 @@
       "status": "inline",
       "note": "本页已提供正文与练习。",
       "multipart": false,
+      "personalImportAllowed": false,
       "files": []
     },
     {
@@ -2482,6 +2590,7 @@
       "status": "inline",
       "note": "本页已提供正文与练习。",
       "multipart": false,
+      "personalImportAllowed": false,
       "files": []
     },
     {
@@ -2490,6 +2599,7 @@
       "status": "inline",
       "note": "本页已提供正文与练习。",
       "multipart": false,
+      "personalImportAllowed": false,
       "files": []
     },
     {
@@ -2498,6 +2608,7 @@
       "status": "inline",
       "note": "本页已提供正文与练习。",
       "multipart": false,
+      "personalImportAllowed": false,
       "files": []
     },
     {
@@ -2506,6 +2617,7 @@
       "status": "inline",
       "note": "本页已提供正文与练习。",
       "multipart": false,
+      "personalImportAllowed": false,
       "files": []
     },
     {
@@ -2514,6 +2626,7 @@
       "status": "inline",
       "note": "本页已提供正文与练习。",
       "multipart": false,
+      "personalImportAllowed": false,
       "files": []
     },
     {
@@ -2522,6 +2635,7 @@
       "status": "inline",
       "note": "本页已提供正文与练习。",
       "multipart": false,
+      "personalImportAllowed": false,
       "files": []
     },
     {
@@ -2530,6 +2644,7 @@
       "status": "inline",
       "note": "本页已提供正文与练习。",
       "multipart": false,
+      "personalImportAllowed": false,
       "files": []
     },
     {
@@ -2538,6 +2653,7 @@
       "status": "inline",
       "note": "本页已提供正文与练习。",
       "multipart": false,
+      "personalImportAllowed": false,
       "files": []
     },
     {
@@ -2546,6 +2662,7 @@
       "status": "inline",
       "note": "本页已提供正文与练习。",
       "multipart": false,
+      "personalImportAllowed": false,
       "files": []
     },
     {
@@ -2554,6 +2671,7 @@
       "status": "inline",
       "note": "本页已提供正文与练习。",
       "multipart": false,
+      "personalImportAllowed": false,
       "files": []
     },
     {
@@ -2562,6 +2680,7 @@
       "status": "inline",
       "note": "本页已提供正文与练习。",
       "multipart": false,
+      "personalImportAllowed": false,
       "files": []
     },
     {
@@ -2570,6 +2689,7 @@
       "status": "inline",
       "note": "本页已提供正文与练习。",
       "multipart": false,
+      "personalImportAllowed": false,
       "files": []
     },
     {
@@ -2578,6 +2698,7 @@
       "status": "inline",
       "note": "本页已提供正文与练习。",
       "multipart": false,
+      "personalImportAllowed": false,
       "files": []
     },
     {
@@ -2586,6 +2707,7 @@
       "status": "downloadable",
       "note": "资料已从作者或官方来源下载核验，按原有阅读范围选用。",
       "multipart": false,
+      "personalImportAllowed": false,
       "files": [
         {
           "label": "作者完整教材 PDF",
@@ -2605,6 +2727,7 @@
       "status": "downloadable",
       "note": "资料已从作者或官方来源下载核验，按原有阅读范围选用。",
       "multipart": false,
+      "personalImportAllowed": false,
       "files": [
         {
           "label": "全文 PDF",
@@ -2624,6 +2747,7 @@
       "status": "downloadable",
       "note": "资料已从作者或官方来源下载核验，按原有阅读范围选用。",
       "multipart": false,
+      "personalImportAllowed": false,
       "files": [
         {
           "label": "论文 PDF",
@@ -2643,6 +2767,7 @@
       "status": "downloadable",
       "note": "资料已从作者或官方来源下载核验，按原有阅读范围选用。",
       "multipart": false,
+      "personalImportAllowed": false,
       "files": [
         {
           "label": "全文 PDF",
@@ -2662,6 +2787,7 @@
       "status": "web-only",
       "note": "该资源提供官方网页正文，本轮未接入可下载的整本文件。",
       "multipart": false,
+      "personalImportAllowed": false,
       "files": []
     },
     {
@@ -2670,6 +2796,7 @@
       "status": "web-only",
       "note": "该资源提供官方网页正文，本轮未接入可下载的整本文件。",
       "multipart": false,
+      "personalImportAllowed": false,
       "files": []
     },
     {
@@ -2678,6 +2805,7 @@
       "status": "downloadable",
       "note": "资料已从作者或官方来源下载核验，按原有阅读范围选用。",
       "multipart": false,
+      "personalImportAllowed": false,
       "files": [
         {
           "label": "全文 PDF",
@@ -2697,6 +2825,7 @@
       "status": "web-only",
       "note": "该资源提供官方网页正文，本轮未接入可下载的整本文件。",
       "multipart": false,
+      "personalImportAllowed": false,
       "files": []
     },
     {
@@ -2705,6 +2834,7 @@
       "status": "downloadable",
       "note": "资料已从作者或官方来源下载核验，按原有阅读范围选用。",
       "multipart": false,
+      "personalImportAllowed": false,
       "files": [
         {
           "label": "作者机构存档 PDF",
@@ -2724,6 +2854,7 @@
       "status": "library",
       "note": "出版版仍需图书馆或购书权限；当前未集成整本公开 PDF。",
       "multipart": false,
+      "personalImportAllowed": false,
       "files": []
     },
     {
@@ -2732,6 +2863,7 @@
       "status": "library",
       "note": "出版版仍需图书馆或购书权限；当前未集成整本公开 PDF。",
       "multipart": false,
+      "personalImportAllowed": false,
       "files": []
     },
     {
@@ -2740,6 +2872,7 @@
       "status": "web-only",
       "note": "该资源提供官方网页正文，本轮未接入可下载的整本文件。",
       "multipart": false,
+      "personalImportAllowed": false,
       "files": []
     },
     {
@@ -2748,6 +2881,7 @@
       "status": "downloadable",
       "note": "资料已从作者或官方来源下载核验，按原有阅读范围选用。",
       "multipart": false,
+      "personalImportAllowed": false,
       "files": [
         {
           "label": "Anatomy and Physiology 2e · 官方整本 PDF",
@@ -2769,6 +2903,7 @@
       "status": "web-only",
       "note": "该资源提供官方网页正文，本轮未接入可下载的整本文件。",
       "multipart": false,
+      "personalImportAllowed": false,
       "files": []
     },
     {
@@ -2777,6 +2912,7 @@
       "status": "downloadable",
       "note": "资料已从作者或官方来源下载核验，按原有阅读范围选用。",
       "multipart": false,
+      "personalImportAllowed": false,
       "files": [
         {
           "label": "University Physics Volume 1 · 官方整本 PDF",
@@ -2798,6 +2934,7 @@
       "status": "downloadable",
       "note": "资料已从作者或官方来源下载核验，按原有阅读范围选用。",
       "multipart": false,
+      "personalImportAllowed": false,
       "files": [
         {
           "label": "MATPOWER User’s Manual, Version 8.1",
@@ -2817,6 +2954,7 @@
       "status": "web-only",
       "note": "该资源提供官方网页正文，本轮未接入可下载的整本文件。",
       "multipart": false,
+      "personalImportAllowed": false,
       "files": []
     },
     {
@@ -2825,6 +2963,7 @@
       "status": "web-only",
       "note": "该资源提供官方网页正文，本轮未接入可下载的整本文件。",
       "multipart": false,
+      "personalImportAllowed": false,
       "files": []
     },
     {
@@ -2833,6 +2972,7 @@
       "status": "downloadable",
       "note": "官方课程资料 ZIP，含课程网页、课件与练习等；具体内容以该课程资料包为准。",
       "multipart": false,
+      "personalImportAllowed": false,
       "files": [
         {
           "label": "完整课程资料 ZIP",
@@ -2851,6 +2991,7 @@
       "status": "web-only",
       "note": "该资源提供官方网页正文，本轮未接入可下载的整本文件。",
       "multipart": false,
+      "personalImportAllowed": false,
       "files": []
     },
     {
@@ -2859,6 +3000,7 @@
       "status": "web-only",
       "note": "该资源提供官方网页正文，本轮未接入可下载的整本文件。",
       "multipart": false,
+      "personalImportAllowed": false,
       "files": []
     },
     {
@@ -2867,6 +3009,7 @@
       "status": "web-only",
       "note": "该资源提供官方网页正文，本轮未接入可下载的整本文件。",
       "multipart": false,
+      "personalImportAllowed": false,
       "files": []
     },
     {
@@ -2875,6 +3018,7 @@
       "status": "inline",
       "note": "本页已提供正文与练习。",
       "multipart": false,
+      "personalImportAllowed": false,
       "files": []
     }
   ]
