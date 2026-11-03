@@ -1,5 +1,5 @@
 {
-  "sourceCommit": "4d12e6f610d5bb3acc3eef4834fc3dadc7e0a02c",
+  "sourceCommit": "15359cac6e48712e8a726231e660ad6250460f8a",
   "assets": [
     {
       "sha256": "2937648e68262cad4d8ddf2b6ba903534fa0c05da86f26e8364ffd1828c41580",
@@ -2431,9 +2431,9 @@
     {
       "sha256": "c277bb8cdacd499d13a48148009be41a7f672a2acdb22d21e0fb8fc19306c7c2",
       "bytes": 15817,
-      "format": "pdf",
-      "filename": "u511-c277bb8cdacd499d.pdf",
-      "repositoryPath": "files/u511-c277bb8cdacd499d.pdf",
+      "format": "tex",
+      "filename": "u511-c277bb8cdacd499d.tex",
+      "repositoryPath": "files/u511-c277bb8cdacd499d.tex",
       "mode": "repository",
       "resourceIds": [
         "U511"
