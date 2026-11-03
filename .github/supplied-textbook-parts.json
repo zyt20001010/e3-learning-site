@@ -1,0 +1,87 @@
+{
+  "expectedMain": "c0000294e261129bbf70b22f469a90143ca85abe",
+  "parts": [
+    {
+      "path": ".github/textbook-parts/proof/part-000.bin",
+      "bytes": 1048576,
+      "sha256": "0871e7c7a63ce587a5ee7790ca43910df60ce4d50882df9782e3cbbed6503749"
+    },
+    {
+      "path": ".github/textbook-parts/proof/part-001.bin",
+      "bytes": 1048576,
+      "sha256": "522e782c7e1d4b69a341ca5f30b93e88eb3fafda1cc9c7e9db89b64183b6cc89"
+    },
+    {
+      "path": ".github/textbook-parts/proof/part-002.bin",
+      "bytes": 1048576,
+      "sha256": "c2f78b8c36cfe9b9c53a521359c6e346cb8450a8f626f39a20ba96f532a1c6d8"
+    },
+    {
+      "path": ".github/textbook-parts/proof/part-003.bin",
+      "bytes": 1048576,
+      "sha256": "ad14467d6da20164b0b2e5ba8fcd02336d6e8d5398dd803281cc8c691b174c04"
+    },
+    {
+      "path": ".github/textbook-parts/proof/part-004.bin",
+      "bytes": 1048576,
+      "sha256": "bbfc25471bf65c1e682e01b1f792195f2642f4eec77beaec09ffc8d37a6bf90a"
+    },
+    {
+      "path": ".github/textbook-parts/proof/part-005.bin",
+      "bytes": 1048576,
+      "sha256": "510b31caf42bbf2281745876334fac22f267ea52255346a088a8ba7db7121f4d"
+    },
+    {
+      "path": ".github/textbook-parts/proof/part-006.bin",
+      "bytes": 1048576,
+      "sha256": "f410c15cee48d0b2ab6db825a7e00f82eaf5060fa83d1e96424e44c3b70dcde0"
+    },
+    {
+      "path": ".github/textbook-parts/proof/part-007.bin",
+      "bytes": 1048576,
+      "sha256": "85c58dfffa742e4a9eae917e8120d3ed226a2fb3f9f4e12c5cc4d54f8b4ed618"
+    },
+    {
+      "path": ".github/textbook-parts/proof/part-008.bin",
+      "bytes": 1048576,
+      "sha256": "a30aef39ba8c1a46f82db49e214185e7e59af287ce04f5aed9b335c146d9b470"
+    },
+    {
+      "path": ".github/textbook-parts/proof/part-009.bin",
+      "bytes": 268188,
+      "sha256": "a42ec42d862700903e324af619a4e8ff434ab72f4da803e4c2342d4a224c1008"
+    }
+  ],
+  "textFiles": [
+    {
+      "path": ".gitignore",
+      "bytes": 150,
+      "sha256": "8daf4a7904806d5841a0402d663c2eee459362737b4577f8c02c4046492812ad"
+    },
+    {
+      "path": "README.md",
+      "bytes": 2067,
+      "sha256": "92453aedd4d6392457e270239dd8e8d447cd200adfa4f4c06ce34b3c2cc882dd"
+    },
+    {
+      "path": "index.html",
+      "bytes": 3539888,
+      "sha256": "ba5abf93775840705c667ce6d091e9d92efc8537c0d9fd82397dc478d642d504"
+    },
+    {
+      "path": "materials/README.md",
+      "bytes": 3178,
+      "sha256": "1dee53e817580e22ff8425dfe5c575ab44510f17d67ea19d8bd44f461eff3f59"
+    },
+    {
+      "path": "materials/catalog.json",
+      "bytes": 119543,
+      "sha256": "9288af934b8f4c733708b3c493601d8654e9ce176062126cf6496b62215e1d99"
+    }
+  ],
+  "pdf": {
+    "path": "materials/how-to-prove-it-3rd-2019.pdf",
+    "bytes": 9705372,
+    "sha256": "3f309cb4fd37ac3e73dfd93b25a99e06aa2c4f322e3d61b50117f06f3ff2d2c1"
+  }
+}
