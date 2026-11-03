@@ -2,3 +2,8 @@
 *backup*.json
 *progress*.json
 *.pdf
+
+# Only the reviewed, licensed materials directory contains public PDFs.
+!materials/*.pdf
+__pycache__/
+*.pyc
