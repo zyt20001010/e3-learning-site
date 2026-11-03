@@ -1,0 +1,2428 @@
+{
+  "version": "learning-materials-2026-11-03",
+  "assets": [
+    {
+      "sha256": "9307fc9bb2fb9d7ea2b7680e8ddf1bf2594127bae0b748dcbe8f3f71def6d154",
+      "bytes": 48252886,
+      "format": "zip",
+      "filename": "la-9307fc9bb2fb9d7e.zip",
+      "repositoryPath": "files/la-9307fc9bb2fb9d7e.zip",
+      "mode": "release",
+      "sources": [
+        "https://ocw.mit.edu/courses/18-06sc-linear-algebra-fall-2011/18.06sc-fall-2011.zip"
+      ],
+      "resourceIds": [
+        "LA"
+      ]
+    },
+    {
+      "sha256": "28928d200c609168daca4f73dc3ab08483c532d4a26280bf1c18470ea0c7fc39",
+      "bytes": 144257022,
+      "format": "zip",
+      "filename": "cal1-28928d200c609168.zip",
+      "repositoryPath": "files/cal1-28928d200c609168.zip",
+      "mode": "release",
+      "sources": [
+        "https://ocw.mit.edu/courses/18-01sc-single-variable-calculus-fall-2010/18.01sc-fall-2010.zip"
+      ],
+      "resourceIds": [
+        "CAL1"
+      ]
+    },
+    {
+      "sha256": "7e918ba7b085012db2f5bb8ebc543e05a09133758ea63764efaea385dd56a10f",
+      "bytes": 114149097,
+      "format": "zip",
+      "filename": "cal2-7e918ba7b085012d.zip",
+      "repositoryPath": "files/cal2-7e918ba7b085012d.zip",
+      "mode": "release",
+      "sources": [
+        "https://ocw.mit.edu/courses/18-02sc-multivariable-calculus-fall-2010/18.02sc-fall-2010.zip"
+      ],
+      "resourceIds": [
+        "CAL2"
+      ]
+    },
+    {
+      "sha256": "147d6fbe35587a2417762cd42e9b8c89d101648ef21fcc3dd31ee3f3d0d86314",
+      "bytes": 16141506,
+      "format": "zip",
+      "filename": "py-147d6fbe35587a24.zip",
+      "repositoryPath": "files/py-147d6fbe35587a24.zip",
+      "mode": "release",
+      "sources": [
+        "https://docs.python.org/3/archives/python-3.15-docs-html.zip"
+      ],
+      "resourceIds": [
+        "PY"
+      ]
+    },
+    {
+      "sha256": "2937648e68262cad4d8ddf2b6ba903534fa0c05da86f26e8364ffd1828c41580",
+      "bytes": 11814245,
+      "format": "epub",
+      "filename": "py-2937648e68262cad.epub",
+      "repositoryPath": "files/py-2937648e68262cad.epub",
+      "mode": "release",
+      "sources": [
+        "https://docs.python.org/3/archives/python-3.15-docs.epub"
+      ],
+      "resourceIds": [
+        "PY"
+      ]
+    },
+    {
+      "sha256": "5f3301c34698547aae4b64a1ea51174e35078f2caabe9b45763a2456e3406068",
+      "bytes": 6627691,
+      "format": "pdf",
+      "filename": "gnn-5f3301c34698547a.pdf",
+      "repositoryPath": "files/gnn-5f3301c34698547a.pdf",
+      "mode": "repository",
+      "sources": [
+        "https://web.stanford.edu/class/cs224w/slides/01-intro.pdf"
+      ],
+      "resourceIds": [
+        "GNN"
+      ]
+    },
+    {
+      "sha256": "0acd13b4d76b8930b42a451c739c7a5d48b71910f95c1751f5888c04bba58778",
+      "bytes": 8454906,
+      "format": "pdf",
+      "filename": "gnn-0acd13b4d76b8930.pdf",
+      "repositoryPath": "files/gnn-0acd13b4d76b8930.pdf",
+      "mode": "repository",
+      "sources": [
+        "https://web.stanford.edu/class/cs224w/slides/02-nodeemb.pdf"
+      ],
+      "resourceIds": [
+        "GNN"
+      ]
+    },
+    {
+      "sha256": "27d6f66100bb826c625ddf8b9a05e169626290fafd75195a1bc6305b4d609123",
+      "bytes": 12489063,
+      "format": "pdf",
+      "filename": "gnn-27d6f66100bb826c.pdf",
+      "repositoryPath": "files/gnn-27d6f66100bb826c.pdf",
+      "mode": "repository",
+      "sources": [
+        "https://web.stanford.edu/class/cs224w/slides/03-GNN1.pdf"
+      ],
+      "resourceIds": [
+        "GNN"
+      ]
+    },
+    {
+      "sha256": "ca83297e69342807107fedee0830e69983b63acadcc3e6284368b7b093044f82",
+      "bytes": 8732504,
+      "format": "pdf",
+      "filename": "gnn-ca83297e69342807.pdf",
+      "repositoryPath": "files/gnn-ca83297e69342807.pdf",
+      "mode": "repository",
+      "sources": [
+        "https://web.stanford.edu/class/cs224w/slides/04-GNN2.pdf"
+      ],
+      "resourceIds": [
+        "GNN"
+      ]
+    },
+    {
+      "sha256": "fe636a968c9802ce45897167c8e68ef54f25f7f8532b662c1c6a2f998a81c94b",
+      "bytes": 7592632,
+      "format": "pdf",
+      "filename": "gnn-fe636a968c9802ce.pdf",
+      "repositoryPath": "files/gnn-fe636a968c9802ce.pdf",
+      "mode": "repository",
+      "sources": [
+        "https://web.stanford.edu/class/cs224w/slides/05-GNN3.pdf"
+      ],
+      "resourceIds": [
+        "GNN"
+      ]
+    },
+    {
+      "sha256": "0a5f03ecab150316c1caebfc27a61a092120806c036365c099e36241f68c5714",
+      "bytes": 7275026,
+      "format": "pdf",
+      "filename": "gnn-0a5f03ecab150316.pdf",
+      "repositoryPath": "files/gnn-0a5f03ecab150316.pdf",
+      "mode": "repository",
+      "sources": [
+        "https://web.stanford.edu/class/cs224w/slides/06-theory.pdf"
+      ],
+      "resourceIds": [
+        "GNN"
+      ]
+    },
+    {
+      "sha256": "ef4a52c439cb5a62f8a9306722191a80be832095755efc475b409157d09f8b43",
+      "bytes": 8534504,
+      "format": "pdf",
+      "filename": "gnn-ef4a52c439cb5a62.pdf",
+      "repositoryPath": "files/gnn-ef4a52c439cb5a62.pdf",
+      "mode": "repository",
+      "sources": [
+        "https://web.stanford.edu/class/cs224w/slides/07-theory2.pdf"
+      ],
+      "resourceIds": [
+        "GNN"
+      ]
+    },
+    {
+      "sha256": "797a8e531f891f1934f5935639b6d91a6af0cf0ef10dac33e9c5603d5e013097",
+      "bytes": 9849249,
+      "format": "pdf",
+      "filename": "gnn-797a8e531f891f19.pdf",
+      "repositoryPath": "files/gnn-797a8e531f891f19.pdf",
+      "mode": "repository",
+      "sources": [
+        "https://web.stanford.edu/class/cs224w/slides/08-graph-transformer1.pdf"
+      ],
+      "resourceIds": [
+        "GNN"
+      ]
+    },
+    {
+      "sha256": "a42e5f29f0ac5e7e444ccf323b3ac57178ee1637b633c18ac7513d45c1817eeb",
+      "bytes": 9386531,
+      "format": "pdf",
+      "filename": "gnn-a42e5f29f0ac5e7e.pdf",
+      "repositoryPath": "files/gnn-a42e5f29f0ac5e7e.pdf",
+      "mode": "repository",
+      "sources": [
+        "https://web.stanford.edu/class/cs224w/slides/09-hetero.pdf"
+      ],
+      "resourceIds": [
+        "GNN"
+      ]
+    },
+    {
+      "sha256": "82c89269bef9e97aea01b2e77a9cc3050c6bd8b59469e9a7fecb14329658909f",
+      "bytes": 8066808,
+      "format": "pdf",
+      "filename": "gnn-82c89269bef9e97a.pdf",
+      "repositoryPath": "files/gnn-82c89269bef9e97a.pdf",
+      "mode": "repository",
+      "sources": [
+        "https://web.stanford.edu/class/cs224w/slides/10-kg.pdf"
+      ],
+      "resourceIds": [
+        "GNN"
+      ]
+    },
+    {
+      "sha256": "3d1b0e2ff24bafd56099244a6730c7adb4790930afff71b6643f999bffec734b",
+      "bytes": 11962881,
+      "format": "pdf",
+      "filename": "gnn-3d1b0e2ff24bafd5.pdf",
+      "repositoryPath": "files/gnn-3d1b0e2ff24bafd5.pdf",
+      "mode": "repository",
+      "sources": [
+        "https://web.stanford.edu/class/cs224w/slides/11-recsys.pdf"
+      ],
+      "resourceIds": [
+        "GNN"
+      ]
+    },
+    {
+      "sha256": "b6e4436807e39ed3ac75a83483bcd4bf11a195f723be8de502f1fd259f7fe67b",
+      "bytes": 18650915,
+      "format": "pdf",
+      "filename": "gnn-b6e4436807e39ed3.pdf",
+      "repositoryPath": "files/gnn-b6e4436807e39ed3.pdf",
+      "mode": "repository",
+      "sources": [
+        "https://web.stanford.edu/class/cs224w/slides/12-RDL.pdf"
+      ],
+      "resourceIds": [
+        "GNN"
+      ]
+    },
+    {
+      "sha256": "aeac36cbf5e44c53d69fa60a2d29a393e2d0e8c955ee103bd845d925fd910886",
+      "bytes": 2195717,
+      "format": "pdf",
+      "filename": "dur-aeac36cbf5e44c53.pdf",
+      "repositoryPath": "files/dur-aeac36cbf5e44c53.pdf",
+      "mode": "repository",
+      "sources": [
+        "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+      ],
+      "resourceIds": [
+        "DUR"
+      ]
+    },
+    {
+      "sha256": "781a514bdca575ee4c0f1b91d5771adc9f981768592e9a387987c91316be9bb7",
+      "bytes": 106312140,
+      "format": "zip",
+      "filename": "ode-781a514bdca575ee.zip",
+      "repositoryPath": "files/ode-781a514bdca575ee.zip",
+      "mode": "release",
+      "sources": [
+        "https://ocw.mit.edu/courses/18-03sc-differential-equations-fall-2011/18.03sc-fall-2011.zip"
+      ],
+      "resourceIds": [
+        "ODE"
+      ]
+    },
+    {
+      "sha256": "246f7d34daad4971d40fa247f1045bf3fce4f912dcea9b4267b161ee7a70b306",
+      "bytes": 55911785,
+      "format": "pdf",
+      "filename": "bda-246f7d34daad4971.pdf",
+      "repositoryPath": "files/bda-246f7d34daad4971.pdf",
+      "mode": "repository",
+      "sources": [
+        "https://sites.stat.columbia.edu/gelman/book/BDA3.pdf"
+      ],
+      "resourceIds": [
+        "BDA"
+      ]
+    },
+    {
+      "sha256": "6b57f19aedb36a539a0a882b3c0c7ef49155ac25d82ee6950fc808b0a60f9c55",
+      "bytes": 11364145,
+      "format": "pdf",
+      "filename": "bfs-6b57f19aedb36a53.pdf",
+      "repositoryPath": "files/bfs-6b57f19aedb36a53.pdf",
+      "mode": "repository",
+      "sources": [
+        "https://users.aalto.fi/~ssarkka/pub/bfs_book_2023_online.pdf"
+      ],
+      "resourceIds": [
+        "BFS"
+      ]
+    },
+    {
+      "sha256": "279156f8f4382faaa253c27697fcb5ff8d75ace5d940d944553b5f3465ea9435",
+      "bytes": 3971794,
+      "format": "pdf",
+      "filename": "sde-279156f8f4382faa.pdf",
+      "repositoryPath": "files/sde-279156f8f4382faa.pdf",
+      "mode": "repository",
+      "sources": [
+        "https://users.aalto.fi/~ssarkka/pub/sde_book.pdf"
+      ],
+      "resourceIds": [
+        "SDE"
+      ]
+    },
+    {
+      "sha256": "54d6bfa8cc4a367bb553bea1c5127ca63696a9655b2ca1f6137a8584dccfdbaf",
+      "bytes": 151421194,
+      "format": "pdf",
+      "filename": "pml2-54d6bfa8cc4a367b.pdf",
+      "repositoryPath": "files/pml2-54d6bfa8cc4a367b.pdf",
+      "mode": "release",
+      "sources": [
+        "https://github.com/probml/pml2-book/releases/latest/download/book2.pdf"
+      ],
+      "resourceIds": [
+        "PML2"
+      ]
+    },
+    {
+      "sha256": "e9eb816d667703a6ce3f93c294f6b9b999cdc91f64689f453935fadcbb2d9f44",
+      "bytes": 1975176,
+      "format": "pdf",
+      "filename": "kos-e9eb816d667703a6.pdf",
+      "repositoryPath": "files/kos-e9eb816d667703a6.pdf",
+      "mode": "repository",
+      "sources": [
+        "https://mkosorok.web.unc.edu/wp-content/uploads/sites/14747/2017/07/current.pdf"
+      ],
+      "resourceIds": [
+        "KOS"
+      ]
+    },
+    {
+      "sha256": "a1067af923e9156bb95fbe4b0d18699bd0723e9c902bdc74465cf7782820b1b5",
+      "bytes": 11315465,
+      "format": "pdf",
+      "filename": "what-a1067af923e9156b.pdf",
+      "repositoryPath": "files/what-a1067af923e9156b.pdf",
+      "mode": "repository",
+      "sources": [
+        "https://miguelhernan.org/s/hernanrobins_WhatIf_19aug26.pdf"
+      ],
+      "resourceIds": [
+        "WHAT"
+      ]
+    },
+    {
+      "sha256": "20a953541b41a099bc69b8d809139a4ccdb2aefedaa13e50c766245fe4b5167e",
+      "bytes": 5990936,
+      "format": "pdf",
+      "filename": "llm-20a953541b41a099.pdf",
+      "repositoryPath": "files/llm-20a953541b41a099.pdf",
+      "mode": "repository",
+      "sources": [
+        "https://raw.githubusercontent.com/stanford-cs336/lectures/main/lecture_03.pdf"
+      ],
+      "resourceIds": [
+        "LLM"
+      ]
+    },
+    {
+      "sha256": "922da01cee70ed9dc9eef13d8116f1d6f45d663c12e632b3e80954c783bd3ce5",
+      "bytes": 6500834,
+      "format": "pdf",
+      "filename": "llm-922da01cee70ed9d.pdf",
+      "repositoryPath": "files/llm-922da01cee70ed9d.pdf",
+      "mode": "repository",
+      "sources": [
+        "https://raw.githubusercontent.com/stanford-cs336/lectures/main/lecture_04.pdf"
+      ],
+      "resourceIds": [
+        "LLM"
+      ]
+    },
+    {
+      "sha256": "a2d5664a3b5a1f246df2fe58b43189215f29931ec05bde4d8a6af4664f55cafe",
+      "bytes": 5200951,
+      "format": "pdf",
+      "filename": "llm-a2d5664a3b5a1f24.pdf",
+      "repositoryPath": "files/llm-a2d5664a3b5a1f24.pdf",
+      "mode": "repository",
+      "sources": [
+        "https://raw.githubusercontent.com/stanford-cs336/lectures/main/lecture_05.pdf"
+      ],
+      "resourceIds": [
+        "LLM"
+      ]
+    },
+    {
+      "sha256": "4c4d7674b333693f20f328935d84dd8a073362c9725c5e05302b6650751ad4d1",
+      "bytes": 6563256,
+      "format": "pdf",
+      "filename": "llm-4c4d7674b333693f.pdf",
+      "repositoryPath": "files/llm-4c4d7674b333693f.pdf",
+      "mode": "repository",
+      "sources": [
+        "https://raw.githubusercontent.com/stanford-cs336/lectures/main/lecture_08.pdf"
+      ],
+      "resourceIds": [
+        "LLM"
+      ]
+    },
+    {
+      "sha256": "92a5d9e26e65bb0a9d8c79b12ed7ea26d14530bf960dcf44f9ed5fd372f519fa",
+      "bytes": 6941146,
+      "format": "pdf",
+      "filename": "llm-92a5d9e26e65bb0a.pdf",
+      "repositoryPath": "files/llm-92a5d9e26e65bb0a.pdf",
+      "mode": "repository",
+      "sources": [
+        "https://raw.githubusercontent.com/stanford-cs336/lectures/main/lecture_09.pdf"
+      ],
+      "resourceIds": [
+        "LLM"
+      ]
+    },
+    {
+      "sha256": "b2148e683b4020f3fa95f5c95f37be55ebf6b2f57382f4c148517e84bf1df890",
+      "bytes": 6702855,
+      "format": "pdf",
+      "filename": "llm-b2148e683b4020f3.pdf",
+      "repositoryPath": "files/llm-b2148e683b4020f3.pdf",
+      "mode": "repository",
+      "sources": [
+        "https://raw.githubusercontent.com/stanford-cs336/lectures/main/lecture_11.pdf"
+      ],
+      "resourceIds": [
+        "LLM"
+      ]
+    },
+    {
+      "sha256": "42a4bc02408a96e0b414f789f32780ae1d8461000f872d93aa38c94fe369e862",
+      "bytes": 6395151,
+      "format": "pdf",
+      "filename": "llm-42a4bc02408a96e0.pdf",
+      "repositoryPath": "files/llm-42a4bc02408a96e0.pdf",
+      "mode": "repository",
+      "sources": [
+        "https://raw.githubusercontent.com/stanford-cs336/lectures/main/lecture_15.pdf"
+      ],
+      "resourceIds": [
+        "LLM"
+      ]
+    },
+    {
+      "sha256": "1a2bea825499f226b1c3fe990606253ad1b4fdbdf2ae90b4d12d7d0c07f2c8b3",
+      "bytes": 6755659,
+      "format": "pdf",
+      "filename": "llm-1a2bea825499f226.pdf",
+      "repositoryPath": "files/llm-1a2bea825499f226.pdf",
+      "mode": "repository",
+      "sources": [
+        "https://raw.githubusercontent.com/stanford-cs336/lectures/main/lecture_16.pdf"
+      ],
+      "resourceIds": [
+        "LLM"
+      ]
+    },
+    {
+      "sha256": "cf402d1c6d3c66da035bdf33b3e2c1bbc4bb92a78b006ee36577e925a265e328",
+      "bytes": 965629,
+      "format": "pdf",
+      "filename": "llm-cf402d1c6d3c66da.pdf",
+      "repositoryPath": "files/llm-cf402d1c6d3c66da.pdf",
+      "mode": "repository",
+      "sources": [
+        "https://raw.githubusercontent.com/stanford-cs336/assignment1-basics/main/cs336_assignment1_basics.pdf"
+      ],
+      "resourceIds": [
+        "LLM"
+      ]
+    },
+    {
+      "sha256": "f5667e3b6fac23c3a6d4ad4a999445b96aab3fb2246904d13ec86b79320b1a84",
+      "bytes": 1495177,
+      "format": "pdf",
+      "filename": "llm-f5667e3b6fac23c3.pdf",
+      "repositoryPath": "files/llm-f5667e3b6fac23c3.pdf",
+      "mode": "repository",
+      "sources": [
+        "https://raw.githubusercontent.com/stanford-cs336/assignment2-systems/main/cs336_assignment2_systems.pdf"
+      ],
+      "resourceIds": [
+        "LLM"
+      ]
+    },
+    {
+      "sha256": "121e9d15b1ba508cef437acc764eaa83268b559c4898c10bda3fd56bdde50392",
+      "bytes": 182230,
+      "format": "pdf",
+      "filename": "llm-121e9d15b1ba508c.pdf",
+      "repositoryPath": "files/llm-121e9d15b1ba508c.pdf",
+      "mode": "repository",
+      "sources": [
+        "https://raw.githubusercontent.com/stanford-cs336/assignment3-scaling/main/cs336_assignment3_scaling.pdf"
+      ],
+      "resourceIds": [
+        "LLM"
+      ]
+    },
+    {
+      "sha256": "2b0660d0d1e96366c4688f9606c707c668a1fa76396c563b21a6fc75863fb59e",
+      "bytes": 287362,
+      "format": "pdf",
+      "filename": "llm-2b0660d0d1e96366.pdf",
+      "repositoryPath": "files/llm-2b0660d0d1e96366.pdf",
+      "mode": "repository",
+      "sources": [
+        "https://raw.githubusercontent.com/stanford-cs336/assignment4-data/main/cs336_assignment4_data.pdf"
+      ],
+      "resourceIds": [
+        "LLM"
+      ]
+    },
+    {
+      "sha256": "c93d503a69aef4aa7519b7fc664abebbf2ebf5e5e88379a7ed92f4c209a2d26a",
+      "bytes": 765568,
+      "format": "pdf",
+      "filename": "llm-c93d503a69aef4aa.pdf",
+      "repositoryPath": "files/llm-c93d503a69aef4aa.pdf",
+      "mode": "repository",
+      "sources": [
+        "https://raw.githubusercontent.com/stanford-cs336/assignment5-alignment/main/cs336_spring2026_assignment5_alignment.pdf"
+      ],
+      "resourceIds": [
+        "LLM"
+      ]
+    },
+    {
+      "sha256": "340efed7e31e421c26714756c81c38be90343624a3630c25d6ff56beac13c927",
+      "bytes": 495855,
+      "format": "pdf",
+      "filename": "ope-340efed7e31e421c.pdf",
+      "repositoryPath": "files/ope-340efed7e31e421c.pdf",
+      "mode": "repository",
+      "sources": [
+        "https://arxiv.org/pdf/2212.06355"
+      ],
+      "resourceIds": [
+        "OPE"
+      ]
+    },
+    {
+      "sha256": "3c5e18cbf6efeeb129e0b6fc6f2b076c4349291b7d34e5920913744df1411342",
+      "bytes": 1968659,
+      "format": "pdf",
+      "filename": "off-3c5e18cbf6efeeb1.pdf",
+      "repositoryPath": "files/off-3c5e18cbf6efeeb1.pdf",
+      "mode": "repository",
+      "sources": [
+        "https://arxiv.org/pdf/2005.01643"
+      ],
+      "resourceIds": [
+        "OFF"
+      ]
+    },
+    {
+      "sha256": "c69aa191d8363c25b36685db4adb7e6980e55ee39892fd3626206c16e1e0efa1",
+      "bytes": 5360733,
+      "format": "pdf",
+      "filename": "conf-c69aa191d8363c25.pdf",
+      "repositoryPath": "files/conf-c69aa191d8363c25.pdf",
+      "mode": "repository",
+      "sources": [
+        "https://arxiv.org/pdf/2107.07511"
+      ],
+      "resourceIds": [
+        "CONF"
+      ]
+    },
+    {
+      "sha256": "eb3efd547349adfbff25514ae0854c142cd29b96b398be38c9000d69a2f64ca8",
+      "bytes": 1494142,
+      "format": "pdf",
+      "filename": "cs-eb3efd547349adfb.pdf",
+      "repositoryPath": "files/cs-eb3efd547349adfb.pdf",
+      "mode": "repository",
+      "sources": [
+        "https://arxiv.org/pdf/1810.08240"
+      ],
+      "resourceIds": [
+        "CS"
+      ]
+    },
+    {
+      "sha256": "599bb0add9a0ec7bf85a6561dbc7619f45403892a19084eb1fe622352ef91ef7",
+      "bytes": 2130940,
+      "format": "pdf",
+      "filename": "dp-599bb0add9a0ec7b.pdf",
+      "repositoryPath": "files/dp-599bb0add9a0ec7b.pdf",
+      "mode": "repository",
+      "sources": [
+        "https://www.cis.upenn.edu/~aaroth/Papers/privacybook.pdf"
+      ],
+      "resourceIds": [
+        "DP"
+      ]
+    },
+    {
+      "sha256": "5292a1fc53631ac28fdbcccecc060de8e072b3008fb8d36c22d963a8f6a06bac",
+      "bytes": 42429657,
+      "format": "pdf",
+      "filename": "ot-5292a1fc53631ac2.pdf",
+      "repositoryPath": "files/ot-5292a1fc53631ac2.pdf",
+      "mode": "repository",
+      "sources": [
+        "https://arxiv.org/pdf/1803.00567"
+      ],
+      "resourceIds": [
+        "OT"
+      ]
+    },
+    {
+      "sha256": "6d796c60e55c47b955a223591e39d3f2c860736b495dfda90e5543577563b9aa",
+      "bytes": 1939020,
+      "format": "pdf",
+      "filename": "randla-6d796c60e55c47b9.pdf",
+      "repositoryPath": "files/randla-6d796c60e55c47b9.pdf",
+      "mode": "repository",
+      "sources": [
+        "https://arxiv.org/pdf/2002.01387"
+      ],
+      "resourceIds": [
+        "RANDLA"
+      ]
+    },
+    {
+      "sha256": "d0385798e8bada8e81b915c1743be81d9ce8776f12ed937e09351995e099ce37",
+      "bytes": 2874717,
+      "format": "pdf",
+      "filename": "wm-d0385798e8bada8e.pdf",
+      "repositoryPath": "files/wm-d0385798e8bada8e.pdf",
+      "mode": "repository",
+      "sources": [
+        "https://arxiv.org/pdf/2301.04104"
+      ],
+      "resourceIds": [
+        "WM"
+      ]
+    },
+    {
+      "sha256": "071e3ecb630171a5ced9aaafe1d509e0355970268612df0947693ee48186692b",
+      "bytes": 869587,
+      "format": "pdf",
+      "filename": "sbi-071e3ecb630171a5.pdf",
+      "repositoryPath": "files/sbi-071e3ecb630171a5.pdf",
+      "mode": "repository",
+      "sources": [
+        "https://arxiv.org/pdf/1911.01429"
+      ],
+      "resourceIds": [
+        "SBI"
+      ]
+    },
+    {
+      "sha256": "dcf8212ed37db9ac154ac975b8f9c7d36831cf56b75261679b04ab9814985fc2",
+      "bytes": 45092403,
+      "format": "pdf",
+      "filename": "geo-dcf8212ed37db9ac.pdf",
+      "repositoryPath": "files/geo-dcf8212ed37db9ac.pdf",
+      "mode": "repository",
+      "sources": [
+        "https://arxiv.org/pdf/2104.13478"
+      ],
+      "resourceIds": [
+        "GEO"
+      ]
+    },
+    {
+      "sha256": "95e9c219298bcf718493885ba6f00cbcc95474e34fa8e4b0bf363e6e07f1b71b",
+      "bytes": 5652337,
+      "format": "pdf",
+      "filename": "mani-95e9c219298bcf71.pdf",
+      "repositoryPath": "files/mani-95e9c219298bcf71.pdf",
+      "mode": "repository",
+      "sources": [
+        "https://www.nicolasboumal.net/book/IntroOptimManifolds_Boumal_2023.pdf"
+      ],
+      "resourceIds": [
+        "MANI"
+      ]
+    },
+    {
+      "sha256": "c4bdbc8f9db91575b9fd5dd6616dd22858d7c53d1fc91cc492696ed96975d52d",
+      "bytes": 856784,
+      "format": "pdf",
+      "filename": "odepar-c4bdbc8f9db91575.pdf",
+      "repositoryPath": "files/odepar-c4bdbc8f9db91575.pdf",
+      "mode": "repository",
+      "sources": [
+        "https://jmlr.org/papers/volume25/23-1261/23-1261.pdf"
+      ],
+      "resourceIds": [
+        "ODEPAR"
+      ]
+    },
+    {
+      "sha256": "d4c7a5200fa104f6d5af7d845dc65b99b17ea55fb1fed6a151a7c4d1353bd6e8",
+      "bytes": 106900,
+      "format": "pdf",
+      "filename": "ostep-d4c7a5200fa104f6.pdf",
+      "repositoryPath": "files/ostep-d4c7a5200fa104f6.pdf",
+      "mode": "repository",
+      "sources": [
+        "https://pages.cs.wisc.edu/~remzi/OSTEP/cpu-intro.pdf"
+      ],
+      "resourceIds": [
+        "OSTEP"
+      ]
+    },
+    {
+      "sha256": "00aa608424bbdf5e9d6ef17d47e7595a5455a42e74ad3e6c5913603aa7e8ea7b",
+      "bytes": 122017,
+      "format": "pdf",
+      "filename": "ostep-00aa608424bbdf5e.pdf",
+      "repositoryPath": "files/ostep-00aa608424bbdf5e.pdf",
+      "mode": "repository",
+      "sources": [
+        "https://pages.cs.wisc.edu/~remzi/OSTEP/cpu-api.pdf"
+      ],
+      "resourceIds": [
+        "OSTEP"
+      ]
+    },
+    {
+      "sha256": "ba97a33d7b878ccd60915f5397463ca38cbf7530a202fcde4128ad66df35b77e",
+      "bytes": 33322,
+      "format": "pdf",
+      "filename": "ostep-ba97a33d7b878ccd.pdf",
+      "repositoryPath": "files/ostep-ba97a33d7b878ccd.pdf",
+      "mode": "repository",
+      "sources": [
+        "https://pages.cs.wisc.edu/~remzi/OSTEP/cpu-dialogue.pdf"
+      ],
+      "resourceIds": [
+        "OSTEP"
+      ]
+    },
+    {
+      "sha256": "ad9c3ae46f0d695744008a0faa1dd104ebf033eb0d5a0e14411146b2d53d9054",
+      "bytes": 134592,
+      "format": "pdf",
+      "filename": "ostep-ad9c3ae46f0d6957.pdf",
+      "repositoryPath": "files/ostep-ad9c3ae46f0d6957.pdf",
+      "mode": "repository",
+      "sources": [
+        "https://pages.cs.wisc.edu/~remzi/OSTEP/cpu-mechanisms.pdf"
+      ],
+      "resourceIds": [
+        "OSTEP"
+      ]
+    },
+    {
+      "sha256": "d4443bc142b7c134280c6d284e887b0768642583eaddda674dfa6975f483aa5a",
+      "bytes": 138852,
+      "format": "pdf",
+      "filename": "ostep-d4443bc142b7c134.pdf",
+      "repositoryPath": "files/ostep-d4443bc142b7c134.pdf",
+      "mode": "repository",
+      "sources": [
+        "https://pages.cs.wisc.edu/~remzi/OSTEP/cpu-sched-lottery.pdf"
+      ],
+      "resourceIds": [
+        "OSTEP"
+      ]
+    },
+    {
+      "sha256": "96241b4e6708991740560334a1f67516c3c68eb3e6a570af7b03cdb4b32918db",
+      "bytes": 115638,
+      "format": "pdf",
+      "filename": "ostep-96241b4e67089917.pdf",
+      "repositoryPath": "files/ostep-96241b4e67089917.pdf",
+      "mode": "repository",
+      "sources": [
+        "https://pages.cs.wisc.edu/~remzi/OSTEP/cpu-sched-mlfq.pdf"
+      ],
+      "resourceIds": [
+        "OSTEP"
+      ]
+    },
+    {
+      "sha256": "302396e55bb9ff0d509a16393ecb46dcb614225a2ee2cf9fef8e8a54eb0dc3e1",
+      "bytes": 118032,
+      "format": "pdf",
+      "filename": "ostep-302396e55bb9ff0d.pdf",
+      "repositoryPath": "files/ostep-302396e55bb9ff0d.pdf",
+      "mode": "repository",
+      "sources": [
+        "https://pages.cs.wisc.edu/~remzi/OSTEP/cpu-sched-multi.pdf"
+      ],
+      "resourceIds": [
+        "OSTEP"
+      ]
+    },
+    {
+      "sha256": "0912b1a34977a70704b921ecfdf0dd65300e038a3eb4e5e57b2d9c38f66b63c3",
+      "bytes": 118326,
+      "format": "pdf",
+      "filename": "ostep-0912b1a34977a707.pdf",
+      "repositoryPath": "files/ostep-0912b1a34977a707.pdf",
+      "mode": "repository",
+      "sources": [
+        "https://pages.cs.wisc.edu/~remzi/OSTEP/cpu-sched.pdf"
+      ],
+      "resourceIds": [
+        "OSTEP"
+      ]
+    },
+    {
+      "sha256": "26fc70ea6b16a4e2c4b26a069e7c5e1e5326796918b6e361ca01e7514990c615",
+      "bytes": 23356,
+      "format": "pdf",
+      "filename": "ostep-26fc70ea6b16a4e2.pdf",
+      "repositoryPath": "files/ostep-26fc70ea6b16a4e2.pdf",
+      "mode": "repository",
+      "sources": [
+        "https://pages.cs.wisc.edu/~remzi/OSTEP/dedication.pdf"
+      ],
+      "resourceIds": [
+        "OSTEP"
+      ]
+    },
+    {
+      "sha256": "b654dd0af273c8e5fdc9ddce5c4097ce7d52f3c1981e5529b6137427207321e3",
+      "bytes": 32657,
+      "format": "pdf",
+      "filename": "ostep-b654dd0af273c8e5.pdf",
+      "repositoryPath": "files/ostep-b654dd0af273c8e5.pdf",
+      "mode": "repository",
+      "sources": [
+        "https://pages.cs.wisc.edu/~remzi/OSTEP/dialogue-concurrency.pdf"
+      ],
+      "resourceIds": [
+        "OSTEP"
+      ]
+    },
+    {
+      "sha256": "7a5453c6c30cb6b0b0b7bb2be7bd27cdd0eca264dfa20391bec2197489a69d6a",
+      "bytes": 24634,
+      "format": "pdf",
+      "filename": "ostep-7a5453c6c30cb6b0.pdf",
+      "repositoryPath": "files/ostep-7a5453c6c30cb6b0.pdf",
+      "mode": "repository",
+      "sources": [
+        "https://pages.cs.wisc.edu/~remzi/OSTEP/dialogue-distribution.pdf"
+      ],
+      "resourceIds": [
+        "OSTEP"
+      ]
+    },
+    {
+      "sha256": "0cabda3579f928219376b3cb394dcb33fa55d519ba4f58abdadd9a91210aa9af",
+      "bytes": 29352,
+      "format": "pdf",
+      "filename": "ostep-0cabda3579f92821.pdf",
+      "repositoryPath": "files/ostep-0cabda3579f92821.pdf",
+      "mode": "repository",
+      "sources": [
+        "https://pages.cs.wisc.edu/~remzi/OSTEP/dialogue-labs.pdf"
+      ],
+      "resourceIds": [
+        "OSTEP"
+      ]
+    },
+    {
+      "sha256": "e5c6f31e941cec9075ffd4c2edbaa4f0339fe2436d38ab6c1819bbab44ab79a1",
+      "bytes": 21151,
+      "format": "pdf",
+      "filename": "ostep-e5c6f31e941cec90.pdf",
+      "repositoryPath": "files/ostep-e5c6f31e941cec90.pdf",
+      "mode": "repository",
+      "sources": [
+        "https://pages.cs.wisc.edu/~remzi/OSTEP/dialogue-monitors.pdf"
+      ],
+      "resourceIds": [
+        "OSTEP"
+      ]
+    },
+    {
+      "sha256": "2ac385ca5924e6bad94e721b3e8859e6e93cf6abf3654cd5d31fe2b532bc16ad",
+      "bytes": 27610,
+      "format": "pdf",
+      "filename": "ostep-2ac385ca5924e6ba.pdf",
+      "repositoryPath": "files/ostep-2ac385ca5924e6ba.pdf",
+      "mode": "repository",
+      "sources": [
+        "https://pages.cs.wisc.edu/~remzi/OSTEP/dialogue-persistence.pdf"
+      ],
+      "resourceIds": [
+        "OSTEP"
+      ]
+    },
+    {
+      "sha256": "27b308c25096f73a2cc45f79057077b9a8b6acd9f8bf68ef662f1d7e058a8973",
+      "bytes": 30567,
+      "format": "pdf",
+      "filename": "ostep-27b308c25096f73a.pdf",
+      "repositoryPath": "files/ostep-27b308c25096f73a.pdf",
+      "mode": "repository",
+      "sources": [
+        "https://pages.cs.wisc.edu/~remzi/OSTEP/dialogue-security.pdf"
+      ],
+      "resourceIds": [
+        "OSTEP"
+      ]
+    },
+    {
+      "sha256": "eb985b86c08584508ad0731b94a84d28a5c0e8004f5cd4475f722504c0e509b4",
+      "bytes": 40349,
+      "format": "pdf",
+      "filename": "ostep-eb985b86c0858450.pdf",
+      "repositoryPath": "files/ostep-eb985b86c0858450.pdf",
+      "mode": "repository",
+      "sources": [
+        "https://pages.cs.wisc.edu/~remzi/OSTEP/dialogue-threeeasy.pdf"
+      ],
+      "resourceIds": [
+        "OSTEP"
+      ]
+    },
+    {
+      "sha256": "2a599f6f4e64a00db08e5ebb739f4b591ace57668b37694ad44d9fd56bb76fbd",
+      "bytes": 29687,
+      "format": "pdf",
+      "filename": "ostep-2a599f6f4e64a00d.pdf",
+      "repositoryPath": "files/ostep-2a599f6f4e64a00d.pdf",
+      "mode": "repository",
+      "sources": [
+        "https://pages.cs.wisc.edu/~remzi/OSTEP/dialogue-virtualization.pdf"
+      ],
+      "resourceIds": [
+        "OSTEP"
+      ]
+    },
+    {
+      "sha256": "fad4df33438163d2310f750c686329139ab43f1938edb95418f8e95ee6d529d2",
+      "bytes": 31767,
+      "format": "pdf",
+      "filename": "ostep-fad4df33438163d2.pdf",
+      "repositoryPath": "files/ostep-fad4df33438163d2.pdf",
+      "mode": "repository",
+      "sources": [
+        "https://pages.cs.wisc.edu/~remzi/OSTEP/dialogue-vm.pdf"
+      ],
+      "resourceIds": [
+        "OSTEP"
+      ]
+    },
+    {
+      "sha256": "7370e7e3168cbe4e7de5fc5afaf85642eafe7b628010c499c078f27316f87ec7",
+      "bytes": 21097,
+      "format": "pdf",
+      "filename": "ostep-7370e7e3168cbe4e.pdf",
+      "repositoryPath": "files/ostep-7370e7e3168cbe4e.pdf",
+      "mode": "repository",
+      "sources": [
+        "https://pages.cs.wisc.edu/~remzi/OSTEP/dialogue-vmm.pdf"
+      ],
+      "resourceIds": [
+        "OSTEP"
+      ]
+    },
+    {
+      "sha256": "531c303f5d20944c0f7a253c16a2deaaebeaa1039a7a43336637b0a01345724e",
+      "bytes": 131483,
+      "format": "pdf",
+      "filename": "ostep-531c303f5d20944c.pdf",
+      "repositoryPath": "files/ostep-531c303f5d20944c.pdf",
+      "mode": "repository",
+      "sources": [
+        "https://pages.cs.wisc.edu/~remzi/OSTEP/dist-afs.pdf"
+      ],
+      "resourceIds": [
+        "OSTEP"
+      ]
+    },
+    {
+      "sha256": "9faa7dcf3c1c8a54339bc6561b57601580b0fce75d7d59c5f10ea764ecf1ef12",
+      "bytes": 23467,
+      "format": "pdf",
+      "filename": "ostep-9faa7dcf3c1c8a54.pdf",
+      "repositoryPath": "files/ostep-9faa7dcf3c1c8a54.pdf",
+      "mode": "repository",
+      "sources": [
+        "https://pages.cs.wisc.edu/~remzi/OSTEP/dist-dialogue.pdf"
+      ],
+      "resourceIds": [
+        "OSTEP"
+      ]
+    },
+    {
+      "sha256": "92986b546ba992cf20b2826b6805d76ac1baa596e91b138fdf56e63eac644a91",
+      "bytes": 139215,
+      "format": "pdf",
+      "filename": "ostep-92986b546ba992cf.pdf",
+      "repositoryPath": "files/ostep-92986b546ba992cf.pdf",
+      "mode": "repository",
+      "sources": [
+        "https://pages.cs.wisc.edu/~remzi/OSTEP/dist-intro.pdf"
+      ],
+      "resourceIds": [
+        "OSTEP"
+      ]
+    },
+    {
+      "sha256": "453691aa33cbd62e23b8cb917068857f250003afdb3994682429a0ebcc75b65e",
+      "bytes": 145901,
+      "format": "pdf",
+      "filename": "ostep-453691aa33cbd62e.pdf",
+      "repositoryPath": "files/ostep-453691aa33cbd62e.pdf",
+      "mode": "repository",
+      "sources": [
+        "https://pages.cs.wisc.edu/~remzi/OSTEP/dist-nfs.pdf"
+      ],
+      "resourceIds": [
+        "OSTEP"
+      ]
+    },
+    {
+      "sha256": "08546bc068699f5a8be8df72417bd2b4e282b08f8c2a1fe056ca09bfdf0533d5",
+      "bytes": 119742,
+      "format": "pdf",
+      "filename": "ostep-08546bc068699f5a.pdf",
+      "repositoryPath": "files/ostep-08546bc068699f5a.pdf",
+      "mode": "repository",
+      "sources": [
+        "https://pages.cs.wisc.edu/~remzi/OSTEP/file-devices.pdf"
+      ],
+      "resourceIds": [
+        "OSTEP"
+      ]
+    },
+    {
+      "sha256": "814f38effd995ee73a269d1801e3c7bc476c3d0e9b297772ac34811212bce989",
+      "bytes": 26908,
+      "format": "pdf",
+      "filename": "ostep-814f38effd995ee7.pdf",
+      "repositoryPath": "files/ostep-814f38effd995ee7.pdf",
+      "mode": "repository",
+      "sources": [
+        "https://pages.cs.wisc.edu/~remzi/OSTEP/file-dialogue.pdf"
+      ],
+      "resourceIds": [
+        "OSTEP"
+      ]
+    },
+    {
+      "sha256": "8bebaab15858c28b7d70c72d97d685103714f423b4581b2e0d5fbb1671764e2b",
+      "bytes": 154732,
+      "format": "pdf",
+      "filename": "ostep-8bebaab15858c28b.pdf",
+      "repositoryPath": "files/ostep-8bebaab15858c28b.pdf",
+      "mode": "repository",
+      "sources": [
+        "https://pages.cs.wisc.edu/~remzi/OSTEP/file-disks.pdf"
+      ],
+      "resourceIds": [
+        "OSTEP"
+      ]
+    },
+    {
+      "sha256": "95b4b1fd00463e78837c1101f1dc0f9416848025eaffdb2a69c3894d5e5f422a",
+      "bytes": 126553,
+      "format": "pdf",
+      "filename": "ostep-95b4b1fd00463e78.pdf",
+      "repositoryPath": "files/ostep-95b4b1fd00463e78.pdf",
+      "mode": "repository",
+      "sources": [
+        "https://pages.cs.wisc.edu/~remzi/OSTEP/file-ffs.pdf"
+      ],
+      "resourceIds": [
+        "OSTEP"
+      ]
+    },
+    {
+      "sha256": "f47b3394d05648303f957234dcdc980023ef7d9e11d2b4d02fc042e7d3e3aef7",
+      "bytes": 160738,
+      "format": "pdf",
+      "filename": "ostep-f47b3394d0564830.pdf",
+      "repositoryPath": "files/ostep-f47b3394d0564830.pdf",
+      "mode": "repository",
+      "sources": [
+        "https://pages.cs.wisc.edu/~remzi/OSTEP/file-implementation.pdf"
+      ],
+      "resourceIds": [
+        "OSTEP"
+      ]
+    },
+    {
+      "sha256": "e31b73700e69a738092c571845b3a1e48158c0a01783d7d83deb8d34b2271b52",
+      "bytes": 129210,
+      "format": "pdf",
+      "filename": "ostep-e31b73700e69a738.pdf",
+      "repositoryPath": "files/ostep-e31b73700e69a738.pdf",
+      "mode": "repository",
+      "sources": [
+        "https://pages.cs.wisc.edu/~remzi/OSTEP/file-integrity.pdf"
+      ],
+      "resourceIds": [
+        "OSTEP"
+      ]
+    },
+    {
+      "sha256": "35b66794d013dd6d117fba1094256ecb94a488d4c7f852b23903dbf47d987704",
+      "bytes": 212094,
+      "format": "pdf",
+      "filename": "ostep-35b66794d013dd6d.pdf",
+      "repositoryPath": "files/ostep-35b66794d013dd6d.pdf",
+      "mode": "repository",
+      "sources": [
+        "https://pages.cs.wisc.edu/~remzi/OSTEP/file-intro.pdf"
+      ],
+      "resourceIds": [
+        "OSTEP"
+      ]
+    },
+    {
+      "sha256": "ea284e285705454787f6ea2804af6f62c42839a8bfa58e5ded307961ef459a11",
+      "bytes": 178600,
+      "format": "pdf",
+      "filename": "ostep-ea284e2857054547.pdf",
+      "repositoryPath": "files/ostep-ea284e2857054547.pdf",
+      "mode": "repository",
+      "sources": [
+        "https://pages.cs.wisc.edu/~remzi/OSTEP/file-journaling.pdf"
+      ],
+      "resourceIds": [
+        "OSTEP"
+      ]
+    },
+    {
+      "sha256": "8c52ffc98c65bcb56198be9e5b7ebb789e86687751553a298d10b25a4712d1f4",
+      "bytes": 156049,
+      "format": "pdf",
+      "filename": "ostep-8c52ffc98c65bcb5.pdf",
+      "repositoryPath": "files/ostep-8c52ffc98c65bcb5.pdf",
+      "mode": "repository",
+      "sources": [
+        "https://pages.cs.wisc.edu/~remzi/OSTEP/file-lfs.pdf"
+      ],
+      "resourceIds": [
+        "OSTEP"
+      ]
+    },
+    {
+      "sha256": "3d88a8b2d47247572a6d424f9b6f5789a6f0b8a39ce1bb8d9f6ef4403fd9e340",
+      "bytes": 170255,
+      "format": "pdf",
+      "filename": "ostep-3d88a8b2d4724757.pdf",
+      "repositoryPath": "files/ostep-3d88a8b2d4724757.pdf",
+      "mode": "repository",
+      "sources": [
+        "https://pages.cs.wisc.edu/~remzi/OSTEP/file-raid.pdf"
+      ],
+      "resourceIds": [
+        "OSTEP"
+      ]
+    },
+    {
+      "sha256": "e8de0c6036d75cfb175166c8701055f75c11b576d8283a101ce09bedaf80b223",
+      "bytes": 200630,
+      "format": "pdf",
+      "filename": "ostep-e8de0c6036d75cfb.pdf",
+      "repositoryPath": "files/ostep-e8de0c6036d75cfb.pdf",
+      "mode": "repository",
+      "sources": [
+        "https://pages.cs.wisc.edu/~remzi/OSTEP/file-ssd.pdf"
+      ],
+      "resourceIds": [
+        "OSTEP"
+      ]
+    },
+    {
+      "sha256": "98e68cadc18468deed74e490b40aa6d414f1536d3ec8e5dc25b156603edf2a19",
+      "bytes": 160075,
+      "format": "pdf",
+      "filename": "ostep-98e68cadc18468de.pdf",
+      "repositoryPath": "files/ostep-98e68cadc18468de.pdf",
+      "mode": "repository",
+      "sources": [
+        "https://pages.cs.wisc.edu/~remzi/OSTEP/intro.pdf"
+      ],
+      "resourceIds": [
+        "OSTEP"
+      ]
+    },
+    {
+      "sha256": "419c8b651882c8153cd565d2ce66ae8ca25f6f6926595541be0861f65bd959ab",
+      "bytes": 34602,
+      "format": "pdf",
+      "filename": "ostep-419c8b651882c815.pdf",
+      "repositoryPath": "files/ostep-419c8b651882c815.pdf",
+      "mode": "repository",
+      "sources": [
+        "https://pages.cs.wisc.edu/~remzi/OSTEP/lab-projects-systems.pdf"
+      ],
+      "resourceIds": [
+        "OSTEP"
+      ]
+    },
+    {
+      "sha256": "69942da33fbca831b461fa74130ec66ea1edeee7ec461e75917f4fc0ce9cb2ec",
+      "bytes": 31468,
+      "format": "pdf",
+      "filename": "ostep-69942da33fbca831.pdf",
+      "repositoryPath": "files/ostep-69942da33fbca831.pdf",
+      "mode": "repository",
+      "sources": [
+        "https://pages.cs.wisc.edu/~remzi/OSTEP/lab-projects-xv6.pdf"
+      ],
+      "resourceIds": [
+        "OSTEP"
+      ]
+    },
+    {
+      "sha256": "e8daa793fc3e393e491167a0cd0b188059653d94013474d962527d3fb61a6b91",
+      "bytes": 100805,
+      "format": "pdf",
+      "filename": "ostep-e8daa793fc3e393e.pdf",
+      "repositoryPath": "files/ostep-e8daa793fc3e393e.pdf",
+      "mode": "repository",
+      "sources": [
+        "https://pages.cs.wisc.edu/~remzi/OSTEP/lab-tutorial.pdf"
+      ],
+      "resourceIds": [
+        "OSTEP"
+      ]
+    },
+    {
+      "sha256": "febaeb69aad85f9901959a002a945dcc3620c507232a9dcdbff673cf977b913a",
+      "bytes": 119715,
+      "format": "pdf",
+      "filename": "ostep-febaeb69aad85f99.pdf",
+      "repositoryPath": "files/ostep-febaeb69aad85f99.pdf",
+      "mode": "repository",
+      "sources": [
+        "https://pages.cs.wisc.edu/~remzi/OSTEP/preface.pdf"
+      ],
+      "resourceIds": [
+        "OSTEP"
+      ]
+    },
+    {
+      "sha256": "a56180e8d15f3d6c5355fe1e420d6c18b727cb2c5bc10aa7a5eb3a1b7f4ecc57",
+      "bytes": 165431,
+      "format": "pdf",
+      "filename": "ostep-a56180e8d15f3d6c.pdf",
+      "repositoryPath": "files/ostep-a56180e8d15f3d6c.pdf",
+      "mode": "repository",
+      "sources": [
+        "https://pages.cs.wisc.edu/~remzi/OSTEP/security-access.pdf"
+      ],
+      "resourceIds": [
+        "OSTEP"
+      ]
+    },
+    {
+      "sha256": "384b176f16bbbaaed0d592e845f6a11f73288899f6f94a038279e2ef2758832d",
+      "bytes": 166074,
+      "format": "pdf",
+      "filename": "ostep-384b176f16bbbaae.pdf",
+      "repositoryPath": "files/ostep-384b176f16bbbaae.pdf",
+      "mode": "repository",
+      "sources": [
+        "https://pages.cs.wisc.edu/~remzi/OSTEP/security-authentication.pdf"
+      ],
+      "resourceIds": [
+        "OSTEP"
+      ]
+    },
+    {
+      "sha256": "c07fce07c9fbff3a6d071b14723c9b98826633d8ef161849211d06c9e6dee04c",
+      "bytes": 184464,
+      "format": "pdf",
+      "filename": "ostep-c07fce07c9fbff3a.pdf",
+      "repositoryPath": "files/ostep-c07fce07c9fbff3a.pdf",
+      "mode": "repository",
+      "sources": [
+        "https://pages.cs.wisc.edu/~remzi/OSTEP/security-crypto.pdf"
+      ],
+      "resourceIds": [
+        "OSTEP"
+      ]
+    },
+    {
+      "sha256": "98b9ea8e7a3e654b175e22265a22a7af1ce42d9fb42079dca10c84644206efe8",
+      "bytes": 159928,
+      "format": "pdf",
+      "filename": "ostep-98b9ea8e7a3e654b.pdf",
+      "repositoryPath": "files/ostep-98b9ea8e7a3e654b.pdf",
+      "mode": "repository",
+      "sources": [
+        "https://pages.cs.wisc.edu/~remzi/OSTEP/security-distributed.pdf"
+      ],
+      "resourceIds": [
+        "OSTEP"
+      ]
+    },
+    {
+      "sha256": "73a56850d907a6b46f05adb88027a91c445d77473e8196cb0afd35f4b5bf0b69",
+      "bytes": 100102,
+      "format": "pdf",
+      "filename": "ostep-73a56850d907a6b4.pdf",
+      "repositoryPath": "files/ostep-73a56850d907a6b4.pdf",
+      "mode": "repository",
+      "sources": [
+        "https://pages.cs.wisc.edu/~remzi/OSTEP/security-intro.pdf"
+      ],
+      "resourceIds": [
+        "OSTEP"
+      ]
+    },
+    {
+      "sha256": "ea053697dcf6480a346dfd2ae4b9c7b5d292ccecfa7e38eb1bd05136a7f96ce6",
+      "bytes": 100720,
+      "format": "pdf",
+      "filename": "ostep-ea053697dcf6480a.pdf",
+      "repositoryPath": "files/ostep-ea053697dcf6480a.pdf",
+      "mode": "repository",
+      "sources": [
+        "https://pages.cs.wisc.edu/~remzi/OSTEP/threads-api.pdf"
+      ],
+      "resourceIds": [
+        "OSTEP"
+      ]
+    },
+    {
+      "sha256": "dc8c3a7b64ff35fe626838a877cc1759d33bce6104ab30a0221268b3ee9859d4",
+      "bytes": 130552,
+      "format": "pdf",
+      "filename": "ostep-dc8c3a7b64ff35fe.pdf",
+      "repositoryPath": "files/ostep-dc8c3a7b64ff35fe.pdf",
+      "mode": "repository",
+      "sources": [
+        "https://pages.cs.wisc.edu/~remzi/OSTEP/threads-bugs.pdf"
+      ],
+      "resourceIds": [
+        "OSTEP"
+      ]
+    },
+    {
+      "sha256": "77a2fb7913c44af3864afe3dc789b3ce0d875a82df20b9690bba1eb8bee94839",
+      "bytes": 128770,
+      "format": "pdf",
+      "filename": "ostep-77a2fb7913c44af3.pdf",
+      "repositoryPath": "files/ostep-77a2fb7913c44af3.pdf",
+      "mode": "repository",
+      "sources": [
+        "https://pages.cs.wisc.edu/~remzi/OSTEP/threads-cv.pdf"
+      ],
+      "resourceIds": [
+        "OSTEP"
+      ]
+    },
+    {
+      "sha256": "02dcd682a855193a904fffb56d17ca27b53681e249ebc0fd282587bfc959e9d6",
+      "bytes": 32085,
+      "format": "pdf",
+      "filename": "ostep-02dcd682a855193a.pdf",
+      "repositoryPath": "files/ostep-02dcd682a855193a.pdf",
+      "mode": "repository",
+      "sources": [
+        "https://pages.cs.wisc.edu/~remzi/OSTEP/threads-dialogue.pdf"
+      ],
+      "resourceIds": [
+        "OSTEP"
+      ]
+    },
+    {
+      "sha256": "a8906e84dd6a7fbe9b3f46c9a3a873e084d1928d304591be6d472f5e5fa394c9",
+      "bytes": 106082,
+      "format": "pdf",
+      "filename": "ostep-a8906e84dd6a7fbe.pdf",
+      "repositoryPath": "files/ostep-a8906e84dd6a7fbe.pdf",
+      "mode": "repository",
+      "sources": [
+        "https://pages.cs.wisc.edu/~remzi/OSTEP/threads-events.pdf"
+      ],
+      "resourceIds": [
+        "OSTEP"
+      ]
+    },
+    {
+      "sha256": "04eebf12233463d54c6b39352bbea644241b308312cabd568b24b9aa3b7e4d1e",
+      "bytes": 125231,
+      "format": "pdf",
+      "filename": "ostep-04eebf12233463d5.pdf",
+      "repositoryPath": "files/ostep-04eebf12233463d5.pdf",
+      "mode": "repository",
+      "sources": [
+        "https://pages.cs.wisc.edu/~remzi/OSTEP/threads-intro.pdf"
+      ],
+      "resourceIds": [
+        "OSTEP"
+      ]
+    },
+    {
+      "sha256": "48d67442fc17dc1e0b6d3a68f1e29d2630eb30de4606c1fffe86124424654ea6",
+      "bytes": 121557,
+      "format": "pdf",
+      "filename": "ostep-48d67442fc17dc1e.pdf",
+      "repositoryPath": "files/ostep-48d67442fc17dc1e.pdf",
+      "mode": "repository",
+      "sources": [
+        "https://pages.cs.wisc.edu/~remzi/OSTEP/threads-locks-usage.pdf"
+      ],
+      "resourceIds": [
+        "OSTEP"
+      ]
+    },
+    {
+      "sha256": "349b3b3251a178e8bd725dc710cd2b9a4d30f34a7491390bc7c1b53c015d1515",
+      "bytes": 171902,
+      "format": "pdf",
+      "filename": "ostep-349b3b3251a178e8.pdf",
+      "repositoryPath": "files/ostep-349b3b3251a178e8.pdf",
+      "mode": "repository",
+      "sources": [
+        "https://pages.cs.wisc.edu/~remzi/OSTEP/threads-locks.pdf"
+      ],
+      "resourceIds": [
+        "OSTEP"
+      ]
+    },
+    {
+      "sha256": "b3f4b61356e64e43631cffbbd5308887d81263eabadf6d94f20d27a979cab6ce",
+      "bytes": 99401,
+      "format": "pdf",
+      "filename": "ostep-b3f4b61356e64e43.pdf",
+      "repositoryPath": "files/ostep-b3f4b61356e64e43.pdf",
+      "mode": "repository",
+      "sources": [
+        "https://pages.cs.wisc.edu/~remzi/OSTEP/threads-monitors.pdf"
+      ],
+      "resourceIds": [
+        "OSTEP"
+      ]
+    },
+    {
+      "sha256": "991a6a2edbd604c6e2c9b52c9505ff63db92fd2bca4c294a252bdfc0dbed38fb",
+      "bytes": 150277,
+      "format": "pdf",
+      "filename": "ostep-991a6a2edbd604c6.pdf",
+      "repositoryPath": "files/ostep-991a6a2edbd604c6.pdf",
+      "mode": "repository",
+      "sources": [
+        "https://pages.cs.wisc.edu/~remzi/OSTEP/threads-sema.pdf"
+      ],
+      "resourceIds": [
+        "OSTEP"
+      ]
+    },
+    {
+      "sha256": "6bf28fd0e16c56c6e82f77bbec48dcbd3d80546852ec1bd0ebc6bd06452fd85f",
+      "bytes": 82682,
+      "format": "pdf",
+      "filename": "ostep-6bf28fd0e16c56c6.pdf",
+      "repositoryPath": "files/ostep-6bf28fd0e16c56c6.pdf",
+      "mode": "repository",
+      "sources": [
+        "https://pages.cs.wisc.edu/~remzi/OSTEP/toc.pdf"
+      ],
+      "resourceIds": [
+        "OSTEP"
+      ]
+    },
+    {
+      "sha256": "959dba1dbd41e3e18e3d97269cc405dcc9ea0872d761d09bf3eec14f3f8273f3",
+      "bytes": 97113,
+      "format": "pdf",
+      "filename": "ostep-959dba1dbd41e3e1.pdf",
+      "repositoryPath": "files/ostep-959dba1dbd41e3e1.pdf",
+      "mode": "repository",
+      "sources": [
+        "https://pages.cs.wisc.edu/~remzi/OSTEP/vm-api.pdf"
+      ],
+      "resourceIds": [
+        "OSTEP"
+      ]
+    },
+    {
+      "sha256": "a6f13af44cae11965876f652e836a1a40603be3e8dfd5336568b69a6007ca4c3",
+      "bytes": 199152,
+      "format": "pdf",
+      "filename": "ostep-a6f13af44cae1196.pdf",
+      "repositoryPath": "files/ostep-a6f13af44cae1196.pdf",
+      "mode": "repository",
+      "sources": [
+        "https://pages.cs.wisc.edu/~remzi/OSTEP/vm-beyondphys-policy.pdf"
+      ],
+      "resourceIds": [
+        "OSTEP"
+      ]
+    },
+    {
+      "sha256": "2d59f70e76be4e9a78eec457b8e20e9941c0c6ec91bb158297695900415459d3",
+      "bytes": 107756,
+      "format": "pdf",
+      "filename": "ostep-2d59f70e76be4e9a.pdf",
+      "repositoryPath": "files/ostep-2d59f70e76be4e9a.pdf",
+      "mode": "repository",
+      "sources": [
+        "https://pages.cs.wisc.edu/~remzi/OSTEP/vm-beyondphys.pdf"
+      ],
+      "resourceIds": [
+        "OSTEP"
+      ]
+    },
+    {
+      "sha256": "c487f8c297177e3f463b21806082537cb9b9f8b0c8c982ca27dc889803ace36c",
+      "bytes": 172402,
+      "format": "pdf",
+      "filename": "ostep-c487f8c297177e3f.pdf",
+      "repositoryPath": "files/ostep-c487f8c297177e3f.pdf",
+      "mode": "repository",
+      "sources": [
+        "https://pages.cs.wisc.edu/~remzi/OSTEP/vm-complete.pdf"
+      ],
+      "resourceIds": [
+        "OSTEP"
+      ]
+    },
+    {
+      "sha256": "8e18d521fe1b6f58761723bd3c02f357defb9f55a43e90e357e60047372808fe",
+      "bytes": 34012,
+      "format": "pdf",
+      "filename": "ostep-8e18d521fe1b6f58.pdf",
+      "repositoryPath": "files/ostep-8e18d521fe1b6f58.pdf",
+      "mode": "repository",
+      "sources": [
+        "https://pages.cs.wisc.edu/~remzi/OSTEP/vm-dialogue.pdf"
+      ],
+      "resourceIds": [
+        "OSTEP"
+      ]
+    },
+    {
+      "sha256": "e843d8451f4c030ae2a7b1af0e5fb493bcfbfa9e0bd44681bda030019d974e2e",
+      "bytes": 135110,
+      "format": "pdf",
+      "filename": "ostep-e843d8451f4c030a.pdf",
+      "repositoryPath": "files/ostep-e843d8451f4c030a.pdf",
+      "mode": "repository",
+      "sources": [
+        "https://pages.cs.wisc.edu/~remzi/OSTEP/vm-freespace.pdf"
+      ],
+      "resourceIds": [
+        "OSTEP"
+      ]
+    },
+    {
+      "sha256": "c57de8420ea7bc8afbca5ce3ba92bcc0b32d5f719f4ab613dd9ceb698d537acc",
+      "bytes": 95320,
+      "format": "pdf",
+      "filename": "ostep-c57de8420ea7bc8a.pdf",
+      "repositoryPath": "files/ostep-c57de8420ea7bc8a.pdf",
+      "mode": "repository",
+      "sources": [
+        "https://pages.cs.wisc.edu/~remzi/OSTEP/vm-intro.pdf"
+      ],
+      "resourceIds": [
+        "OSTEP"
+      ]
+    },
+    {
+      "sha256": "38d81af0ae91743ee39c08c71be620d244b73496536c68c22ccebc2b8a0344a7",
+      "bytes": 130259,
+      "format": "pdf",
+      "filename": "ostep-38d81af0ae91743e.pdf",
+      "repositoryPath": "files/ostep-38d81af0ae91743e.pdf",
+      "mode": "repository",
+      "sources": [
+        "https://pages.cs.wisc.edu/~remzi/OSTEP/vm-mechanism.pdf"
+      ],
+      "resourceIds": [
+        "OSTEP"
+      ]
+    },
+    {
+      "sha256": "0307d990a5638c37d59fb8ca67de75a0afc439461239fa660a7c948dce3bc6d5",
+      "bytes": 117219,
+      "format": "pdf",
+      "filename": "ostep-0307d990a5638c37.pdf",
+      "repositoryPath": "files/ostep-0307d990a5638c37.pdf",
+      "mode": "repository",
+      "sources": [
+        "https://pages.cs.wisc.edu/~remzi/OSTEP/vm-paging.pdf"
+      ],
+      "resourceIds": [
+        "OSTEP"
+      ]
+    },
+    {
+      "sha256": "f9511d43148cc005e9c2d992deff04c16eecbee7269e7568e4b50ab49ddbb2e8",
+      "bytes": 106854,
+      "format": "pdf",
+      "filename": "ostep-f9511d43148cc005.pdf",
+      "repositoryPath": "files/ostep-f9511d43148cc005.pdf",
+      "mode": "repository",
+      "sources": [
+        "https://pages.cs.wisc.edu/~remzi/OSTEP/vm-segmentation.pdf"
+      ],
+      "resourceIds": [
+        "OSTEP"
+      ]
+    },
+    {
+      "sha256": "45eced8581a51497919ed170b4b8631b5ab7ecbad5c77387d0868f52cec6c43f",
+      "bytes": 139762,
+      "format": "pdf",
+      "filename": "ostep-45eced8581a51497.pdf",
+      "repositoryPath": "files/ostep-45eced8581a51497.pdf",
+      "mode": "repository",
+      "sources": [
+        "https://pages.cs.wisc.edu/~remzi/OSTEP/vm-smalltables.pdf"
+      ],
+      "resourceIds": [
+        "OSTEP"
+      ]
+    },
+    {
+      "sha256": "202953f283487b812a9a97c17f4a3cb3a9b3e80a300cc6467c3080ffb0be013e",
+      "bytes": 150670,
+      "format": "pdf",
+      "filename": "ostep-202953f283487b81.pdf",
+      "repositoryPath": "files/ostep-202953f283487b81.pdf",
+      "mode": "repository",
+      "sources": [
+        "https://pages.cs.wisc.edu/~remzi/OSTEP/vm-tlbs.pdf"
+      ],
+      "resourceIds": [
+        "OSTEP"
+      ]
+    },
+    {
+      "sha256": "413759240b8b7a83ddd6c333e901e365d228cf9157b9c88f998f42fd161c36b6",
+      "bytes": 119202,
+      "format": "pdf",
+      "filename": "ostep-413759240b8b7a83.pdf",
+      "repositoryPath": "files/ostep-413759240b8b7a83.pdf",
+      "mode": "repository",
+      "sources": [
+        "https://pages.cs.wisc.edu/~remzi/OSTEP/vmm-intro.pdf"
+      ],
+      "resourceIds": [
+        "OSTEP"
+      ]
+    },
+    {
+      "sha256": "a740b5a2e4cf0afddd4fa3d2621da342054379b6bd9c442430fd10160246198b",
+      "bytes": 42713767,
+      "format": "zip",
+      "filename": "alg-a740b5a2e4cf0afd.zip",
+      "repositoryPath": "files/alg-a740b5a2e4cf0afd.zip",
+      "mode": "release",
+      "sources": [
+        "https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/6.006-spring-2020.zip"
+      ],
+      "resourceIds": [
+        "ALG"
+      ]
+    },
+    {
+      "sha256": "b64f9b77e193002a2b47eca1a19d8cc992ca8a0f69a5ad9e11286f66cba995f7",
+      "bytes": 3355995,
+      "format": "pdf",
+      "filename": "dis-b64f9b77e193002a.pdf",
+      "repositoryPath": "files/dis-b64f9b77e193002a.pdf",
+      "mode": "repository",
+      "sources": [
+        "https://ocw.mit.edu/courses/6-042j-mathematics-for-computer-science-fall-2010/93cad640cf3ed0b23ef70688f452d4d5_MIT6_042JF10_notes.pdf"
+      ],
+      "resourceIds": [
+        "DIS"
+      ]
+    },
+    {
+      "sha256": "9a27ec66778c05bfbabd169654d212477b852a1cd11ee0bac313f8eccbe2e498",
+      "bytes": 36751137,
+      "format": "zip",
+      "filename": "dis-9a27ec66778c05bf.zip",
+      "repositoryPath": "files/dis-9a27ec66778c05bf.zip",
+      "mode": "release",
+      "sources": [
+        "https://ocw.mit.edu/courses/6-042j-mathematics-for-computer-science-fall-2010/6.042j-fall-2010.zip"
+      ],
+      "resourceIds": [
+        "DIS"
+      ]
+    },
+    {
+      "sha256": "8ed43122785a57cd02fe8a5d29d8590342b1e02d5caf070bcec43c452e29fdb6",
+      "bytes": 23890714,
+      "format": "zip",
+      "filename": "complex-8ed43122785a57cd.zip",
+      "repositoryPath": "files/complex-8ed43122785a57cd.zip",
+      "mode": "release",
+      "sources": [
+        "https://ocw.mit.edu/courses/18-04-complex-variables-with-applications-spring-2018/18.04-spring-2018.zip"
+      ],
+      "resourceIds": [
+        "COMPLEX"
+      ]
+    },
+    {
+      "sha256": "838ec6b0f65dc1e3e84ab5a95988dc46fa4e040a1e0b45fed256b8e4b17ae558",
+      "bytes": 67759129,
+      "format": "zip",
+      "filename": "sig-838ec6b0f65dc1e3.zip",
+      "repositoryPath": "files/sig-838ec6b0f65dc1e3.zip",
+      "mode": "release",
+      "sources": [
+        "https://ocw.mit.edu/courses/6-003-signals-and-systems-fall-2011/6.003-fall-2011.zip"
+      ],
+      "resourceIds": [
+        "SIG"
+      ]
+    },
+    {
+      "sha256": "cecf432d89eee07c3c98ac149e950a8d3de0398866df1a84ced4a3f0d3687ef5",
+      "bytes": 3514468,
+      "format": "pdf",
+      "filename": "owen-cecf432d89eee07c.pdf",
+      "repositoryPath": "files/owen-cecf432d89eee07c.pdf",
+      "mode": "repository",
+      "sources": [
+        "https://artowen.su.domains/mc/Ch-intro.pdf"
+      ],
+      "resourceIds": [
+        "OWEN"
+      ]
+    },
+    {
+      "sha256": "63a9481dea0fb89f6bb5af9d3e38593e729c916117274223822bef28ad4dbcd4",
+      "bytes": 374006,
+      "format": "pdf",
+      "filename": "owen-63a9481dea0fb89f.pdf",
+      "repositoryPath": "files/owen-63a9481dea0fb89f.pdf",
+      "mode": "repository",
+      "sources": [
+        "https://artowen.su.domains/mc/Ch-unifrng.pdf"
+      ],
+      "resourceIds": [
+        "OWEN"
+      ]
+    },
+    {
+      "sha256": "e7002c97f07ffc53f13d3e1ba20e7705f9aedb72f247501f35e1c47b568f8a1d",
+      "bytes": 566735,
+      "format": "pdf",
+      "filename": "owen-e7002c97f07ffc53.pdf",
+      "repositoryPath": "files/owen-e7002c97f07ffc53.pdf",
+      "mode": "repository",
+      "sources": [
+        "https://artowen.su.domains/mc/Ch-nonunifrng.pdf"
+      ],
+      "resourceIds": [
+        "OWEN"
+      ]
+    },
+    {
+      "sha256": "172d90b2651b8fb5c240607b1766f282aba663e8458f3e04223995c9bc31fcd4",
+      "bytes": 1854764,
+      "format": "pdf",
+      "filename": "owen-172d90b2651b8fb5.pdf",
+      "repositoryPath": "files/owen-172d90b2651b8fb5.pdf",
+      "mode": "repository",
+      "sources": [
+        "https://artowen.su.domains/mc/Ch-randvectors.pdf"
+      ],
+      "resourceIds": [
+        "OWEN"
+      ]
+    },
+    {
+      "sha256": "2849dadfedfcb4e058f78b85122a532600bae913a75fb4a7d01de0b01092966e",
+      "bytes": 2377723,
+      "format": "pdf",
+      "filename": "owen-2849dadfedfcb4e0.pdf",
+      "repositoryPath": "files/owen-2849dadfedfcb4e0.pdf",
+      "mode": "repository",
+      "sources": [
+        "https://artowen.su.domains/mc/Ch-processes.pdf"
+      ],
+      "resourceIds": [
+        "OWEN"
+      ]
+    },
+    {
+      "sha256": "fccee8176c06d67353673d52ce11e88e77028d1c2dc5da79d50480b6f6dab2b9",
+      "bytes": 400979,
+      "format": "pdf",
+      "filename": "owen-fccee8176c06d673.pdf",
+      "repositoryPath": "files/owen-fccee8176c06d673.pdf",
+      "mode": "repository",
+      "sources": [
+        "https://artowen.su.domains/mc/Ch-quadrature.pdf"
+      ],
+      "resourceIds": [
+        "OWEN"
+      ]
+    },
+    {
+      "sha256": "26b03406aefdcf64fcd2e19532a9c6fd4d60947273bdbafcc3aa7bd67f683f9e",
+      "bytes": 977144,
+      "format": "pdf",
+      "filename": "owen-26b03406aefdcf64.pdf",
+      "repositoryPath": "files/owen-26b03406aefdcf64.pdf",
+      "mode": "repository",
+      "sources": [
+        "https://artowen.su.domains/mc/Ch-var-basic.pdf"
+      ],
+      "resourceIds": [
+        "OWEN"
+      ]
+    },
+    {
+      "sha256": "dca6fb244e9e1434faef928ed57d4c9afa259a9b379e24779c7d6f35973e8c41",
+      "bytes": 658518,
+      "format": "pdf",
+      "filename": "owen-dca6fb244e9e1434.pdf",
+      "repositoryPath": "files/owen-dca6fb244e9e1434.pdf",
+      "mode": "repository",
+      "sources": [
+        "https://artowen.su.domains/mc/Ch-var-is.pdf"
+      ],
+      "resourceIds": [
+        "OWEN"
+      ]
+    },
+    {
+      "sha256": "eff0ceaed2fea88ff6129f60921d4e06085c06cd5525113b82f3b5ea63b27c8f",
+      "bytes": 957310,
+      "format": "pdf",
+      "filename": "owen-eff0ceaed2fea88f.pdf",
+      "repositoryPath": "files/owen-eff0ceaed2fea88f.pdf",
+      "mode": "repository",
+      "sources": [
+        "https://artowen.su.domains/mc/Ch-var-adv.pdf"
+      ],
+      "resourceIds": [
+        "OWEN"
+      ]
+    },
+    {
+      "sha256": "831a8fe228978802cb899b363750ce7dc7355f4365cc7a23ecff7c3b434c85c8",
+      "bytes": 1909243,
+      "format": "pdf",
+      "filename": "owen-831a8fe228978802.pdf",
+      "repositoryPath": "files/owen-831a8fe228978802.pdf",
+      "mode": "repository",
+      "sources": [
+        "https://artowen.su.domains/mc/Ch-MCMC.pdf"
+      ],
+      "resourceIds": [
+        "OWEN"
+      ]
+    },
+    {
+      "sha256": "e03c8889bda31b1855853ebea4cc8479bdfb8341eb4951de0bddd6a7cf2bf936",
+      "bytes": 322583,
+      "format": "pdf",
+      "filename": "owen-e03c8889bda31b18.pdf",
+      "repositoryPath": "files/owen-e03c8889bda31b18.pdf",
+      "mode": "repository",
+      "sources": [
+        "https://artowen.su.domains/mc/A-anova.pdf"
+      ],
+      "resourceIds": [
+        "OWEN"
+      ]
+    },
+    {
+      "sha256": "54e7b383811c1fceaa328b318ae9dc7c8156b9b81603d58778baea61197d2eac",
+      "bytes": 5231225,
+      "format": "pdf",
+      "filename": "owen-54e7b383811c1fce.pdf",
+      "repositoryPath": "files/owen-54e7b383811c1fce.pdf",
+      "mode": "repository",
+      "sources": [
+        "https://artowen.su.domains/mc/practicalqmc.pdf"
+      ],
+      "resourceIds": [
+        "OWEN"
+      ]
+    },
+    {
+      "sha256": "4ccdd3c65e6f01e8ee862f5b04250487e30eff4b0c21541a5aa3cd2295339a12",
+      "bytes": 508559,
+      "format": "pdf",
+      "filename": "fda-4ccdd3c65e6f01e8.pdf",
+      "repositoryPath": "files/fda-4ccdd3c65e6f01e8.pdf",
+      "mode": "repository",
+      "sources": [
+        "https://arxiv.org/pdf/1507.05135"
+      ],
+      "resourceIds": [
+        "FDA"
+      ]
+    },
+    {
+      "sha256": "e07e7ff0b90fb5b2b1e19181aae456f65ebed5ee8995ed9000382ed752320380",
+      "bytes": 1555575,
+      "format": "pdf",
+      "filename": "hawk-e07e7ff0b90fb5b2.pdf",
+      "repositoryPath": "files/hawk-e07e7ff0b90fb5b2.pdf",
+      "mode": "repository",
+      "sources": [
+        "https://arxiv.org/pdf/1507.02822"
+      ],
+      "resourceIds": [
+        "HAWK"
+      ]
+    },
+    {
+      "sha256": "61335910aaf73b4433aaf79020b2cd6588d122b946fd379bb4704c7dfc2f7ee8",
+      "bytes": 8937404,
+      "format": "pdf",
+      "filename": "stoch-61335910aaf73b44.pdf",
+      "repositoryPath": "files/stoch-61335910aaf73b44.pdf",
+      "mode": "repository",
+      "sources": [
+        "https://ocw.mit.edu/courses/6-262-discrete-stochastic-processes-spring-2011/6_262_s_11_coursetextbookpdf.pdf"
+      ],
+      "resourceIds": [
+        "STOCH"
+      ]
+    },
+    {
+      "sha256": "f7cb34f3dc5db3255289b01a6869a1f140f8f8ba0905e9a87aaaf3816dd6d67a",
+      "bytes": 44382611,
+      "format": "zip",
+      "filename": "stoch-f7cb34f3dc5db325.zip",
+      "repositoryPath": "files/stoch-f7cb34f3dc5db325.zip",
+      "mode": "release",
+      "sources": [
+        "https://ocw.mit.edu/courses/6-262-discrete-stochastic-processes-spring-2011/6.262-spring-2011.zip"
+      ],
+      "resourceIds": [
+        "STOCH"
+      ]
+    },
+    {
+      "sha256": "3a28106da8f45fcdd8499357e8cfa905562ae7b5f9d74c78e35b97223b9b7898",
+      "bytes": 2463145,
+      "format": "pdf",
+      "filename": "rough-3a28106da8f45fcd.pdf",
+      "repositoryPath": "files/rough-3a28106da8f45fcd.pdf",
+      "mode": "repository",
+      "sources": [
+        "https://www.hairer.org/notes/RoughPaths.pdf"
+      ],
+      "resourceIds": [
+        "ROUGH"
+      ]
+    },
+    {
+      "sha256": "d4309b35a2d725407d3eb63a130ab6c3436967137fbffbbcd8cb5f87f82f8f06",
+      "bytes": 920928,
+      "format": "pdf",
+      "filename": "spde-d4309b35a2d72540.pdf",
+      "repositoryPath": "files/spde-d4309b35a2d72540.pdf",
+      "mode": "repository",
+      "sources": [
+        "https://arxiv.org/pdf/0907.4178"
+      ],
+      "resourceIds": [
+        "SPDE"
+      ]
+    },
+    {
+      "sha256": "30a92d14b5cc4637dafd7341feac97b99d6d1e7d623a6f6e102144d7d43c2f57",
+      "bytes": 1095613,
+      "format": "pdf",
+      "filename": "tda-30a92d14b5cc4637.pdf",
+      "repositoryPath": "files/tda-30a92d14b5cc4637.pdf",
+      "mode": "repository",
+      "sources": [
+        "https://arxiv.org/pdf/1506.08903"
+      ],
+      "resourceIds": [
+        "TDA"
+      ]
+    },
+    {
+      "sha256": "c691923b1b65547561d8f641d5a5762c3d0d8d39ff8724cd5d4b2cae52a62d6f",
+      "bytes": 2322026,
+      "format": "pdf",
+      "filename": "infog-c691923b1b655475.pdf",
+      "repositoryPath": "files/infog-c691923b1b655475.pdf",
+      "mode": "repository",
+      "sources": [
+        "https://arxiv.org/pdf/1808.08271"
+      ],
+      "resourceIds": [
+        "INFOG"
+      ]
+    },
+    {
+      "sha256": "992f1c5469587aca584781f98d7b7bc6416345795cb702fa4baf583644f74e5b",
+      "bytes": 260328,
+      "format": "pdf",
+      "filename": "quant-992f1c5469587aca.pdf",
+      "repositoryPath": "files/quant-992f1c5469587aca.pdf",
+      "mode": "repository",
+      "sources": [
+        "https://www.preskill.caltech.edu/ph229/notes/chap1.pdf"
+      ],
+      "resourceIds": [
+        "QUANT"
+      ]
+    },
+    {
+      "sha256": "709a8a52cfbc9afb65ed6fb9dfbd9b59afaa8eac21167cbaf37a43b2555b0d34",
+      "bytes": 376827,
+      "format": "pdf",
+      "filename": "quant-709a8a52cfbc9afb.pdf",
+      "repositoryPath": "files/quant-709a8a52cfbc9afb.pdf",
+      "mode": "repository",
+      "sources": [
+        "https://www.preskill.caltech.edu/ph219/chap2_15.pdf"
+      ],
+      "resourceIds": [
+        "QUANT"
+      ]
+    },
+    {
+      "sha256": "34141b215c144c0cc8fd86e9a4ba289e1e8eb73b9dc6cf1dccdf594d4f57e6ad",
+      "bytes": 433557,
+      "format": "pdf",
+      "filename": "quant-34141b215c144c0c.pdf",
+      "repositoryPath": "files/quant-34141b215c144c0c.pdf",
+      "mode": "repository",
+      "sources": [
+        "https://www.preskill.caltech.edu/ph219/chap3_15.pdf"
+      ],
+      "resourceIds": [
+        "QUANT"
+      ]
+    },
+    {
+      "sha256": "f534889a223492ca32873fe20bac3214cf0b2e7d35e0a8d26f44fa10503d0546",
+      "bytes": 422808,
+      "format": "pdf",
+      "filename": "quant-f534889a223492ca.pdf",
+      "repositoryPath": "files/quant-f534889a223492ca.pdf",
+      "mode": "repository",
+      "sources": [
+        "https://www.preskill.caltech.edu/ph229/notes/chap4_01.pdf"
+      ],
+      "resourceIds": [
+        "QUANT"
+      ]
+    },
+    {
+      "sha256": "e5f011c45dd67810ae6de81276c8a15c02948a772264fdfd7b638e4006aa62c3",
+      "bytes": 332702,
+      "format": "pdf",
+      "filename": "quant-e5f011c45dd67810.pdf",
+      "repositoryPath": "files/quant-e5f011c45dd67810.pdf",
+      "mode": "repository",
+      "sources": [
+        "https://www.preskill.caltech.edu/ph219/chap5_15.pdf"
+      ],
+      "resourceIds": [
+        "QUANT"
+      ]
+    },
+    {
+      "sha256": "83afe653105520793ab37a56cfcce606dbec20e2ff67510887ae71dd0c6d6a28",
+      "bytes": 466725,
+      "format": "pdf",
+      "filename": "quant-83afe65310552079.pdf",
+      "repositoryPath": "files/quant-83afe65310552079.pdf",
+      "mode": "repository",
+      "sources": [
+        "https://www.preskill.caltech.edu/ph219/chap6_20_6A_2022.pdf"
+      ],
+      "resourceIds": [
+        "QUANT"
+      ]
+    },
+    {
+      "sha256": "ddb6901c73ca5732272164c03ef91696be01d697bc4c7c55eeeddcee7aafc8bc",
+      "bytes": 690902,
+      "format": "pdf",
+      "filename": "quant-ddb6901c73ca5732.pdf",
+      "repositoryPath": "files/quant-ddb6901c73ca5732.pdf",
+      "mode": "repository",
+      "sources": [
+        "https://www.preskill.caltech.edu/ph219/chap7_26_6A.pdf"
+      ],
+      "resourceIds": [
+        "QUANT"
+      ]
+    },
+    {
+      "sha256": "b18e7631222d2fca486a962c63e149c2b6f44e8b51fef7b010112c90a643d18e",
+      "bytes": 509850,
+      "format": "pdf",
+      "filename": "quant-b18e7631222d2fca.pdf",
+      "repositoryPath": "files/quant-b18e7631222d2fca.pdf",
+      "mode": "repository",
+      "sources": [
+        "https://www.preskill.caltech.edu/ph219/topological.pdf"
+      ],
+      "resourceIds": [
+        "QUANT"
+      ]
+    },
+    {
+      "sha256": "4cfb665bcc4a3c6a7658939ea36b9919bd354540a5a2a34e4d2611969f1ec16b",
+      "bytes": 659825,
+      "format": "pdf",
+      "filename": "quant-4cfb665bcc4a3c6a.pdf",
+      "repositoryPath": "files/quant-4cfb665bcc4a3c6a.pdf",
+      "mode": "repository",
+      "sources": [
+        "https://www.preskill.caltech.edu/ph219/chap10_6A_2025.pdf"
+      ],
+      "resourceIds": [
+        "QUANT"
+      ]
+    },
+    {
+      "sha256": "9d41ab5d5751a44e3a5e117da30f25ad555e6e023bddec8366f9450570dcf5d4",
+      "bytes": 1951403,
+      "format": "pdf",
+      "filename": "statphys-9d41ab5d5751a44e.pdf",
+      "repositoryPath": "files/statphys-9d41ab5d5751a44e.pdf",
+      "mode": "repository",
+      "sources": [
+        "https://davidtong.org/pdfs/teaching/statistical-physics/statphys.pdf"
+      ],
+      "resourceIds": [
+        "STATPHYS"
+      ]
+    },
+    {
+      "sha256": "8075bc90335044e8726fd11fdebb38dad628a977e33c81663384cb157076ae3d",
+      "bytes": 1055584,
+      "format": "pdf",
+      "filename": "statphys-8075bc90335044e8.pdf",
+      "repositoryPath": "files/statphys-8075bc90335044e8.pdf",
+      "mode": "repository",
+      "sources": [
+        "https://davidtong.org/pdfs/teaching/statistical-physics/statphys1.pdf"
+      ],
+      "resourceIds": [
+        "STATPHYS"
+      ]
+    },
+    {
+      "sha256": "0c8143b2adba05f63e9360f4c7e4d7ee1e7a1c33c05e92f854eb50ee5eaaee69",
+      "bytes": 737809,
+      "format": "pdf",
+      "filename": "statphys-0c8143b2adba05f6.pdf",
+      "repositoryPath": "files/statphys-0c8143b2adba05f6.pdf",
+      "mode": "repository",
+      "sources": [
+        "https://davidtong.org/pdfs/teaching/statistical-physics/statphys2.pdf"
+      ],
+      "resourceIds": [
+        "STATPHYS"
+      ]
+    },
+    {
+      "sha256": "d71220dc504387c239ed832d9fb89bbd60c4cd94b707bde85233fcb4fef820c0",
+      "bytes": 1155302,
+      "format": "pdf",
+      "filename": "statphys-d71220dc504387c2.pdf",
+      "repositoryPath": "files/statphys-d71220dc504387c2.pdf",
+      "mode": "repository",
+      "sources": [
+        "https://davidtong.org/pdfs/teaching/statistical-physics/statphys3.pdf"
+      ],
+      "resourceIds": [
+        "STATPHYS"
+      ]
+    },
+    {
+      "sha256": "375f466d65d5b88285f0503ef31805ee2434ad318bf65b2fe043e3287b85982e",
+      "bytes": 586110,
+      "format": "pdf",
+      "filename": "statphys-375f466d65d5b882.pdf",
+      "repositoryPath": "files/statphys-375f466d65d5b882.pdf",
+      "mode": "repository",
+      "sources": [
+        "https://davidtong.org/pdfs/teaching/statistical-physics/statphys4.pdf"
+      ],
+      "resourceIds": [
+        "STATPHYS"
+      ]
+    },
+    {
+      "sha256": "54d04dc368bad90cd16bde9e1a17f6b023d6ae470f69fc9566f8ca4c8db5196c",
+      "bytes": 912892,
+      "format": "pdf",
+      "filename": "statphys-54d04dc368bad90c.pdf",
+      "repositoryPath": "files/statphys-54d04dc368bad90c.pdf",
+      "mode": "repository",
+      "sources": [
+        "https://davidtong.org/pdfs/teaching/statistical-physics/statphys5.pdf"
+      ],
+      "resourceIds": [
+        "STATPHYS"
+      ]
+    },
+    {
+      "sha256": "eee39216f0e6750fe08f11d17beb1b7e132557db3ed87dcd389cd3d035c4a4c1",
+      "bytes": 8768341,
+      "format": "pdf",
+      "filename": "owasp-eee39216f0e6750f.pdf",
+      "repositoryPath": "files/owasp-eee39216f0e6750f.pdf",
+      "mode": "repository",
+      "sources": [
+        "https://genai.owasp.org/download/43299/?tmstv=1731900559"
+      ],
+      "resourceIds": [
+        "OWASP"
+      ]
+    },
+    {
+      "sha256": "525ad8768d80c43930c5b0bb395b9b705689411745676a9a46b4de43e7169055",
+      "bytes": 710173,
+      "format": "pdf",
+      "filename": "surv-525ad8768d80c439.pdf",
+      "repositoryPath": "files/surv-525ad8768d80c439.pdf",
+      "mode": "repository",
+      "sources": [
+        "https://stat.ethz.ch/CRAN/web/packages/survival/vignettes/survival.pdf"
+      ],
+      "resourceIds": [
+        "SURV"
+      ]
+    },
+    {
+      "sha256": "1db668b4c846794153343b3866b49bb3bec426d84ed4e12a02218b8e7edbcc74",
+      "bytes": 2282389,
+      "format": "pdf",
+      "filename": "da-1db668b4c8467941.pdf",
+      "repositoryPath": "files/da-1db668b4c8467941.pdf",
+      "mode": "repository",
+      "sources": [
+        "https://arxiv.org/pdf/1506.07825"
+      ],
+      "resourceIds": [
+        "DA"
+      ]
+    },
+    {
+      "sha256": "c32859e65947e43ccbb929c8055585b71157dcccb679affa38b925333572bada",
+      "bytes": 1059610,
+      "format": "pdf",
+      "filename": "tensor-c32859e65947e43c.pdf",
+      "repositoryPath": "files/tensor-c32859e65947e43c.pdf",
+      "mode": "repository",
+      "sources": [
+        "https://www.mathsci.ai/publication/TensorReview.pdf"
+      ],
+      "resourceIds": [
+        "TENSOR"
+      ]
+    },
+    {
+      "sha256": "8776454b6a8daafbacb1bf75f8e161a3aa84b4452cfa8f8e0b0d6cec32fbda53",
+      "bytes": 1335440,
+      "format": "pdf",
+      "filename": "pac-8776454b6a8daafb.pdf",
+      "repositoryPath": "files/pac-8776454b6a8daafb.pdf",
+      "mode": "repository",
+      "sources": [
+        "https://arxiv.org/pdf/2110.11216"
+      ],
+      "resourceIds": [
+        "PAC"
+      ]
+    },
+    {
+      "sha256": "f931f2855d9addc7ace62ddf20aea67c2d6f8f95982648da8d9ba2a06008b7e6",
+      "bytes": 774850,
+      "format": "pdf",
+      "filename": "mdl-f931f2855d9addc7.pdf",
+      "repositoryPath": "files/mdl-f931f2855d9addc7.pdf",
+      "mode": "repository",
+      "sources": [
+        "https://arxiv.org/pdf/math/0406077"
+      ],
+      "resourceIds": [
+        "MDL"
+      ]
+    },
+    {
+      "sha256": "7690ccaa0ff7038219c966d8466b63d5d241e30beff9aeb2860e205ab392fc20",
+      "bytes": 1461511,
+      "format": "pdf",
+      "filename": "water-7690ccaa0ff70382.pdf",
+      "repositoryPath": "files/water-7690ccaa0ff70382.pdf",
+      "mode": "repository",
+      "sources": [
+        "https://arxiv.org/pdf/2301.10226"
+      ],
+      "resourceIds": [
+        "WATER"
+      ]
+    },
+    {
+      "sha256": "40d976c83c18cce1900eff8c41bd5ad408c102b813af39d05ff85678ccf8d76e",
+      "bytes": 6881335,
+      "format": "pdf",
+      "filename": "bridge-source-b002-40d976c83c18cce1.pdf",
+      "repositoryPath": "files/bridge-source-b002-40d976c83c18cce1.pdf",
+      "mode": "repository",
+      "sources": [
+        "https://web.stanford.edu/~boyd/cvxbook/bv_cvxbook.pdf"
+      ],
+      "resourceIds": [
+        "BRIDGE_SOURCE_B002"
+      ]
+    },
+    {
+      "sha256": "018f3d473d16c35e807e8cdfbd0bed3ccf7a56452e3e10c6b1d84b56eaf2cf59",
+      "bytes": 176204,
+      "format": "pdf",
+      "filename": "bridge-source-b003-018f3d473d16c35e.pdf",
+      "repositoryPath": "files/bridge-source-b003-018f3d473d16c35e.pdf",
+      "mode": "repository",
+      "sources": [
+        "https://www.claymath.org/wp-content/uploads/2022/06/pvsnp.pdf"
+      ],
+      "resourceIds": [
+        "BRIDGE_SOURCE_B003"
+      ]
+    },
+    {
+      "sha256": "6d09a78cc225e29a10fcff75974692e1900810fb04222076bf69dfbbf35931d2",
+      "bytes": 1954019,
+      "format": "pdf",
+      "filename": "bridge-source-b004-6d09a78cc225e29a.pdf",
+      "repositoryPath": "files/bridge-source-b004-6d09a78cc225e29a.pdf",
+      "mode": "repository",
+      "sources": [
+        "https://arxiv.org/pdf/1606.04838"
+      ],
+      "resourceIds": [
+        "BRIDGE_SOURCE_B004"
+      ]
+    },
+    {
+      "sha256": "e488e7c208c5a9a6dda912026d59add5fcc7d79a2b43f4191c4585b1a0886f17",
+      "bytes": 289309,
+      "format": "pdf",
+      "filename": "bridge-source-b005-e488e7c208c5a9a6.pdf",
+      "repositoryPath": "files/bridge-source-b005-e488e7c208c5a9a6.pdf",
+      "mode": "repository",
+      "sources": [
+        "https://timroughgarden.org/w16/l/l12.pdf"
+      ],
+      "resourceIds": [
+        "BRIDGE_SOURCE_B005"
+      ]
+    },
+    {
+      "sha256": "add6bfc5aaaf1bef7b8849fdb47425c29808c8f89d4db08485c06f3e80e0a7cd",
+      "bytes": 3963246,
+      "format": "pdf",
+      "filename": "sup-source-sup02-2-add6bfc5aaaf1bef.pdf",
+      "repositoryPath": "files/sup-source-sup02-2-add6bfc5aaaf1bef.pdf",
+      "mode": "repository",
+      "sources": [
+        "https://www.stat.cmu.edu/~cshalizi/754/notes/all.pdf"
+      ],
+      "resourceIds": [
+        "SUP_SOURCE_SUP02_2"
+      ]
+    },
+    {
+      "sha256": "b932b034d3d574f105e0a7fc48c5d14a7b4ba49151c1757805caa8f26598f2a4",
+      "bytes": 760057,
+      "format": "pdf",
+      "filename": "sup-source-sup03-1-b932b034d3d574f1.pdf",
+      "repositoryPath": "files/sup-source-sup03-1-b932b034d3d574f1.pdf",
+      "mode": "repository",
+      "sources": [
+        "https://authors.library.caltech.edu/records/fk9j9-5tq15/files/stuart15c.pdf?download=1"
+      ],
+      "resourceIds": [
+        "SUP_SOURCE_SUP03_1"
+      ]
+    },
+    {
+      "sha256": "6b8f08a43841abf3a32e279126b4753ec5d114cd38aca336b04ff4ad4e43c534",
+      "bytes": 1571414,
+      "format": "pdf",
+      "filename": "q05-6b8f08a43841abf3.pdf",
+      "repositoryPath": "files/q05-6b8f08a43841abf3.pdf",
+      "mode": "repository",
+      "sources": [
+        "https://matpower.org/docs/MATPOWER-manual-8.1.pdf"
+      ],
+      "resourceIds": [
+        "Q05"
+      ]
+    },
+    {
+      "sha256": "99175d7b2c21b143aa70d28aa5cbf9d79f53eef5bf18f8ecf72a5336bc8f5bb1",
+      "bytes": 10216374,
+      "format": "zip",
+      "filename": "q08-99175d7b2c21b143.zip",
+      "repositoryPath": "files/q08-99175d7b2c21b143.zip",
+      "mode": "release",
+      "sources": [
+        "https://ocw.mit.edu/courses/15-762j-supply-chain-planning-spring-2011/15.762j-spring-2011.zip"
+      ],
+      "resourceIds": [
+        "Q08"
+      ]
+    }
+  ],
+  "bundle": null
+}

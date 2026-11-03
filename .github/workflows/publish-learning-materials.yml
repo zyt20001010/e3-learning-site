@@ -1,0 +1,24 @@
+name: Publish verified learning materials
+on:
+  push:
+    branches: [codex/all-materials]
+    paths: [.github/learning-materials.json]
+permissions:
+  contents: write
+concurrency:
+  group: learning-materials-library
+  cancel-in-progress: false
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - name: Read the committed publisher
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh api "repos/$GITHUB_REPOSITORY/contents/scripts/publish-learning-materials.py?ref=$GITHUB_SHA" -H 'Accept: application/vnd.github.raw+json' > publisher.py
+      - name: Verify source files and publish to the library branch
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python3 publisher.py
