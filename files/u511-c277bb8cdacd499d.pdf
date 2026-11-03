@@ -1,0 +1,521 @@
+
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\begin{document}
+\section*{Q1}
+
+Define the standardized sum:
+
+\[
+S_n = \frac{X_1 + \cdots + X_n}{\sqrt{n}},
+\]
+
+and we want to compare \( E[g(S_n)] \) with \( E[g(Z)] \). Let \( Y_i \sim N(0, 1) \), and let \( Y_1, \dots, Y_n \) be i.i.d. random variables. We consider:
+
+\[
+E[g(S_n)] - E[g(Z)].
+\]
+
+To simplify the analysis, we represent the behavior of \( g(S_n) \) using a multivariate function.
+
+
+Define:
+
+\[
+f(x_1, \dots, x_n) = g\left( \frac{x_1 + \cdots + x_n}{\sqrt{n}} \right).
+\]
+
+We want to analyze the difference in expectations:
+
+\[
+\left| E[f(X_1, \dots, X_n)] - E[f(Y_1, \dots, Y_n)] \right|.
+\]
+
+
+Following the approach in the notes, we calculate the partial derivatives of \( f \) with respect to each variable up to the \( k \)-th order.
+
+\begin{itemize}
+	\item \textbf{First-Order Partial Derivative}:
+	\[
+	\frac{\partial f}{\partial x_i} = \frac{1}{\sqrt{n}} g'\left( \frac{x_1 + \cdots + x_n}{\sqrt{n}} \right).
+	\]
+	
+	\item \textbf{Second-Order Partial Derivative}:
+	\[
+	\frac{\partial^2 f}{\partial x_i^2} = \frac{1}{n} g''\left( \frac{x_1 + \cdots + x_n}{\sqrt{n}} \right).
+	\]
+	
+	\item \textbf{General \( k \)-th Order Partial Derivative}:
+	
+	For any \( k \geq 1 \), we have:
+	
+	\[
+	\frac{\partial^k f}{\partial x_i^k} = \frac{1}{n^{k/2}} g^{(k)}\left( \frac{x_1 + \cdots + x_n}{\sqrt{n}} \right).
+	\]
+\end{itemize}
+
+
+Using Stein's method as outlined in the notes, we have:
+
+\[
+\left| E\left[ f(X_1, \dots, X_n) \right] - E\left[ f(Y_1, \dots, Y_n) \right] \right| \leq \frac{1}{k!} \sum_{i=1}^n \left| \frac{\partial^k f}{\partial x_i^k} \right|_\infty \left( E[X_i^k] + E[Y_i^k] \right).
+\]
+
+Substituting the \( k \)-th order partial derivative, we get:
+
+\[
+\left| E\left[ f(X_1, \dots, X_n) \right] - E\left[ f(Y_1, \dots, Y_n) \right] \right| \leq \frac{1}{k!} \cdot n \cdot \frac{1}{n^{k/2}} \left| g^{(k)} \right|_\infty \left( E[X_i^k] + E[Y_i^k] \right).
+\]
+
+Simplifying:
+
+\[
+\left| E\left[ f(X_1, \dots, X_n) \right] - E\left[ f(Y_1, \dots, Y_n) \right] \right| \leq \frac{C_g}{n^{(k-1)/2}},
+\]
+
+\[
+C_g = \frac{1}{k!} \left| g^{(k)} \right|_\infty \left( E[X_i^k] + E[Y_i^k] \right)
+\]
+
+
+Next, we take \( Y_i = Z_i \), where \( Z_i \sim N(0, 1) \) are independent standard normal random variables. Thus:
+
+\[
+\frac{Y_1 + \cdots + Y_n}{\sqrt{n}} \sim N(0, 1).
+\]
+
+Therefore:
+
+\[
+\left| E\left[ g\left( \frac{X_1 + \cdots + X_n}{\sqrt{n}} \right) \right] - E[g(Z)] \right| \leq \frac{C_g}{n^{(k-1)/2}}.
+\]
+
+
+ For general \( k \), we derived the specific form of the error, showing a rate of convergence of \( O(n^{-(k-1)/2}) \).
+
+\section*{Q2}
+
+First, rewrite \(S_n^2\) as the difference between two parts:
+
+\[
+S_n^2 = \frac{1}{n} \sum_{i=1}^n X_i^2 - \overline{X}^2
+\]
+
+where \(\overline{X} = \frac{1}{n} \sum_{i=1}^n X_i\) is the sample mean.
+
+Thus, we have:
+
+\[
+\sqrt{n}(S_n^2 - \sigma^2) = \sqrt{n} \left( \frac{1}{n} \sum_{i=1}^n X_i^2 - \overline{X}^2 - \sigma^2 \right)
+\]
+
+This expression suggests that \(S_n^2\) can be decomposed into a function of the sample mean \(\overline{X}\) and the sample second moment \(\frac{1}{n} \sum_{i=1}^n X_i^2\).
+
+Next, define:
+
+\[
+Y_i = \begin{pmatrix} X_i \\ X_i^2 \end{pmatrix}
+\]
+
+This vector includes both the first and second moments of \(X_i\) (i.e., \(X_i\) and \(X_i^2\)), which are the key components we need to derive the asymptotic distribution of the sample variance.
+
+
+Since \(X_1, X_2, \dots, X_n\) are independent and identically distributed (i.i.d.), we can apply the multivariate CLT to \(Y_i = \begin{pmatrix} X_i \\ X_i^2 \end{pmatrix}\).
+
+According to the multivariate CLT, as \(n \to \infty\), the sample mean \(\frac{1}{n} \sum_{i=1}^n Y_i\) converges in distribution to a normal distribution:
+
+\[
+\sqrt{n} \left( \frac{1}{n} \sum_{i=1}^n Y_i - \mathbb{E}(Y_i) \right) \xrightarrow{d} N(0, \Sigma_Y)
+\]
+
+where \(\Sigma_Y\) is the covariance matrix of \(Y_i\), and \(\mathbb{E}(Y_i)\) is the expectation of \(Y_i\).
+
+First, compute \(\mathbb{E}(Y_i)\):
+
+\[
+\mathbb{E}(Y_i) = \begin{pmatrix} \mu \\ \sigma^2 + \mu^2 \end{pmatrix}
+\]
+
+where \(\mu = \mathbb{E}[X_i]\) and \(\sigma^2 = \mathrm{Var}(X_i)\).
+
+Next, compute the covariance matrix \(\Sigma_Y\) of \(Y_i\):
+
+\[
+\Sigma_Y = \begin{pmatrix} \mathrm{Var}(X_i) & \mathrm{Cov}(X_i, X_i^2) \\ \mathrm{Cov}(X_i, X_i^2) & \mathrm{Var}(X_i^2) \end{pmatrix}
+\]
+
+\[
+\mathrm{Var}(X_i) = \sigma^2
+\]
+
+\[
+\mathrm{Cov}(X_i, X_i^2) = \mathbb{E}[X_i^3] - \mu \cdot \mathbb{E}[X_i^2] = \mathbb{E}[X_i^3] - \mu(\sigma^2 + \mu^2)
+\]
+
+\[
+\mathrm{Var}(X_i^2) = \mathbb{E}[X_i^4] - (\sigma^2 + \mu^2)^2
+\]
+
+
+Now, we apply the Delta Method to the function \(S_n^2\).
+
+Recall that the sample variance can be written as:
+
+\[
+S_n^2 = g\left( \overline{X}, \frac{1}{n} \sum_{i=1}^n X_i^2 \right) = x_2 - x_1^2
+\]
+
+where the function \(g\) is defined in terms of the sample mean \(\overline{X}\) and the sample second moment \(\frac{1}{n} \sum_{i=1}^n X_i^2\). According to the Delta Method, given \(g(x_1, x_2) = x_2 - x_1^2\), we can derive the asymptotic distribution of the sample variance by taking a first-order Taylor expansion of \(g\).
+
+Take partial derivatives of \(g(x_1, x_2)\):
+
+\[
+\frac{\partial g}{\partial x_1} = -2x_1, \quad \frac{\partial g}{\partial x_2} = 1
+\]
+
+Thus, by applying the Delta Method, we obtain:
+
+\[
+\sqrt{n} \left(S_n^2 - \sigma^2\right) \xrightarrow{d} N(0, \mathrm{Var}(X^2) - 2\sigma^4)
+\]
+
+\section*{Q3}
+
+The sample correlation coefficient is defined as:
+\[
+\hat{\rho} = \frac{\frac{1}{n} \sum_{i=1}^{n} (X_i - \bar{X})(Y_i - \bar{Y})}{\sqrt{\frac{1}{n} \sum_{i=1}^{n} (X_i - \bar{X})^2} \sqrt{\frac{1}{n} \sum_{i=1}^{n} (Y_i - \bar{Y})^2}}
+\]
+where \(\bar{X}\) and \(\bar{Y}\) are the sample means of \(X_i\) and \(Y_i\).
+
+Define a new random vector:
+\[
+Z_i = \begin{pmatrix} X_i \\ Y_i \end{pmatrix}, \quad i = 1, 2, \ldots, n
+\]
+where \(X_i\) and \(Y_i\) are i.i.d. pairs.
+
+Define the sample mean vector:
+\[
+\bar{Z}_n = \frac{1}{n} \sum_{i=1}^{n} Z_i = \begin{pmatrix} \bar{X} \\ \bar{Y} \end{pmatrix}
+\]
+
+
+By the Multivariate CLT:
+\[
+\sqrt{n}(\bar{Z}_n - \mu) \xrightarrow{d} N(0, \Sigma)
+\]
+where \(\mu = \mathbb{E}[Z_i] = \begin{pmatrix} \mathbb{E}[X_i] \\ \mathbb{E}[Y_i] \end{pmatrix}\), and \(\Sigma\) is the covariance matrix:
+\[
+\Sigma = \begin{pmatrix}
+	\text{Var}(X) & \text{Cov}(X, Y) \\
+	\text{Cov}(X, Y) & \text{Var}(Y)
+\end{pmatrix}
+\]
+
+
+The sample correlation coefficient \(\hat{\rho}\) can be represented as:
+\[
+\hat{\rho} = g(\bar{Z}_n)
+\]
+where \(g\) is a function mapping \(\bar{Z}_n\) to \(\hat{\rho}\).
+
+By applying the Delta Method:
+\[
+\sqrt{n} (\hat{\rho} - \rho) \approx \nabla g(\mu)^\top \sqrt{n} (\bar{Z}_n - \mu)
+\]
+where \(\nabla g(\mu)\) is the gradient of \(g\) evaluated at \(\mu\).
+
+
+\[
+\nabla g(\mu) = \left( \frac{\partial g}{\partial \bar{X}}, \frac{\partial g}{\partial \bar{Y}} \right)
+\]
+
+
+The covariance matrix \(\Sigma\) is given by:
+\[
+\Sigma = \begin{pmatrix}
+	\sigma_{XX} & \sigma_{XY} \\
+	\sigma_{XY} & \sigma_{YY}
+\end{pmatrix}
+\]
+where \(\sigma_{XX} = \text{Var}(X)\), \(\sigma_{YY} = \text{Var}(Y)\), and \(\sigma_{XY} = \text{Cov}(X, Y)\).
+
+
+\[
+\sqrt{n} (\hat{\rho} - \rho) \xrightarrow{d} N(0, \nabla g(\mu)^\top \Sigma \nabla g(\mu))
+\]
+which is a normal distribution with variance:
+\[
+\sigma^2 = \nabla g(\mu)^\top \Sigma \nabla g(\mu)
+\]
+
+
+\[
+\sqrt{n}(\hat{\rho} - \rho) \xrightarrow{d} N(0, \sigma^2)
+\]
+where \(\sigma^2\) is derived from the gradient and the covariance matrix.
+
+\section*{Q4}
+\subsection*{(a) \( O_p(1) + o_p(1) = O_p(1) \)}
+
+Let:
+
+- \( X_n \sim O_p(1) \): This means that for any \( \epsilon > 0 \), there exists a constant \( M > 0 \) such that
+\[
+P(|X_n| > M) < \epsilon \quad \text{for sufficiently large } n.
+\]
+That is, the sequence \( X_n \) is bounded in probability.
+
+- \( Y_n \sim o_p(1) \): This means that
+\[
+Y_n \xrightarrow{p} 0,
+\]
+which implies that for any \( \epsilon > 0 \),
+\[
+P(|Y_n| > \epsilon) \to 0 \quad \text{as } n \to \infty.
+\]
+
+Now consider \( Z_n = X_n + Y_n \).
+
+We want to show that \( Z_n \sim O_p(1) \), i.e., we need to verify:
+\[
+P(|Z_n| > M) < \epsilon \quad \text{for sufficiently large } n.
+\]
+
+By the triangle inequality, we have:
+\[
+|Z_n| = |X_n + Y_n| \leq |X_n| + |Y_n|.
+\]
+Thus,
+\[
+P(|Z_n| > M) \leq P(|X_n| + |Y_n| > M).
+\]
+
+We proceed by bounding the terms involving \( X_n \) and \( Y_n \).
+
+Since \( X_n \sim O_p(1) \), for any \( \epsilon > 0 \), there exists \( M_1 > 0 \) such that
+\[
+P(|X_n| > M_1) < \frac{\epsilon}{2}.
+\]
+
+Since \( Y_n \sim o_p(1) \), for any given \( \delta > 0 \), there exists \( n_0 \) such that for \( n > n_0 \),
+\[
+P(|Y_n| > \delta) < \frac{\epsilon}{2}.
+\]
+
+Now, choose \( M = M_1 + \delta \). Then we have:
+\[
+P(|Z_n| > M) \leq P(|X_n| > M_1) + P(|Y_n| > \delta) < \frac{\epsilon}{2} + \frac{\epsilon}{2} = \epsilon.
+\]
+Thus, \( Z_n \sim O_p(1) \), which proves that \( O_p(1) + o_p(1) = O_p(1) \).
+
+\subsection*{(b) \( O_p(1) \cdot o_p(1) = o_p(1) \)}
+
+Let:
+
+- \( X_n \sim O_p(1) \), which means that for any \( \epsilon > 0 \), there exists a constant \( M > 0 \) such that
+\[
+P(|X_n| > M) < \epsilon \quad \text{for sufficiently large } n.
+\]
+
+- \( Y_n \sim o_p(1) \), which means that
+\[
+P(|Y_n| > \delta) \to 0 \quad \text{as } n \to \infty.
+\]
+
+We need to prove that \( Z_n = X_n \cdot Y_n \sim o_p(1) \), i.e., for any \( \epsilon > 0 \),
+\[
+P(|Z_n| > \epsilon) \to 0 \quad \text{as } n \to \infty.
+\]
+
+Consider
+\[
+|Z_n| = |X_n \cdot Y_n| \leq |X_n| \cdot |Y_n|.
+\]
+We want to prove that
+\[
+P(|Z_n| > \epsilon) \to 0.
+\]
+
+Since \( X_n \sim O_p(1) \), there exists \( M > 0 \) such that
+\[
+P(|X_n| > M) < \frac{\epsilon}{2}.
+\]
+Similarly, since \( Y_n \sim o_p(1) \), for any given \( \delta > 0 \), there exists \( n_0 \) such that for \( n > n_0 \),
+\[
+P(|Y_n| > \frac{\epsilon}{2M}) < \frac{\epsilon}{2}.
+\]
+
+Therefore, for \( |Z_n| \), we have:
+\[
+P(|Z_n| > \epsilon) = P(|X_n \cdot Y_n| > \epsilon) \leq P(|X_n| > M) + P(|Y_n| > \frac{\epsilon}{2M}).
+\]
+For sufficiently large \( n \), we have:
+\[
+P(|Z_n| > \epsilon) < \frac{\epsilon}{2} + \frac{\epsilon}{2} = \epsilon.
+\]
+Thus, \( Z_n = X_n \cdot Y_n \sim o_p(1) \), which proves that \( O_p(1) \cdot o_p(1) = o_p(1) \).
+
+
+\section*{Q5}
+
+
+Step 1: Assume \( X_1, X_2, \dots, X_{n+1} \) are i.i.d. random variables from an exponential distribution, \( X_i \sim \text{Exp}(1) \).
+
+We use the known result that if \( X_1, X_2, \dots, X_{n+1} \sim \text{Exp}(1) \), the normalized sums of these variables correspond to the order statistics of a uniform distribution. Specifically, define:
+\[
+Y_i = \frac{X_1 + X_i}{X_1 + X_2 + \dots + X_{n+1}},
+\]
+then \( (U_{(1)}, U_{(2)}, \dots, U_{(n)}) \overset{d}{=} (Y_1, Y_2, \dots, Y_n) \), where \( U_{(1)}, U_{(2)}, \dots, U_{(n)} \) are the order statistics of a sample from \( \text{Unif}(0, 1) \). This result can be derived from the properties of exponential random variables.
+
+
+
+Step 2: Define \( a_n = \left\lfloor \frac{n}{2} + 0.5 \right\rfloor \), which is the index for the sample median. The sample median can be represented as:
+\[
+\hat{\theta} = U_{(a_n)} \overset{d}{=} \frac{X_1 + X_{a_n}}{X_1 + \dots + X_{n+1}}
+\]
+
+Define:
+\[
+A_n = \frac{X_1 + \cdots + X_{a_n}}{n}, \quad B_n = \frac{X_{a_n+1} + \cdots + X_{n+1}}{n}
+\]
+Thus:
+\[
+\hat{\theta} = \frac{A_n}{A_n + B_n}
+\]
+
+
+
+Step 3: To prove the asymptotic normality of the sample median \( \hat{\theta} \), we first prove the asymptotic normality of \( A_n \) and \( B_n \).
+
+
+Definition:
+\[
+A_n = \frac{X_1 + \cdots + X_{a_n}}{n}, \quad B_n = \frac{X_{a_n+1} + \cdots + X_{n+1}}{n}
+\]
+where \( X_i \sim \text{Exp}(1) \), i.i.d.
+
+
+\begin{enumerate}
+	\item \textbf{Expectation and Variance:}
+	
+	Since \( X_i \sim \text{Exp}(1) \), we have \( E(X_i) = 1 \) and \( \text{Var}(X_i) = 1 \). For \( A_n \) and \( B_n \), which are scaled sums of i.i.d. exponential random variables, we have:
+	\[
+	E(A_n) = \frac{a_n}{n} \cdot E(X_i) \approx \frac{n/2}{n} = \frac{1}{2}
+	\]
+	\[
+	E(B_n) = \frac{n + 1 - a_n}{n} \cdot E(X_i) \approx \frac{n/2}{n} = \frac{1}{2}
+	\]
+	
+	\item \textbf{Application of the Central Limit Theorem:}
+	
+	Since \( A_n \) and \( B_n \) are means of i.i.d. random variables, we can apply the Central Limit Theorem. For \( A_n \):
+	\[
+	A_n = \frac{1}{n} \sum_{i=1}^{a_n} X_i
+	\]
+	By the Central Limit Theorem:
+	\[
+	\sqrt{n} \left( A_n - E(A_n) \right) = \sqrt{n} \left( A_n - \frac{1}{2} \right) \xrightarrow{d} N\left( 0, \frac{1/2}{n} \cdot \text{Var}(X_i) \right) = N(0, 1/2)
+	\]
+	Similarly for \( B_n \):
+	\[
+	\sqrt{n} \left( B_n - \frac{1}{2} \right) \xrightarrow{d} N(0, 1/2)
+	\]
+\end{enumerate}
+
+
+\begin{enumerate}
+	\item \textbf{Independence:} Since \( A_n \) and \( B_n \) are composed of disjoint sets of independent random variables, \( A_n \) and \( B_n \) are independent.
+	\item \textbf{Using the Multivariate Central Limit Theorem:}
+	
+	By the Multivariate Central Limit Theorem, we have:
+	\[
+	\sqrt{n} \left( \begin{pmatrix} A_n \\ B_n \end{pmatrix} - \begin{pmatrix} 1/2 \\ 1/2 \end{pmatrix} \right) \xrightarrow{d} N\left( \begin{pmatrix} 0 \\ 0 \end{pmatrix}, \begin{pmatrix} 1/2 & 0 \\ 0 & 1/2 \end{pmatrix} \right)
+	\]
+\end{enumerate}
+
+
+Let the random vector \( \mathbf{X}_n \) converge to a normal distribution:
+\[
+\sqrt{n}(\mathbf{X}_n - \boldsymbol{\mu}) \xrightarrow{d} N(\mathbf{0}, \Sigma)
+\]
+If the function \( g(\mathbf{x}) \) is differentiable at \( \boldsymbol{\mu} \), then:
+\[
+\sqrt{n}(g(\mathbf{X}_n) - g(\boldsymbol{\mu})) \xrightarrow{d} N(0, \nabla g(\boldsymbol{\mu})^T \Sigma \nabla g(\boldsymbol{\mu}))
+\]
+
+Here, define:
+\[
+g(A_n, B_n) = \frac{A_n}{A_n + B_n}
+\]
+For \( A_n = B_n = 1/2 \):
+\[
+g\left( \frac{1}{2}, \frac{1}{2} \right) = \frac{1/2}{1/2 + 1/2} = \frac{1}{2}
+\]
+
+Calculating the derivative:
+\[
+\frac{\partial g}{\partial A_n} = \frac{B_n}{(A_n + B_n)^2}, \quad \frac{\partial g}{\partial B_n} = -\frac{A_n}{(A_n + B_n)^2}
+\]
+At the point \( A_n = B_n = 1/2 \):
+\[
+\frac{\partial g}{\partial A_n} = 1, \quad \frac{\partial g}{\partial B_n} = -1
+\]
+
+Thus, the gradient vector is:
+\[
+\nabla g = \begin{pmatrix} 1 \\ -1 \end{pmatrix}
+\]
+
+
+Using the Delta Method, we find the asymptotic distribution of the function \( g(A_n, B_n) = \frac{A_n}{A_n + B_n} \):
+\[
+\sqrt{n}(\hat{\theta} - 1/2) \xrightarrow{d} N(0, \nabla g^T \Sigma \nabla g)
+\]
+Here, \( \Sigma = \begin{pmatrix} 1/2 & 0 \\ 0 & 1/2 \end{pmatrix} \), and the gradient vector is \( \nabla g = \begin{pmatrix} 1 \\ -1 \end{pmatrix} \). Therefore:
+\[
+\nabla g^T \Sigma \nabla g = \begin{pmatrix} 1 & -1 \end{pmatrix} \begin{pmatrix} 1/2 & 0 \\ 0 & 1/2 \end{pmatrix} \begin{pmatrix} 1 \\ -1 \end{pmatrix} = \frac{1}{2} + \frac{1}{2} = \frac{1}{4}
+\]
+
+Thus:
+\[
+\sqrt{n}(\hat{\theta} - 1/2) \xrightarrow{d} N(0, 1/4)
+\]
+
+
+For an arbitrary distribution \( P \), let \( X_i = F^{-1}(U_i) \), where \( U_i \sim \text{Unif}(0, 1) \). The sample median can then be expressed as:
+\[
+\hat{\theta} = F^{-1}(U_{\text{median}})
+\]
+where \( U_{\text{median}} \) is the median of the uniform sample.
+
+
+We apply the Delta Method to the function \( F^{-1} \). Let:
+\[
+g(U) = F^{-1}(U)
+\]
+Using the Delta Method again, we know that if
+\[
+\sqrt{n}(U_{\text{median}} - 1/2) \xrightarrow{d} N(0, 1/4)
+\]
+then:
+\[
+\sqrt{n}(\hat{\theta} - \theta) = \sqrt{n}(F^{-1}(U_{\text{median}}) - F^{-1}(1/2)) \xrightarrow{d} N\left(0, \left( F^{-1} \right)'(1/2)^2 \cdot \frac{1}{4}\right)
+\]
+
+Using the Inverse Function Theorem, if \( F \) is differentiable at \( \theta \) with \( F'(\theta) \neq 0 \), then \( F^{-1} \) is also differentiable at \( F(\theta) = 1/2 \). The derivative of the inverse function is given by:
+\[
+(F^{-1})'(1/2) = \frac{1}{F'(\theta)}
+\]
+
+Thus:
+\[
+\left( (F^{-1})'(1/2) \right)^2 = \frac{1}{(F'(\theta))^2}
+\]
+
+Substituting back, we have:
+\[
+\sqrt{n}(\hat{\theta} - \theta) \xrightarrow{d} N\left(0, \frac{1}{4[F'(\theta)]^2}\right)
+\]
+
+\end{document}

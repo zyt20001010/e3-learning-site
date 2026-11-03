@@ -1,5 +1,5 @@
 {
-  "sourceCommit": "209d4e23c4c085791d5417f40260514c50eda24b",
+  "sourceCommit": "4d12e6f610d5bb3acc3eef4834fc3dadc7e0a02c",
   "assets": [
     {
       "sha256": "2937648e68262cad4d8ddf2b6ba903534fa0c05da86f26e8364ffd1828c41580",
@@ -1932,80 +1932,3142 @@
         "BRIDGE_SOURCE_B005"
       ],
       "state": "ready"
-    }
-  ],
-  "failures": [
-    {
-      "sha256": "5f3301c34698547aae4b64a1ea51174e35078f2caabe9b45763a2456e3406068",
-      "filename": "gnn-5f3301c34698547a.pdf",
-      "error": "RuntimeError: URLError: <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1081)>; URLError: <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1081)>"
-    },
-    {
-      "sha256": "147d6fbe35587a2417762cd42e9b8c89d101648ef21fcc3dd31ee3f3d0d86314",
-      "filename": "py-147d6fbe35587a24.zip",
-      "error": "RuntimeError: ValueError: Source size changed; ValueError: Source size changed"
-    },
-    {
-      "sha256": "0acd13b4d76b8930b42a451c739c7a5d48b71910f95c1751f5888c04bba58778",
-      "filename": "gnn-0acd13b4d76b8930.pdf",
-      "error": "RuntimeError: URLError: <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1081)>; URLError: <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1081)>"
-    },
-    {
-      "sha256": "27d6f66100bb826c625ddf8b9a05e169626290fafd75195a1bc6305b4d609123",
-      "filename": "gnn-27d6f66100bb826c.pdf",
-      "error": "RuntimeError: URLError: <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1081)>; URLError: <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1081)>"
-    },
-    {
-      "sha256": "ca83297e69342807107fedee0830e69983b63acadcc3e6284368b7b093044f82",
-      "filename": "gnn-ca83297e69342807.pdf",
-      "error": "RuntimeError: URLError: <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1081)>; URLError: <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1081)>"
     },
     {
       "sha256": "fe636a968c9802ce45897167c8e68ef54f25f7f8532b662c1c6a2f998a81c94b",
+      "bytes": 7592632,
+      "format": "pdf",
       "filename": "gnn-fe636a968c9802ce.pdf",
-      "error": "RuntimeError: URLError: <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1081)>; URLError: <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1081)>"
+      "repositoryPath": "files/gnn-fe636a968c9802ce.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "GNN"
+      ],
+      "state": "ready"
+    },
+    {
+      "sha256": "5f3301c34698547aae4b64a1ea51174e35078f2caabe9b45763a2456e3406068",
+      "bytes": 6627691,
+      "format": "pdf",
+      "filename": "gnn-5f3301c34698547a.pdf",
+      "repositoryPath": "files/gnn-5f3301c34698547a.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "GNN"
+      ],
+      "state": "ready"
+    },
+    {
+      "sha256": "147d6fbe35587a2417762cd42e9b8c89d101648ef21fcc3dd31ee3f3d0d86314",
+      "bytes": 16141506,
+      "format": "zip",
+      "filename": "py-147d6fbe35587a24.zip",
+      "repositoryPath": "files/py-147d6fbe35587a24.zip",
+      "mode": "release",
+      "resourceIds": [
+        "PY"
+      ],
+      "releaseUrl": "https://github.com/zyt20001010/e3-learning-site/releases/download/learning-materials-2026-11-03/py-147d6fbe35587a24.zip",
+      "releaseId": 705957847,
+      "state": "ready"
+    },
+    {
+      "sha256": "0acd13b4d76b8930b42a451c739c7a5d48b71910f95c1751f5888c04bba58778",
+      "bytes": 8454906,
+      "format": "pdf",
+      "filename": "gnn-0acd13b4d76b8930.pdf",
+      "repositoryPath": "files/gnn-0acd13b4d76b8930.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "GNN"
+      ],
+      "state": "ready"
+    },
+    {
+      "sha256": "ca83297e69342807107fedee0830e69983b63acadcc3e6284368b7b093044f82",
+      "bytes": 8732504,
+      "format": "pdf",
+      "filename": "gnn-ca83297e69342807.pdf",
+      "repositoryPath": "files/gnn-ca83297e69342807.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "GNN"
+      ],
+      "state": "ready"
     },
     {
       "sha256": "0a5f03ecab150316c1caebfc27a61a092120806c036365c099e36241f68c5714",
+      "bytes": 7275026,
+      "format": "pdf",
       "filename": "gnn-0a5f03ecab150316.pdf",
-      "error": "RuntimeError: URLError: <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1081)>; URLError: <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1081)>"
+      "repositoryPath": "files/gnn-0a5f03ecab150316.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "GNN"
+      ],
+      "state": "ready"
     },
     {
       "sha256": "ef4a52c439cb5a62f8a9306722191a80be832095755efc475b409157d09f8b43",
+      "bytes": 8534504,
+      "format": "pdf",
       "filename": "gnn-ef4a52c439cb5a62.pdf",
-      "error": "RuntimeError: URLError: <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1081)>; URLError: <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1081)>"
-    },
-    {
-      "sha256": "797a8e531f891f1934f5935639b6d91a6af0cf0ef10dac33e9c5603d5e013097",
-      "filename": "gnn-797a8e531f891f19.pdf",
-      "error": "RuntimeError: URLError: <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1081)>; URLError: <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1081)>"
+      "repositoryPath": "files/gnn-ef4a52c439cb5a62.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "GNN"
+      ],
+      "state": "ready"
     },
     {
       "sha256": "a42e5f29f0ac5e7e444ccf323b3ac57178ee1637b633c18ac7513d45c1817eeb",
+      "bytes": 9386531,
+      "format": "pdf",
       "filename": "gnn-a42e5f29f0ac5e7e.pdf",
-      "error": "RuntimeError: URLError: <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1081)>; URLError: <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1081)>"
+      "repositoryPath": "files/gnn-a42e5f29f0ac5e7e.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "GNN"
+      ],
+      "state": "ready"
+    },
+    {
+      "sha256": "797a8e531f891f1934f5935639b6d91a6af0cf0ef10dac33e9c5603d5e013097",
+      "bytes": 9849249,
+      "format": "pdf",
+      "filename": "gnn-797a8e531f891f19.pdf",
+      "repositoryPath": "files/gnn-797a8e531f891f19.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "GNN"
+      ],
+      "state": "ready"
     },
     {
       "sha256": "82c89269bef9e97aea01b2e77a9cc3050c6bd8b59469e9a7fecb14329658909f",
+      "bytes": 8066808,
+      "format": "pdf",
       "filename": "gnn-82c89269bef9e97a.pdf",
-      "error": "RuntimeError: URLError: <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1081)>; URLError: <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1081)>"
+      "repositoryPath": "files/gnn-82c89269bef9e97a.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "GNN"
+      ],
+      "state": "ready"
+    },
+    {
+      "sha256": "27d6f66100bb826c625ddf8b9a05e169626290fafd75195a1bc6305b4d609123",
+      "bytes": 12489063,
+      "format": "pdf",
+      "filename": "gnn-27d6f66100bb826c.pdf",
+      "repositoryPath": "files/gnn-27d6f66100bb826c.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "GNN"
+      ],
+      "state": "ready"
     },
     {
       "sha256": "3d1b0e2ff24bafd56099244a6730c7adb4790930afff71b6643f999bffec734b",
+      "bytes": 11962881,
+      "format": "pdf",
       "filename": "gnn-3d1b0e2ff24bafd5.pdf",
-      "error": "RuntimeError: URLError: <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1081)>; URLError: <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1081)>"
+      "repositoryPath": "files/gnn-3d1b0e2ff24bafd5.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "GNN"
+      ],
+      "state": "ready"
     },
     {
       "sha256": "b6e4436807e39ed3ac75a83483bcd4bf11a195f723be8de502f1fd259f7fe67b",
+      "bytes": 18650915,
+      "format": "pdf",
       "filename": "gnn-b6e4436807e39ed3.pdf",
-      "error": "RuntimeError: URLError: <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1081)>; URLError: <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1081)>"
+      "repositoryPath": "files/gnn-b6e4436807e39ed3.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "GNN"
+      ],
+      "state": "ready"
+    },
+    {
+      "sha256": "2f615ab26601ef8642bb5d91c8f9fcc68130d4a0bd7a4bc490beb2c8da1a2a70",
+      "bytes": 4228218,
+      "format": "pdf",
+      "filename": "an-2f615ab26601ef86.pdf",
+      "repositoryPath": "files/an-2f615ab26601ef86.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "AN"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "edfe17bd43825c821a24cfba0f72b911ea5b526b8820a218bdf17596c24dbf9b",
+      "bytes": 180644,
+      "format": "pdf",
+      "filename": "u511-edfe17bd43825c82.pdf",
+      "repositoryPath": "files/u511-edfe17bd43825c82.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "U511"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "3682156f26f798a55030c8fb2ce5a8c1f15a5135316815ef08f0d7bad31ca294",
+      "bytes": 157791,
+      "format": "pdf",
+      "filename": "u511-3682156f26f798a5.pdf",
+      "repositoryPath": "files/u511-3682156f26f798a5.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "U511"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "0b75071a998a3cb357d07f942890618427893643c24d4702f02bb209da15be43",
+      "bytes": 141221,
+      "format": "pdf",
+      "filename": "u511-0b75071a998a3cb3.pdf",
+      "repositoryPath": "files/u511-0b75071a998a3cb3.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "U511"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "c47c5491c9e37bf5b978c20a9c2aa695ae5dde9e3a0f4297f1e6ab598455bf35",
+      "bytes": 97909,
+      "format": "pdf",
+      "filename": "u511-c47c5491c9e37bf5.pdf",
+      "repositoryPath": "files/u511-c47c5491c9e37bf5.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "U511"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "2d5c7349eca39bf0c6a1951dc24aa08ab4779a3630d3ff6f6420f118eec839e1",
+      "bytes": 164470,
+      "format": "pdf",
+      "filename": "u511-2d5c7349eca39bf0.pdf",
+      "repositoryPath": "files/u511-2d5c7349eca39bf0.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "U511"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "3fd1ad13bab447d6170cee6031dca31440dcba8a0cdd38aab7f66b256acf6def",
+      "bytes": 144392,
+      "format": "pdf",
+      "filename": "u511-3fd1ad13bab447d6.pdf",
+      "repositoryPath": "files/u511-3fd1ad13bab447d6.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "U511"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "228c12ea09b05f79d7fa01cc768e1c5a7c307d9e0e30e1cafcbcf5f782f666ca",
+      "bytes": 168686,
+      "format": "pdf",
+      "filename": "u511-228c12ea09b05f79.pdf",
+      "repositoryPath": "files/u511-228c12ea09b05f79.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "U511"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "ee5049c68bc4d080caa3bd3b311a77ed0ddb31ec3457f5d8faf439b2cf9ee960",
+      "bytes": 148740,
+      "format": "pdf",
+      "filename": "u511-ee5049c68bc4d080.pdf",
+      "repositoryPath": "files/u511-ee5049c68bc4d080.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "U511"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "03b454c347211320b63394c9de087f8ef5b83c1af5a9db368a4aa00095ae8272",
+      "bytes": 101483,
+      "format": "pdf",
+      "filename": "u511-03b454c347211320.pdf",
+      "repositoryPath": "files/u511-03b454c347211320.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "U511"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
     },
     {
       "sha256": "40d976c83c18cce1900eff8c41bd5ad408c102b813af39d05ff85678ccf8d76e",
+      "bytes": 6881335,
+      "format": "pdf",
       "filename": "bridge-source-b002-40d976c83c18cce1.pdf",
-      "error": "RuntimeError: URLError: <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1081)>; URLError: <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1081)>"
+      "repositoryPath": "files/bridge-source-b002-40d976c83c18cce1.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "BRIDGE_SOURCE_B002"
+      ],
+      "state": "ready"
+    },
+    {
+      "sha256": "df9f01382cfe45a97c452e3ad8365d1cfbffb54b631c74ee61bf936e7c13f891",
+      "bytes": 153260,
+      "format": "pdf",
+      "filename": "u511-df9f01382cfe45a9.pdf",
+      "repositoryPath": "files/u511-df9f01382cfe45a9.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "U511"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "2ae3fc427dad994c861f29075c2d2ed1ef76f8ee009a4fc1de533ce815793df0",
+      "bytes": 139582,
+      "format": "pdf",
+      "filename": "u511-2ae3fc427dad994c.pdf",
+      "repositoryPath": "files/u511-2ae3fc427dad994c.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "U511"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "18805c1c2d8e68b8fe751dada38fc2eb93f5cd6bd2d3ff734360a25dade3607b",
+      "bytes": 133496,
+      "format": "pdf",
+      "filename": "u511-18805c1c2d8e68b8.pdf",
+      "repositoryPath": "files/u511-18805c1c2d8e68b8.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "U511"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "9cbaa4e2c6ebc8d226542a1fc4658e7bccf39263ce74ee44a2fd4e7554744e75",
+      "bytes": 187794,
+      "format": "pdf",
+      "filename": "u511-9cbaa4e2c6ebc8d2.pdf",
+      "repositoryPath": "files/u511-9cbaa4e2c6ebc8d2.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "U511"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "ab0d6dcdc0fa75093540e4f4d178c053d7b46bfa987ec3e9306a880f8bffdc9f",
+      "bytes": 132176,
+      "format": "pdf",
+      "filename": "u511-ab0d6dcdc0fa7509.pdf",
+      "repositoryPath": "files/u511-ab0d6dcdc0fa7509.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "U511"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "e14ed5567d6eba7bcbd3bc49a7d1d10e8e193ce8af9df5a4cef23e46ca771d5f",
+      "bytes": 282757,
+      "format": "pdf",
+      "filename": "u511-e14ed5567d6eba7b.pdf",
+      "repositoryPath": "files/u511-e14ed5567d6eba7b.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "U511"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "2ecfe2d3573945ca7220d48de3a08063337a700dd3c2f5ea78d8a0f453907d4f",
+      "bytes": 198845,
+      "format": "pdf",
+      "filename": "u511-2ecfe2d3573945ca.pdf",
+      "repositoryPath": "files/u511-2ecfe2d3573945ca.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "U511"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "e94bcdd37c467d72c5434efa8f84793c595635f3a7f5f7b22e61095771601ad7",
+      "bytes": 119713,
+      "format": "pdf",
+      "filename": "u511-e94bcdd37c467d72.pdf",
+      "repositoryPath": "files/u511-e94bcdd37c467d72.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "U511"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "e3e9cc5dd54ce692a005a2ed6a8384a1ed5d9facd739e9b9180a76e83b1ec132",
+      "bytes": 213847,
+      "format": "pdf",
+      "filename": "u511-e3e9cc5dd54ce692.pdf",
+      "repositoryPath": "files/u511-e3e9cc5dd54ce692.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "U511"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "139be8b2310efbba8008e569cc601db644cc4a0caf9895439ae0c60f452fcbd5",
+      "bytes": 150901,
+      "format": "pdf",
+      "filename": "u511-139be8b2310efbba.pdf",
+      "repositoryPath": "files/u511-139be8b2310efbba.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "U511"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "1acba9eacd231ecd173a194818c188b6a2ee3b279d7ae954c725b93f7d23ffdf",
+      "bytes": 142531,
+      "format": "pdf",
+      "filename": "u511-1acba9eacd231ecd.pdf",
+      "repositoryPath": "files/u511-1acba9eacd231ecd.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "U511"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "02fd0fa3b9f26220e348607cfd8ee07bd624860a4148efaba07aed8b33a2fd53",
+      "bytes": 136771,
+      "format": "pdf",
+      "filename": "u511-02fd0fa3b9f26220.pdf",
+      "repositoryPath": "files/u511-02fd0fa3b9f26220.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "U511"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "e6df8edf590b4bbd08455b1051ad9d5f64642daecc4f660554cdeaf54744b080",
+      "bytes": 174927,
+      "format": "pdf",
+      "filename": "u511-e6df8edf590b4bbd.pdf",
+      "repositoryPath": "files/u511-e6df8edf590b4bbd.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "U511"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "be80659dd480587963581fcb1dd4261cf583c7655321eb002f65b2d493fc6202",
+      "bytes": 132143,
+      "format": "pdf",
+      "filename": "u511-be80659dd4805879.pdf",
+      "repositoryPath": "files/u511-be80659dd4805879.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "U511"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "74429c59b60bfe513866ba7964dde4e0a83a9ef38bd1195ce79e343a3b829f1d",
+      "bytes": 199845,
+      "format": "pdf",
+      "filename": "u511-74429c59b60bfe51.pdf",
+      "repositoryPath": "files/u511-74429c59b60bfe51.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "U511"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "c277bb8cdacd499d13a48148009be41a7f672a2acdb22d21e0fb8fc19306c7c2",
+      "bytes": 15817,
+      "format": "pdf",
+      "filename": "u511-c277bb8cdacd499d.pdf",
+      "repositoryPath": "files/u511-c277bb8cdacd499d.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "U511"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "d206232e439f614566ce082de4a8bc667b223a3c4db91855d21b987bd7966265",
+      "bytes": 129130,
+      "format": "pdf",
+      "filename": "u527-d206232e439f6145.pdf",
+      "repositoryPath": "files/u527-d206232e439f6145.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "U527"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "0b0cf4149d9ccfb0da57a3f33ea7e8589cd8dc74e13e5675061b43175720f7cf",
+      "bytes": 130165,
+      "format": "pdf",
+      "filename": "u527-0b0cf4149d9ccfb0.pdf",
+      "repositoryPath": "files/u527-0b0cf4149d9ccfb0.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "U527"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "cb74f16ad3fb8cbc2682008c3c1c9ae0d9f6c97aa7681ae0f83172d561433e26",
+      "bytes": 1109114,
+      "format": "pdf",
+      "filename": "u527-cb74f16ad3fb8cbc.pdf",
+      "repositoryPath": "files/u527-cb74f16ad3fb8cbc.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "U527"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "068fbda6b828c89eb66608ed3eb158fd93857fcd0cc12ad6f09e9305ab62ba6e",
+      "bytes": 2521509,
+      "format": "pdf",
+      "filename": "u527-068fbda6b828c89e.pdf",
+      "repositoryPath": "files/u527-068fbda6b828c89e.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "U527"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "7c21bab4d304b8b5b5d95e104700c2074415e55b9f65dc5edce40e602bbfae36",
+      "bytes": 2823953,
+      "format": "pdf",
+      "filename": "u527-7c21bab4d304b8b5.pdf",
+      "repositoryPath": "files/u527-7c21bab4d304b8b5.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "U527"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "25e5516c8dd5487f8185f8c7a284a517a4aeb063da19651847e5c0336c552d57",
+      "bytes": 4240892,
+      "format": "pdf",
+      "filename": "nla-25e5516c8dd5487f.pdf",
+      "repositoryPath": "files/nla-25e5516c8dd5487f.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "NLA"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "2e87c7fe88bc3ae9fdee6ec7b9eec19130b184a3c5f49455ede2e68d1e8c96d0",
+      "bytes": 3095596,
+      "format": "pdf",
+      "filename": "u527-2e87c7fe88bc3ae9.pdf",
+      "repositoryPath": "files/u527-2e87c7fe88bc3ae9.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "U527"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "78ab656bf1e3ae8a3fba2781db2eb9a95f8b661703f741f0ebb2d623dd19cf8c",
+      "bytes": 3969677,
+      "format": "pdf",
+      "filename": "u527-78ab656bf1e3ae8a.pdf",
+      "repositoryPath": "files/u527-78ab656bf1e3ae8a.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "U527"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "14e35ecabac6a86ba7bb6e878f3be0637fa09d8db45cd83ac726888e32349e1d",
+      "bytes": 9416818,
+      "format": "pdf",
+      "filename": "u527-14e35ecabac6a86b.pdf",
+      "repositoryPath": "files/u527-14e35ecabac6a86b.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "U527"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "4c2bd5dc1bf8c3d44215b2535ea69fe845a97941efe52a4db739bc1c363da3d4",
+      "bytes": 2948731,
+      "format": "pdf",
+      "filename": "u527-4c2bd5dc1bf8c3d4.pdf",
+      "repositoryPath": "files/u527-4c2bd5dc1bf8c3d4.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "U527"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "834a1e803dcf5621535d19a1b4ae72f9429da85cf4b69df0ce0b90a7a9c0ea53",
+      "bytes": 22883338,
+      "format": "pdf",
+      "filename": "fol-834a1e803dcf5621.pdf",
+      "repositoryPath": "files/fol-834a1e803dcf5621.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "FOL"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "27ee41b8a523259b3f79d27968dec360d7f25ff0588d17c6ce16a2810cc35f8b",
+      "bytes": 4462917,
+      "format": "pdf",
+      "filename": "u527-27ee41b8a523259b.pdf",
+      "repositoryPath": "files/u527-27ee41b8a523259b.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "U527"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "01816291eed6b43c1f68e7918ac4f53964fd092e063bdfb5c9f22f3d6cb3f0be",
+      "bytes": 14696754,
+      "format": "pdf",
+      "filename": "asy-01816291eed6b43c.pdf",
+      "repositoryPath": "files/asy-01816291eed6b43c.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "ASY"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "01d6f777aee80b0e9f64545b1529b50bc920c8eb7d1648d1cebf3228d23c0bd3",
+      "bytes": 3058543,
+      "format": "pdf",
+      "filename": "u527-01d6f777aee80b0e.pdf",
+      "repositoryPath": "files/u527-01d6f777aee80b0e.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "U527"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "60d911333c070f40cc0245a1c0654e421d3ba19d657aa711928ae160399a3f1e",
+      "bytes": 4994687,
+      "format": "pdf",
+      "filename": "u527-60d911333c070f40.pdf",
+      "repositoryPath": "files/u527-60d911333c070f40.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "U527"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "04f5a286f7fa79bba93387a5867b506c5f5359788bfa2af9bdb5f5dce421f483",
+      "bytes": 3730197,
+      "format": "pdf",
+      "filename": "u527-04f5a286f7fa79bb.pdf",
+      "repositoryPath": "files/u527-04f5a286f7fa79bb.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "U527"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "5b7fed049f566d2b2a630e0500aca5e9e5249088912f032d578cc9f11c49e204",
+      "bytes": 11537568,
+      "format": "pdf",
+      "filename": "u527-5b7fed049f566d2b.pdf",
+      "repositoryPath": "files/u527-5b7fed049f566d2b.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "U527"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "b48f8c4f88ec07072728e43c4906466d812a315457622b1de6f9969bac498987",
+      "bytes": 233467,
+      "format": "pdf",
+      "filename": "u527-b48f8c4f88ec0707.pdf",
+      "repositoryPath": "files/u527-b48f8c4f88ec0707.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "U527"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "9c3470e90e94f47a9d5ad3fcdfaf5bd94a0faaef6209660328a3c06278490482",
+      "bytes": 80472,
+      "format": "pdf",
+      "filename": "u525-9c3470e90e94f47a.pdf",
+      "repositoryPath": "files/u525-9c3470e90e94f47a.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "U525"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "5e8613932167570a445e9a125fb8b4c610a03a77be2c3da389dce82715dff5d0",
+      "bytes": 454611,
+      "format": "pdf",
+      "filename": "u525-5e8613932167570a.pdf",
+      "repositoryPath": "files/u525-5e8613932167570a.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "U525"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "8df2ae539c32bcc6565858e96c207b9b1b79f6d6c56c1264d89cbe58a7058f8d",
+      "bytes": 7359775,
+      "format": "pdf",
+      "filename": "u527-8df2ae539c32bcc6.pdf",
+      "repositoryPath": "files/u527-8df2ae539c32bcc6.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "U527"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "38843445300c92a6841ef159dc397e61efe1fb98c62058f15a2f8ccc8cd2fb4d",
+      "bytes": 484305,
+      "format": "pdf",
+      "filename": "u525-38843445300c92a6.pdf",
+      "repositoryPath": "files/u525-38843445300c92a6.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "U525"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "a5a6e779d69a0b6dc3db80ddda06fd19311e0a1481cb55577aee0cd824ca06da",
+      "bytes": 305045,
+      "format": "pdf",
+      "filename": "u525-a5a6e779d69a0b6d.pdf",
+      "repositoryPath": "files/u525-a5a6e779d69a0b6d.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "U525"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "1a366f31b0bf1b368ec2f0a31e1a34419c016ecfc7a6c079a57a90750d1d1627",
+      "bytes": 368787,
+      "format": "pdf",
+      "filename": "u525-1a366f31b0bf1b36.pdf",
+      "repositoryPath": "files/u525-1a366f31b0bf1b36.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "U525"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "8cfa8088003ae05c9b8f6cf5114a1cbc044cbf28ba8a38f116d85a88ce6dce7f",
+      "bytes": 623640,
+      "format": "pdf",
+      "filename": "u525-8cfa8088003ae05c.pdf",
+      "repositoryPath": "files/u525-8cfa8088003ae05c.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "U525"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "a89a8df3fc7f65b11623be8d6e91963a1b59661b35082d6601cc78757f0d18e8",
+      "bytes": 682701,
+      "format": "pdf",
+      "filename": "u525-a89a8df3fc7f65b1.pdf",
+      "repositoryPath": "files/u525-a89a8df3fc7f65b1.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "U525"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "48a37f0bf46ab9f36af89ef3c5520ac8e99f9f579c836c7a341da58573866ab2",
+      "bytes": 580316,
+      "format": "pdf",
+      "filename": "u525-48a37f0bf46ab9f3.pdf",
+      "repositoryPath": "files/u525-48a37f0bf46ab9f3.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "U525"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "fae519e9857009d6d5eeea66308182bce0eff29d59dd2c74614f21042f810278",
+      "bytes": 1108866,
+      "format": "pdf",
+      "filename": "u525-fae519e9857009d6.pdf",
+      "repositoryPath": "files/u525-fae519e9857009d6.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "U525"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "4cc7a3124aa3842bf0663e66209af3c229e4e409532a6a4eff24084a456b1fd1",
+      "bytes": 2374481,
+      "format": "pdf",
+      "filename": "u525-4cc7a3124aa3842b.pdf",
+      "repositoryPath": "files/u525-4cc7a3124aa3842b.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "U525"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "b9d404d448c744bf5f96c76dc5751115a512bc3da90bb9b3ce1da88bfc320117",
+      "bytes": 24492227,
+      "format": "pdf",
+      "filename": "u511-b9d404d448c744bf.pdf",
+      "repositoryPath": "files/u511-b9d404d448c744bf.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "U511"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "d728b8b1fd3749eb72393b6b97b1069ec7f0a6a14b81ffe13d272e40dd27aba7",
+      "bytes": 1074899,
+      "format": "pdf",
+      "filename": "u525-d728b8b1fd3749eb.pdf",
+      "repositoryPath": "files/u525-d728b8b1fd3749eb.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "U525"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "2ed8bce96f826f7b8e3a248d38d5721bacff484dcfe044f63bf93968d9283052",
+      "bytes": 599239,
+      "format": "pdf",
+      "filename": "u525-2ed8bce96f826f7b.pdf",
+      "repositoryPath": "files/u525-2ed8bce96f826f7b.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "U525"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "d2fdcaf51dddcbda477d40c245aee89fbcc9ee2eba31cb0a47a2f5004d4bf9d7",
+      "bytes": 7779238,
+      "format": "pdf",
+      "filename": "u527-d2fdcaf51dddcbda.pdf",
+      "repositoryPath": "files/u527-d2fdcaf51dddcbda.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "U527"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "314f9f69875550a09409f33df5367a1b46374b1ce23bd4ba9c71e9f490892d5e",
+      "bytes": 161229,
+      "format": "pdf",
+      "filename": "u525-314f9f69875550a0.pdf",
+      "repositoryPath": "files/u525-314f9f69875550a0.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "U525"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "1e552c7bd0fdf0a37e8ff04038f2786767fc8d8727806aff8aa602ccfe832d91",
+      "bytes": 274838,
+      "format": "pdf",
+      "filename": "u525-1e552c7bd0fdf0a3.pdf",
+      "repositoryPath": "files/u525-1e552c7bd0fdf0a3.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "U525"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "4f0acf13b190eb72a8efdc51dc99f480efa6d7050f9741827fe55fb35dbf7a32",
+      "bytes": 1132407,
+      "format": "pdf",
+      "filename": "u525-4f0acf13b190eb72.pdf",
+      "repositoryPath": "files/u525-4f0acf13b190eb72.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "U525"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "144d34522b2c90d415bc5b675eea6827942ae9bb87bbbe44ef04a67dd3490bd7",
+      "bytes": 154542,
+      "format": "pdf",
+      "filename": "u525-144d34522b2c90d4.pdf",
+      "repositoryPath": "files/u525-144d34522b2c90d4.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "U525"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "0b058b98d6b289a9874f7852ff82bcd20dd5eb809b4a25ddc3225eb75b31edc0",
+      "bytes": 1788696,
+      "format": "pdf",
+      "filename": "u525-0b058b98d6b289a9.pdf",
+      "repositoryPath": "files/u525-0b058b98d6b289a9.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "U525"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "4ce77a2a9748822945f27b617efc3eba4db8f8f6c050e4bb71f82985bbba0776",
+      "bytes": 63982,
+      "format": "pdf",
+      "filename": "u525-4ce77a2a97488229.pdf",
+      "repositoryPath": "files/u525-4ce77a2a97488229.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "U525"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "c4a7cffc6329f68701955657b7ea1c8a729c0b43e93d2052b85be46ac71b5a08",
+      "bytes": 117413,
+      "format": "pdf",
+      "filename": "u525-c4a7cffc6329f687.pdf",
+      "repositoryPath": "files/u525-c4a7cffc6329f687.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "U525"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "945d8a197712074620f21643944265b92b32c7d908116b596dc734b4e415fdd5",
+      "bytes": 190219,
+      "format": "pdf",
+      "filename": "u525-945d8a1977120746.pdf",
+      "repositoryPath": "files/u525-945d8a1977120746.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "U525"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "c6766dd6670dd8ddf23d6028215e4d9836a15fad67a5640c32719cef86dfe1be",
+      "bytes": 109203,
+      "format": "pdf",
+      "filename": "u525-c6766dd6670dd8dd.pdf",
+      "repositoryPath": "files/u525-c6766dd6670dd8dd.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "U525"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "f101569a58d0ec78681b9bf9bb3eb66925f543a81003d34168f014a5c13bb080",
+      "bytes": 198279,
+      "format": "pdf",
+      "filename": "u525-f101569a58d0ec78.pdf",
+      "repositoryPath": "files/u525-f101569a58d0ec78.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "U525"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "7db6431bb1a6bf46af45e0c9491f47effbcfb90360b97687676dd552d87094a3",
+      "bytes": 221467,
+      "format": "pdf",
+      "filename": "u525-7db6431bb1a6bf46.pdf",
+      "repositoryPath": "files/u525-7db6431bb1a6bf46.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "U525"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "212aa67e062aec260f5113ee8b11ad428996288258463182a857d52707854acf",
+      "bytes": 1809605,
+      "format": "pdf",
+      "filename": "u525-212aa67e062aec26.pdf",
+      "repositoryPath": "files/u525-212aa67e062aec26.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "U525"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "b7d23492827c5ecbd09be2e645afafc0b1739b8395c5fcb5e49e86c4365819f3",
+      "bytes": 168323,
+      "format": "pdf",
+      "filename": "u525-b7d23492827c5ecb.pdf",
+      "repositoryPath": "files/u525-b7d23492827c5ecb.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "U525"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "e0c606580844d97d7ab3c28f104d3f4a3b72ee4ed1ee35ac7cd725d5fac144e7",
+      "bytes": 556020,
+      "format": "pdf",
+      "filename": "u528-e0c606580844d97d.pdf",
+      "repositoryPath": "files/u528-e0c606580844d97d.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "U528"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "c941b3d13c9dd5eacc2d668b754d7099b2a31e1e8e10ffb418e61ab77a927616",
+      "bytes": 518451,
+      "format": "pdf",
+      "filename": "u525-c941b3d13c9dd5ea.pdf",
+      "repositoryPath": "files/u525-c941b3d13c9dd5ea.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "U525"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "b4d9ef5c946799b134e25044def3959ac9c763f867a31d421209a9a7d9a5e1d0",
+      "bytes": 254359,
+      "format": "pdf",
+      "filename": "u525-b4d9ef5c946799b1.pdf",
+      "repositoryPath": "files/u525-b4d9ef5c946799b1.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "U525"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "03a393816e4b170daff8897b4a35a9818649d617a0286a700db394ffd9f0ce9c",
+      "bytes": 452522,
+      "format": "pdf",
+      "filename": "u528-03a393816e4b170d.pdf",
+      "repositoryPath": "files/u528-03a393816e4b170d.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "U528"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "ea083b509b9a3c2710a4964ac1d58147f7f2f1ce9c4cf117b519908945834099",
+      "bytes": 567916,
+      "format": "pdf",
+      "filename": "u528-ea083b509b9a3c27.pdf",
+      "repositoryPath": "files/u528-ea083b509b9a3c27.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "U528"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "6b1e7156842dfcb38c4ffe112800b8d75a6fa4feb4ead450376715821c449311",
+      "bytes": 529070,
+      "format": "pdf",
+      "filename": "u528-6b1e7156842dfcb3.pdf",
+      "repositoryPath": "files/u528-6b1e7156842dfcb3.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "U528"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "dc0c38a6766b395ed4a7870350aea6cc55eb1d2757c8a61c480c77d94698507c",
+      "bytes": 519964,
+      "format": "pdf",
+      "filename": "u528-dc0c38a6766b395e.pdf",
+      "repositoryPath": "files/u528-dc0c38a6766b395e.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "U528"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "2674371c5e6ff5a6bc7fac2004052b35cb9cd547eaad0dd3fc321ccbf5549048",
+      "bytes": 12726879,
+      "format": "pdf",
+      "filename": "u527-2674371c5e6ff5a6.pdf",
+      "repositoryPath": "files/u527-2674371c5e6ff5a6.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "U527"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "c36396100917a43182128bea11943786ccf58bfdd9628b686e5a3af9e7cf2f91",
+      "bytes": 527676,
+      "format": "pdf",
+      "filename": "u528-c36396100917a431.pdf",
+      "repositoryPath": "files/u528-c36396100917a431.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "U528"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "1c6721d2448ef6de47b8d162a875f028dfb1b5ac6eeaa1db65d8cf244d9a33a9",
+      "bytes": 535842,
+      "format": "pdf",
+      "filename": "u528-1c6721d2448ef6de.pdf",
+      "repositoryPath": "files/u528-1c6721d2448ef6de.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "U528"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "8e9d91a25547799cacc59845cafccece70e0071d5e884b5c7d1907684d8e7905",
+      "bytes": 165350,
+      "format": "pdf",
+      "filename": "u528-8e9d91a25547799c.pdf",
+      "repositoryPath": "files/u528-8e9d91a25547799c.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "U528"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "b1395c6aac3c0e2dba7cd1be03e6820f0db79c897e603494b437075c2016d5f5",
+      "bytes": 885106,
+      "format": "pdf",
+      "filename": "u528-b1395c6aac3c0e2d.pdf",
+      "repositoryPath": "files/u528-b1395c6aac3c0e2d.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "U528"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "bc7a8f445d140cad83e2e8bb6efd9a2df658b692e080900e6535a7c4a1aef294",
+      "bytes": 131901,
+      "format": "pdf",
+      "filename": "uhd-bc7a8f445d140cad.pdf",
+      "repositoryPath": "files/uhd-bc7a8f445d140cad.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "UHD"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "fb9be4766d743c920d0655a3f4f5ba56d175e03d94ed24337fa0791bb16b7338",
+      "bytes": 1126355,
+      "format": "pdf",
+      "filename": "u528-fb9be4766d743c92.pdf",
+      "repositoryPath": "files/u528-fb9be4766d743c92.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "U528"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "d89d06ac3e943c07a871a4cb2b076e3c5af0c3ed76d6f57ef1a4152caed45804",
+      "bytes": 805445,
+      "format": "pdf",
+      "filename": "u528-d89d06ac3e943c07.pdf",
+      "repositoryPath": "files/u528-d89d06ac3e943c07.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "U528"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "9776d422a500d24e4241a72091fc803435519e633576271091b804d601491abc",
+      "bytes": 566048,
+      "format": "pdf",
+      "filename": "uhd-9776d422a500d24e.pdf",
+      "repositoryPath": "files/uhd-9776d422a500d24e.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "UHD"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "762e411ff39212f74aa4b84a38a26854c3eead5b6edf9aa81462b8994b71b6a9",
+      "bytes": 2623793,
+      "format": "pdf",
+      "filename": "u528-762e411ff39212f7.pdf",
+      "repositoryPath": "files/u528-762e411ff39212f7.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "U528"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "102352c286c2c794a437a982272ee30ecf339a3f01a16a5054ac5ebe927f7ed3",
+      "bytes": 6430491,
+      "format": "pdf",
+      "filename": "u528-102352c286c2c794.pdf",
+      "repositoryPath": "files/u528-102352c286c2c794.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "U528"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "5eea169458fc24b2bce47d2636ab2320ebd6cc2777db21cdacaa5ee456ea057a",
+      "bytes": 8026581,
+      "format": "pdf",
+      "filename": "uhd-5eea169458fc24b2.pdf",
+      "repositoryPath": "files/uhd-5eea169458fc24b2.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "UHD"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "fb2818dbebac5c99b7a476afbbb6b21295cadb5ae5fe3ee1f92697182639c49c",
+      "bytes": 8029553,
+      "format": "pdf",
+      "filename": "uhd-fb2818dbebac5c99.pdf",
+      "repositoryPath": "files/uhd-fb2818dbebac5c99.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "UHD"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "54d6f83923049c8f6685841e9b671d558f170d8c2575639de77302947c711c26",
+      "bytes": 7389879,
+      "format": "pdf",
+      "filename": "uhd-54d6f83923049c8f.pdf",
+      "repositoryPath": "files/uhd-54d6f83923049c8f.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "UHD"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "73f6ddee13b538eec47454aaf2cae6e0ee3733a0105e202b85fb99f6e570594c",
+      "bytes": 18320457,
+      "format": "pdf",
+      "filename": "u527-73f6ddee13b538ee.pdf",
+      "repositoryPath": "files/u527-73f6ddee13b538ee.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "U527"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "b9daceebbc5fe3b3e7ae3c35f8924c8e89c554bd7fb0d17aa44839b6c8ff46ad",
+      "bytes": 10660094,
+      "format": "pdf",
+      "filename": "uhd-b9daceebbc5fe3b3.pdf",
+      "repositoryPath": "files/uhd-b9daceebbc5fe3b3.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "UHD"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "bc05491eacce62b2f43dbdf41a289adeac1e62a527b9cd1de2dc0aa56219dc82",
+      "bytes": 5553011,
+      "format": "pdf",
+      "filename": "uhd-bc05491eacce62b2.pdf",
+      "repositoryPath": "files/uhd-bc05491eacce62b2.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "UHD"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "08f571111a6236b94933ed68fca7e897e4c23b9acb80f4b5c7b2f0e205ad8504",
+      "bytes": 9318812,
+      "format": "pdf",
+      "filename": "uhd-08f571111a6236b9.pdf",
+      "repositoryPath": "files/uhd-08f571111a6236b9.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "UHD"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "924e9ebc571376903375107e63a6e063da2d48b37f01160bf3e0e86c6ff9d682",
+      "bytes": 7836712,
+      "format": "pdf",
+      "filename": "uhd-924e9ebc57137690.pdf",
+      "repositoryPath": "files/uhd-924e9ebc57137690.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "UHD"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "369d541a7ae7057c3161479f3970555bcf47a5af35e3c098ba15d333febda97b",
+      "bytes": 7061253,
+      "format": "pdf",
+      "filename": "uhd-369d541a7ae7057c.pdf",
+      "repositoryPath": "files/uhd-369d541a7ae7057c.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "UHD"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "81667af1f0302b07703bbfd23ac2966f13a98933aab2e9e50aed9ba9cac10869",
+      "bytes": 563113,
+      "format": "pdf",
+      "filename": "uhd-81667af1f0302b07.pdf",
+      "repositoryPath": "files/uhd-81667af1f0302b07.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "UHD"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "51ec92970a9f331861389a23e508647638c43c04049ee2967a14f944ca21683d",
+      "bytes": 201135,
+      "format": "pdf",
+      "filename": "uspec-51ec92970a9f3318.pdf",
+      "repositoryPath": "files/uspec-51ec92970a9f3318.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "USPEC"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "4b331d9c86acd6b53a77c82bd099bdbb335bf1c938e197a528cb1a547d060c0a",
+      "bytes": 173232,
+      "format": "pdf",
+      "filename": "uspec-4b331d9c86acd6b5.pdf",
+      "repositoryPath": "files/uspec-4b331d9c86acd6b5.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "USPEC"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "6e37b9ac772811a9a3e0b9ae2926ef038eadb60ffa3375fce2202fe49f942c8f",
+      "bytes": 241139,
+      "format": "pdf",
+      "filename": "uspec-6e37b9ac772811a9.pdf",
+      "repositoryPath": "files/uspec-6e37b9ac772811a9.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "USPEC"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "24fab2efbb0c395827f2322e3cf9d0313be3c96d191cedc6487e496bebfcbb31",
+      "bytes": 376790,
+      "format": "pdf",
+      "filename": "uspec-24fab2efbb0c3958.pdf",
+      "repositoryPath": "files/uspec-24fab2efbb0c3958.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "USPEC"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "9ce79386cf052bcecb8a97ca7bffcd3bba8c8715fb7f7f27335ef78ec0712812",
+      "bytes": 566027,
+      "format": "pdf",
+      "filename": "uhd-9ce79386cf052bce.pdf",
+      "repositoryPath": "files/uhd-9ce79386cf052bce.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "UHD"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "46dae4cf7e9db125b562e55fcc3ca453b61565533defa736fda6fe53aa5a7393",
+      "bytes": 185534,
+      "format": "pdf",
+      "filename": "uspec-46dae4cf7e9db125.pdf",
+      "repositoryPath": "files/uspec-46dae4cf7e9db125.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "USPEC"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "cbbd498592923f85ebc3f4e3f407deee1baf7542e9ab6b931b1c60a5204e0afe",
+      "bytes": 181207,
+      "format": "pdf",
+      "filename": "uspec-cbbd498592923f85.pdf",
+      "repositoryPath": "files/uspec-cbbd498592923f85.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "USPEC"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "d115ff3864b68ac74e1ffbb2bea00aa954a7214516ab8069db3c3176f8518bf8",
+      "bytes": 164540,
+      "format": "pdf",
+      "filename": "uspec-d115ff3864b68ac7.pdf",
+      "repositoryPath": "files/uspec-d115ff3864b68ac7.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "USPEC"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "5dc81225477553b0348d67596e424e8473a1c18f65cd4b4994a32d9e0c68bb99",
+      "bytes": 334294,
+      "format": "pdf",
+      "filename": "uspec-5dc81225477553b0.pdf",
+      "repositoryPath": "files/uspec-5dc81225477553b0.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "USPEC"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "5243ace1a9165956efe74e745fc1fde5e715b9d658c95033c10db7a72d0d8b5e",
+      "bytes": 210670,
+      "format": "pdf",
+      "filename": "uspec-5243ace1a9165956.pdf",
+      "repositoryPath": "files/uspec-5243ace1a9165956.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "USPEC"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "0536851fddb683a2c46da844e2e75c9f1a343320b43366683baa5916c60efba5",
+      "bytes": 324039,
+      "format": "pdf",
+      "filename": "uspec-0536851fddb683a2.pdf",
+      "repositoryPath": "files/uspec-0536851fddb683a2.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "USPEC"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "6f4bc8b6a3cc768097102e54379ca894e92302ab5f9a9516fb55b71116ae0cd4",
+      "bytes": 140791,
+      "format": "pdf",
+      "filename": "uspec-6f4bc8b6a3cc7680.pdf",
+      "repositoryPath": "files/uspec-6f4bc8b6a3cc7680.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "USPEC"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "b40c6b4f80faa9ca6f56d89436a121c9d185da3491a3d2f63cf00753eec3aaad",
+      "bytes": 165986,
+      "format": "pdf",
+      "filename": "ucause-b40c6b4f80faa9ca.pdf",
+      "repositoryPath": "files/ucause-b40c6b4f80faa9ca.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "UCAUSE"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "bc3303c9fb7bf038671107a6f8dce25475476d1968105cbc8fe13db8e55bec81",
+      "bytes": 307923,
+      "format": "pdf",
+      "filename": "uspec-bc3303c9fb7bf038.pdf",
+      "repositoryPath": "files/uspec-bc3303c9fb7bf038.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "USPEC"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "b34de21cb5f426922ad68f0ee01e9aa2963d5b8c329b750c1ed725f00db3bfa4",
+      "bytes": 166084,
+      "format": "pdf",
+      "filename": "ucause-b34de21cb5f42692.pdf",
+      "repositoryPath": "files/ucause-b34de21cb5f42692.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "UCAUSE"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "5dce444d87b843fe15d138ca7db871db99e8c57870175caa28b1d93a1e7956dd",
+      "bytes": 577352,
+      "format": "pdf",
+      "filename": "ucause-5dce444d87b843fe.pdf",
+      "repositoryPath": "files/ucause-5dce444d87b843fe.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "UCAUSE"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "8667cf45bf812a6b2b6651e97eb7fdf28c987f476f9ca56004370ed07d1f7dfa",
+      "bytes": 8703429,
+      "format": "pdf",
+      "filename": "uhd-8667cf45bf812a6b.pdf",
+      "repositoryPath": "files/uhd-8667cf45bf812a6b.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "UHD"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "a15f6fe9347951deee5a893314aab015dd08f3559d54161d4660f2b6afce6139",
+      "bytes": 1433260,
+      "format": "pdf",
+      "filename": "ucause-a15f6fe9347951de.pdf",
+      "repositoryPath": "files/ucause-a15f6fe9347951de.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "UCAUSE"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "2f80343d57f39e29dc96fc325eadd28907b9122959394096ac4595bf63c879bd",
+      "bytes": 1658182,
+      "format": "pdf",
+      "filename": "ucause-2f80343d57f39e29.pdf",
+      "repositoryPath": "files/ucause-2f80343d57f39e29.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "UCAUSE"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "d8552f3bb4b7ec865e5c745f122889a9de078479cb9f0052eb2b896b9db56d16",
+      "bytes": 10809218,
+      "format": "pdf",
+      "filename": "uhd-d8552f3bb4b7ec86.pdf",
+      "repositoryPath": "files/uhd-d8552f3bb4b7ec86.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "UHD"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "f4899982be1d388c07c81601e523448cf735eaaf4d772e97a7972a6d8905e507",
+      "bytes": 1083213,
+      "format": "pdf",
+      "filename": "ucause-f4899982be1d388c.pdf",
+      "repositoryPath": "files/ucause-f4899982be1d388c.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "UCAUSE"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "7914b88d98687062f03fc63818eb230da78651a39f57f1edb2a97118bc38a86e",
+      "bytes": 6002327,
+      "format": "pdf",
+      "filename": "ucause-7914b88d98687062.pdf",
+      "repositoryPath": "files/ucause-7914b88d98687062.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "UCAUSE"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "cd4eb99f43c270c05a100c71e936142fe8b03ecde5147069728c5ce720b660b0",
+      "bytes": 1174065,
+      "format": "pdf",
+      "filename": "ucause-cd4eb99f43c270c0.pdf",
+      "repositoryPath": "files/ucause-cd4eb99f43c270c0.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "UCAUSE"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "9dd646f139067dbc676a9df703a443583a03460236dcea9f6f9f77815abfef15",
+      "bytes": 655543,
+      "format": "pdf",
+      "filename": "ucause-9dd646f139067dbc.pdf",
+      "repositoryPath": "files/ucause-9dd646f139067dbc.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "UCAUSE"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "f22cac4213ba045406be598aaaff8a83cbf556bb5e1e2c7ad9fd7dd497a2fa19",
+      "bytes": 349771,
+      "format": "pdf",
+      "filename": "ucause-f22cac4213ba0454.pdf",
+      "repositoryPath": "files/ucause-f22cac4213ba0454.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "UCAUSE"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "f06297693ce2220e8b579e19494ca20ae46e2bda7ce83b7c4295a2f69e2568b4",
+      "bytes": 343366,
+      "format": "pdf",
+      "filename": "ucause-f06297693ce2220e.pdf",
+      "repositoryPath": "files/ucause-f06297693ce2220e.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "UCAUSE"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "62be6144b4eaf6cb46faa3aaae004c3d2a45d6c9f4a2043938d295037613109d",
+      "bytes": 677217,
+      "format": "pdf",
+      "filename": "ucause-62be6144b4eaf6cb.pdf",
+      "repositoryPath": "files/ucause-62be6144b4eaf6cb.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "UCAUSE"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "0b22ba052435c813eb782f489f03bf44b054307844ac44bb412cea2bf8f36081",
+      "bytes": 1709215,
+      "format": "pdf",
+      "filename": "ucause-0b22ba052435c813.pdf",
+      "repositoryPath": "files/ucause-0b22ba052435c813.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "UCAUSE"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "d72971baef1025df60abb49f065fb3075fb9edc2afe5244bd37c742b8703e42b",
+      "bytes": 926312,
+      "format": "pdf",
+      "filename": "ucause-d72971baef1025df.pdf",
+      "repositoryPath": "files/ucause-d72971baef1025df.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "UCAUSE"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "ac701db754da315b7e969475952c882f1f174bb8488497ef8af1154fe5df5190",
+      "bytes": 925641,
+      "format": "pdf",
+      "filename": "ucause-ac701db754da315b.pdf",
+      "repositoryPath": "files/ucause-ac701db754da315b.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "UCAUSE"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "53289b2bab6e5865013108739898199d8411a042967573539415152107d5965b",
+      "bytes": 14581588,
+      "format": "pdf",
+      "filename": "uhd-53289b2bab6e5865.pdf",
+      "repositoryPath": "files/uhd-53289b2bab6e5865.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "UHD"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "3a28bdcc430f76f0dd1661842b179a07e7606aa919a48ad7e1c468bfe271c950",
+      "bytes": 3327086,
+      "format": "pdf",
+      "filename": "ucause-3a28bdcc430f76f0.pdf",
+      "repositoryPath": "files/ucause-3a28bdcc430f76f0.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "UCAUSE"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "f368e54d84df5401521546ab6e9e504515749ac9f3eadc23f024eb27fa07318d",
+      "bytes": 5983401,
+      "format": "pdf",
+      "filename": "ucause-f368e54d84df5401.pdf",
+      "repositoryPath": "files/ucause-f368e54d84df5401.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "UCAUSE"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "fdda3a0b10aa2d32d4d49e4aa8e85238147bddc310d9f8ef801850ba18cedc07",
+      "bytes": 146941,
+      "format": "pdf",
+      "filename": "u576-fdda3a0b10aa2d32.pdf",
+      "repositoryPath": "files/u576-fdda3a0b10aa2d32.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "U576"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "e5a19edd8e74e4bc61cb1110e14b4ffac8f139b60def3fb6ae9229a1ee777a8b",
+      "bytes": 190088,
+      "format": "pdf",
+      "filename": "u576-e5a19edd8e74e4bc.pdf",
+      "repositoryPath": "files/u576-e5a19edd8e74e4bc.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "U576"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "567484f9f45ad1496fdd9e538b001c74c8e7fe2e2074781eb91ff928fb6f1456",
+      "bytes": 182359,
+      "format": "pdf",
+      "filename": "u576-567484f9f45ad149.pdf",
+      "repositoryPath": "files/u576-567484f9f45ad149.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "U576"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "6ac470750f213aa09166cac32f0db8bad44f42fa2e94a6bcc59fc66d1e37cbd5",
+      "bytes": 1466476,
+      "format": "pdf",
+      "filename": "ucause-6ac470750f213aa0.pdf",
+      "repositoryPath": "files/ucause-6ac470750f213aa0.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "UCAUSE"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "7611c4d4b00b6da8bd829290e766d7158a6b1203004139d817be4d1079ea7fd3",
+      "bytes": 158976,
+      "format": "pdf",
+      "filename": "u576-7611c4d4b00b6da8.pdf",
+      "repositoryPath": "files/u576-7611c4d4b00b6da8.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "U576"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "ba938004babf73feed2c129f4a10597480be06bdc6c1c0c1b7ad0ae4c9e82a4a",
+      "bytes": 189509,
+      "format": "pdf",
+      "filename": "u576-ba938004babf73fe.pdf",
+      "repositoryPath": "files/u576-ba938004babf73fe.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "U576"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "dedd7ee0710f4f4762c4c0a5a5b789120d5ad30d4582c3e8cb48bf9721461765",
+      "bytes": 149007,
+      "format": "pdf",
+      "filename": "u576-dedd7ee0710f4f47.pdf",
+      "repositoryPath": "files/u576-dedd7ee0710f4f47.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "U576"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "e1f160a3f0df0bf933dd90dc5d6ba822a578e1fc3877c2a9cdc0dcee8588e0d2",
+      "bytes": 188549,
+      "format": "pdf",
+      "filename": "u576-e1f160a3f0df0bf9.pdf",
+      "repositoryPath": "files/u576-e1f160a3f0df0bf9.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "U576"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "25ad04d12e1ce84e5924a25c26e2ed0b7e77514ba354354e1061737d1a122ef8",
+      "bytes": 165488,
+      "format": "pdf",
+      "filename": "u576-25ad04d12e1ce84e.pdf",
+      "repositoryPath": "files/u576-25ad04d12e1ce84e.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "U576"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "2ed9d39d5d690e968f0010a0b9c9db6feea9f3e81d45f9dc831eab0e84c4d291",
+      "bytes": 153301,
+      "format": "pdf",
+      "filename": "u576-2ed9d39d5d690e96.pdf",
+      "repositoryPath": "files/u576-2ed9d39d5d690e96.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "U576"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "6f097c29702ffb1c5ad9fe5355cb04573d78a46a01a0d3324477bdedd4d1c18e",
+      "bytes": 188241,
+      "format": "pdf",
+      "filename": "u576-6f097c29702ffb1c.pdf",
+      "repositoryPath": "files/u576-6f097c29702ffb1c.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "U576"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "9eada3208c9efd499ec72ee05ff68a6bb68978d497c88dd7c08ad021c8794fb2",
+      "bytes": 183436,
+      "format": "pdf",
+      "filename": "u576-9eada3208c9efd49.pdf",
+      "repositoryPath": "files/u576-9eada3208c9efd49.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "U576"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "ff89d34ef9f098707a45846f33003f65cf91dd5dec77ab30bbbbe8fe6dafc8a7",
+      "bytes": 223193,
+      "format": "pdf",
+      "filename": "u576-ff89d34ef9f09870.pdf",
+      "repositoryPath": "files/u576-ff89d34ef9f09870.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "U576"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "3cdd110a61ca6667105d1fc530544a45a14f14985016464de200b0f926e0b06a",
+      "bytes": 168229,
+      "format": "pdf",
+      "filename": "u576-3cdd110a61ca6667.pdf",
+      "repositoryPath": "files/u576-3cdd110a61ca6667.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "U576"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "c8a190992667f0b15bcdd703135dece288b873a24f0ddd803ecca6aafd484a9a",
+      "bytes": 181117,
+      "format": "pdf",
+      "filename": "u576-c8a190992667f0b1.pdf",
+      "repositoryPath": "files/u576-c8a190992667f0b1.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "U576"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "3f8b75bd8ecf274d9e2942992d0c0456395899e32610a31160ed40d9eb2e5be3",
+      "bytes": 178209,
+      "format": "pdf",
+      "filename": "u576-3f8b75bd8ecf274d.pdf",
+      "repositoryPath": "files/u576-3f8b75bd8ecf274d.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "U576"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "c505999b0e664e3336df324af70aa7889fe16413f912d96d35a15d10db350b28",
+      "bytes": 1466834,
+      "format": "pdf",
+      "filename": "ucause-c505999b0e664e33.pdf",
+      "repositoryPath": "files/ucause-c505999b0e664e33.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "UCAUSE"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "a72acbf978bf94b81e836378035f55ff43fdff0f3e91c2796268600fb902be56",
+      "bytes": 150978,
+      "format": "pdf",
+      "filename": "u576-a72acbf978bf94b8.pdf",
+      "repositoryPath": "files/u576-a72acbf978bf94b8.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "U576"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "78ea2f4b9548967d83b5c76fc5ea4a984363237294cd78c58e32891987d10770",
+      "bytes": 154804,
+      "format": "pdf",
+      "filename": "u576-78ea2f4b9548967d.pdf",
+      "repositoryPath": "files/u576-78ea2f4b9548967d.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "U576"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "b9be0426d60ea7a9efae81e52f6c3bc3c42d8ff9d5d6e890acae296050addfec",
+      "bytes": 181558,
+      "format": "pdf",
+      "filename": "u576-b9be0426d60ea7a9.pdf",
+      "repositoryPath": "files/u576-b9be0426d60ea7a9.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "U576"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "8ba16fe52c0907b8a24168d43d73a27bfef5c62cc07eee9a27029de3d4586dc3",
+      "bytes": 179088,
+      "format": "pdf",
+      "filename": "u576-8ba16fe52c0907b8.pdf",
+      "repositoryPath": "files/u576-8ba16fe52c0907b8.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "U576"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "e5b0267c9e8e93ee20a17083a9828fff192d6cb3f25bb9de20b8f87abcfc4a6a",
+      "bytes": 160785,
+      "format": "pdf",
+      "filename": "u576-e5b0267c9e8e93ee.pdf",
+      "repositoryPath": "files/u576-e5b0267c9e8e93ee.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "U576"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "392f63b5a5e0be72f6ff630154be119a1c7038233b94e31ae26cbe3c1d07dfd6",
+      "bytes": 198003,
+      "format": "pdf",
+      "filename": "u576-392f63b5a5e0be72.pdf",
+      "repositoryPath": "files/u576-392f63b5a5e0be72.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "U576"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "90d76ec7c1f545e9a173a63af88cd64a4bc5a6b5aaa4725218359e03c9d780d5",
+      "bytes": 148671,
+      "format": "pdf",
+      "filename": "u576-90d76ec7c1f545e9.pdf",
+      "repositoryPath": "files/u576-90d76ec7c1f545e9.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "U576"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "e113a622433fd88b3df6112f262dfee89c9ce89898ac210e1698c01b771c4b11",
+      "bytes": 185833,
+      "format": "pdf",
+      "filename": "u576-e113a622433fd88b.pdf",
+      "repositoryPath": "files/u576-e113a622433fd88b.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "U576"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "b0c4847d92ac2e4e89fc80c96f407661572033400960e736bd3f221ea52c428b",
+      "bytes": 181794,
+      "format": "pdf",
+      "filename": "u576-b0c4847d92ac2e4e.pdf",
+      "repositoryPath": "files/u576-b0c4847d92ac2e4e.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "U576"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "98d790a77e7e8571b0dda6327be4271b55aa2965b7363c50ef30d2f243fb49b7",
+      "bytes": 145469,
+      "format": "pdf",
+      "filename": "u576-98d790a77e7e8571.pdf",
+      "repositoryPath": "files/u576-98d790a77e7e8571.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "U576"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "ebb49226de53bc6df31be1f0215fbdd26eef520ba2d52f21b5d29846c588800b",
+      "bytes": 76222,
+      "format": "pdf",
+      "filename": "u576-ebb49226de53bc6d.pdf",
+      "repositoryPath": "files/u576-ebb49226de53bc6d.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "U576"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "e9f66b4e5706cb3496df7506162cb1002ef862c42988a5cface8f8f8da5e8e77",
+      "bytes": 145481,
+      "format": "pdf",
+      "filename": "u576-e9f66b4e5706cb34.pdf",
+      "repositoryPath": "files/u576-e9f66b4e5706cb34.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "U576"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "1abb20e7ced4554f78e42e4da4e5e641232dc38c87875909bd1bf23abe81ca4a",
+      "bytes": 181782,
+      "format": "pdf",
+      "filename": "u576-1abb20e7ced4554f.pdf",
+      "repositoryPath": "files/u576-1abb20e7ced4554f.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "U576"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "4a30f07e10f430690912e808b09306ad86d7ac913144de88a5ebcea45ef8376b",
+      "bytes": 1404988,
+      "format": "pdf",
+      "filename": "u576-4a30f07e10f43069.pdf",
+      "repositoryPath": "files/u576-4a30f07e10f43069.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "U576"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "549eb073ef4e0194fd37cf7372b07f151940dff8611ea18ef549f0e69ed62172",
+      "bytes": 161752,
+      "format": "pdf",
+      "filename": "u576-549eb073ef4e0194.pdf",
+      "repositoryPath": "files/u576-549eb073ef4e0194.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "U576"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "a18f38ee6761eb4540116b1e248b1aad2bf1a10f629754343b468db5121506e8",
+      "bytes": 6515889,
+      "format": "pdf",
+      "filename": "ucause-a18f38ee6761eb45.pdf",
+      "repositoryPath": "files/ucause-a18f38ee6761eb45.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "UCAUSE"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "de80b82f4ab6a063104823c60a2ce525e252e031a8b923192cc84e5c07a3b98a",
+      "bytes": 210654,
+      "format": "pdf",
+      "filename": "u576-de80b82f4ab6a063.pdf",
+      "repositoryPath": "files/u576-de80b82f4ab6a063.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "U576"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "7657f5f0bc7c77b235c052cc27eebccfa6a9a197b22a1dde19bde684205e7a0c",
+      "bytes": 361704,
+      "format": "pdf",
+      "filename": "u576-7657f5f0bc7c77b2.pdf",
+      "repositoryPath": "files/u576-7657f5f0bc7c77b2.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "U576"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "1f2dd6d9e4afdb645a4494015f0bf37f6f47ecf0f30a0924f0da96fb930ec5ef",
+      "bytes": 76226,
+      "format": "pdf",
+      "filename": "u576-1f2dd6d9e4afdb64.pdf",
+      "repositoryPath": "files/u576-1f2dd6d9e4afdb64.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "U576"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "149ca83b709e50feee07fdf4f38339178882d6db375a848f8a11e28b5196ed3a",
+      "bytes": 17223947,
+      "format": "pdf",
+      "filename": "uspec-149ca83b709e50fe.pdf",
+      "repositoryPath": "files/uspec-149ca83b709e50fe.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "USPEC"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "c9642b5488ac42639ebe3dd13ebed0959e775fbc5bf484e03a858e637d205f05",
+      "bytes": 312875,
+      "format": "pdf",
+      "filename": "url-c9642b5488ac4263.pdf",
+      "repositoryPath": "files/url-c9642b5488ac4263.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "URL"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "f215d76cc341074fbaaf3205eebed4f21b529e1192806694410270b41f8202da",
+      "bytes": 3076854,
+      "format": "pdf",
+      "filename": "url-f215d76cc341074f.pdf",
+      "repositoryPath": "files/url-f215d76cc341074f.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "URL"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "0f9adaf76f524faaab6e9302bbe4897d704a34f5796200819bc6c3f859b4cbb3",
+      "bytes": 182040,
+      "format": "pdf",
+      "filename": "url-0f9adaf76f524faa.pdf",
+      "repositoryPath": "files/url-0f9adaf76f524faa.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "URL"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "44b2796afb0ccbf233946cfd9683ff88718727e57f5bf40acf602280bcd200bf",
+      "bytes": 9398512,
+      "format": "pdf",
+      "filename": "ucause-44b2796afb0ccbf2.pdf",
+      "repositoryPath": "files/ucause-44b2796afb0ccbf2.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "UCAUSE"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "25c7149d72809c9fc695935bb36db6dc4d8f5da0bda8fbb4b3044eb50310802d",
+      "bytes": 312774,
+      "format": "pdf",
+      "filename": "url-25c7149d72809c9f.pdf",
+      "repositoryPath": "files/url-25c7149d72809c9f.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "URL"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "dd37adeb5be41bc7790c2d8091519fa13181c3dce55c3282967cad3a4bef1cf7",
+      "bytes": 5423432,
+      "format": "pdf",
+      "filename": "url-dd37adeb5be41bc7.pdf",
+      "repositoryPath": "files/url-dd37adeb5be41bc7.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "URL"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "908d72c048a6748c862bf657f74d8888a172e676955e63febe7077b75e7ae3b0",
+      "bytes": 6711439,
+      "format": "pdf",
+      "filename": "url-908d72c048a6748c.pdf",
+      "repositoryPath": "files/url-908d72c048a6748c.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "URL"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "4f4f8c802ea5ad713a80ca7918a8a530314ea6c092b60e88b50d06e9bf20dc2a",
+      "bytes": 2461716,
+      "format": "pdf",
+      "filename": "url-4f4f8c802ea5ad71.pdf",
+      "repositoryPath": "files/url-4f4f8c802ea5ad71.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "URL"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "8b4ca04422de37e34979b4b2b63e574461addb52234049ad43e0606515e86d14",
+      "bytes": 2196745,
+      "format": "pdf",
+      "filename": "url-8b4ca04422de37e3.pdf",
+      "repositoryPath": "files/url-8b4ca04422de37e3.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "URL"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "67baef9796b6433ef6c257ca332dcdcb4a3862d0f760eb381ab1acf9c1561c63",
+      "bytes": 9212264,
+      "format": "pdf",
+      "filename": "url-67baef9796b6433e.pdf",
+      "repositoryPath": "files/url-67baef9796b6433e.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "URL"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "b5ed0a4f6bad7d92a72ff3e9c6f3247400d91b0b7fd2898edd66c1bc816e2175",
+      "bytes": 1297670,
+      "format": "pdf",
+      "filename": "url-b5ed0a4f6bad7d92.pdf",
+      "repositoryPath": "files/url-b5ed0a4f6bad7d92.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "URL"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "e7419bc25883c78ae3980d2085199fca73c111903815786ac2feff4cffe35484",
+      "bytes": 2291644,
+      "format": "pdf",
+      "filename": "url-e7419bc25883c78a.pdf",
+      "repositoryPath": "files/url-e7419bc25883c78a.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "URL"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "2c30ad46c784c248f3c8d8e2c6fcf6a341ef9b6b5374f75f1019d59670e1e98c",
+      "bytes": 9206182,
+      "format": "pdf",
+      "filename": "url-2c30ad46c784c248.pdf",
+      "repositoryPath": "files/url-2c30ad46c784c248.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "URL"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "c0fa41b7bfd94795e967448ba34fd9707e3d2ebdb2dbc90794400312c21a6219",
+      "bytes": 17113791,
+      "format": "pdf",
+      "filename": "url-c0fa41b7bfd94795.pdf",
+      "repositoryPath": "files/url-c0fa41b7bfd94795.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "URL"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "c30552686a8aa721dabc0df8ef07150d3c24875afc79100864d218fac7392abb",
+      "bytes": 3152806,
+      "format": "pdf",
+      "filename": "url-c30552686a8aa721.pdf",
+      "repositoryPath": "files/url-c30552686a8aa721.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "URL"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "7a0253e6d1436b3ead608289c3ed579d8aaada40dc7e0140a837b08c5fe0243b",
+      "bytes": 9676657,
+      "format": "pdf",
+      "filename": "url-7a0253e6d1436b3e.pdf",
+      "repositoryPath": "files/url-7a0253e6d1436b3e.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "URL"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "7a442d0faffe4632f952f36820174e384261d7274f97df18bfc0c182bf5c2e88",
+      "bytes": 7664054,
+      "format": "pdf",
+      "filename": "url-7a442d0faffe4632.pdf",
+      "repositoryPath": "files/url-7a442d0faffe4632.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "URL"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "7b6086b0bbd3937ba9ee1d736e2ac0ef5df20f6c82d6f9bd003e4d88569b5817",
+      "bytes": 5675259,
+      "format": "pdf",
+      "filename": "url-7b6086b0bbd3937b.pdf",
+      "repositoryPath": "files/url-7b6086b0bbd3937b.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "URL"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "0acb9f54541acfcc15c19136aad9f5396a76207593671aaceca3b935fd1b3466",
+      "bytes": 2661456,
+      "format": "pdf",
+      "filename": "url-0acb9f54541acfcc.pdf",
+      "repositoryPath": "files/url-0acb9f54541acfcc.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "URL"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "abe3bf5567af6e833ee71fa04870fbe2141834ccb8973f48bb1247d83a7761c0",
+      "bytes": 1351732,
+      "format": "pdf",
+      "filename": "url-abe3bf5567af6e83.pdf",
+      "repositoryPath": "files/url-abe3bf5567af6e83.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "URL"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "3aa998c88298f7c6c979a2132384d065c44a97bd8599ca3c9fd35d83318467d2",
+      "bytes": 259562,
+      "format": "pdf",
+      "filename": "url-3aa998c88298f7c6.pdf",
+      "repositoryPath": "files/url-3aa998c88298f7c6.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "URL"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "7b7a86fe46d69ee9cfed4592d99e932f29c29a46c15ab398027e316cf36ab643",
+      "bytes": 5912762,
+      "format": "pdf",
+      "filename": "url-7b7a86fe46d69ee9.pdf",
+      "repositoryPath": "files/url-7b7a86fe46d69ee9.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "URL"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "223a3b9ae7e9de501e58edd678a5660bdbb4731b7423aedf04a1ab022f1c806a",
+      "bytes": 1534148,
+      "format": "pdf",
+      "filename": "url-223a3b9ae7e9de50.pdf",
+      "repositoryPath": "files/url-223a3b9ae7e9de50.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "URL"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "06d784cdf32df7be4185c6ee5279d1dec2fa4e7b8629cfee601a3bf796a7751c",
+      "bytes": 2144692,
+      "format": "pdf",
+      "filename": "url-06d784cdf32df7be.pdf",
+      "repositoryPath": "files/url-06d784cdf32df7be.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "URL"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "b8eb13dc0d2328cae904f5db6db4002d9d00aac0dae3c4a08b915b9db5c7100e",
+      "bytes": 40006,
+      "format": "pdf",
+      "filename": "stat530-b8eb13dc0d2328ca.pdf",
+      "repositoryPath": "files/stat530-b8eb13dc0d2328ca.pdf",
+      "mode": "repository",
+      "resourceIds": [],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "a039fabf205f71177aae57b00e671aeb86cf772606544ec5ba844038ee475948",
+      "bytes": 125176,
+      "format": "pdf",
+      "filename": "stat530-a039fabf205f7117.pdf",
+      "repositoryPath": "files/stat530-a039fabf205f7117.pdf",
+      "mode": "repository",
+      "resourceIds": [],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "2e0d1dbfd6dec393743ff92652bc1338390f54101c99fba5f1cf1c9780753181",
+      "bytes": 5286376,
+      "format": "pdf",
+      "filename": "url-2e0d1dbfd6dec393.pdf",
+      "repositoryPath": "files/url-2e0d1dbfd6dec393.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "URL"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "a0a97f613ab1fbcc58ed86c3eceaee175820f072d4de74e9cbfcf91316cab8ae",
+      "bytes": 1255819,
+      "format": "pdf",
+      "filename": "url-a0a97f613ab1fbcc.pdf",
+      "repositoryPath": "files/url-a0a97f613ab1fbcc.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "URL"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "7e966273df46b24356db05de3c9be39d5f14e87a54f957b670a9c7d19ab4f477",
+      "bytes": 1302200,
+      "format": "pdf",
+      "filename": "u546-7e966273df46b243.pdf",
+      "repositoryPath": "files/u546-7e966273df46b243.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "U546"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "90daa1b6d2a2d60447567c7dec79018a2faec08e8927badb0c21d6f103743120",
+      "bytes": 3380030,
+      "format": "pdf",
+      "filename": "url-90daa1b6d2a2d604.pdf",
+      "repositoryPath": "files/url-90daa1b6d2a2d604.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "URL"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "20610801b645a974eab3d70ec5308c0c9e7739c3b91632b3d92411798e6ba16e",
+      "bytes": 142485,
+      "format": "pdf",
+      "filename": "bioe580-20610801b645a974.pdf",
+      "repositoryPath": "files/bioe580-20610801b645a974.pdf",
+      "mode": "repository",
+      "resourceIds": [],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "6e60798e8b88585d39a5f02772e7a120a400c7e49c076c0ee5df1f813ca4dd16",
+      "bytes": 3036539,
+      "format": "pdf",
+      "filename": "stat530-6e60798e8b88585d.pdf",
+      "repositoryPath": "files/stat530-6e60798e8b88585d.pdf",
+      "mode": "repository",
+      "resourceIds": [],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "86a8220ecfe0c9827daf2c85aef28d073f63760638a0eac28000dbc7b8edde98",
+      "bytes": 1740270,
+      "format": "pdf",
+      "filename": "stat530-86a8220ecfe0c982.pdf",
+      "repositoryPath": "files/stat530-86a8220ecfe0c982.pdf",
+      "mode": "repository",
+      "resourceIds": [],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "d900540d108519c946302beeb9b2753c269e36f7a321b777884a1cfc76143eaa",
+      "bytes": 2660743,
+      "format": "pdf",
+      "filename": "url-d900540d108519c9.pdf",
+      "repositoryPath": "files/url-d900540d108519c9.pdf",
+      "mode": "repository",
+      "resourceIds": [
+        "URL"
+      ],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "ec682d328130f4a795b71466bee2e7e375bd99298b286f9c97436c46073da81c",
+      "bytes": 781218,
+      "format": "pdf",
+      "filename": "bioe580-ec682d328130f4a7.pdf",
+      "repositoryPath": "files/bioe580-ec682d328130f4a7.pdf",
+      "mode": "repository",
+      "resourceIds": [],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "ef7194a8522399e0f131ef4ce71a7dca1f41e9570a376e3f5f7cbb83a63ffd98",
+      "bytes": 1167583,
+      "format": "pdf",
+      "filename": "bioe580-ef7194a8522399e0.pdf",
+      "repositoryPath": "files/bioe580-ef7194a8522399e0.pdf",
+      "mode": "repository",
+      "resourceIds": [],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "b7dc62466d391be84803f664ea13ba5e089cb33d2c0eb50dd6431cf17073eb65",
+      "bytes": 1549063,
+      "format": "pdf",
+      "filename": "bioe580-b7dc62466d391be8.pdf",
+      "repositoryPath": "files/bioe580-b7dc62466d391be8.pdf",
+      "mode": "repository",
+      "resourceIds": [],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "19b888548893185104237f4485ba896481b4a995356fb0d32bdae959a8309b79",
+      "bytes": 698126,
+      "format": "pdf",
+      "filename": "bioe580-19b8885488931851.pdf",
+      "repositoryPath": "files/bioe580-19b8885488931851.pdf",
+      "mode": "repository",
+      "resourceIds": [],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "c90d453a5d1489ad86805609100e7863f4817590bde883bd2c5b3fed29fe7002",
+      "bytes": 4701422,
+      "format": "pdf",
+      "filename": "stat530-c90d453a5d1489ad.pdf",
+      "repositoryPath": "files/stat530-c90d453a5d1489ad.pdf",
+      "mode": "repository",
+      "resourceIds": [],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "a2d4ed0927326f673c998d6260c4a8ebd1dc768eb4dd11767fbac6e96e48d390",
+      "bytes": 3234451,
+      "format": "pdf",
+      "filename": "bioe580-a2d4ed0927326f67.pdf",
+      "repositoryPath": "files/bioe580-a2d4ed0927326f67.pdf",
+      "mode": "repository",
+      "resourceIds": [],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "1facb71a1eac755d17c9576973aab589be839778d3b472e62dad274411bc90ad",
+      "bytes": 5511455,
+      "format": "pdf",
+      "filename": "stat530-1facb71a1eac755d.pdf",
+      "repositoryPath": "files/stat530-1facb71a1eac755d.pdf",
+      "mode": "repository",
+      "resourceIds": [],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "476d739ffa614b809a0c0a21715520fe46c7c9501f35a921278a8afacc16a11c",
+      "bytes": 1004342,
+      "format": "pdf",
+      "filename": "bioe580-476d739ffa614b80.pdf",
+      "repositoryPath": "files/bioe580-476d739ffa614b80.pdf",
+      "mode": "repository",
+      "resourceIds": [],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "9462db2dd949dd0eb91d3aee0808fca36cbee37994d17533d82777a89fb81d09",
+      "bytes": 500450,
+      "format": "pdf",
+      "filename": "bioe580-9462db2dd949dd0e.pdf",
+      "repositoryPath": "files/bioe580-9462db2dd949dd0e.pdf",
+      "mode": "repository",
+      "resourceIds": [],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "3776a49fc3dca04171933e8529c85a467efa3eb6e0ba3b97476a45ff80be5032",
+      "bytes": 689433,
+      "format": "pdf",
+      "filename": "bioe580-3776a49fc3dca041.pdf",
+      "repositoryPath": "files/bioe580-3776a49fc3dca041.pdf",
+      "mode": "repository",
+      "resourceIds": [],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "55858f722df4ac66bc1c286985e9d126a7d1ad7c02ec6c517c5148eeabf8ba4d",
+      "bytes": 443285,
+      "format": "pdf",
+      "filename": "bioe580-55858f722df4ac66.pdf",
+      "repositoryPath": "files/bioe580-55858f722df4ac66.pdf",
+      "mode": "repository",
+      "resourceIds": [],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "15160a4c0ef1cbfebf66d46dc0ccdbd541a394c5c02ae38f73932f099b322dca",
+      "bytes": 382111,
+      "format": "pdf",
+      "filename": "bioe580-15160a4c0ef1cbfe.pdf",
+      "repositoryPath": "files/bioe580-15160a4c0ef1cbfe.pdf",
+      "mode": "repository",
+      "resourceIds": [],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "e5bb58f24a2215a2bcb537739950c42225c657473663c613f07fbbeeac42ae92",
+      "bytes": 633136,
+      "format": "pdf",
+      "filename": "bioe580-e5bb58f24a2215a2.pdf",
+      "repositoryPath": "files/bioe580-e5bb58f24a2215a2.pdf",
+      "mode": "repository",
+      "resourceIds": [],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "e455e3c69e52c23e1ad7d7cb23cb5d8123c65a8ce492d2d98d6b1f3375e41da3",
+      "bytes": 80245,
+      "format": "pdf",
+      "filename": "stat428-e455e3c69e52c23e.pdf",
+      "repositoryPath": "files/stat428-e455e3c69e52c23e.pdf",
+      "mode": "repository",
+      "resourceIds": [],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "78f19c392d425c1ee464d670f785fff62a6843de93bcf7d618063ce948c9a65d",
+      "bytes": 2127871,
+      "format": "pdf",
+      "filename": "bioe580-78f19c392d425c1e.pdf",
+      "repositoryPath": "files/bioe580-78f19c392d425c1e.pdf",
+      "mode": "repository",
+      "resourceIds": [],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "5e460eb2152b78fcc973eb730055101430075da04514508bcdf8ede51c202c72",
+      "bytes": 1022107,
+      "format": "pdf",
+      "filename": "bioe580-5e460eb2152b78fc.pdf",
+      "repositoryPath": "files/bioe580-5e460eb2152b78fc.pdf",
+      "mode": "repository",
+      "resourceIds": [],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "6fdc57b2707fe141bbc57f21693855d6d6b319666a1ed5884b799eb952605d58",
+      "bytes": 868898,
+      "format": "pdf",
+      "filename": "bioe580-6fdc57b2707fe141.pdf",
+      "repositoryPath": "files/bioe580-6fdc57b2707fe141.pdf",
+      "mode": "repository",
+      "resourceIds": [],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "83f99ecc10eff11a88dcf8b9517359eb3b881b9f110cc6a75ad85d24e1cdea43",
+      "bytes": 101323,
+      "format": "pdf",
+      "filename": "stat410-83f99ecc10eff11a.pdf",
+      "repositoryPath": "files/stat410-83f99ecc10eff11a.pdf",
+      "mode": "repository",
+      "resourceIds": [],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "2241e1a8d846b2326301cd6b3f61a9f40d3a34af4e4455918949e060db55f0d4",
+      "bytes": 138244,
+      "format": "pdf",
+      "filename": "stat410-2241e1a8d846b232.pdf",
+      "repositoryPath": "files/stat410-2241e1a8d846b232.pdf",
+      "mode": "repository",
+      "resourceIds": [],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "6c3ff2d21201e49a448347d67b9eb87e2b84b5c908b8e5b4cbbfd517f04143ab",
+      "bytes": 130944,
+      "format": "pdf",
+      "filename": "stat410-6c3ff2d21201e49a.pdf",
+      "repositoryPath": "files/stat410-6c3ff2d21201e49a.pdf",
+      "mode": "repository",
+      "resourceIds": [],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "a07acbab32dde57c8744d00ca4ac99003ea133ed5f5694a611f2357288d1e346",
+      "bytes": 2036438,
+      "format": "pdf",
+      "filename": "is597-a07acbab32dde57c.pdf",
+      "repositoryPath": "files/is597-a07acbab32dde57c.pdf",
+      "mode": "repository",
+      "resourceIds": [],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "7aba3860b1840c4cd31a9c320ce169c4bc642e350dc1167207235f039573e018",
+      "bytes": 952978,
+      "format": "html",
+      "filename": "stat428-7aba3860b1840c4c.html",
+      "repositoryPath": "files/stat428-7aba3860b1840c4c.html",
+      "mode": "release",
+      "resourceIds": [],
+      "sourceKind": "user-provided",
+      "releaseUrl": "https://github.com/zyt20001010/e3-learning-site/releases/download/learning-materials-2026-11-03/stat428-7aba3860b1840c4c.html",
+      "releaseId": 705957989,
+      "state": "ready"
+    },
+    {
+      "sha256": "4bf1909e5355a1f9d96b06401700d01edb36acf06a6f1e4b14a0bdeb21d70d91",
+      "bytes": 744603,
+      "format": "pdf",
+      "filename": "stat410-4bf1909e5355a1f9.pdf",
+      "repositoryPath": "files/stat410-4bf1909e5355a1f9.pdf",
+      "mode": "repository",
+      "resourceIds": [],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "8a05e96172a555b742a683eae9042ff0a72bfaf8dfa6b76de90922957bf25099",
+      "bytes": 190023,
+      "format": "pdf",
+      "filename": "stat410-8a05e96172a555b7.pdf",
+      "repositoryPath": "files/stat410-8a05e96172a555b7.pdf",
+      "mode": "repository",
+      "resourceIds": [],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "c46dc54acbc18fd916a4ec389bec65882d7992253793f034b52f0f0fbdae407c",
+      "bytes": 74816,
+      "format": "pdf",
+      "filename": "math561-c46dc54acbc18fd9.pdf",
+      "repositoryPath": "files/math561-c46dc54acbc18fd9.pdf",
+      "mode": "repository",
+      "resourceIds": [],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "da2c9fd1f1e686299f0e5d014d172494e15df860774671d3d086993e2baf5192",
+      "bytes": 189807,
+      "format": "pdf",
+      "filename": "stat410-da2c9fd1f1e68629.pdf",
+      "repositoryPath": "files/stat410-da2c9fd1f1e68629.pdf",
+      "mode": "repository",
+      "resourceIds": [],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "943e8af3b8d065384da05e471c3d4ed571a4b1e04a20f96afc87c28a502125e5",
+      "bytes": 4635971,
+      "format": "pdf",
+      "filename": "bioe580-943e8af3b8d06538.pdf",
+      "repositoryPath": "files/bioe580-943e8af3b8d06538.pdf",
+      "mode": "repository",
+      "resourceIds": [],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "a100cdaf18eaedf244705ded97f330f613265f262537e2b1a09cfc53a4f6b4af",
+      "bytes": 5019676,
+      "format": "pdf",
+      "filename": "is597-a100cdaf18eaedf2.pdf",
+      "repositoryPath": "files/is597-a100cdaf18eaedf2.pdf",
+      "mode": "repository",
+      "resourceIds": [],
+      "sourceKind": "user-provided",
+      "state": "ready"
+    },
+    {
+      "sha256": "91319fe049423df8c845697f8627cc1bf6fc4bf47e65fe51b0a274c66c247c4f",
+      "bytes": 8253255,
+      "format": "pdf",
+      "filename": "cs582-91319fe049423df8.pdf",
+      "repositoryPath": "files/cs582-91319fe049423df8.pdf",
+      "mode": "repository",
+      "resourceIds": [],
+      "sourceKind": "user-provided",
+      "state": "ready"
     }
   ],
-  "requested": 173,
-  "verified": 159
+  "failures": [],
+  "requested": 406,
+  "verified": 406
 }
