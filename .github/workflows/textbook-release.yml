@@ -1,0 +1,33 @@
+name: Publish open textbook downloads
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/textbook-release.yml
+      - .github/textbook-release.json
+      - scripts/publish-textbooks.py
+
+permissions:
+  contents: write
+
+concurrency:
+  group: textbook-downloads
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Read the exact committed manifest and publisher
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh api "repos/$GITHUB_REPOSITORY/contents/.github/textbook-release.json?ref=$GITHUB_SHA" -H 'Accept: application/vnd.github.raw+json' > release.json
+          gh api "repos/$GITHUB_REPOSITORY/contents/scripts/publish-textbooks.py?ref=$GITHUB_SHA" -H 'Accept: application/vnd.github.raw+json' > publish-textbooks.py
+      - name: Verify and publish the unchanged licensed textbooks
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python3 publish-textbooks.py

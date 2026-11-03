@@ -1,0 +1,39 @@
+{
+  "tag": "textbooks-2026-11-03",
+  "title": "开放教材 PDF · 2026-11-03",
+  "assets": [
+    {
+      "resourceId": "PRE",
+      "title": "Precalculus 2e",
+      "filename": "openstax-precalculus-2e.pdf",
+      "sourceUrl": "https://assets.openstax.org/oscms-prodcms/media/documents/precalculus-2e_-_WEB.pdf",
+      "sourcePage": "https://openstax.org/details/books/precalculus-2e",
+      "bytes": 114386806,
+      "sha256": "4b7018778433d2c125229a35315cf70e0813cbaacb04118b7265baae625372b5",
+      "license": "CC BY-NC-SA 4.0",
+      "redistributionAllowed": true
+    },
+    {
+      "resourceId": "Q02",
+      "title": "Anatomy and Physiology 2e",
+      "filename": "openstax-anatomy-and-physiology-2e.pdf",
+      "sourceUrl": "https://assets.openstax.org/oscms-prodcms/media/documents/anatomy-and-physiology-2e_-_WEB.pdf",
+      "sourcePage": "https://openstax.org/details/books/anatomy-and-physiology-2e",
+      "bytes": 476335014,
+      "sha256": "aa2e577b2083c343f4d57b38f00dd935dd2d98befdb38c0f368d72d636d0ff46",
+      "license": "CC BY-NC-SA 4.0",
+      "redistributionAllowed": true
+    },
+    {
+      "resourceId": "Q04",
+      "title": "University Physics Volume 1",
+      "filename": "openstax-university-physics-volume-1.pdf",
+      "sourceUrl": "https://assets.openstax.org/oscms-prodcms/media/documents/university-physics-volume-1_-_WEB.pdf",
+      "sourcePage": "https://openstax.org/details/books/university-physics-volume-1",
+      "bytes": 81497906,
+      "sha256": "93652b69c43197d10dc83438b813b5f7515e61e7ea4336da8636ff902cb4aba8",
+      "license": "CC BY-NC-SA 4.0",
+      "redistributionAllowed": true
+    }
+  ]
+}
