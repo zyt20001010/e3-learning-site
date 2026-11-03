@@ -12,6 +12,16 @@ CC BY-NC-SA 4.0 · OpenStax / Rice University；未修改官方 PDF
 
 SHA-256：`4b7018778433d2c125229a35315cf70e0813cbaacb04118b7265baae625372b5`
 
+## Daniel J. Velleman · How to Prove It, 3rd ed. (2019)
+
+Daniel J. Velleman © 2019；用户提供的现有文件，保留原版权页与内容
+
+出版信息（文件由用户提供）：https://www.cambridge.org/highereducation/books/how-to-prove-it/6D2965D625C6836CD4A785A2C843B3DA
+
+下载副本：materials/how-to-prove-it-3rd-2019.pdf
+
+SHA-256：`3f309cb4fd37ac3e73dfd93b25a99e06aa2c4f322e3d61b50117f06f3ff2d2c1`
+
 ## Dive into Deep Learning · 在线1.0.3版，PyTorch路线
 
 CC BY-SA 4.0 · Zhang, Lipton, Li, Smola；未修改官方 PDF

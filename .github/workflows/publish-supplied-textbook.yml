@@ -1,0 +1,28 @@
+name: Assemble and publish supplied textbook
+
+on:
+  push:
+    branches: [codex/proof-transfer]
+    paths: [.github/supplied-textbook-parts.json]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: supplied-proof-textbook
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Read the committed publisher
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh api "repos/$GITHUB_REPOSITORY/contents/scripts/publish-supplied-textbook.py?ref=$GITHUB_SHA" -H 'Accept: application/vnd.github.raw+json' > publisher.py
+      - name: Verify every part and publish the original file
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python3 publisher.py

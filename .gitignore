@@ -3,7 +3,7 @@
 *progress*.json
 *.pdf
 
-# Only the reviewed, licensed materials directory contains public PDFs.
+# Public material files are explicitly staged from this directory.
 !materials/*.pdf
 __pycache__/
 *.pyc
