@@ -5305,7 +5305,7 @@
     },
     {
       "resourceId": "INTERNAL",
-      "title": "本执行册 · 贯通实验、年度维护与应用问题卡（本次补写）",
+      "title": "本执行册 · 综合实验、年度维护与应用问题卡（本次补写）",
       "status": "inline",
       "note": "本页已提供正文与练习。",
       "multipart": false,
@@ -5494,7 +5494,7 @@
     },
     {
       "resourceId": "BRIDGE_B001",
-      "title": "贯通讲义 · 从建模走到研究问题",
+      "title": "综合讲义 · 从建模走到研究问题",
       "status": "inline",
       "note": "本页已提供正文与练习。",
       "multipart": false,
@@ -5503,7 +5503,7 @@
     },
     {
       "resourceId": "BRIDGE_B002",
-      "title": "贯通讲义 · 运筹建模：连续、整数与松弛",
+      "title": "综合讲义 · 运筹建模：连续、整数与松弛",
       "status": "inline",
       "note": "本页已提供正文与练习。",
       "multipart": false,
@@ -5512,7 +5512,7 @@
     },
     {
       "resourceId": "BRIDGE_B003",
-      "title": "贯通讲义 · 计算边界：P、NP、归约与近似",
+      "title": "综合讲义 · 计算边界：P、NP、归约与近似",
       "status": "inline",
       "note": "本页已提供正文与练习。",
       "multipart": false,
@@ -5521,7 +5521,7 @@
     },
     {
       "resourceId": "BRIDGE_B004",
-      "title": "贯通讲义 · 算法辨析：随机梯度与元启发式",
+      "title": "综合讲义 · 算法辨析：随机梯度与元启发式",
       "status": "inline",
       "note": "本页已提供正文与练习。",
       "multipart": false,
@@ -5530,7 +5530,7 @@
     },
     {
       "resourceId": "BRIDGE_B005",
-      "title": "贯通讲义 · 优化与博弈：零和、对偶和均衡",
+      "title": "综合讲义 · 优化与博弈：零和、对偶和均衡",
       "status": "inline",
       "note": "本页已提供正文与练习。",
       "multipart": false,
@@ -5539,7 +5539,7 @@
     },
     {
       "resourceId": "BRIDGE_B006",
-      "title": "贯通讲义 · 优化不是采样：MAP、MCMC 与退火",
+      "title": "综合讲义 · MAP、MCMC 与模拟退火",
       "status": "inline",
       "note": "本页已提供正文与练习。",
       "multipart": false,
@@ -5548,7 +5548,7 @@
     },
     {
       "resourceId": "BRIDGE_B007",
-      "title": "贯通讲义 · 可观测、可辨识与因果识别",
+      "title": "综合讲义 · 可观测、可辨识与因果识别",
       "status": "inline",
       "note": "本页已提供正文与练习。",
       "multipart": false,
@@ -5557,7 +5557,7 @@
     },
     {
       "resourceId": "BRIDGE_B008",
-      "title": "贯通讲义 · 统计—计算权衡与四种误差",
+      "title": "综合讲义 · 统计—计算权衡与四种误差",
       "status": "inline",
       "note": "本页已提供正文与练习。",
       "multipart": false,
@@ -5566,7 +5566,7 @@
     },
     {
       "resourceId": "BRIDGE_B009",
-      "title": "贯通讲义 · 从预测到干预，再到决策",
+      "title": "综合讲义 · 从预测到干预，再到决策",
       "status": "inline",
       "note": "本页已提供正文与练习。",
       "multipart": false,
@@ -5575,7 +5575,7 @@
     },
     {
       "resourceId": "BRIDGE_B010",
-      "title": "贯通讲义 · 随机近似、学习动态与 SDE",
+      "title": "综合讲义 · 随机近似、学习动态与 SDE",
       "status": "inline",
       "note": "本页已提供正文与练习。",
       "multipart": false,
@@ -5584,7 +5584,7 @@
     },
     {
       "resourceId": "BRIDGE_B011",
-      "title": "贯通讲义 · 在线学习、无悔与博弈",
+      "title": "综合讲义 · 在线学习、无悔与博弈",
       "status": "inline",
       "note": "本页已提供正文与练习。",
       "multipart": false,
@@ -5593,7 +5593,7 @@
     },
     {
       "resourceId": "BRIDGE_B012",
-      "title": "贯通讲义 · 控制、RL、离线评估与安全",
+      "title": "综合讲义 · 控制、RL、离线评估与安全",
       "status": "inline",
       "note": "本页已提供正文与练习。",
       "multipart": false,
@@ -5602,7 +5602,7 @@
     },
     {
       "resourceId": "BRIDGE_B013",
-      "title": "贯通讲义 · 矩阵、核、图与几何表示",
+      "title": "综合讲义 · 矩阵、核、图与几何表示",
       "status": "inline",
       "note": "本页已提供正文与练习。",
       "multipart": false,
@@ -5611,7 +5611,7 @@
     },
     {
       "resourceId": "BRIDGE_B014",
-      "title": "贯通讲义 · 可信性：覆盖、校准、稳健、隐私与安全",
+      "title": "综合讲义 · 可信性：覆盖、校准、稳健、隐私与安全",
       "status": "inline",
       "note": "本页已提供正文与练习。",
       "multipart": false,
@@ -5620,7 +5620,7 @@
     },
     {
       "resourceId": "BRIDGE_B015",
-      "title": "贯通讲义 · 科学计算、生成模型与世界模型",
+      "title": "综合讲义 · 科学计算、生成模型与世界模型",
       "status": "inline",
       "note": "本页已提供正文与练习。",
       "multipart": false,
@@ -5629,7 +5629,7 @@
     },
     {
       "resourceId": "BRIDGE_B016",
-      "title": "贯通讲义 · 随机运营：排队、资源分配与学习",
+      "title": "综合讲义 · 随机运营：排队、资源分配与学习",
       "status": "inline",
       "note": "本页已提供正文与练习。",
       "multipart": false,
@@ -5638,7 +5638,7 @@
     },
     {
       "resourceId": "BRIDGE_B017",
-      "title": "贯通讲义 · 均衡、社会最优与机制设计",
+      "title": "综合讲义 · 均衡、社会最优与机制设计",
       "status": "inline",
       "note": "本页已提供正文与练习。",
       "multipart": false,
@@ -5647,7 +5647,7 @@
     },
     {
       "resourceId": "BRIDGE_B018",
-      "title": "贯通讲义 · 综合答辩：把知识迁移到新问题",
+      "title": "综合讲义 · 综合研究汇报与答辩",
       "status": "inline",
       "note": "本页已提供正文与练习。",
       "multipart": false,

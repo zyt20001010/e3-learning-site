@@ -218,4 +218,4 @@ OpenStax 许可：https://creativecommons.org/licenses/by-nc-sa/4.0/
 
 NIST 使用说明：https://www.nist.gov/copyrights-disclaimers
 
-其他文件链接到作者、出版社、课程或机构原站。下载和使用须遵循原文件说明。
+各文件的原始来源保留在目录中，下载和使用按原文件说明执行。
