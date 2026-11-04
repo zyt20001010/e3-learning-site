@@ -5305,7 +5305,7 @@
     },
     {
       "resourceId": "INTERNAL",
-      "title": "本执行册 · 综合实验、年度维护与应用问题卡（本次补写）",
+      "title": "本执行册 · 综合实验、年度维护与应用问题分析（本次补写）",
       "status": "inline",
       "note": "本页已提供正文与练习。",
       "multipart": false,
@@ -5494,7 +5494,7 @@
     },
     {
       "resourceId": "BRIDGE_B001",
-      "title": "综合讲义 · 从建模走到研究问题",
+      "title": "综合讲义 · 研究问题定义与数学建模",
       "status": "inline",
       "note": "本页已提供正文与练习。",
       "multipart": false,
@@ -5512,7 +5512,7 @@
     },
     {
       "resourceId": "BRIDGE_B003",
-      "title": "综合讲义 · 计算边界：P、NP、归约与近似",
+      "title": "综合讲义 · 计算复杂性：P、NP、归约与近似算法",
       "status": "inline",
       "note": "本页已提供正文与练习。",
       "multipart": false,
@@ -5521,7 +5521,7 @@
     },
     {
       "resourceId": "BRIDGE_B004",
-      "title": "综合讲义 · 算法辨析：随机梯度与元启发式",
+      "title": "综合讲义 · 随机梯度与元启发式算法",
       "status": "inline",
       "note": "本页已提供正文与练习。",
       "multipart": false,
@@ -5566,7 +5566,7 @@
     },
     {
       "resourceId": "BRIDGE_B009",
-      "title": "综合讲义 · 从预测到干预，再到决策",
+      "title": "综合讲义 · 预测、干预效应与决策分析",
       "status": "inline",
       "note": "本页已提供正文与练习。",
       "multipart": false,
@@ -5974,7 +5974,7 @@
     },
     {
       "resourceId": "Q12",
-      "title": "本页《应用问题卡》（本次补写）",
+      "title": "本页《应用问题分析》（本次补写）",
       "status": "inline",
       "note": "本页已提供正文与练习。",
       "multipart": false,
