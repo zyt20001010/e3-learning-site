@@ -2,6 +2,8 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile,readdir} from 'node:fs/promises';
 import {createHash} from 'node:crypto';
+import katex from 'katex';
+import {LABS} from '../js/labs.js';
 const read=async name=>JSON.parse(await readFile(new URL('../content/'+name+'.json',import.meta.url),'utf8'));
 test('all original E3 scripts and curriculum remain byte-for-byte unchanged',async()=>{
   const html=await readFile(new URL('../../index.html',import.meta.url),'utf8');
@@ -21,6 +23,48 @@ test('coverage inventory and planned/completed states are explicit',async()=>{
     assert(['P0','P1','P2'].includes(n.priority));
     assert(n.nameEn);assert(n.minutes.A>0);assert(n.prerequisites);
     if(n.id.endsWith('-extensions'))assert(Object.values(n.status).every(x=>x===false));
+  }
+});
+test('every Day guide has usable examples, resolved links and valid formulas',async()=>{
+  const [first,others,book]=await Promise.all([read('day-one'),read('route-guides'),read('knowledge')]);
+  const guides=[{...first,day:1},...others];
+  assert.deepEqual(guides.map(guide=>guide.day),Array.from({length:14},(_,i)=>i+1));
+  const points=new Set(book.items.map(point=>point.id)),labs=new Set(LABS.map(lab=>lab.id));
+  const renderMath=tex=>katex.renderToString(tex,{throwOnError:true,strict:'error'});
+  const inline=text=>{
+    for(const [,formula] of text.matchAll(/\\\((.*?)\\\)/gs))renderMath(formula);
+  };
+  function checkBlock([kind,value]){
+    if(kind==='eq'){assert(value[1]);renderMath(value[0]);}
+    else if(kind==='p')inline(value);
+    else if(kind==='table'){
+      const [headers,rows]=value;
+      for(const row of rows)assert.equal(row.length,headers.length);
+      [...headers,...rows.flat()].forEach(inline);
+    }else if(kind==='lab')assert(['line','rate'].includes(value));
+    else if(kind==='source')assert.equal(new URL(value[0]).protocol,'https:');
+    else assert.fail('Unknown guide block '+kind);
+  }
+  for(const guide of guides){
+    const sections=guide.groups.flatMap(group=>group.sections);
+    assert(sections.length>=2&&guide.application.length&&guide.exercises.length,guide.title);
+    assert.equal(new Set(sections.map(section=>section.id)).size,sections.length);
+    if(guide.core)for(const id of guide.core)assert(sections.some(section=>section.id===id));
+    if(guide.focusExercise!==undefined)assert(guide.exercises[guide.focusExercise]);
+    for(const section of sections){
+      assert.match(section.id,/^[a-z0-9-]+$/);
+      assert(section.blocks.length);
+      for(const point of section.points)assert(points.has(point),point);
+      if(section.standaloneSetup)inline(section.standaloneSetup);
+      section.blocks.forEach(checkBlock);
+    }
+    for(const lab of guide.labs||[])assert(labs.has(lab),lab);
+    guide.application.forEach(checkBlock);
+    guide.code?.blocks.forEach(checkBlock);
+    for(const exercise of guide.exercises){
+      assert.equal(exercise.length,3);
+      exercise.forEach(inline);
+    }
   }
 });
 test('all 14 days meet workload limits and reuse canonical nodes',async()=>{

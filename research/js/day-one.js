@@ -36,7 +36,7 @@ function slider(id, label, min, max, step, value) {
     +'<input id="'+id+'" type="range" min="'+min+'" max="'+max+'" step="'+step+'" value="'+value+'"></label>';
 }
 
-function labMarkup(kind, scope) {
+export function renderDayOneLab(kind, scope) {
   const id = 'day-one-'+scope+'-'+kind;
   const isLine = kind === 'line';
   const controls = isLine
@@ -177,65 +177,4 @@ export function activateDayOneLabs(parent) {
     });
   }
   return () => cleanups.forEach(cleanup => cleanup());
-}
-
-const exerciseId = 'day-one-practice';
-const codeId = 'day-one-code';
-const sectionHref = id => '#route/1?section='+id;
-const sectionId = section => 'day-one-'+section.id;
-
-export function createDayOne(guide, {esc, p, link, external, table, hero, pointName, readCode}) {
-  const sections = guide.groups.flatMap(group => group.sections);
-  const renderBlocks = (blocks, scope) => blocks.map(([kind, value]) => {
-    if (kind === 'p') return p(value);
-    if (kind === 'eq') return '<div class="equation"><div data-tex="'+esc(value[0])+'"></div>'+p(value[1])+'</div>';
-    if (kind === 'table') return table(...value);
-    if (kind === 'lab') return labMarkup(value, scope);
-    if (kind === 'source') return '<p class="small">'+external(...value)+'</p>';
-    throw new Error('未知的 Day 1 内容类型 '+kind);
-  }).join('');
-  const pointLinks = section => {
-    if (!section.points.length) return '';
-    return '<div class="dependency-links" aria-label="相关知识点">'+section.points.map(id => link('#concept/'+id, pointName(id))).join('')+'</div>';
-  };
-
-  async function page() {
-    const filename = 'day-one-training.py';
-    const source = await readCode(filename);
-    const toc = '<nav class="day-one-toc" aria-label="Day 1 讲义目录"><ol>'
-      +guide.groups.map(({title, sections}) => '<li>'+link(sectionHref(sectionId(sections[0])), title)+'</li>').join('')
-      +'<li>'+link(sectionHref(codeId),'代码复现')+'</li><li>'+link(sectionHref(exerciseId),'独立复算')+'</li></ol></nav>';
-    const lesson = guide.groups.map(group => '<section class="day-one-group"><h2>'+esc(group.title)+'</h2>'
-      +group.sections.map(section => '<section id="'+sectionId(section)+'" class="lesson-section day-one-section"><h3>'
-        +esc(section.title)+'</h3>'+renderBlocks(section.blocks, section.id)+pointLinks(section)+'</section>').join('')
-      +'</section>').join('');
-    const code = '<section class="lesson-section day-one-section" id="'+codeId+'"><h2>从手算到代码</h2>'
-      +p('Python 标准库脚本用同一个样本计算解析梯度，再逐参数用中心差分复核。差分点都在当前 ReLU 正半轴内。脚本还检查不同学习率以及第一层梯度为零的反例。')
-      +(source?'<div class="code-block"><div class="code-head"><span>Python 标准库</span><button data-copy="day-one">复制代码</button></div><pre><code>'
-        +esc(source)+'</code></pre></div>':'')
-      +'<p>'+link('examples/'+filename,'下载复现脚本')+'</p>'
-      +p('迁移到 PyTorch 时，一般先用 optimizer.zero_grad() 清理上一步的累积，再用 loss.backward() 计算梯度，最后调用 optimizer.step() 更新参数。需要累积多个小批的梯度时，清理和更新的位置随训练设计调整。')
-      +'<p class="small">'+external('https://docs.pytorch.org/docs/2.15/generated/torch.Tensor.backward.html','PyTorch 关于 backward 与梯度累积的说明')+'</p></section>';
-    const exercises = '<section class="lesson-section day-one-section" id="'+exerciseId+'"><h2>独立复算</h2>'
-      +guide.exercises.map(([title, prompt, answer])=>'<div class="day-one-exercise"><h3>'+esc(title)+'</h3>'+p(prompt)
-        +'<details><summary>核对答案</summary>'+p(answer)+'</details></div>').join('')+'</section>';
-    return '<div class="breadcrumb">'+link('#route','可选学习路线')+' / Day 1</div>'
-      +hero(guide.title, guide.introduction, 'E3 RESEARCH · DAY 1')
-      +'<div class="day-one-content">'+toc+lesson+code+exercises+'<div class="button-row">'
-      +link('#route/1?view=plan','查看 Day 1 课程安排')+link('#route/2','Day 2 · 卷积与统计核')+'</div></div>';
-  }
-
-  function related(pointId, showWorkedSections) {
-    const matches = sections.filter(section => section.points.includes(pointId));
-    if (!matches.length) return '';
-    if (!showWorkedSections) {
-      return '<div class="day-one-related"><strong>在同一个训练例中查看</strong><div class="dependency-links">'
-        +matches.map(section => link(sectionHref(sectionId(section)), section.title)).join('')+'</div></div>';
-    }
-    return '<section class="lesson-section"><h2>在同一个训练例中展开</h2>'
-      +matches.map((section,index) => '<details'+(index===0?' open':'')+'><summary>'+esc(section.title)+'</summary>'
-        +(section.standaloneSetup?p(section.standaloneSetup):'')+renderBlocks(section.blocks, 'point-'+section.id)
-        +'<p class="small">'+link(sectionHref(sectionId(section)),'到 Day 1 查看前后步骤')+'</p></details>').join('')+'</section>';
-  }
-  return {page, related};
 }

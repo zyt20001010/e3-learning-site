@@ -55,16 +55,34 @@ test('direct point entry, reading depths, edits and navigation preserve existing
     }
     await navigate('#home');assert(html().includes('遇到一个技术点'));assert(!html().includes('已写成的基础课程'));
     assert(html().includes('跟着算一遍 · Day 1'));
+    await navigate('#route');
+    assert(html().includes('14 天科研专题')&&html().includes('href="#route/14"'));
+    for(let day=1;day<=14;day++){
+      await navigate('#route/'+day);
+      assert(html().includes('data-study-day="'+day+'"'),'Day '+day+' has a guide');
+      assert(html().includes('核心算例')&&html().includes('放到研究中')&&html().includes('核对答案'),'Day '+day+' follows the common reading path');
+      assert(html().includes('href="#route/'+day+'?view=plan"'),'Day '+day+' links to the original daily plan');
+    }
+    await fire('change',{id:'study-guide-select',value:'2'});
+    assert.equal(location.hash,'#route/2');
     await navigate('#route/1');
     assert(html().includes('<h1>神经网络究竟是如何学习的</h1>'));
     assert(html().includes('data-day-one-lab="line"')&&html().includes('data-day-one-lab="rate"'));
     assert(html().includes('0.045')&&html().includes('3.92')&&html().includes('day-one-practice'));
     assert(html().includes('def central_difference'));
+    assert(html().includes('<details class="study-guide-extra">'));
+    await navigate('#route/1?section=day-one-shape');
+    assert(html().includes('<details class="study-guide-extra" open>'),'existing links open the matching supplemental section');
     await navigate('#route/1?view=plan');assert(html().includes('维度与矩阵乘法'));
+    await navigate('#route/2?view=plan');assert(html().includes('卷积核、通道与权重共享'));
     await navigate('#concept/backpropagation?depth=B');
-    assert(html().includes('从损失倒推四个梯度')&&html().includes('在同一个训练例中展开'));
+    assert(html().includes('从损失倒推四个梯度')&&html().includes('在专题算例中展开'));
+    await navigate('#concept/convolution-kernel');
+    assert(html().includes('#route/2?section=day-2-sensor-convolution'));
     await navigate('#concept/term-102ca5126493');
     assert(html().includes('#route/1?section=day-one-update'));
+    await navigate('#tree/E');
+    assert(html().includes('相关专题算例'));
     assert.equal(map.get('yanting-execution-e3-v1'),'original E3 sentinel');
     assert.equal(state().depth,'B','atom depth selection leaves the legacy course preference intact');
   }finally{for(const [key,descriptor] of Object.entries(saved)){if(descriptor)Object.defineProperty(globalThis,key,descriptor);else delete globalThis[key];}}

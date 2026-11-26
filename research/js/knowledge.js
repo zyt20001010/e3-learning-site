@@ -31,7 +31,7 @@ export function createKnowledgeBase(ctx) {
     return hero('遇到一个技术点，就从这里开始','从一个具体操作进入：看清它为什么需要、怎样计算、依赖什么条件。基础名词可以就地展开，推导和代码按需深入。','E3 RESEARCH · 科研技术知识库')
       +searchForm()+'<div class="quick-links">'+link('#knowledge?content=ready&priority=P0','P0 核心技术点 · '+p0.length)+link('#knowledge','全部知识点')+link('#knowledge?learning=unmastered','尚未掌握 · '+(ready.length-done.length))+link('#review','我的复习')+'</div>'
       +'<p class="small muted">'+ready.length+' 个知识点已有快速阅读与关键推导；其余 '+(items.length-ready.length)+' 个条目仍在建设。阅读时间是建议预算，可以随时跳转。</p>'
-      +(ctx.dayOne?'<p class="day-one-entry">'+link('#route/1','跟着算一遍 · Day 1 神经网络如何学习')+'</p>':'')
+      +(ctx.studyGuides?'<p class="study-guide-entry">'+link('#route','14 天科研专题讲解')+' · '+link('#route/1','跟着算一遍 · Day 1 神经网络如何学习')+'</p>':'')
       +(recent.length?'<section><h2>继续最近的知识点</h2>'+chips(recent.map(n=>n.id))+'</section>':'')
       +'<section><div class="section-head"><h2>P0 · 直接开始</h2>'+link('#knowledge?content=ready&priority=P0','查看完整 P0 清单')+'</div><div class="atom-cards">'+featured.map(n=>'<article class="atom-card"><div class="eyebrow">'+esc(n.priority)+' · 3–5 MIN</div><h3>'+atomLink(n.id)+'</h3><p>'+esc(n.summary)+'</p><span class="small muted">快速认知 · 关键推导</span></article>').join('')+'</div></section>'
       +'<section><h2>也可以从问题或共同机制进入</h2><div class="entry-grid"><a href="#problems"><strong>从科研问题出发</strong><span>生成样本、解释梯度、识别机制、选择实验</span></a><a href="#mechanisms"><strong>寻找共同数学操作</strong><span>聚合、微分、测度变换、运输、状态推断</span></a><a href="#papers"><strong>拆解一篇论文</strong><span>已核对的方法映射，以及需要补充的阅读</span></a><a href="#compare"><strong>比较相近技术</strong><span>对象、目标、假设和失效条件逐项对照</span></a></div></section>'
@@ -64,7 +64,7 @@ export function createKnowledgeBase(ctx) {
     const recordId=atomRecordId(n),r=getState().records[recordId],canCheck=atomAvailable(n,depth);
     const head='<div class="breadcrumb">'+link('#knowledge','全部知识点')+' / '+esc(n.module)+'</div><header class="lesson-header"><div class="course-meta">'+badge(n.priority,'priority')+status(n)+'</div><h1>'+esc(n.name)+'</h1>'+(n.nameEn?'<p class="english">'+esc(n.nameEn)+'</p>':'')+p(n.summary)+'<div class="button-row"><button data-star="'+recordId+'">'+(r?.star?'已收藏':'收藏知识点')+'</button><button data-review="'+recordId+'">'+(r?.review?'已加入复习':'加入复习')+'</button></div><p class="small muted">可直接学习；遇到陌生概念时展开本页的局部解释。别名：'+esc([...new Set(n.aliases)].filter(x=>x!==n.name).join(' / ')||'暂无')+'</p></header>';
     const levels='<nav class="atom-depths" aria-label="本知识点阅读深度">'+[['A','3–5 分钟'],['B','10–20 分钟'],['C','按需']].map(([d,time])=>'<a href="#concept/'+n.id+'?depth='+d+'"'+(d===depth?' class="selected" aria-current="page"':'')+'><strong>'+depthNames[d]+'</strong><span>'+time+(atomAvailable(n,d)?'':' · 待完成')+'</span></a>').join('')+'</nav>';
-    const guided=ctx.dayOne?.related(n.id,depth!=='A'&&atomAvailable(n))||'';
+    const guided=ctx.studyGuides?.related(n.id,depth!=='A'&&atomAvailable(n))||'';
     if(!atomAvailable(n)){
       const related=searchAtoms(items,n.name,{content:'ready'}).slice(0,6);
       return head+levels+'<div class="notice-box">'+p('本条目的专门教学内容尚未写成。可以收藏、记下问题或加入复习。')+'</div>'+guided+(related.length?'<section><h2>已有内容中的相关讲解</h2>'+rows(related)+'</section>':'')+courseAssociations(n)+'<section>'+noteEditor({id:recordId})+'</section>';

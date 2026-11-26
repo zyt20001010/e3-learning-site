@@ -1,7 +1,8 @@
 import {STORAGE_KEY,IMPORT_BACKUP_KEY,emptyProgress,emptyRecord,loadProgress,saveProgress,parseBackup,exportBackup,importProgress,selfChecked} from './progress.js';
 import {LABS,renderLab,activateLabs} from './labs.js';
-import {createKnowledgeBase} from './knowledge.js?v=20261126-day1';
-import {createDayOne, activateDayOneLabs} from './day-one.js?v=20261126-day1';
+import {createKnowledgeBase} from './knowledge.js?v=20261126-guides';
+import {activateDayOneLabs} from './day-one.js?v=20261126-guides';
+import {createStudyGuides} from './study-guide.js?v=20261126-guides';
 const $=s=>document.querySelector(s);
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const p=s=>'<p>'+esc(s)+'</p>';
@@ -13,7 +14,8 @@ const safeURL=url=>{try{const u=new URL(url,location.href);return ['https:','htt
 const external=(url,label)=>'<a href="'+esc(safeURL(url))+'" target="_blank" rel="noopener noreferrer">'+esc(label)+'</a>';
 const sectionTitle=s=>s.title.replace(/^L[0-8]\s*[·:：.-]\s*/,'');
 const labels={eli5:'直觉',example:'手算',definition:'定义',derivation:'推导',code:'代码运行',interactive:'交互实验',literature:'来源核验',audit:'质量复核'};
-let data,byId,sourceMap,questions,knowledge,dayOne,dayOneCode,renderToken=0,noticeTimer,importText='',lessonCache=new Map(),priority='all';
+let data,byId,sourceMap,questions,knowledge,studyGuides,renderToken=0,noticeTimer,importText='',priority='all';
+const lessonCache=new Map(),guideCodeCache=new Map();
 let cleanupDayOneLabs=()=>{};
 let storage,writable=true,state=emptyProgress();
 try{storage=window.localStorage;const result=loadProgress(storage);state=result.state;writable=result.writable;if(result.error)storageError(result.error);}
@@ -59,7 +61,9 @@ function hero(title,subtitle,eyebrow='E3 RESEARCH'){
 }
 function tree(module){
   const modules=module?data.catalog.modules.filter(m=>m.id===module):data.catalog.modules;
+  const moduleLessons=module?data.catalog.groups.filter(group=>group.module===module).flatMap(group=>group.lessons):[];
   return hero('科研技术知识树','十个领域、39 个模块。先选择当前需要理解的操作，再按先修关系补齐基础。目录覆盖与课程完成度分别显示。')
+    +(module?studyGuides.forLessons(moduleLessons):'<p>'+link('#route','查看全部 14 篇专题讲解')+'</p>')
     +'<div class="button-row"><label><input id="ready-only" type="checkbox"> 只显示已有正文的课程</label></div>'
     +modules.map(m=>'<section class="group"><h2>'+esc(m.id+' · '+m.name)+'</h2>'+data.catalog.groups.filter(g=>g.module===m.id).map(g=>{
       const ns=g.lessons.map(id=>byId.get(id)).filter(matchesPriority);if(!ns.length)return '';
@@ -77,15 +81,15 @@ function renderQuiz(q,prefix='course'){
     return '<label for="'+id+'"><input type="radio" id="'+id+'" name="'+prefix+'-'+q.id+'" value="'+i+'"'+(answer?.selected===i?' checked':'')+'> '+esc(option)+'</label>';
   }).join('')+'</fieldset><button type="submit">检查答案</button><div class="feedback'+(answer&&!correct?' wrong':'')+'"'+(!answer?' hidden':'')+'>'+(answer?(correct?'回答正确。':'需要复习。')+' '+esc(q.explanation):'')+'</div></form>';
 }
-function route(day){
+function routePlan(day){
   const shown=day?data.route.filter(d=>d.day===Number(day)):data.route;
   const used=new Set();
   return hero('可选 · 14 天科研路线','可按需跳过或调整。每天聚焦 3–4 个单元。把公式复算、失败反例和科研判断放在同一天完成；高级证明留在后续理论扩展中。')
-    +'<div class="day-index">'+data.route.map(d=>link('#route/'+d.day,'Day '+d.day)).join('')+link('#route','全部天数')+'</div>'
+    +'<div class="day-index">'+data.route.map(d=>link('#route/'+d.day+'?view=plan','Day '+d.day)).join('')+link('#route?view=plan','全部安排')+link('#route','专题讲解')+'</div>'
     +table(['安排','分钟'],data.route[0].schedule.map(x=>[x.label,x.minutes]))
     +shown.map(d=>{
       let qs=[];for(const u of d.units){const candidates=questions.filter(q=>q.nodeId===u.nodeId&&!used.has(q.id));if(candidates[0]){qs.push(candidates[0]);used.add(candidates[0].id);}}
-      const guideLink=d.day===1&&dayOne?'<p>'+link('#route/1','按完整讲义学习 Day 1')+'</p>':'';
+      const guideLink=studyGuides.hasDay(d.day)?'<p>'+link('#route/'+d.day,'进入 Day '+d.day+' 专题算例')+'</p>':'';
       return '<section class="day" id="day-'+d.day+'"><div class="eyebrow">DAY '+d.day+' · '+d.minutes+' 分钟</div><h2>'+esc(d.title)+'</h2>'+guideLink+'<ul class="units">'+d.units.map((u,i)=>{
         const n=byId.get(u.nodeId);const section=u.startSection||'L0';
         return '<li class="unit"><div>'+link('#lesson/'+u.nodeId+'?section='+section+'&depth='+u.depth,u.title)+'<div class="small muted">'+esc(n.name)+' · '+u.depth+' 层为主</div></div><div>'+u.minutes+' 分钟 '+status(n)+'</div></li>';
@@ -128,7 +132,7 @@ async function lesson(id){
     +'<section class="lesson-section" id="references"><h2>参考来源与核验范围</h2>'+references(n.references)+'</section>'
     +(n.related.length?'<section><h2>继续连接</h2><div class="dependency-links">'+n.related.map(x=>courseLink(x)).join('')+'</div></section>':'')
     +(associatedPapers.length?'<section><h2>关联论文</h2>'+listLinks(associatedPapers.map(x=>['#papers/'+x.id,x.title]))+'</section>':'');
-  const guidedExample=id==='backprop'&&dayOne?'<p>'+link('#route/1?section=day-one-forward','从样本到参数更新的手算和实验')+'</p>':'';
+  const guidedExample=studyGuides.forLessons([id]);
   return head+guidedExample+knowledge.coursePoints(id)+'<div class="lesson-layout"><article class="lesson-body">'+body+'</article>'+toc+'</div>';
 }
 function listLinks(pairs){return '<ul>'+pairs.map(([href,label])=>'<li>'+link(href,label)+'</li>').join('')+'</ul>';}
@@ -196,13 +200,13 @@ function quality(){
     +'<p>'+link('README.md','本版维护说明')+' · '+link('content/build-report.json','原课程构建记录')+' · '+link('content/knowledge-verification.json','知识点核验记录')+'</p>';
 }
 async function fetchJSON(path){const response=await fetch(path,{cache:'no-cache'});if(!response.ok)throw new Error('无法加载 '+path+'（HTTP '+response.status+'）');return response.json();}
-async function readDayOneCode(filename){
-  if(dayOneCode)return dayOneCode;
+async function readGuideCode(filename){
+  if(guideCodeCache.has(filename))return guideCodeCache.get(filename);
   try{
     const response=await fetch('examples/'+filename,{cache:'no-cache'});
-    if(response.ok)dayOneCode=await response.text();
+    if(response.ok)guideCodeCache.set(filename,await response.text());
   }catch{ /* The download link remains available if the inline copy fails. */ }
-  return dayOneCode;
+  return guideCodeCache.get(filename);
 }
 function math(){
   document.querySelectorAll('[data-tex]').forEach(el=>{
@@ -229,7 +233,10 @@ async function render({keepScroll=false}={}){
     else if(view==='concept')html=await knowledge.concept(id,readingDepth());
     else if(view==='mechanisms'||view==='problems')html=knowledge.collection(view,id);
     else if(view==='tree')html=tree(id);
-    else if(view==='route')html=id==='1'&&params.get('view')!=='plan'&&dayOne?await dayOne.page():route(id);
+    else if(view==='route'){
+      if(params.get('view')==='plan')html=routePlan(id);
+      else html=id?await studyGuides.page(Number(id),params.get('section')):studyGuides.overview();
+    }
     else if(view==='lesson')html=await lesson(id);
     else if(view==='compare')html=comparisons(id);
     else if(view==='graph')html=graph(id);
@@ -245,7 +252,7 @@ async function render({keepScroll=false}={}){
     $('#main').innerHTML=html;math();activateLabs($('#main'));
     cleanupDayOneLabs=activateDayOneLabs($('#main'));
     const section=params.get('section');
-    const guidedSection=view==='route'&&id==='1'&&/^day-one-[a-z-]+$/.test(section||'');
+    const guidedSection=view==='route'&&/^day-(?:one|\d+)-[a-z0-9-]+$/.test(section||'');
     if(section&&(guidedSection||/^(L[0-8]|experiment|questions|references|theory)$/.test(section))){
       const target=document.getElementById(section);
       if(target)target.scrollIntoView({block:'start'});else if(state.depth==='A'&&['L4','L7'].includes(section))toast('该段在 B 层。请切换阅读深度后查看。');
@@ -275,6 +282,7 @@ document.addEventListener('change',async e=>{
   const el=e.target;
   if(el.id==='priority'){priority=el.value;if(/^#(knowledge|search)/.test(location.hash)){const params=new URLSearchParams(location.hash.split('?')[1]||'');params.set('priority',priority);params.delete('page');history.replaceState(null,'','#knowledge?'+params.toString());}await render({keepScroll:true});}
   else if(el.id==='graph-select')location.hash='graph/'+el.value;
+  else if(el.id==='study-guide-select')location.hash='route/'+el.value;
   else if(el.dataset.check){const r=record(el.dataset.node);r.checks[el.dataset.checkDepth||state.depth][el.dataset.check]=el.checked;r.updatedAt=Date.now();persist();toast('学习自评已记录。');}
   else if(el.id==='ready-only'){
     document.querySelectorAll('.knowledge-group').forEach(group=>{
@@ -305,19 +313,24 @@ window.addEventListener('storage',e=>{
   if(e.key===STORAGE_KEY&&e.newValue){try{state=parseBackup(e.newValue);toast('另一个标签页更新了学习记录。');render({keepScroll:true});}catch{storageError('另一个标签页写入了无法读取的记录；请导出备份后检查。');writable=false;}}
 });
 try{
-  const [catalog,route,comparisons,papers,topics,connections,sources,qs,build,book,searchIndex,guide]=await Promise.all([
+  const [catalog,route,comparisons,papers,topics,connections,sources,qs,build,book,searchIndex,firstGuide,otherGuides]=await Promise.all([
     ...['catalog','route','comparisons','papers','topics','connections','sources','questions','build-report','knowledge','search'].map(x=>fetchJSON('content/'+x+'.json')),
-    fetchJSON('content/day-one.json').catch(()=>null)
+    fetchJSON('content/day-one.json').catch(()=>null),
+    fetchJSON('content/route-guides.json').catch(()=>[])
   ]);
   data={catalog,route,comparisons,papers,topics,connections,sources,build,book};
   questions=qs;
   byId=new Map(catalog.nodes.map(n=>[n.id,n]));
   sourceMap=new Map(book.sources.map(s=>[s.id,s]));
   const pointNames=new Map(book.items.map(point=>[point.id,point.name]));
-  dayOne=guide?createDayOne(guide,{esc,p,link,external,table,hero,pointName:id=>pointNames.get(id)||id,readCode:readDayOneCode}):null;
+  const guides=firstGuide?[{...firstGuide,day:1},...otherGuides]:otherGuides;
+  studyGuides=createStudyGuides(guides,route,{
+    esc,p,link,external,table,hero,pointName:id=>pointNames.get(id)||id,
+    labName:id=>LABS.find(lab=>lab.id===id)?.title||id,readCode:readGuideCode
+  });
   knowledge=createKnowledgeBase({
     book,esc,p,link,badge,table,hero,references,renderLab,getLesson,getState:()=>state,
-    noteEditor,getPriority:()=>priority,papers,dayOne,
+    noteEditor,getPriority:()=>priority,papers,studyGuides,
     courseSearch:query=>{
       const terms=query.toLowerCase().trim().split(/\s+/);
       return searchIndex.filter(x=>x.kind==='lesson'&&ready(byId.get(x.id))&&matchesPriority(byId.get(x.id))&&terms.every(t=>x.text.toLowerCase().includes(t)));
