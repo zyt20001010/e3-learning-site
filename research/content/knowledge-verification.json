@@ -1,0 +1,71 @@
+{
+  "verifiedOn": "2026-11-26",
+  "contentVersion": 1,
+  "counts": {
+    "indexEntries": 1291,
+    "quickReading": 68,
+    "technicalReading": 68,
+    "completeTheory": 0,
+    "indexOnly": 1223,
+    "originalCoverageEntriesMapped": 910,
+    "mechanismGroups": 12,
+    "researchProblems": 9,
+    "nodeEquations": 123,
+    "sourceSlices": 243,
+    "sources": 50
+  },
+  "checks": {
+    "authorNumericExamples": [
+      {
+        "group": "neural",
+        "knowledgePoints": 22,
+        "numericExamplesPassed": true,
+        "verifiedAuthorContentSHA256": "8de5e5f4954d06c7faa725ceb7f5aab6afbb43ad83fa84e5fe3da19a896e2e45",
+        "verificationReportSHA256": "efed6a5edb30bb706460271c4cc4dd731a7e7aca340e02e8a53f5d5679fec95f"
+      },
+      {
+        "group": "probability",
+        "knowledgePoints": 22,
+        "numericExamplesPassed": true,
+        "verifiedAuthorContentSHA256": "a4b2ce8429c90619b956118c8fb883ebc820938d4e202049b4241adcdde43e29",
+        "verificationReportSHA256": "a32b16b23bc831f381d2c991952e5eaf4598cc342eb6d39a0f192df7a720ea99"
+      },
+      {
+        "group": "dynamics",
+        "knowledgePoints": 24,
+        "numericExamplesPassed": true,
+        "verifiedAuthorContentSHA256": "acfea81521171ffe72c2f183373e276bc4561e71c234955fadbb861488ef7368",
+        "verificationReportSHA256": "489efdfffb2ebd9a39c6caf0075895faa1ef0c3ea991cf1634a3e78fa81ccb34"
+      }
+    ],
+    "knowledgeFileSHA256": "46db93d046b15f68b4d4b753030dd4d71152857f1e01fc488d641ab087ccd04d",
+    "automatedTests": 43,
+    "automatedTestsPassed": true,
+    "affectedIntegrationTestsRetested": 10,
+    "buildPassed": true,
+    "coreTypecheckPassed": true,
+    "pageScriptsSyntaxPassed": true,
+    "strictKaTeXRenderingPassed": true,
+    "allThreeDepthsRenderedForAllAuthoredPoints": true,
+    "legacyProtectedFilesByteIdentical": 37,
+    "originalE3EmbeddedScriptsByteIdentical": 6,
+    "originalCoverageMappingComplete": true,
+    "newConceptCompletionNotInferredFromOldCourses": true,
+    "backupRoundtripAndMergePassed": true,
+    "localHttpStatus": 200
+  },
+  "browser": {
+    "visualInspectionCompleted": false,
+    "interactiveBrowserInspectionCompleted": false,
+    "reason": "The connected in-app browser timed out for tab inventory and page creation. Chrome was not available. Application event integration was tested with a DOM/storage test double, not a real browser."
+  },
+  "contentBoundaries": [
+    "Quick/technical status applies to the named point and limited examples, not its entire parent field.",
+    "Index entries can include comparison or relationship topics awaiting further extraction.",
+    "Synonyms may resolve to one ID; related search terms do not assert mathematical equivalence.",
+    "Theory status remains false; numeric examples and formula parsing are not general proofs.",
+    "Referenced code is the unchanged complete course example, not a new standalone replication per point.",
+    "Paper mappings distinguish reviewed scope from supplemental mathematical background.",
+    "All numerical examples are synthetic; no new clinical, biological or large-model experiments were run."
+  ]
+}

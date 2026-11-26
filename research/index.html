@@ -5,47 +5,46 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="description" content="E3 Research：从手算、数学推导和交互实验理解现代统计机器学习与科学研究方法。">
   <meta name="theme-color" content="#087e8b">
-  <title>E3 Research · 科研技术学习</title>
+  <title>E3 Research · 科研技术知识库</title>
   <link rel="stylesheet" href="vendor/katex/katex.min.css">
-  <link rel="stylesheet" href="css/research.css?v=20261126-2">
+  <link rel="stylesheet" href="css/research.css?v=20261126-atomic1">
   <script defer src="vendor/katex/katex.min.js"></script>
   <script defer src="vendor/katex/auto-render.min.js"></script>
-  <script type="module" src="js/app.js?v=20261126-2"></script>
+  <script type="module" src="js/app.js?v=20261126-atomic1"></script>
 </head>
 <body>
   <a class="skip" href="#main">跳到正文</a>
   <header class="site-header">
     <div class="header-inner">
-      <a class="brand" href="#home">E3 <strong>Research</strong><span>科研技术学习</span></a>
+      <a class="brand" href="#home">E3 <strong>Research</strong><span>科研技术知识库</span></a>
       <a class="legacy-link" href="../">E3 长期学习</a>
     </div>
     <nav class="primary-nav" aria-label="主要导航">
-      <a href="#home" data-nav="home">学习首页</a>
-      <a href="#route" data-nav="route">14 天路线</a>
-      <a href="#tree" data-nav="tree">知识树</a>
+      <a href="#home" data-nav="home">技术速学</a>
+      <a href="#knowledge" data-nav="knowledge">全部知识点</a>
+      <a href="#problems" data-nav="problems">科研问题</a>
+      <a href="#mechanisms" data-nav="mechanisms">数学机制</a>
+      <a href="#papers" data-nav="papers">论文拆解</a>
       <a href="#compare" data-nav="compare">技术对比</a>
-      <a href="#graph" data-nav="graph">依赖关系</a>
-      <a href="#papers" data-nav="papers">论文索引</a>
-      <a href="#topics" data-nav="topics">科研专题</a>
-      <a href="#labs" data-nav="labs">数学实验</a>
-      <a href="#notebook" data-nav="notebook">学习记录</a>
+      <a href="#review" data-nav="review">我的复习</a>
+      <a href="#tree" data-nav="tree">完整课程</a>
     </nav>
   </header>
   <div class="workspace">
     <aside class="sidebar" aria-label="知识导航">
       <form id="search-form" role="search">
-        <label for="search">全局搜索</label>
-        <div class="search-row"><input id="search" type="search" placeholder="技术、公式、术语或论文" autocomplete="off"><button type="submit">搜索</button></div>
+        <label for="search">知识点搜索</label>
+        <div class="search-row"><input id="search" type="search" placeholder="中文、English、别名" autocomplete="off"><button type="submit">搜索</button></div>
       </form>
       <div class="filter-row"><label for="priority">优先级</label><select id="priority"><option value="all">全部优先级</option><option value="P0">P0 · 近期必须</option><option value="P1">P1 · 近期可能使用</option><option value="P2">P2 · 按需扩展</option></select></div>
       <fieldset class="depth-switch"><legend>阅读深度</legend><div role="group" aria-label="阅读深度">
         <button data-depth="A" aria-pressed="true">A 必知</button><button data-depth="B" aria-pressed="false">B 可用</button><button data-depth="C" aria-pressed="false">C 理论</button>
       </div></fieldset>
-      <p class="small muted">优先级决定先学什么；深度决定读到哪里。</p>
+      <p class="small muted">知识点可直接打开，基础按需补充。</p>
       <div id="sidebar-curriculum"></div>
       <div class="sidebar-footer">记录保存在当前浏览器。<a href="#notebook">备份与恢复</a></div>
     </aside>
-    <main id="main" tabindex="-1"><p class="loading" role="status">正在载入课程目录…</p></main>
+    <main id="main" tabindex="-1"><p class="loading" role="status">正在载入知识点…</p></main>
   </div>
   <div id="notice" class="toast" role="status" aria-live="polite" hidden></div>
   <div id="storage-alert" class="storage-alert" role="alert" hidden></div>
