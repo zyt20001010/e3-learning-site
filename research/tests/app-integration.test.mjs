@@ -19,7 +19,11 @@ test('direct point entry, reading depths, edits and navigation preserve existing
     window:{localStorage:{getItem:k=>map.get(k)??null,setItem:(k,v)=>map.set(k,v)},addEventListener(event,fn){(windowListeners[event]??=[]).push(fn);},scrollTo(){}},
     location,
     history:{replaceState(a,b,url){location.hash=url;}},
-    fetch:async path=>({ok:true,json:async()=>JSON.parse(await readFile(new URL('../'+path,import.meta.url),'utf8'))}),
+    fetch:async path=>({
+      ok:true,
+      json:async()=>JSON.parse(await readFile(new URL('../'+path,import.meta.url),'utf8')),
+      text:()=>readFile(new URL('../'+path,import.meta.url),'utf8')
+    }),
     setTimeout:()=>0,clearTimeout:()=>{}
   };
   for(const [key,value] of Object.entries(globals)){saved[key]=Object.getOwnPropertyDescriptor(globalThis,key);Object.defineProperty(globalThis,key,{value,writable:true,configurable:true});}
@@ -50,6 +54,17 @@ test('direct point entry, reading depths, edits and navigation preserve existing
       await navigate(path);assert(html().includes(text),path);assert(!html().includes('内容暂时无法加载'),path);
     }
     await navigate('#home');assert(html().includes('遇到一个技术点'));assert(!html().includes('已写成的基础课程'));
+    assert(html().includes('跟着算一遍 · Day 1'));
+    await navigate('#route/1');
+    assert(html().includes('<h1>神经网络究竟是如何学习的</h1>'));
+    assert(html().includes('data-day-one-lab="line"')&&html().includes('data-day-one-lab="rate"'));
+    assert(html().includes('0.045')&&html().includes('3.92')&&html().includes('day-one-practice'));
+    assert(html().includes('def central_difference'));
+    await navigate('#route/1?view=plan');assert(html().includes('维度与矩阵乘法'));
+    await navigate('#concept/backpropagation?depth=B');
+    assert(html().includes('从损失倒推四个梯度')&&html().includes('在同一个训练例中展开'));
+    await navigate('#concept/term-102ca5126493');
+    assert(html().includes('#route/1?section=day-one-update'));
     assert.equal(map.get('yanting-execution-e3-v1'),'original E3 sentinel');
     assert.equal(state().depth,'B','atom depth selection leaves the legacy course preference intact');
   }finally{for(const [key,descriptor] of Object.entries(saved)){if(descriptor)Object.defineProperty(globalThis,key,descriptor);else delete globalThis[key];}}
