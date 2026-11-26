@@ -28,7 +28,7 @@
 
 ## 维护与验证
 
-网站无需 npm、R 或 Python 即可使用；KaTeX 与字体为本地资源。需经 HTTP 打开，直接双击 HTML 不支持 ES modules 与 JSON 加载。
+在线学习无需安装 npm、R 或 Python。直接打开本地 HTML 会跳转到在线知识库并保留页面位置。开发预览使用下方的本地 HTTP 服务。
 
 在仓库根目录启动预览：
 

@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="css/research.css?v=20261126-day1">
   <script defer src="vendor/katex/katex.min.js"></script>
   <script defer src="vendor/katex/auto-render.min.js"></script>
-  <script type="module" src="js/app.js?v=20261126-day1"></script>
+  <script id="research-app" type="module" src="js/app.js?v=20261126-day1"></script>
 </head>
 <body>
   <a class="skip" href="#main">跳到正文</a>
@@ -44,10 +44,35 @@
       <div id="sidebar-curriculum"></div>
       <div class="sidebar-footer">记录保存在当前浏览器。<a href="#notebook">备份与恢复</a></div>
     </aside>
-    <main id="main" tabindex="-1"><p class="loading" role="status">正在载入知识点…</p></main>
+    <main id="main" tabindex="-1">
+      <div class="loading">
+        <p id="startup-message" role="status">正在载入知识点…</p>
+        <a id="startup-online" href="https://zyt20001010.github.io/e3-learning-site/research/">打开在线版</a>
+      </div>
+    </main>
   </div>
   <div id="notice" class="toast" role="status" aria-live="polite" hidden></div>
   <div id="storage-alert" class="storage-alert" role="alert" hidden></div>
   <noscript><p class="no-script">请启用 JavaScript。<a href="../">原 E3 学习网站</a></p></noscript>
+  <script>
+    (() => {
+      const message = document.getElementById('startup-message');
+      const online = document.getElementById('startup-online');
+      online.hash = location.hash;
+      if (location.protocol === 'file:') {
+        message.textContent = '本地文件将打开在线知识库。';
+        location.replace(online.href);
+        return;
+      }
+      document.getElementById('research-app').addEventListener('error', () => {
+        if (message.isConnected) message.textContent = '页面资源载入失败。请刷新，或打开在线版。';
+      });
+      window.setTimeout(() => {
+        if (message.isConnected && message.textContent === '正在载入知识点…') {
+          message.textContent = '载入时间较长。可以刷新，或打开在线版。';
+        }
+      }, 12000);
+    })();
+  </script>
 </body>
 </html>
