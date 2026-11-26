@@ -1,0 +1,233 @@
+{
+  "id": "fourier",
+  "name": "频率、相位与傅里叶变换",
+  "nameEn": "Frequency, Phase and Fourier Transforms",
+  "module": "C3",
+  "priority": "P0",
+  "summary": "用四个采样点证明相同幅度谱可对应不同信号，并通过线性卷积与循环卷积说明 FFT 补零的必要性。",
+  "prerequisites": [
+    "linear-algebra"
+  ],
+  "related": [
+    "convolution",
+    "representation",
+    "ode-sde"
+  ],
+  "minutes": {
+    "A": 45,
+    "B": 90,
+    "C": 180
+  },
+  "sections": [
+    {
+      "id": "L0",
+      "title": "L0 · 同一信号的另一套坐标",
+      "depth": "A",
+      "paragraphs": [
+        "一个信号随时间如何变化容易观察，但叠加了哪些周期成分、某种滤波器抑制哪些变化，未必容易直接看出。傅里叶变换把信号写成不同频率复指数的组合，相当于更换坐标系。完整复系数在适用条件下保留原信息。",
+        "频域不是模型新增的测量信息。若只保留部分频率或丢掉相位，就从可逆变换变成信息压缩。能否满足科研任务，应检查被删除的信息是否与目标有关。"
+      ]
+    },
+    {
+      "id": "L1",
+      "title": "L1 · 振幅、频率和相位分别控制什么",
+      "depth": "A",
+      "paragraphs": [
+        "对 x(t)=A cos(2πft+φ)，振幅 A 控制上下摆动的大小，频率 f 是单位时间完成的周期数，角频率 ω=2πf，单位是弧度每单位时间。相位 φ 决定在 t=0 时处于周期的什么位置；相位改变可以让峰值出现得更早或更晚。",
+        "复数系数不是额外的物理测量：它用两个实数记录余弦和正弦方向的权重。模长表示该频率分量的强度，辐角表示相位。图像是随二维位置变化的亮度函数，所以也可以按空间频率分解：条纹密度对应频率，条纹位置对应相位。"
+      ]
+    },
+    {
+      "id": "L2",
+      "title": "L2 · 相同幅度谱，不同时间顺序",
+      "depth": "A",
+      "paragraphs": [
+        "取四点合成信号 x=(1,0,−1,0) 与 y=(0,1,0,−1)。y 是 x 向右循环移动一个采样点；两者振幅相同，频率都是每四点一周期，但相位不同。使用前向指数为负的 DFT 约定，令 i²=−1。",
+        "例如 x 的 k=1 系数是 1+0·(−i)+(−1)·(−1)+0·i=2；y 的 k=1 系数是 0+1·(−i)+0·(−1)+(−1)·i=−2i。其他频率同样按四项加和即可得到。"
+      ],
+      "table": {
+        "headers": [
+          "频率下标 k",
+          "Xₖ",
+          "Yₖ",
+          "共同的幅度"
+        ],
+        "rows": [
+          [
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          [
+            "1",
+            "2",
+            "−2i",
+            "2"
+          ],
+          [
+            "2",
+            "0",
+            "0",
+            "0"
+          ],
+          [
+            "3",
+            "2",
+            "2i",
+            "2"
+          ]
+        ]
+      },
+      "steps": [
+        "两者幅度谱都是 (0,2,0,2)，所以任何只读幅度谱的方法都无法区分这两个输入。",
+        "把 y 的复系数替换成非负模长再逆变换，得到 x，而不是 y。",
+        "非零系数的相位分别不同；零系数的相位没有数学上的唯一含义，程序显示 0 只是约定。"
+      ]
+    },
+    {
+      "id": "L3",
+      "title": "L3 · DFT、逆变换与连续形式",
+      "depth": "A",
+      "paragraphs": [
+        "给定 N 个实数或复数观测 x₀,…,x_N−1，DFT 输出 X₀,…,X_N−1∈C。这里 Xₖ 是变换系数，不是概率密度；变换不需要学习参数。若采样频率为 f_s，则频率间隔为 f_s/N，后半段下标需按负频率解释。",
+        "对非直流、非 Nyquist 的恰好落在频率格点上的实余弦，正负频率各分担一半幅度，因此系数模长为 NA/2；不能直接把所有 |Xₖ| 都叫原信号振幅。"
+      ],
+      "equations": [
+        {
+          "tex": "X_k=\\sum_{n=0}^{N-1}x_n e^{-2\\pi i kn/N},\\qquad x_n=\\frac1N\\sum_{k=0}^{N-1}X_k e^{2\\pi i kn/N}",
+          "explanation": "本课程前向不归一化，逆向除以 N。其他规范也可成立，但两端必须配套。"
+        },
+        {
+          "tex": "\\widehat f(\\xi)=\\int_{\\mathbb R}f(t)e^{-2\\pi i\\xi t}\\,dt",
+          "explanation": "这是连续 Fourier 变换的一种规范。f∈L¹ 时该积分存在；逆变换、L² 延拓和分布意义需要各自条件，不能直接套用有限 DFT 的证明。"
+        }
+      ]
+    },
+    {
+      "id": "L4",
+      "title": "L4 · 可逆性与移位定理由有限求和得到",
+      "depth": "B",
+      "paragraphs": [
+        "把 Xₖ 的定义代入逆变换，再交换两个有限求和，得到 x_m 的系数为 (1/N)Σₖexp[2πik(n−m)/N]。当 n=m 时和为 N；否则是公比不为 1、N 次方为 1 的几何级数，和为 0。因此有限 DFT 精确可逆，数值实现另有浮点误差。",
+        "若 y_n=x_(n−s mod N)，替换求和下标可得 Yₖ=exp(−2πiks/N)Xₖ。乘子的模为 1，所以循环移位保持幅度谱，改变相位。这给出上节反例的一般原因，而不是只从画图猜测。",
+        "循环卷积 c_n=Σₘa_m b_(n−m mod N) 代入 DFT，换元后分成两个和，得到 Cₖ=AₖBₖ。有限长线性卷积若要用它计算，须补零到至少 N_a+N_b−1，避免尾部折回。"
+      ],
+      "equations": [
+        {
+          "tex": "\\sum_{n=0}^{N-1}|x_n|^2=\\frac1N\\sum_{k=0}^{N-1}|X_k|^2",
+          "explanation": "Parseval 等式对应本课程的归一化规范。它保持总平方能量，但相同总能量远不足以确定一个信号。"
+        }
+      ]
+    },
+    {
+      "id": "L5",
+      "title": "L5 · 频域、时频域与快速算法",
+      "depth": "A",
+      "paragraphs": [
+        "DFT 是一个变换；FFT 是高效计算同一个变换的一类算法。直接求和需要 O(N²) 运算，常见 FFT 可达 O(N log N)。FFT 不是另一个统计模型，也不增加频率观测精度。",
+        "全局频谱描述整段信号的频率成分。短时 Fourier 变换在滑动窗口中计算频谱，用时间分辨率换取频率分辨率；小波使用不同尺度的局部基函数，适合观察局部、非平稳结构。",
+        "例如 a=(1,2)、b=(1,1) 的线性卷积是 (1,3,2)。不补零直接做两点 DFT 相乘再逆变换，得到循环卷积 (3,3)；补零到三点才得到线性结果。Fourier 神经算子还在频域学习参数化映射，不能等同于一次固定 FFT。"
+      ]
+    },
+    {
+      "id": "L6",
+      "title": "L6 · 采样与截断无法自动撤销",
+      "depth": "A",
+      "paragraphs": [
+        "若没有带宽限制等假设，连续信号不能由有限采样唯一恢复。以每秒 f_s 点采样，超过 Nyquist 范围的频率可能与低频产生相同采样序列，这叫混叠；采样之后再增加网络容量不能唯一补回已混淆的频率。",
+        "有限记录等于给信号乘一个时间窗。若周期与窗口不匹配，能量会分散到多个 DFT 格点，形成频谱泄漏。补更多零只是把频率表示采得更密，并不增加真实观测时长，也不凭空提高分辨两个接近频率的能力。",
+        "用幅度谱作为特征会主动丢弃移位信息。若任务需要不受整体时间偏移影响，这可能是有意设计；若任务关心先后顺序、滞后或位置，则可能删掉关键科学信息。"
+      ]
+    },
+    {
+      "id": "L7",
+      "title": "L7 · 直接 DFT 与 R 的 FFT 交叉验证",
+      "depth": "B",
+      "paragraphs": [
+        "程序自己实现 DFT 有限求和，再和 R 的 fft() 对照。它检查逆变换、Parseval 等式、相位丢失反例，以及补零前后的卷积。R 的 inverse=TRUE 默认不除以长度，必须手动归一化。",
+        "所有输入都是声明过的合成数列，不是电生理或药理实验结果。代码只验证离散计算，不能替代连续函数空间中的收敛证明。"
+      ],
+      "code": {
+        "language": "r",
+        "source": "# R >= 4.0；base R / stats。合成四点信号，无外部数据。\nset.seed(20261126)\ndft_direct <- function(x, inverse=FALSE) {\n  n <- length(x); index <- 0:(n-1)\n  sgn <- if (inverse) 1 else -1\n  z <- vapply(index, function(k) sum(x*exp(sgn*2*pi*1i*k*index/n)), complex(1))\n  if (inverse) z/n else z\n}\nx <- c(1,0,-1,0); y <- c(0,1,0,-1)\nX <- dft_direct(x); Y <- dft_direct(y)\nstopifnot(max(Mod(X-fft(x)))<1e-12)\nstopifnot(max(Mod(Y-fft(y)))<1e-12)\nstopifnot(max(abs(Mod(X)-Mod(Y)))<1e-12)\nstopifnot(max(Mod(dft_direct(Y,TRUE)-y))<1e-12)\nphase_removed <- Re(dft_direct(Mod(Y),TRUE))\nstopifnot(max(abs(phase_removed-x))<1e-12)\nstopifnot(sum((phase_removed-y)^2)>1)\nstopifnot(abs(sum(x^2)-sum(Mod(X)^2)/length(x))<1e-12)\n# 不补零的两点频域乘积给出循环卷积。\na <- c(1,2); b <- c(1,1)\ncircular <- Re(fft(fft(a)*fft(b),inverse=TRUE))/2\n# 线性卷积长度为 2+2-1=3，先补零到至少 3。\npadded <- Re(fft(fft(c(a,0))*fft(c(b,0)),inverse=TRUE))/3\nstopifnot(max(abs(circular-c(3,3)))<1e-12)\nstopifnot(max(abs(padded-c(1,3,2)))<1e-12)\nprint(list(x=x,y=y,DFT_x=X,DFT_y=Y,magnitude=Mod(Y),phase_removed=phase_removed))\nprint(list(circular=circular,linear=padded))\n",
+        "environment": "R 4.0+；base R 与 stats，无附加包",
+        "verified": true,
+        "file": "fourier.R"
+      }
+    },
+    {
+      "id": "L8",
+      "title": "L8 · 把频谱选择对应到科研目标",
+      "depth": "A",
+      "paragraphs": [
+        "对于动态给药或生理时间序列，需要说明时间零点、采样间隔、缺失观测和滤波步骤。两个信号频谱幅度接近并不表示它们具有相同的顺序响应；完整相位可能正是动态区别所在。",
+        "对于显微图像或空间组学，频域处理可以分离不同尺度的变化，但空间频率不等于具体生物机制。读论文时要追踪哪些系数被截断、哪些相位被保留，以及对照实验是否检验了这种压缩对目标的影响。"
+      ]
+    }
+  ],
+  "extension": {
+    "status": "planned",
+    "topics": [
+      "L² Fourier 变换与 Plancherel 定理",
+      "采样定理的函数空间与带限条件",
+      "相位恢复的可识别性及额外约束"
+    ]
+  },
+  "references": [
+    "r-fft",
+    "osgood-fourier"
+  ],
+  "questions": [
+    {
+      "id": "fourier-q1",
+      "type": "最小计算",
+      "prompt": "本课 y=(0,1,0,−1) 的 k=1 DFT 系数是什么？",
+      "options": [
+        "2",
+        "−2i",
+        "0"
+      ],
+      "answer": 1,
+      "explanation": "按负指数约定，1×(−i)+(−1)×i=−2i。",
+      "depth": "A"
+    },
+    {
+      "id": "fourier-q2",
+      "type": "技术辨析",
+      "prompt": "两个信号幅度谱完全相同，能否保证原信号相同？",
+      "options": [
+        "能，因为频率相同",
+        "不能，相位可能不同",
+        "只有长度为 4 才不能"
+      ],
+      "answer": 1,
+      "explanation": "循环移位会保持幅度谱，同时改变各非零频率分量的相位。",
+      "depth": "A"
+    },
+    {
+      "id": "fourier-q3",
+      "type": "最小计算",
+      "prompt": "长度为 2 和 2 的序列要通过 FFT 计算线性卷积，至少补到多长？",
+      "options": [
+        "2",
+        "3",
+        "4"
+      ],
+      "answer": 1,
+      "explanation": "至少 N_a+N_b−1=3；补到 4 也可，但不是最小长度。",
+      "depth": "A"
+    }
+  ],
+  "lab": "fourier",
+  "status": {
+    "eli5": true,
+    "example": true,
+    "definition": true,
+    "derivation": true,
+    "code": true,
+    "interactive": true,
+    "literature": true,
+    "audit": true
+  }
+}

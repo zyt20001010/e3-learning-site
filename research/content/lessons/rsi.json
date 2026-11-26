@@ -1,0 +1,232 @@
+{
+  "id": "rsi",
+  "name": "RSI 与反馈驱动的工作流改进",
+  "nameEn": "Recursive Self-Improvement and Feedback-driven Workflow Search",
+  "module": "G4",
+  "priority": "P0",
+  "summary": "明确系统到底改变参数、记忆、搜索策略还是工作流，并用冻结测试任务区分局部修正与真实能力提升。",
+  "prerequisites": [
+    "mcts"
+  ],
+  "related": [
+    "backprop",
+    "sampling",
+    "bandit"
+  ],
+  "minutes": {
+    "A": 45,
+    "B": 90,
+    "C": 180
+  },
+  "sections": [
+    {
+      "id": "L0",
+      "title": "背景与需要",
+      "depth": "A",
+      "paragraphs": [
+        "科研智能体可能失败在检索遗漏、工具顺序、计算代码或评价标准。仅增加同一个模型的调用次数，既不保证输出变好，也不意味着系统学会了怎样改进自己。",
+        "RSI 在不同研究中指向不同范围的递归自我改进设想，没有一个被所有系统共享的算法和统一收敛定理。阅读时必须先写出可改变对象、更新规则、反馈来源与评价环境。一次答案自我修订，和能改进后续改进过程的系统，是不同强度的主张。"
+      ]
+    },
+    {
+      "id": "L1",
+      "title": "直觉与对象对应",
+      "depth": "A",
+      "paragraphs": [
+        "把一个系统分成执行器、改进器和检验器。执行器完成任务；改进器依据失败记录提出修改；检验器评价修改。若改动只是重写当前答案，改变的是输出；若把经验保存在记忆里并影响未来任务，改变的是后续决策依据；若更新梯度，改变的是参数。",
+        "这些改变可以发生在不同位置。Reflexion 原论文展示的是把语言反馈保存到经验记忆以影响后续尝试，并不通过更新模型权重实现该过程；这说明某类反馈改进可以不重新训练，但不能推出任意递归改进都会持续成功。",
+        "下面用数值积分规则选择构造一个透明的最小反馈环。全部候选规则预先给定，系统仅比较并保留工作流。它复现可检验的基础组件，不冒充一个完整的自主 RSI 系统。"
+      ]
+    },
+    {
+      "id": "L2",
+      "title": "逐步计算",
+      "depth": "A",
+      "paragraphs": [
+        "任务是根据少数函数值计算 [0,1] 上的积分。候选工作流依次为两个小区间的左矩形法、梯形法和 Simpson 法。开发任务为 f(x)=1、x、x²，真积分为 1、1/2、1/3。",
+        "对 x²，三种方法分别给 1/8=0.125、3/8=0.375、1/3≈0.333333。对 x，左矩形法给 0.25，后两种给 0.5。于是三个开发任务的均方误差依次约为 0.035301、0.000579、0。保留开发误差最低的 Simpson。",
+        "冻结选择后，才评价未参与选择的 x³ 与 exp(x)。Simpson 对 x³ 给 0.25，等于精确积分；对 exp(x) 给约 1.718861，真值约 1.718282。这是这个任务分布上的有限验证，不是“自我改进达到全局最优”的证明。"
+      ],
+      "table": {
+        "headers": [
+          "工作流",
+          "f(x)=1",
+          "f(x)=x",
+          "f(x)=x²",
+          "改变对象"
+        ],
+        "rows": [
+          [
+            "左矩形",
+            "1",
+            "0.25",
+            "0.125",
+            "调用哪套数值规则"
+          ],
+          [
+            "梯形",
+            "1",
+            "0.5",
+            "0.375",
+            "调用哪套数值规则"
+          ],
+          [
+            "Simpson",
+            "1",
+            "0.5",
+            "1/3",
+            "调用哪套数值规则"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "L3",
+      "title": "数学定义与假设",
+      "depth": "A",
+      "paragraphs": [
+        "用 c 表示工作流配置，可包含工具顺序、检索策略、提示模板或搜索规则；θ 表示固定或可更新的模型参数；m 表示外部记忆。任务 z 来自目标任务分布 P，y 是可核验结果，A(c,θ,m;z) 是系统输出。",
+        "改进器 U 根据开发反馈更新 (c,θ,m) 的一部分。若 θ 不变而 c 或 m 变化，就是没有参数训练的适应过程。若声称递归改进，应进一步明确 U 本身有哪些部分被更新，以及下一轮改进能力如何独立衡量。",
+        "改进器可以修改后续候选的提出方式，例如根据失败类型扩大某类搜索、改变验证顺序或复用一个已经核验的工具链。这与固定枚举所有候选相比多了一个可改变对象；若声称这部分更好，必须在相同候选预算下比较它找到有效改进的概率，而不是仅报告最终最好候选。"
+      ],
+      "equations": [
+        {
+          "tex": "J(c,\\theta,m)=E_{(z,y)\\sim P}\\,\\ell(A(c,\\theta,m;z),y)",
+          "explanation": "J 是目标任务分布上的风险；开发集平均损失只是它的估计。"
+        },
+        {
+          "tex": "(c_{t+1},\\theta_{t+1},m_{t+1})=U(c_t,\\theta_t,m_t,F_t)",
+          "explanation": "Fₜ 是具体反馈，不是自动正确的真理；应记录其来源、成本和可验证性。"
+        },
+        {
+          "tex": "B_t=\\min_{0\\le s\\le t}\\widehat J_{\\mathrm{dev}}(c_s),\\qquad B_{t+1}\\le B_t",
+          "explanation": "历史开发集最好值的单调性仅由取最小值产生，不保证总体风险或未见任务性能改善。"
+        }
+      ]
+    },
+    {
+      "id": "L4",
+      "title": "关键推导",
+      "depth": "B",
+      "paragraphs": [
+        "首先将“有所改进”拆成可测命题：当前任务通过率提高、同分布未见任务提高、跨任务迁移提高、在相同预算下改进器更有效。前一个命题成立并不能自动证明后一个。",
+        "取最优开发配置会引入选择效应。即使所有候选的真实能力完全相同，测试的候选越多，也越容易找到碰巧分数高的那个。需要在选择结束后使用未参与反馈的新任务，并记录候选数量、工具调用、token 或函数评估成本。",
+        "如果检验器可以直接判断答案正确，例如算式、类型检查或独立实验结果，反馈至少有外部约束；如果检验器只是同一个模型再次打分，则应额外测量其错误、偏好和与生成器共享的盲点。",
+        "本例由公开公式直接计算积分误差，再固定最终规则、一次评价新函数。它展示反馈环的可检验结构；规则由人预写，不能据此声称系统独立发明了 Simpson 公式。"
+      ]
+    },
+    {
+      "id": "L5",
+      "title": "相邻技术对比",
+      "depth": "A",
+      "paragraphs": [
+        "梯度更新根据损失对 θ 的导数修改参数；贝叶斯更新根据似然修改参数不确定性的概率分布；无训练搜索改变被选择的候选或工作流。三者都可能改善任务表现，但数学对象和成本不同。",
+        "In-context learning 改变当前上下文及其影响下的输出，不一定改变权重；test-time training 明确在测试阶段进行参数优化；RAG 增加检索到的外部信息；经验记忆保存过去结果。不能只凭“模型下一次答得更好”确定发生了哪一种学习。",
+        "Bandit 可以分配候选方案的尝试次数，MCTS 可以搜索多步工作流；它们是可能使用的组件。把系统称为 RSI，不会替代对这些组件、反馈和改进对象的说明。"
+      ]
+    },
+    {
+      "id": "L6",
+      "title": "失败情形与反例",
+      "depth": "A",
+      "paragraphs": [
+        "取 f(x)=sin²(2πx)。在 0、1/2、1 三个固定节点上函数值全为 0，Simpson 给积分 0，但真实积分为 1/2。只反复讨论同样三个读数，无法发现两个节点之间的峰；需要新采样位置或额外函数类假设。",
+        "如果不断查看同一“最终测试集”再修改提示或流程，这个集合已经变成开发反馈，不能继续声称独立验证。冻结测试集的名字不能抵消信息已经被使用的事实。",
+        "把评分模型喜欢的样式当作研究正确性，可能形成自我强化的错误循环。增加迭代次数不会自动带来外部证据；应找能区分正确与错误候选的独立测量。",
+        "若一个系统写入大量“经验记忆”却从不在后续决策中读取，记忆只是日志，不能解释性能提高。应通过有针对性的消融检查读取路径、信息来源和实际改变的行动；同时防止记忆中暗藏测试答案，把数据泄漏误当经验迁移。"
+      ]
+    },
+    {
+      "id": "L7",
+      "title": "最小代码复现",
+      "depth": "B",
+      "paragraphs": [
+        "代码完整记录候选、开发损失、被保留工作流和记忆，冻结后检查两个新任务，并主动运行固定节点失效反例。没有模型 API、参数训练或临床数据。",
+        "本代码的memory变量只保存可读日志，真正改变行为的是被保留的current工作流；候选提出顺序由人固定。这个设计有意把“评价并选择”与“学习如何提出新候选”分开，后者尚未实现。它说明没有权重训练也能改变后续求解方式，同时保留对完整递归改进主张的诚实边界。"
+      ],
+      "code": {
+        "language": "r",
+        "source": "# R >= 4.4；可核验的工作流反馈环；不调用大模型、不训练网络。\nset.seed(20261126)\nleft <- function(f) (f(0)+f(.5))/2\ntrap <- function(f) (f(0)+2*f(.5)+f(1))/4\nsimpson <- function(f) (f(0)+4*f(.5)+f(1))/6\nworkflows <- list(left=left,trapezoid=trap,simpson=simpson)\n# 开发任务与最终核验任务分开；每次函数评估最多3个节点。\ndev_functions <- list(function(x) rep(1,length(x)),function(x) x,function(x) x^2)\ndev_truth <- c(1,.5,1/3)\ndev_loss <- function(solver) mean((vapply(dev_functions,solver,numeric(1))-dev_truth)^2)\ncurrent <- \"left\"; memory <- character(); log <- list()\nfor(round in 1:3) {\n  candidate <- c(\"left\",\"trapezoid\",\"simpson\")[round]\n  loss <- dev_loss(workflows[[candidate]])\n  if(loss <= dev_loss(workflows[[current]])) current <- candidate\n  memory <- c(memory,paste(candidate,\"development MSE\",format(loss,digits=5)))\n  log[[round]] <- data.frame(round=round,candidate=candidate,loss=loss,\n                             retained=current,retained_loss=dev_loss(workflows[[current]]))\n}\n# 候选冻结后才用未参与选择的任务；不是反复查询测试集。\nholdout_functions <- list(function(x) x^3,function(x) exp(x))\nholdout_truth <- c(.25,exp(1)-1)\nbefore <- vapply(holdout_functions,workflows$left,numeric(1))\nafter <- vapply(holdout_functions,workflows[[current]],numeric(1))\nstopifnot(current==\"simpson\",abs(after[1]-.25)<1e-12)\nstopifnot(mean((after-holdout_truth)^2)<mean((before-holdout_truth)^2))\ntrace <- do.call(rbind,log)\nstopifnot(all(diff(trace$retained_loss)<=1e-12))\n# 信息反例：所有评估节点均为零，真实积分却是1/2。\nmissed <- function(x) sin(2*pi*x)^2\nalias_value <- workflows[[current]](missed)\nstopifnot(abs(alias_value)<1e-12)\nprint(trace)\nprint(list(memory=memory,holdout=data.frame(truth=holdout_truth,before=before,after=after),\n           alias_prediction=alias_value,alias_true_integral=.5))\n",
+        "environment": "R >= 4.4；只用 base；随机种子 20261126（过程本身确定）",
+        "verified": true,
+        "file": "rsi.R"
+      }
+    },
+    {
+      "id": "L8",
+      "title": "科研连接与证据边界",
+      "depth": "A",
+      "paragraphs": [
+        "科研自动化可以先在数据清洗、符号推导、代码复现和实验规划中建立可核验反馈环。对每次改进记录输入、修改内容、验证器、预算和结果，才可能判断经验是否迁移到新任务。",
+        "若最终能力来自新增工具、测试用例或外部观测，应明确报告这些信息来源。研究贡献可以是更可靠的反馈设计、更好的预算分配或可证的改进条件；不需要通过模糊的“递归智能”名称制造理论深度。"
+      ]
+    }
+  ],
+  "extension": {
+    "status": "planned",
+    "topics": [
+      "自适应选择后的评估有效性与可复用留出集",
+      "改进器本身发生变化时的可识别评价设计",
+      "固定预算下工作流搜索的统计保证和停止条件"
+    ]
+  },
+  "references": [
+    "reflexion-shinn-2023",
+    "adaptive-holdout-dwork-2015"
+  ],
+  "questions": [
+    {
+      "id": "rsi-q1",
+      "type": "技术辨析",
+      "prompt": "模型权重固定，系统把失败总结保存在外部记忆并影响下一次工具选择，这属于什么变化？",
+      "options": [
+        "没有任何变化",
+        "外部记忆与工作流变化",
+        "必定是梯度下降",
+        "已经证明通用 RSI 收敛"
+      ],
+      "answer": 1,
+      "explanation": "参数固定不等于整个系统状态固定；但这种变化本身还不是通用改进保证。",
+      "depth": "A"
+    },
+    {
+      "id": "rsi-q2",
+      "type": "科研判断",
+      "prompt": "历史最好开发分数每轮都不下降，能直接证明什么？",
+      "options": [
+        "总体能力单调提高",
+        "全局最优已经找到",
+        "保存最好开发分数这个操作具有单调性",
+        "未见任务效果一定改善"
+      ],
+      "answer": 2,
+      "explanation": "取最大值或最小值会机械地产生单调记录，需要独立任务验证实际泛化改善。",
+      "depth": "A"
+    },
+    {
+      "id": "rsi-q3",
+      "type": "最小计算",
+      "prompt": "f(x)=sin²(2πx) 在 0、1/2、1 上都为 0，真实积分为 1/2。仅反复使用这三个值能够排除积分为 0 吗？",
+      "options": [
+        "可以，多反思几轮即可",
+        "不可以，需要新观测或额外函数类约束",
+        "提高模型参数量必然可以",
+        "随机改写答案就能证明"
+      ],
+      "answer": 1,
+      "explanation": "现有观测与零函数相同，信息不足不能由重复处理相同读数弥补。",
+      "depth": "A"
+    }
+  ],
+  "lab": null,
+  "status": {
+    "eli5": true,
+    "example": true,
+    "definition": true,
+    "derivation": true,
+    "code": true,
+    "interactive": false,
+    "literature": true,
+    "audit": true
+  }
+}

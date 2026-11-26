@@ -1,0 +1,922 @@
+[
+  {
+    "day": 1,
+    "title": "计算图与参数学习",
+    "minutes": 200,
+    "units": [
+      {
+        "nodeId": "linear-algebra",
+        "title": "维度与矩阵乘法",
+        "minutes": 60,
+        "depth": "A",
+        "sections": [
+          "L0"
+        ],
+        "startSection": "L0"
+      },
+      {
+        "nodeId": "backprop",
+        "title": "前向计算与梯度",
+        "minutes": 60,
+        "depth": "A",
+        "sections": [
+          "L2"
+        ],
+        "startSection": "L2"
+      },
+      {
+        "nodeId": "backprop",
+        "title": "梯度检查与优化器",
+        "minutes": 60,
+        "depth": "B",
+        "sections": [
+          "L7"
+        ],
+        "startSection": "L7"
+      }
+    ],
+    "practiceMinutes": 20,
+    "acceptance": [
+      "反向传播为何不等于参数更新？",
+      "手算一个共享参数的总梯度。"
+    ],
+    "schedule": [
+      {
+        "label": "背景与直觉",
+        "minutes": 30
+      },
+      {
+        "label": "手算与定义",
+        "minutes": 60
+      },
+      {
+        "label": "推导与对比",
+        "minutes": 45
+      },
+      {
+        "label": "复现与反例",
+        "minutes": 45
+      },
+      {
+        "label": "论文连接与自测",
+        "minutes": 20
+      }
+    ],
+    "note": "每天约 3 小时 20 分；重复引用课程时，依单元标题选择对应段落，不重复通读。未完成正文的单元会标出，不能计为已学课程。"
+  },
+  {
+    "day": 2,
+    "title": "卷积与不同类型的核",
+    "minutes": 200,
+    "units": [
+      {
+        "nodeId": "convolution",
+        "title": "卷积核、通道与权重共享",
+        "minutes": 60,
+        "depth": "A",
+        "sections": [
+          "L0"
+        ],
+        "startSection": "L0"
+      },
+      {
+        "nodeId": "kernels",
+        "title": "Gram 矩阵与核方法",
+        "minutes": 60,
+        "depth": "A",
+        "sections": [
+          "L2"
+        ],
+        "startSection": "L2"
+      },
+      {
+        "nodeId": "kernels",
+        "title": "GIP、训练边界与核的辨析",
+        "minutes": 60,
+        "depth": "A",
+        "sections": [
+          "L6"
+        ],
+        "startSection": "L6"
+      }
+    ],
+    "practiceMinutes": 20,
+    "acceptance": [
+      "算出一个 3×3 输入的特征图。",
+      "GIP 使用测试标签会导致什么问题？"
+    ],
+    "schedule": [
+      {
+        "label": "背景与直觉",
+        "minutes": 30
+      },
+      {
+        "label": "手算与定义",
+        "minutes": 60
+      },
+      {
+        "label": "推导与对比",
+        "minutes": 45
+      },
+      {
+        "label": "复现与反例",
+        "minutes": 45
+      },
+      {
+        "label": "论文连接与自测",
+        "minutes": 20
+      }
+    ],
+    "note": "每天约 3 小时 20 分；重复引用课程时，依单元标题选择对应段落，不重复通读。未完成正文的单元会标出，不能计为已学课程。"
+  },
+  {
+    "day": 3,
+    "title": "图与消息传递",
+    "minutes": 200,
+    "units": [
+      {
+        "nodeId": "gnn",
+        "title": "三个节点的一轮消息传递",
+        "minutes": 60,
+        "depth": "A",
+        "sections": [
+          "L2"
+        ],
+        "startSection": "L2"
+      },
+      {
+        "nodeId": "gnn",
+        "title": "归一化、层数与信息传播",
+        "minutes": 60,
+        "depth": "A",
+        "sections": [
+          "L3"
+        ],
+        "startSection": "L3"
+      },
+      {
+        "nodeId": "gnn",
+        "title": "超图、表达能力与泄漏",
+        "minutes": 60,
+        "depth": "A",
+        "sections": [
+          "L6"
+        ],
+        "startSection": "L6"
+      }
+    ],
+    "practiceMinutes": 20,
+    "acceptance": [
+      "节点2的一轮输出如何计算？",
+      "整图 readout 与节点更新有什么区别？"
+    ],
+    "schedule": [
+      {
+        "label": "背景与直觉",
+        "minutes": 30
+      },
+      {
+        "label": "手算与定义",
+        "minutes": 60
+      },
+      {
+        "label": "推导与对比",
+        "minutes": 45
+      },
+      {
+        "label": "复现与反例",
+        "minutes": 45
+      },
+      {
+        "label": "论文连接与自测",
+        "minutes": 20
+      }
+    ],
+    "note": "每天约 3 小时 20 分；重复引用课程时，依单元标题选择对应段落，不重复通读。未完成正文的单元会标出，不能计为已学课程。"
+  },
+  {
+    "day": 4,
+    "title": "Attention 与表征",
+    "minutes": 200,
+    "units": [
+      {
+        "nodeId": "representation",
+        "title": "Embedding 与信息保留",
+        "minutes": 60,
+        "depth": "A",
+        "sections": [
+          "L0"
+        ],
+        "startSection": "L0"
+      },
+      {
+        "nodeId": "attention",
+        "title": "QKV 与逐行 Softmax",
+        "minutes": 60,
+        "depth": "A",
+        "sections": [
+          "L2"
+        ],
+        "startSection": "L2"
+      },
+      {
+        "nodeId": "attention",
+        "title": "掩码、多头与计算预算",
+        "minutes": 60,
+        "depth": "A",
+        "sections": [
+          "L5"
+        ],
+        "startSection": "L5"
+      }
+    ],
+    "practiceMinutes": 20,
+    "acceptance": [
+      "逐步计算三个 token 的权重。",
+      "Causal mask 能否消除隐藏混杂？"
+    ],
+    "schedule": [
+      {
+        "label": "背景与直觉",
+        "minutes": 30
+      },
+      {
+        "label": "手算与定义",
+        "minutes": 60
+      },
+      {
+        "label": "推导与对比",
+        "minutes": 45
+      },
+      {
+        "label": "复现与反例",
+        "minutes": 45
+      },
+      {
+        "label": "论文连接与自测",
+        "minutes": 20
+      }
+    ],
+    "note": "每天约 3 小时 20 分；重复引用课程时，依单元标题选择对应段落，不重复通读。未完成正文的单元会标出，不能计为已学课程。"
+  },
+  {
+    "day": 5,
+    "title": "频谱、相位与模态",
+    "minutes": 200,
+    "units": [
+      {
+        "nodeId": "fourier",
+        "title": "DFT 与相位的手算",
+        "minutes": 60,
+        "depth": "A",
+        "sections": [
+          "L2"
+        ],
+        "startSection": "L2"
+      },
+      {
+        "nodeId": "representation",
+        "title": "压缩与不可逆信息损失",
+        "minutes": 60,
+        "depth": "A",
+        "sections": [
+          "L6"
+        ],
+        "startSection": "L6"
+      },
+      {
+        "nodeId": "multimodal",
+        "title": "模态对齐与特征融合",
+        "minutes": 60,
+        "depth": "A",
+        "sections": [
+          "L0"
+        ],
+        "startSection": "L0"
+      }
+    ],
+    "practiceMinutes": 20,
+    "acceptance": [
+      "构造幅度谱相同、信号不同的例子。",
+      "配对信息在模态对齐中起什么作用？"
+    ],
+    "schedule": [
+      {
+        "label": "背景与直觉",
+        "minutes": 30
+      },
+      {
+        "label": "手算与定义",
+        "minutes": 60
+      },
+      {
+        "label": "推导与对比",
+        "minutes": 45
+      },
+      {
+        "label": "复现与反例",
+        "minutes": 45
+      },
+      {
+        "label": "论文连接与自测",
+        "minutes": 20
+      }
+    ],
+    "note": "每天约 3 小时 20 分；重复引用课程时，依单元标题选择对应段落，不重复通读。未完成正文的单元会标出，不能计为已学课程。"
+  },
+  {
+    "day": 6,
+    "title": "概率更新与计算采样",
+    "minutes": 200,
+    "units": [
+      {
+        "nodeId": "probability",
+        "title": "条件分布与贝叶斯更新",
+        "minutes": 60,
+        "depth": "A",
+        "sections": [
+          "L0"
+        ],
+        "startSection": "L0"
+      },
+      {
+        "nodeId": "sampling",
+        "title": "重要性权重与 Monte Carlo",
+        "minutes": 60,
+        "depth": "A",
+        "sections": [
+          "L2"
+        ],
+        "startSection": "L2"
+      },
+      {
+        "nodeId": "sampling",
+        "title": "MCMC、混合与优化的区别",
+        "minutes": 60,
+        "depth": "A",
+        "sections": [
+          "L5"
+        ],
+        "startSection": "L5"
+      }
+    ],
+    "practiceMinutes": 20,
+    "acceptance": [
+      "计算一个离散重要性权重。",
+      "为什么取概率最高点不能替代采样？"
+    ],
+    "schedule": [
+      {
+        "label": "背景与直觉",
+        "minutes": 30
+      },
+      {
+        "label": "手算与定义",
+        "minutes": 60
+      },
+      {
+        "label": "推导与对比",
+        "minutes": 45
+      },
+      {
+        "label": "复现与反例",
+        "minutes": 45
+      },
+      {
+        "label": "论文连接与自测",
+        "minutes": 20
+      }
+    ],
+    "note": "每天约 3 小时 20 分；重复引用课程时，依单元标题选择对应段落，不重复通读。未完成正文的单元会标出，不能计为已学课程。"
+  },
+  {
+    "day": 7,
+    "title": "生成分布与概率运输",
+    "minutes": 200,
+    "units": [
+      {
+        "nodeId": "diffusion",
+        "title": "加噪、score 与条件去噪",
+        "minutes": 60,
+        "depth": "A",
+        "sections": [
+          "L0"
+        ],
+        "startSection": "L0"
+      },
+      {
+        "nodeId": "flow-matching",
+        "title": "速度回归与 ODE 采样",
+        "minutes": 60,
+        "depth": "A",
+        "sections": [
+          "L2"
+        ],
+        "startSection": "L2"
+      },
+      {
+        "nodeId": "vae-gan",
+        "title": "VAE、GAN 与生成目标辨析",
+        "minutes": 60,
+        "depth": "A",
+        "sections": [
+          "L5"
+        ],
+        "startSection": "L5"
+      }
+    ],
+    "practiceMinutes": 20,
+    "acceptance": [
+      "对数据的 score 与对参数的梯度有何不同？",
+      "流匹配何时不等同于最优传输？"
+    ],
+    "schedule": [
+      {
+        "label": "背景与直觉",
+        "minutes": 30
+      },
+      {
+        "label": "手算与定义",
+        "minutes": 60
+      },
+      {
+        "label": "推导与对比",
+        "minutes": 45
+      },
+      {
+        "label": "复现与反例",
+        "minutes": 45
+      },
+      {
+        "label": "论文连接与自测",
+        "minutes": 20
+      }
+    ],
+    "note": "每天约 3 小时 20 分；重复引用课程时，依单元标题选择对应段落，不重复通读。未完成正文的单元会标出，不能计为已学课程。"
+  },
+  {
+    "day": 8,
+    "title": "状态、动力学与滤波",
+    "minutes": 200,
+    "units": [
+      {
+        "nodeId": "ode-sde",
+        "title": "离散化、ODE 与 SDE",
+        "minutes": 60,
+        "depth": "A",
+        "sections": [
+          "L0"
+        ],
+        "startSection": "L0"
+      },
+      {
+        "nodeId": "ode-sde",
+        "title": "潜状态与 Kalman 更新",
+        "minutes": 60,
+        "depth": "B",
+        "sections": [
+          "L4"
+        ],
+        "startSection": "L4"
+      },
+      {
+        "nodeId": "time-series",
+        "title": "序列预测与多步误差",
+        "minutes": 60,
+        "depth": "A",
+        "sections": [
+          "L0"
+        ],
+        "startSection": "L0"
+      }
+    ],
+    "practiceMinutes": 20,
+    "acceptance": [
+      "布朗增量为什么乘根号 dt？",
+      "状态估计为什么不等于参数辨识？"
+    ],
+    "schedule": [
+      {
+        "label": "背景与直觉",
+        "minutes": 30
+      },
+      {
+        "label": "手算与定义",
+        "minutes": 60
+      },
+      {
+        "label": "推导与对比",
+        "minutes": 45
+      },
+      {
+        "label": "复现与反例",
+        "minutes": 45
+      },
+      {
+        "label": "论文连接与自测",
+        "minutes": 20
+      }
+    ],
+    "note": "每天约 3 小时 20 分；重复引用课程时，依单元标题选择对应段落，不重复通读。未完成正文的单元会标出，不能计为已学课程。"
+  },
+  {
+    "day": 9,
+    "title": "输入顺序与动态药效",
+    "minutes": 200,
+    "units": [
+      {
+        "nodeId": "pkpd",
+        "title": "暴露与药效的不同对象",
+        "minutes": 60,
+        "depth": "A",
+        "sections": [
+          "L0"
+        ],
+        "startSection": "L0"
+      },
+      {
+        "nodeId": "noncommutativity",
+        "title": "矩阵指数与给药顺序",
+        "minutes": 60,
+        "depth": "A",
+        "sections": [
+          "L2"
+        ],
+        "startSection": "L2"
+      },
+      {
+        "nodeId": "noncommutativity",
+        "title": "受限输入与终点观测",
+        "minutes": 60,
+        "depth": "B",
+        "sections": [
+          "L4"
+        ],
+        "startSection": "L4"
+      }
+    ],
+    "practiceMinutes": 20,
+    "acceptance": [
+      "按两个顺序计算终点。",
+      "恒定输入下的完整轨迹能否替代序贯输入？"
+    ],
+    "schedule": [
+      {
+        "label": "背景与直觉",
+        "minutes": 30
+      },
+      {
+        "label": "手算与定义",
+        "minutes": 60
+      },
+      {
+        "label": "推导与对比",
+        "minutes": 45
+      },
+      {
+        "label": "复现与反例",
+        "minutes": 45
+      },
+      {
+        "label": "论文连接与自测",
+        "minutes": 20
+      }
+    ],
+    "note": "每天约 3 小时 20 分；重复引用课程时，依单元标题选择对应段落，不重复通读。未完成正文的单元会标出，不能计为已学课程。"
+  },
+  {
+    "day": 10,
+    "title": "逆问题与目标量",
+    "minutes": 200,
+    "units": [
+      {
+        "nodeId": "identifiability",
+        "title": "观测等价与目标泛函",
+        "minutes": 60,
+        "depth": "A",
+        "sections": [
+          "L3"
+        ],
+        "startSection": "L3"
+      },
+      {
+        "nodeId": "identifiability",
+        "title": "稳定性、噪声与条件数",
+        "minutes": 60,
+        "depth": "B",
+        "sections": [
+          "L4"
+        ],
+        "startSection": "L4"
+      },
+      {
+        "nodeId": "identifiability",
+        "title": "有限样本与贡献边界",
+        "minutes": 60,
+        "depth": "A",
+        "sections": [
+          "L8"
+        ],
+        "startSection": "L8"
+      }
+    ],
+    "practiceMinutes": 20,
+    "acceptance": [
+      "构造参数不同但观测分布相同的模型。",
+      "经典下界推论为何不自动成为新理论？"
+    ],
+    "schedule": [
+      {
+        "label": "背景与直觉",
+        "minutes": 30
+      },
+      {
+        "label": "手算与定义",
+        "minutes": 60
+      },
+      {
+        "label": "推导与对比",
+        "minutes": 45
+      },
+      {
+        "label": "复现与反例",
+        "minutes": 45
+      },
+      {
+        "label": "论文连接与自测",
+        "minutes": 20
+      }
+    ],
+    "note": "每天约 3 小时 20 分；重复引用课程时，依单元标题选择对应段落，不重复通读。未完成正文的单元会标出，不能计为已学课程。"
+  },
+  {
+    "day": 11,
+    "title": "JEPA、因果与反事实",
+    "minutes": 200,
+    "units": [
+      {
+        "nodeId": "jepa",
+        "title": "编码器、预测器与目标分支",
+        "minutes": 60,
+        "depth": "A",
+        "sections": [
+          "L3"
+        ],
+        "startSection": "L3"
+      },
+      {
+        "nodeId": "causality",
+        "title": "干预语义与识别条件",
+        "minutes": 60,
+        "depth": "A",
+        "sections": [
+          "L3"
+        ],
+        "startSection": "L3"
+      },
+      {
+        "nodeId": "counterfactual",
+        "title": "边缘分布、耦合与个体反事实",
+        "minutes": 60,
+        "depth": "B",
+        "sections": [
+          "L4"
+        ],
+        "startSection": "L4"
+      }
+    ],
+    "practiceMinutes": 20,
+    "acceptance": [
+      "JEPA 学到什么、从哪里获得信息？",
+      "两个干预边缘分布能否唯一决定个体反事实？"
+    ],
+    "schedule": [
+      {
+        "label": "背景与直觉",
+        "minutes": 30
+      },
+      {
+        "label": "手算与定义",
+        "minutes": 60
+      },
+      {
+        "label": "推导与对比",
+        "minutes": 45
+      },
+      {
+        "label": "复现与反例",
+        "minutes": 45
+      },
+      {
+        "label": "论文连接与自测",
+        "minutes": 20
+      }
+    ],
+    "note": "每天约 3 小时 20 分；重复引用课程时，依单元标题选择对应段落，不重复通读。未完成正文的单元会标出，不能计为已学课程。"
+  },
+  {
+    "day": 12,
+    "title": "信息与实验选择",
+    "minutes": 200,
+    "units": [
+      {
+        "nodeId": "experimental-design",
+        "title": "信息增益的目标量",
+        "minutes": 60,
+        "depth": "A",
+        "sections": [
+          "L3"
+        ],
+        "startSection": "L3"
+      },
+      {
+        "nodeId": "experimental-design",
+        "title": "候选实验与最优设计",
+        "minutes": 60,
+        "depth": "B",
+        "sections": [
+          "L4"
+        ],
+        "startSection": "L4"
+      },
+      {
+        "nodeId": "kernels",
+        "title": "GP、核与贝叶斯优化的联系",
+        "minutes": 60,
+        "depth": "A",
+        "sections": [
+          "L5"
+        ],
+        "startSection": "L5"
+      }
+    ],
+    "practiceMinutes": 20,
+    "acceptance": [
+      "最大化药效与最大化机制信息相同吗？",
+      "一个新增实验如何打破观测等价？"
+    ],
+    "schedule": [
+      {
+        "label": "背景与直觉",
+        "minutes": 30
+      },
+      {
+        "label": "手算与定义",
+        "minutes": 60
+      },
+      {
+        "label": "推导与对比",
+        "minutes": 45
+      },
+      {
+        "label": "复现与反例",
+        "minutes": 45
+      },
+      {
+        "label": "论文连接与自测",
+        "minutes": 20
+      }
+    ],
+    "note": "每天约 3 小时 20 分；重复引用课程时，依单元标题选择对应段落，不重复通读。未完成正文的单元会标出，不能计为已学课程。"
+  },
+  {
+    "day": 13,
+    "title": "决策、搜索与反馈",
+    "minutes": 200,
+    "units": [
+      {
+        "nodeId": "bandit",
+        "title": "三臂实验与 UCB 推导",
+        "minutes": 60,
+        "depth": "B",
+        "sections": [
+          "L4"
+        ],
+        "startSection": "L4"
+      },
+      {
+        "nodeId": "mcts",
+        "title": "搜索树的四个阶段",
+        "minutes": 60,
+        "depth": "A",
+        "sections": [
+          "L2"
+        ],
+        "startSection": "L2"
+      },
+      {
+        "nodeId": "rsi",
+        "title": "训练、搜索与工作流改进",
+        "minutes": 60,
+        "depth": "A",
+        "sections": [
+          "L5"
+        ],
+        "startSection": "L5"
+      }
+    ],
+    "practiceMinutes": 20,
+    "acceptance": [
+      "累计遗憾和最佳臂识别有什么不同？",
+      "MCTS 回传为什么不是反向传播？"
+    ],
+    "schedule": [
+      {
+        "label": "背景与直觉",
+        "minutes": 30
+      },
+      {
+        "label": "手算与定义",
+        "minutes": 60
+      },
+      {
+        "label": "推导与对比",
+        "minutes": 45
+      },
+      {
+        "label": "复现与反例",
+        "minutes": 45
+      },
+      {
+        "label": "论文连接与自测",
+        "minutes": 20
+      }
+    ],
+    "note": "每天约 3 小时 20 分；重复引用课程时，依单元标题选择对应段落，不重复通读。未完成正文的单元会标出，不能计为已学课程。"
+  },
+  {
+    "day": 14,
+    "title": "序贯因果与跨尺度验证",
+    "minutes": 200,
+    "units": [
+      {
+        "nodeId": "sequential-causal",
+        "title": "时变混杂与 g-formula",
+        "minutes": 45,
+        "depth": "B",
+        "sections": [
+          "L4"
+        ],
+        "startSection": "L4"
+      },
+      {
+        "nodeId": "ope",
+        "title": "离线策略评估与支持集",
+        "minutes": 45,
+        "depth": "B",
+        "sections": [
+          "L4"
+        ],
+        "startSection": "L4"
+      },
+      {
+        "nodeId": "virtual-cell",
+        "title": "细胞、人体与预测验证",
+        "minutes": 45,
+        "depth": "A",
+        "sections": [
+          "L0"
+        ],
+        "startSection": "L0"
+      },
+      {
+        "nodeId": "reliability",
+        "title": "不确定性与外部验证",
+        "minutes": 45,
+        "depth": "A",
+        "sections": [
+          "L6"
+        ],
+        "startSection": "L6"
+      }
+    ],
+    "practiceMinutes": 20,
+    "acceptance": [
+      "怎样处理受既往治疗影响的混杂因素？",
+      "细胞扰动结果为什么不能直接作为人体治疗效应？"
+    ],
+    "schedule": [
+      {
+        "label": "背景与直觉",
+        "minutes": 30
+      },
+      {
+        "label": "手算与定义",
+        "minutes": 60
+      },
+      {
+        "label": "推导与对比",
+        "minutes": 45
+      },
+      {
+        "label": "复现与反例",
+        "minutes": 45
+      },
+      {
+        "label": "论文连接与自测",
+        "minutes": 20
+      }
+    ],
+    "note": "每天约 3 小时 20 分；重复引用课程时，依单元标题选择对应段落，不重复通读。未完成正文的单元会标出，不能计为已学课程。"
+  }
+]

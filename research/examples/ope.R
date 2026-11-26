@@ -1,0 +1,21 @@
+set.seed(20261126)
+b1 <- 0.25; n <- 4L
+logs <- as.matrix(expand.grid(rep(list(0:1),n)))
+successes <- rowSums(logs)
+probability <- b1^successes*(1-b1)^(n-successes)
+is_value <- successes/(n*b1)
+expectation <- sum(probability*is_value)
+variance <- sum(probability*(is_value-expectation)^2)
+stopifnot(abs(sum(probability)-1)<1e-12, abs(expectation-1)<1e-12)
+stopifnot(abs(variance-0.75)<1e-12, 2/(n*b1)==2)
+dr_expectation <- function(q1,bhat1) q1+b1/bhat1*(1-q1)
+stopifnot(abs(dr_expectation(0.6,b1)-1)<1e-12)
+stopifnot(abs(dr_expectation(1,0.5)-1)<1e-12)
+stopifnot(abs(dr_expectation(0.6,0.5)-0.8)<1e-12)
+weights <- c(4,4,0,0)
+ess <- sum(weights)^2/sum(weights^2)
+stopifnot(ess==2)
+print(c(target=1,observed_example=2,IS_expectation=expectation,IS_variance=variance,
+        no_target_action_probability=(1-b1)^n,ESS=ess))
+print(c(DR_correct_behavior=dr_expectation(0.6,b1),DR_correct_reward=dr_expectation(1,0.5),
+        DR_both_wrong=dr_expectation(0.6,0.5)))

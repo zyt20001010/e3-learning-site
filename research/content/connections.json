@@ -1,0 +1,67 @@
+[
+  {
+    "title": "Attention、核回归、GNN",
+    "kind": "共同计算结构",
+    "boundary": "都是加权聚合的实例；权重参数化、归一化与邻域不同，一般不等价。"
+  },
+  {
+    "title": "CNN、Fourier、图卷积",
+    "kind": "有条件的严格恒等式",
+    "boundary": "离散循环卷积在DFT基中对角化；线性卷积需补零，图拉普拉斯谱不是普通欧氏频率。"
+  },
+  {
+    "title": "Diffusion、SDE、Langevin",
+    "kind": "共享随机动力学工具",
+    "boundary": "具体漂移、扩散与目标分布不同；逆时间方程需要正则条件和正确score。"
+  },
+  {
+    "title": "Flow Matching、Optimal Transport",
+    "kind": "可结合，非一般等价",
+    "boundary": "给定耦合产生训练路径；独立耦合的流匹配不自动达到最小运输成本。"
+  },
+  {
+    "title": "Importance Sampling、IPW、OPE",
+    "kind": "测度变换恒等式",
+    "boundary": "在绝对连续性下用密度比重加权；因果IPW和OPE还需各自识别与支持条件。"
+  },
+  {
+    "title": "贝叶斯更新、Particle Filter、Thompson",
+    "kind": "同一更新原则的不同用途",
+    "boundary": "粒子滤波近似动态后验；Thompson用后验抽样行动，不等于滤波本身。"
+  },
+  {
+    "title": "JEPA、SSM、POMDP",
+    "kind": "潜状态思想类似",
+    "boundary": "预测表征未必是Markov状态或干预充分统计量；belief是给定模型下的条件分布。"
+  },
+  {
+    "title": "RNA Velocity、分支扩散、虚拟细胞",
+    "kind": "不同层级的动力学描述",
+    "boundary": "RNA局部变化、细胞状态运动和种群生灭的对象不同，需额外测量与跨层映射。"
+  },
+  {
+    "title": "PK/PD、Neural ODE、系统辨识",
+    "kind": "共同使用输入驱动动力系统",
+    "boundary": "机制约束、状态含义与允许输入不同；拟合输出轨迹不保证恢复机制。"
+  },
+  {
+    "title": "反事实、逆问题、部分识别",
+    "kind": "共同的观测等价结构",
+    "boundary": "不同生成机制产生同一观测规律；目标在等价类上常数时才点识别。"
+  },
+  {
+    "title": "Bandit、MCTS、RL、RSI",
+    "kind": "决策与反馈思想类似",
+    "boundary": "目标、状态转移和被改变对象不同；没有覆盖四者的统一遗憾或收敛结论。"
+  },
+  {
+    "title": "核方法、GP、Bayesian Optimization",
+    "kind": "特定模型下可精确联系",
+    "boundary": "Gaussian观测模型下GP后验均值可对应核岭回归；BO还需采集函数和实验语义。"
+  },
+  {
+    "title": "随机测度、点过程、细胞快照",
+    "kind": "数学表示关系",
+    "boundary": "有限细胞快照可表示为点测度；强度、阶乘矩和完整分布提供不同信息。"
+  }
+]

@@ -1,0 +1,210 @@
+{
+  "id": "vae-gan",
+  "name": "VAE 与 GAN：显式潜变量推断和对抗生成",
+  "nameEn": "Variational Autoencoders and Generative Adversarial Networks",
+  "module": "D2",
+  "priority": "P0",
+  "summary": "对同一生成任务分别写清潜变量模型、ELBO和对抗目标，用可解析例检验下界方向、重参数化梯度与最优判别器。",
+  "prerequisites": [
+    "probability",
+    "backprop",
+    "sampling"
+  ],
+  "related": [
+    "representation",
+    "diffusion",
+    "flow-matching"
+  ],
+  "minutes": {
+    "A": 50,
+    "B": 100,
+    "C": 180
+  },
+  "sections": [
+    {
+      "id": "L0",
+      "title": "背景与需要",
+      "depth": "A",
+      "paragraphs": [
+        "生成任务需要学习数据分布，而不只是给每个输入预测一个标签。VAE 明确写出潜变量和观测之间的概率模型，但真实后验可能难算；GAN 用生成器产生样本，通过真假判别反馈训练，通常不直接计算样本密度。两条路线分别处理后验积分和分布匹配的困难。",
+        "名字相近不代表信息流相同。普通自编码器重建输入，并不自动提供一个可以从先验稳定生成数据的概率模型；在图像旁画出潜空间也不能证明隐变量具有因果含义。"
+      ]
+    },
+    {
+      "id": "L1",
+      "title": "直觉与对象对应",
+      "depth": "A",
+      "paragraphs": [
+        "VAE 的编码器看到观测 x，输出潜变量 z 的近似后验分布参数；解码器看到 z，输出观测分布的参数。编码器不是把 x 变成唯一真状态，而是在指定模型下表达多种可能解释。训练要求既能解释观测，又不要让近似后验无约束地偏离先验。",
+        "GAN 的生成器把随机输入 z 变成样本 G(z)，判别器 D(x) 判断样本来自数据还是生成器。D 提供训练反馈，生成新样本时通常只需要抽 z 并运行 G。两者交替优化，不是一个网络先求梯度、另一个网络只负责更新参数的分工。"
+      ]
+    },
+    {
+      "id": "L2",
+      "title": "逐步计算",
+      "depth": "A",
+      "paragraphs": [
+        "一维 VAE 例：z∼N(0,1)，x|z∼N(z,0.25)，观察到 x=1。真实后验可解析为 N(0.8,0.2)。故意用较差近似 q=N(0.6,0.3)，其中第二个参数均为方差。",
+        "重建期望 E_q log p(x|z)=−0.5log(2π×0.25)−[(1−0.6)²+0.3]/(2×0.25)≈−1.145791。KL(q||先验)≈0.431986，因此 ELBO≈−1.577777。真实 log p(x)≈−1.430510，比 ELBO 高约 0.147267，恰等于 KL(q||真实后验)。",
+        "离散 GAN 例：真实概率为 (0.8,0.2)，生成概率为 (0.2,0.8)，最优判别输出为 (0.8,0.2)。按自然对数计算，JS≈0.192745，最优判别器下的对抗目标约为 −1.000805，等于 −log4+2JS。生成分布匹配真实分布时，JS=0，最优判别输出才是处处 1/2。"
+      ]
+    },
+    {
+      "id": "L3",
+      "title": "数学定义与假设",
+      "depth": "A",
+      "paragraphs": [
+        "观测 x∈Rᵈ、潜变量 z∈Rᵏ；θ 是生成模型参数，φ 是近似后验参数。先验 p(z)、条件观测密度 pθ(x|z) 与近似后验 qφ(z|x) 是三个不同对象。下面公式要求相关密度有共同支配测度、KL及期望有意义。",
+        "Gaussian编码器常输出均值 mφ(x) 和对数方差 rφ(x)。先抽与参数无关的 ε∼N(0,I)，再令 z=mφ+exp(rφ/2)⊙ε。这样随机性仍来自 ε，参数到 z 的路径则可微。",
+        "常见VAE对θ、φ做点优化，只对每个样本的潜变量z进行变分近似；这不等于对全部网络参数做完整贝叶斯推断。共享编码器参数让不同样本共用一套推断函数，节省逐样本优化成本，也会产生推断函数类受限的摊销误差。"
+      ],
+      "equations": [
+        {
+          "tex": "\\mathcal L(\\theta,\\phi;x)=E_{q_\\phi(z|x)}\\log p_\\theta(x|z)-\\operatorname{KL}(q_\\phi(z|x)\\|p(z))\\le\\log p_\\theta(x)",
+          "explanation": "ELBO 是对数边缘似然的下界；训练一般最大化它或最小化其负值。"
+        },
+        {
+          "tex": "\\min_G\\max_D\\left\\{E_{x\\sim p_{\\rm data}}\\log D(x)+E_{z\\sim p_z}\\log(1-D(G(z)))\\right\\}",
+          "explanation": "这是原始minimax GAN目标。实际常用的非饱和生成器损失与该表达式不同，需按论文具体实现核对。"
+        }
+      ]
+    },
+    {
+      "id": "L4",
+      "title": "关键推导",
+      "depth": "B",
+      "paragraphs": [
+        "由 Bayes 公式 log p(x,z)=log p(z|x)+log p(x)，对 q 取期望并减 E_q log q，得到 ELBO=log p(x)−KL(q||p(z|x))。KL非负给出下界方向；若 q 等于真实后验，下界取等。把 KL 写成反向顺序会改变近似问题，不能随意交换。",
+        "重参数化后，对参数的求导穿过确定性变换 z=gφ(ε,x)。在可交换导数与期望等条件下，可以用 Monte Carlo 路径梯度估计期望的参数梯度。它没有消除随机性，而是把随机数从需要求导的分布参数中分离。",
+        "本例 ELBO 对近似均值 m 的导数为 (x−m)/0.25−m，在 m=0.6 时为 1；对 log v 的导数为 [1−v−v/0.25]/2，在 v=0.3 时为 −0.25。代码将路径梯度和有限差分独立对照。",
+        "GAN 在每个位置最大化 a log D+b log(1−D)，一阶条件为 a/D−b/(1−D)=0，解得 D*=a/(a+b)，二阶导数为负。代回总体目标，把分母写成两分布均值的两倍，就得到 −log4+2JS。这个理想判别器结论不保证有限网络的交替训练找到全局最优。",
+        "一维Gaussian的KL(q||N(0,1))可由两密度对数相减后取q期望得到：E_q(z²)=m²+v，E_q[(z−m)²]=v，常数项整理为(m²+v−1−log v)/2。这一步明确了式中的v是方差；若误把标准差直接代入，重建项、KL和梯度都会错。"
+      ]
+    },
+    {
+      "id": "L5",
+      "title": "相邻技术对比",
+      "depth": "A",
+      "paragraphs": [
+        "VAE 的训练经过 x→近似后验参数→z→观测分布→ELBO；生成经过先验 z→观测分布→新样本，通常不需要新观测 x。若只输出解码均值，会少掉观测模型中的随机性。",
+        "GAN 的训练经过随机 z→生成样本→判别反馈，并与真实样本共同训练 D；生成只运行 G。它没有天然的 x→z 后验接口，除非另加推断结构。扩散把生成过程分成多个去噪步骤，Flow Matching学习速度场；不同生成模型应比较分布质量、覆盖、计算成本及具体任务，而不是只看重建误差。"
+      ],
+      "table": {
+        "headers": [
+          "方法",
+          "学习对象",
+          "生成方式",
+          "主要限制"
+        ],
+        "rows": [
+          [
+            "VAE",
+            "生成参数与近似后验",
+            "先验抽样后解码",
+            "变分近似、似然设定、优化"
+          ],
+          [
+            "GAN",
+            "生成器与判别器",
+            "随机输入经生成器映射",
+            "对抗优化、模式覆盖"
+          ],
+          [
+            "普通AE",
+            "编码和重建映射",
+            "未必定义可用先验",
+            "重建好不保证随机生成好"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "L6",
+      "title": "失败情形与反例",
+      "depth": "A",
+      "paragraphs": [
+        "VAE中如果解码器不使用 z，编码器可能趋近先验，形成后验坍塌；“KL变小”此时不等于潜变量学到了有用结构。过于简单的 q 也可能漏掉真实后验的多个解释。",
+        "GAN若只生成真实分布的一小部分模式，少量漂亮样本仍可能掩盖模式坍塌。判别器输出1/2也可能因为判别器太弱，而不是两分布相同；理想D*的结论不能直接用于未充分训练的D。",
+        "潜变量做坐标旋转或可逆重参数化后，观测分布可能保持不变。没有额外结构时，不能把某个潜轴自然命名为唯一生物机制。"
+      ]
+    },
+    {
+      "id": "L7",
+      "title": "最小代码复现",
+      "depth": "B",
+      "paragraphs": [
+        "代码直接计算一维ELBO、解析后验KL缺口、重参数化梯度和离散GAN的JS恒等式。它验证底层数学；没有训练图像VAE或GAN，也不以此声称大型生成能力已复现。",
+        "本例先选定生成参数和近似后验，再检验损失及其梯度，没有执行完整的交替参数训练。要训练高维模型，还需批数据、优化器、模型选择及独立生成评价；当前数值检查对应数学实现正确性，不对应真实数据上的泛化性能。"
+      ],
+      "code": {
+        "language": "r",
+        "source": "# R >= 4.4；解析Gaussian VAE与离散GAN算例；未训练大模型。\nset.seed(20261126)\nx <- 1; observation_variance <- .25\npost_mean <- x/(1+observation_variance)\npost_var <- observation_variance/(1+observation_variance)\nELBO <- function(m,log_v) {\n  v <- exp(log_v)\n  reconstruction <- -.5*log(2*pi*observation_variance)-((x-m)^2+v)/(2*observation_variance)\n  kl_prior <- .5*(m^2+v-1-log_v)\n  reconstruction-kl_prior\n}\nm <- .6; v <- .3\nbound <- ELBO(m,log(v))\nlog_evidence <- dnorm(x,0,sqrt(1+observation_variance),log=TRUE)\nkl_posterior <- .5*(log(post_var/v)+(v+(m-post_mean)^2)/post_var-1)\nstopifnot(abs(log_evidence-bound-kl_posterior)<1e-12,kl_posterior>=0)\nstopifnot(abs(ELBO(post_mean,log(post_var))-log_evidence)<1e-12)\n# 固定独立标准噪声，经重参数化得到q样本，验证期望及路径梯度。\neps <- rnorm(60000); z <- m+sqrt(v)*eps\nmc_bound <- mean(dnorm(x,z,sqrt(observation_variance),log=TRUE))-.5*(m^2+v-1-log(v))\ngrad_m <- mean((x-z)/observation_variance)-m\ngrad_logv <- mean((x-z)/observation_variance*.5*sqrt(v)*eps)-.5*(v-1)\ndelta <- 1e-5\nfd_m <- (ELBO(m+delta,log(v))-ELBO(m-delta,log(v)))/(2*delta)\nfd_logv <- (ELBO(m,log(v)+delta)-ELBO(m,log(v)-delta))/(2*delta)\nstopifnot(abs(mc_bound-bound)<.035,abs(grad_m-fd_m)<.04,abs(grad_logv-fd_logv)<.04)\n# 两点空间上的GAN最优判别器与JS恒等式。\np <- c(.8,.2); generated <- c(.2,.8); mixture <- (p+generated)/2\nDstar <- p/(p+generated)\nvalue <- sum(p*log(Dstar)+generated*log(1-Dstar))\nJS <- .5*sum(p*log(p/mixture))+.5*sum(generated*log(generated/mixture))\nstopifnot(abs(value-(-log(4)+2*JS))<1e-12)\nstopifnot(max(abs(Dstar-c(.8,.2)))<1e-12,JS>=0)\nprint(list(VAE=c(ELBO=bound,log_evidence=log_evidence,KL_gap=kl_posterior,MC=mc_bound),\n           gradients=rbind(analytic=c(fd_m,fd_logv),monte_carlo=c(grad_m,grad_logv)),\n           GAN=list(discriminator=Dstar,value=value,JS=JS)))\n",
+        "environment": "R >= 4.4；base与stats；随机种子20261126",
+        "verified": true,
+        "file": "vae-gan.R"
+      }
+    },
+    {
+      "id": "L8",
+      "title": "科研连接与证据边界",
+      "depth": "A",
+      "paragraphs": [
+        "阅读生成论文应先问训练目标逼近什么分布、潜变量承载什么信息、生成时需要哪些输入，以及评价是否能检测覆盖缺失。样本像不像与干预是否正确是不同评价问题。",
+        "ELBO分解和最优判别器推导属于经典结果。方法贡献需要进一步说明新观测条件、识别结构、近似误差、优化稳定性或任务验证带来的实质能力。"
+      ]
+    }
+  ],
+  "extension": {
+    "status": "planned",
+    "topics": [
+      "变分近似误差、摊销误差与参数估计误差的分离",
+      "生成模型潜变量可识别性条件",
+      "对抗优化的局部稳定性、模式覆盖与统计距离"
+    ]
+  },
+  "references": [
+    "vae-kingma-2014",
+    "gan-goodfellow-2014"
+  ],
+  "questions": [
+    {
+      "id": "vae-gan-q1",
+      "type": "技术辨析",
+      "prompt": "ELBO 与 log p(x) 的正确关系是什么？",
+      "options": [
+        "ELBO≥log p(x)",
+        "ELBO≤log p(x)，差为q到真实后验的KL",
+        "二者总相等",
+        "二者没有关系"
+      ],
+      "answer": 1,
+      "explanation": "log p(x)=ELBO+KL(q(z|x)||p(z|x))，KL非负。",
+      "depth": "A"
+    },
+    {
+      "id": "vae-gan-q2",
+      "type": "最小计算",
+      "prompt": "p=(0.8,0.2)、q=(0.2,0.8)，理想 GAN 判别器 D* 为什么？",
+      "options": [
+        "(0.5,0.5)",
+        "(0.2,0.8)",
+        "(0.8,0.2)",
+        "(1,0)"
+      ],
+      "answer": 2,
+      "explanation": "逐点 D*=p/(p+q)，这里分母两项都是1。",
+      "depth": "A"
+    }
+  ],
+  "status": {
+    "eli5": true,
+    "example": true,
+    "definition": true,
+    "derivation": true,
+    "code": true,
+    "interactive": false,
+    "literature": true,
+    "audit": true
+  },
+  "lab": null
+}

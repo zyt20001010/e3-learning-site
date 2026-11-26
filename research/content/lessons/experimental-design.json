@@ -1,0 +1,206 @@
+{
+  "id": "experimental-design",
+  "name": "实验设计：选择能区分解释的观测",
+  "nameEn": "Bayesian Experimental Design and Information Gain",
+  "module": "G1",
+  "priority": "P0",
+  "summary": "从两种候选机制的二元观测出发，手算后验与期望信息增益，区分噪声大、模型分歧大和实验价值高。",
+  "prerequisites": [
+    "probability",
+    "identifiability"
+  ],
+  "related": [
+    "noncommutativity",
+    "bandit",
+    "pkpd"
+  ],
+  "minutes": {
+    "A": 45,
+    "B": 90,
+    "C": 180
+  },
+  "sections": [
+    {
+      "id": "L0",
+      "title": "有限实验应服务于明确的判断",
+      "depth": "A",
+      "paragraphs": [
+        "当实验成本高时，问题不只是还能测什么，而是哪项新观测能够改变我们对研究目标的判断。重复测一个两种机制都预测相同的读数，可以提高该读数的精度，却未必帮助区分机制。实验设计需要把这一差别写入目标。",
+        "本课采用贝叶斯信息设计：先给候选机制及其当前权重，再描述每项实验可能产生的数据，最后平均计算实验后能减少多少不确定性。最优只相对于这套模型、目标和候选实验成立，不等于所有现实实验中都最优。"
+      ]
+    },
+    {
+      "id": "L1",
+      "title": "能辨别来源的检测器",
+      "depth": "A",
+      "paragraphs": [
+        "有两个同样可信的候选解释 θ=0 与 θ=1。检测器输出 Y=0 或1。实验 d₀ 无论哪个解释正确都像抛公平硬币；实验 d₁ 则以0.9概率报告正确解释。候选解释对应未知参数，检测器对应实验设计，报告对应随机观测。",
+        "两个实验在执行前都有一半概率输出1，表面上同样难预测。但 d₀ 的不确定性全来自与解释无关的噪声；d₁ 的输出能帮助判断解释。只按预测分布有多分散选实验，会把这两种情况混在一起。"
+      ]
+    },
+    {
+      "id": "L2",
+      "title": "逐步计算后验和信息增益",
+      "depth": "A",
+      "paragraphs": [
+        "先验各为0.5。d₁ 下 P(Y=1|θ=0)=0.1、P(Y=1|θ=1)=0.9，因此 P(Y=1)=0.5×0.1+0.5×0.9=0.5。看到 Y=1 后，θ=1 的后验为0.9×0.5/0.5=0.9；看到 Y=0 后，后验变为0.1。",
+        "二元熵 H(p)=−p log₂p−(1−p)log₂(1−p)。先验熵为1 bit，两个可能后验的熵均约0.468996 bit，所以期望减少1−0.468996=0.531004 bit。d₀ 的后验始终为0.5，期望信息增益为0。"
+      ],
+      "table": {
+        "headers": [
+          "实验",
+          "两机制的 P(Y=1)",
+          "预测熵",
+          "期望信息增益"
+        ],
+        "rows": [
+          [
+            "d₀：无判别信息",
+            "(0.5,0.5)",
+            "1 bit",
+            "0 bit"
+          ],
+          [
+            "d₁：有判别信息",
+            "(0.1,0.9)",
+            "1 bit",
+            "约0.531 bit"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "L3",
+      "title": "设计变量、似然与效用",
+      "depth": "A",
+      "paragraphs": [
+        "令 𝒯 为参数空间、𝒟 为可行实验集合、𝒴 为观测空间。随机参数 ϑ 的取值 θ 属于 𝒯，观测随机变量 Y 的取值 y 属于 𝒴。当前信息形成分布 π(θ)，设计 d∈𝒟 决定似然 p(y|θ,d)。本课集合都是有限的；连续参数和观测时，将求和换成满足可积条件的积分。",
+        "选设计时尚未看到结果，所以不能只优化某个希望看到的 y。先对每个可能结果更新参数分布，再用该结果发生的预测概率加权。实验成本、可操作范围和科学目标应在做实验之前明确；本课两项实验的比较暂设成本相同。"
+      ],
+      "equations": [
+        {
+          "tex": "p(y\\mid d)=\\sum_{\\theta}\\pi(\\theta)p(y\\mid\\theta,d),\\quad \\pi(\\theta\\mid y,d)=\\frac{\\pi(\\theta)p(y\\mid\\theta,d)}{p(y\\mid d)}",
+          "explanation": "仅对预测概率为正的结果进行更新。"
+        },
+        {
+          "tex": "U(d)=\\sum_y p(y\\mid d)D_{\\rm KL}\\!\\left(\\pi(\\cdot\\mid y,d)\\Vert\\pi\\right)",
+          "explanation": "U 是期望信息增益；本课 KL 使用 log₂，因此单位为 bit。"
+        }
+      ]
+    },
+    {
+      "id": "L4",
+      "title": "信息增益为何等于互信息",
+      "depth": "B",
+      "paragraphs": [
+        "把后验更新式代入 KL 中的比值，π(θ|y,d)/π(θ)=p(y|θ,d)/p(y|d)。再用 p(y|d)π(θ|y,d)=π(θ)p(y|θ,d)，便将双层平均写成参数与观测的联合平均。这个结果测量观测能改变多少参数判断。",
+        "有限离散情形还可整理为 H(Y|d)−EθH(Y|θ,d)。前项是总预测不确定性，后项是在机制已知时仍存在的观测噪声。d₀ 两项同为1，因此相减为0；d₁ 第二项为 H(0.1)，差为0.531004。",
+        "若参数由目标 ψ 和干扰分量组成，可以针对 ψ 定义信息效用，而不是奖励所有参数变得更确定。若最终目的在选择行动，也可定义实验后的最优决策收益，再减去实验成本；这与最大参数信息增益是不同目标。"
+      ],
+      "equations": [
+        {
+          "tex": "U(d)=\\sum_{\\theta,y}\\pi(\\theta)p(y\\mid\\theta,d)\\log_2\\frac{p(y\\mid\\theta,d)}{p(y\\mid d)}=I(\\vartheta;Y\\mid d)",
+          "explanation": "有限空间中可直接交换求和；连续问题需检查密度、绝对连续性和积分。"
+        },
+        {
+          "tex": "U(d)=H(\\vartheta)-\\mathbb E_{Y\\mid d}H(\\vartheta\\mid Y,d)",
+          "explanation": "平均熵下降与期望 KL 相同；某次实验后的实际熵不保证必然下降。"
+        }
+      ]
+    },
+    {
+      "id": "L5",
+      "title": "区分学习、搜索和决策效用",
+      "depth": "A",
+      "paragraphs": [
+        "主动学习通常关心预测模型从哪些新标签受益；贝叶斯优化通常关心找到目标函数值较高的输入；机制判别关心候选解释是否分得开。它们都选择下一次测量，但“好实验”的定义不同，不能只因为都采用采集函数就互换。",
+        "本例完全枚举两个机制、两个结果和两个实验，计算量很小。一般需要在每个设计下计算边缘似然或嵌套模拟；近似模型偏差和 Monte Carlo 误差会改变排序。应先用可精确求解的小例校核实现，再增加维度。",
+        "多次测量的总价值一般不能直接把单次信息增益相加：前一次结果会更新候选权重，下一次可能重复已经获得的信息。即使观测在给定机制后独立，边缘上仍可能相关。批量设计应评价联合结果，序贯设计则应在当前后验下重新计算。"
+      ]
+    },
+    {
+      "id": "L6",
+      "title": "错误模型也能给出很确定的建议",
+      "depth": "A",
+      "paragraphs": [
+        "如果真实机制不在候选集合里，一项实验可能迅速排除两个错误候选中的一个，却仍留下错误解释。信息增益是在给定模型中的量；需要对结果做后验预测检查，并保留与当前模型冲突的读数，而不是把异常观测删掉。",
+        "若先验把真实候选的概率设为零，通常的贝叶斯更新无法将其恢复。若观察模型忽略系统误差，重复同一实验会造成过度确定。可通过增加合理候选、校准测量或进行敏感性分析修复，而不是将一切实验设计判为无效。"
+      ]
+    },
+    {
+      "id": "L7",
+      "title": "枚举计算两项实验的价值",
+      "depth": "B",
+      "paragraphs": [
+        "代码同时从期望 KL 和熵差两条路径计算信息增益，并检查每个可能结果的后验。数值来自明确的概率表，没有假装是实验室观测。改变表格后可以复算同一套公式。"
+      ],
+      "code": {
+        "language": "r",
+        "environment": "R >= 4.4；仅 base R；合成教学数据；seed = 20261126",
+        "verified": true,
+        "source": "set.seed(20261126)\nentropy <- function(p) {p <- p[p>0]; -sum(p*log2(p))}\nprior <- c(0.5,0.5)\ndesign_value <- function(prob_one) {\n  likelihood <- cbind(1-prob_one,prob_one)\n  joint <- sweep(likelihood,1,prior,\"*\")\n  predictive <- colSums(joint)\n  posterior <- sweep(joint,2,predictive,\"/\")\n  kl <- apply(posterior,2,function(p) sum(p[p>0]*log2(p[p>0]/prior[p>0])))\n  eig <- sum(predictive*kl)\n  entropy_drop <- entropy(prior)-sum(predictive*apply(posterior,2,entropy))\n  stopifnot(abs(eig-entropy_drop)<1e-12, abs(sum(predictive)-1)<1e-12)\n  list(EIG=eig,predictive=predictive,posterior=posterior)\n}\nuninformative <- design_value(c(0.5,0.5))\ninformative <- design_value(c(0.1,0.9))\nstopifnot(abs(uninformative$EIG)<1e-12)\nstopifnot(abs(informative$EIG-(1-entropy(c(0.1,0.9))))<1e-12)\nstopifnot(abs(informative$posterior[2,2]-0.9)<1e-12)\nstopifnot(max(abs(informative$predictive-uninformative$predictive))<1e-12)\nprint(c(no_information=uninformative$EIG,discriminating=informative$EIG))\nprint(informative$posterior)\n",
+        "file": "experimental-design.R"
+      }
+    },
+    {
+      "id": "L8",
+      "title": "让实验建议成为可验证的研究环节",
+      "depth": "A",
+      "paragraphs": [
+        "对当前课题，先列出仍能解释数据的机制及其分歧，再选择这些分歧能影响的可测读数。若两解释只在输入切换后不同，单纯增加恒定输入重复没有触及该目标信息。候选实验还须满足可实现条件与资源限制。",
+        "评价设计策略时，可在有已知真值的模拟中比较相同预算下的目标误差，再用预先保留的实验检查真实收益。每轮保存候选集、当前分布、效用和选择结果。逐轮贪心信息最大化是可用规则，但未在这里证明为长期全局最优。",
+        "成本可以作为预算约束，也可以进入经过单位转换的净效用；不能直接把人民币与 bit 随意相减。若两个候选实验的估计价值差小于计算误差，应先提高效用估计精度，或选择更便宜、更稳定的实验，而不是把很小的数值差写成确定优势。"
+      ]
+    }
+  ],
+  "extension": {
+    "status": "planned",
+    "topics": [
+      "目标导向信息设计与干扰参数",
+      "嵌套 Monte Carlo 的偏差和排序稳定性",
+      "序贯设计的长期价值与模型失配"
+    ]
+  },
+  "references": [
+    "applied-huan-marzouk"
+  ],
+  "questions": [
+    {
+      "id": "experimental-design-q1",
+      "type": "最小计算",
+      "prompt": "先验熵1 bit，所有可能后验熵均0.469 bit，期望信息增益是多少？",
+      "options": [
+        "1.469 bit",
+        "0.531 bit",
+        "0 bit"
+      ],
+      "answer": 1,
+      "explanation": "信息增益等于先验熵减去期望后验熵。",
+      "depth": "A"
+    },
+    {
+      "id": "experimental-design-q2",
+      "type": "科研判断",
+      "prompt": "两项实验的预测熵相同，是否说明它们区分机制的价值相同？",
+      "options": [
+        "是",
+        "否，还要扣除机制已知时的观测不确定性",
+        "只要模型更大就相同"
+      ],
+      "answer": 1,
+      "explanation": "本课两项实验的预测熵均为1，但与机制有关的信息分别为0和约0.531。",
+      "depth": "A"
+    }
+  ],
+  "lab": "experimental-design",
+  "status": {
+    "eli5": true,
+    "example": true,
+    "definition": true,
+    "derivation": true,
+    "code": true,
+    "interactive": true,
+    "literature": true,
+    "audit": true
+  }
+}

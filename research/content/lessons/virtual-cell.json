@@ -1,0 +1,203 @@
+{
+  "id": "virtual-cell",
+  "name": "细胞扰动预测与虚拟细胞的观测边界",
+  "nameEn": "Cell Perturbation Prediction and Virtual Cells",
+  "module": "J5",
+  "priority": "P1",
+  "summary": "先确定细胞数据测到什么，再用状态转换与选择存活的反例，区分终点分布预测、个体轨迹和机制。",
+  "prerequisites": [
+    "probability",
+    "causality",
+    "identifiability"
+  ],
+  "related": [
+    "branching",
+    "counterfactual",
+    "pkpd"
+  ],
+  "minutes": {
+    "A": 45,
+    "B": 90,
+    "C": 180
+  },
+  "sections": [
+    {
+      "id": "L0",
+      "title": "把虚拟细胞写成可评价的任务",
+      "depth": "A",
+      "paragraphs": [
+        "“虚拟细胞”是宽泛研究方向，具体研究仍须规定输入、输出与实验条件。预测某种扰动后的转录表达分布，预测细胞数量，以及恢复同一细胞随时间变化的过程，是不同任务；拥有一个高维表达生成器并不自动完成其余任务。",
+        "单细胞测量提供细致的群体快照，但很多测序流程会破坏被测细胞，因而不能直接看到同一个细胞的前后配对。模型可以利用跨条件分布学习规律，不过路径、选择与机制的解释需要检查额外信息来自哪里。"
+      ]
+    },
+    {
+      "id": "L1",
+      "title": "同一张合照可能来自不同历史",
+      "depth": "A",
+      "paragraphs": [
+        "把两类合成细胞状态记成 A 与 B，初始各有60个。终点合照只报告被抽到的细胞中 A、B 各占多少。合照中的颜色对应状态标签，人数对应绝对数量，前后身份连线则对应细胞追踪或谱系信息；三种信息不能混为一谈。",
+        "一种历史让部分 A 变成 B，另一种历史只让 A 更容易消失。两种历史都可能使 B 的比例上升。若只看归一化比例，就未必知道究竟发生了状态转换、差异存活还是两者共同作用。"
+      ]
+    },
+    {
+      "id": "L2",
+      "title": "两种机制给出相同终点分布",
+      "depth": "A",
+      "paragraphs": [
+        "转换机制：30个 A 变为 B，终点为(30,90)，总数120。选择机制：A 只有三分之一存活、B 全部存活，终点为(20,60)，总数80。两个终点中 A 的比例都是1/4，B 都是3/4。",
+        "再给 A 一个两基因表达向量(2,0)，给 B 向量(0,2)。两种机制的归一化表达分布均为四分之一概率取(2,0)、四分之三取(0,2)，均值也都是(0.5,1.5)。这个相等不仅限于均值，而是本例整个抽样状态分布相同。"
+      ],
+      "table": {
+        "headers": [
+          "机制",
+          "终点 A、B 数量",
+          "A、B 比例",
+          "总数"
+        ],
+        "rows": [
+          [
+            "状态转换",
+            "(30,90)",
+            "(0.25,0.75)",
+            "120"
+          ],
+          [
+            "选择存活",
+            "(20,60)",
+            "(0.25,0.75)",
+            "80"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "L3",
+      "title": "区分潜在状态和测量分布",
+      "depth": "A",
+      "paragraphs": [
+        "令 Z 表示未必完全可见的细胞状态，X∈ℕᴳ 为测到的 G 个基因计数，A 为扰动，C 为细胞类型、剂量、时间及实验环境。测量还受到捕获率、测序深度和批次影响。处理后的 X 分布不是全部细胞内部状态的完整记录。",
+        "一个可操作的预测目标是给定初始群体与条件时的终点测量分布。若写成干预目标 P(Xₜ|do(A=a),C)，还须说明扰动分配、实际施加内容和测量选择；普通条件分布 P(Xₜ|A=a,C) 不能仅凭符号改写就获得因果含义。"
+      ],
+      "equations": [
+        {
+          "tex": "\\mu_t=\\sum_z n_t(z)\\,\\delta_z,\\qquad p_t(z)=\\frac{n_t(z)}{\\sum_{z^\\prime}n_t(z^\\prime)}",
+          "explanation": "μₜ 保留绝对数量；pₜ 是归一化群体分布，会丢失总数量。"
+        },
+        {
+          "tex": "\\mathbb E[X_t]=\\sum_zp_t(z)\\,\\mathbb E[X_t\\mid Z_t=z]",
+          "explanation": "均值改变可以来自状态比例改变，也可以来自各状态内部表达改变。"
+        }
+      ]
+    },
+    {
+      "id": "L4",
+      "title": "从转换核与存活权重推导反例",
+      "depth": "B",
+      "paragraphs": [
+        "用列向量表示初始数量 n₀=(60,60)ᵀ。转换矩阵 T=[[0.5,0],[0.5,1]] 的每列和为1：初始 A 有一半留在 A、一半到 B，初始 B 全留在 B。因此 Tn₀=(30,90)ᵀ，保持总数量。",
+        "选择矩阵 S=diag(1/3,1) 只改变各类存活数量，Sn₀=(20,60)ᵀ。分别除以总数后，两者都等于(1/4,3/4)ᵀ。任何只根据该归一化终点分布评估的方法，都无法在这个例子中区分两种历史。",
+        "若观测采用有放回的独立分类抽样模型，固定 m 个抽样得到同一个多项式计数分布；有限群体无放回抽样须另行分析。新增绝对数量测量在本例可以区分两机制；真实问题中还需校准检测率。追踪同一细胞或谱系提供另一类信息，可直接约束转换和选择过程。"
+      ],
+      "equations": [
+        {
+          "tex": "\\frac{Tn_0}{\\mathbf1^{\\mathsf T}Tn_0}=\\frac{Sn_0}{\\mathbf1^{\\mathsf T}Sn_0}=\\begin{pmatrix}1/4\\\\3/4\\end{pmatrix}",
+          "explanation": "观测等价取决于只测终点归一化组成的协议；更丰富观测可能打破该等价。"
+        }
+      ]
+    },
+    {
+      "id": "L5",
+      "title": "预测架构的信息从哪里进入",
+      "depth": "A",
+      "paragraphs": [
+        "一个简化扰动模型可写成输入表达与条件→编码器→潜在表示→扰动映射→解码器→预测表达分布。编码器压缩哪些观测，扰动映射使用哪些已测干预，解码器如何对应计数噪声，都需要说明。潜在向量相加是一种结构假设，不是自动得到的细胞机制。",
+        "逐细胞平方误差要求有合理配对；未配对快照通常只能直接监督分布或聚合目标。对任意模型，损失降低支持的是对应目标拟合改善。跨细胞类型、剂量或组合的外推，还须说明共享结构和训练覆盖，而不是仅凭“生成”一词获得保证。",
+        "训练数据中的每个扰动还应记录对照、施加时间、实际作用强度和实验重复。名义上相同的基因扰动不保证每个细胞具有相同效力；将其差异全部归入潜在生物状态，会混淆技术变化与真实响应。条件编码只能利用已提供且正确测量的信息。"
+      ]
+    },
+    {
+      "id": "L6",
+      "title": "漂亮的嵌入图可能掩盖评价问题",
+      "depth": "A",
+      "paragraphs": [
+        "如果同一供体或同一实验重复的细胞同时进入训练和测试，模型可能利用供体与批次特征得到很好的指标。把细胞随机拆开不等于检验新扰动或新供体泛化；独立评价单位应由所声称的能力决定。",
+        "只看总体表达相关性，还可能被高表达且对扰动不敏感的基因主导。应对照未处理预测和简单均值基线，检查扰动响应基因、细胞组成、绝对数量及预定表型。原始测量、归一化和特征选择也应仅在允许的数据范围内确定。"
+      ]
+    },
+    {
+      "id": "L7",
+      "title": "核对同分布与不同绝对数量",
+      "depth": "B",
+      "paragraphs": [
+        "代码计算两个终点、归一化分布、表达均值，以及固定抽样数下完全相同的二项分布概率。绝对数量是本例的判别观测；这些数值没有来自任何真实细胞实验。"
+      ],
+      "code": {
+        "language": "r",
+        "environment": "R >= 4.4；仅 base R；合成教学数据；seed = 20261126",
+        "verified": true,
+        "source": "set.seed(20261126)\ninitial <- c(A=60,B=60)\ntransition <- matrix(c(0.5,0,0.5,1),nrow=2,byrow=TRUE)\nselection <- diag(c(1/3,1))\nconverted <- as.vector(transition %*% initial)\nselected <- as.vector(selection %*% initial)\nnormalize <- function(x) x/sum(x)\np_conversion <- normalize(converted)\np_selection <- normalize(selected)\nstopifnot(all(converted==c(30,90)),all(selected==c(20,60)))\nstopifnot(max(abs(p_conversion-p_selection))<1e-12)\nexpression <- rbind(A=c(2,0),B=c(0,2))\nmean_conversion <- as.vector(p_conversion %*% expression)\nmean_selection <- as.vector(p_selection %*% expression)\nstopifnot(max(abs(mean_conversion-c(0.5,1.5)))<1e-12)\nstopifnot(max(abs(mean_conversion-mean_selection))<1e-12)\nm <- 20L\npmf_conversion <- dbinom(0:m,size=m,prob=p_conversion[1])\npmf_selection <- dbinom(0:m,size=m,prob=p_selection[1])\nstopifnot(max(abs(pmf_conversion-pmf_selection))<1e-12)\nstopifnot(sum(converted)==120,sum(selected)==80)\nprint(rbind(conversion=converted,selection=selected))\nprint(rbind(p_conversion=p_conversion,p_selection=p_selection))\nprint(c(gene1=mean_conversion[1],gene2=mean_conversion[2],\n        total_conversion=sum(converted),total_selection=sum(selected)))\n",
+        "file": "virtual-cell.R"
+      }
+    },
+    {
+      "id": "L8",
+      "title": "从分布预测推进到可检验的新能力",
+      "depth": "A",
+      "paragraphs": [
+        "一个适合起步的任务是：在固定测量技术下预测未见扰动的终点分布，并明确能否外推到新细胞类型。先用简单基线和完整拆分检验是否有增量，再决定是否需要潜在动力学。若目标改为机制区分，就优先增加能打破等价的数量、时间或谱系观测。",
+        "细胞层扰动结果向组织、器官或患者疗效迁移，需要额外的暴露、环境、选择和跨尺度映射信息。虚拟细胞研究可以成为统计逆问题与动态建模的应用，但本课的终点反例不证明任何具体模型无用，也不构成完整细胞机制恢复的证明。"
+      ]
+    }
+  ],
+  "extension": {
+    "status": "planned",
+    "topics": [
+      "非配对快照下的动态过程识别",
+      "增殖、死亡、状态转换与检测选择的联合模型",
+      "跨扰动与跨细胞类型泛化的独立评价"
+    ]
+  },
+  "references": [
+    "applied-perturb-seq",
+    "applied-scgen"
+  ],
+  "questions": [
+    {
+      "id": "virtual-cell-q1",
+      "type": "最小计算",
+      "prompt": "终点(30,90)与(20,60)的归一化组成是什么？",
+      "options": [
+        "不同",
+        "都为(0.25,0.75)",
+        "都为(0.5,0.5)"
+      ],
+      "answer": 1,
+      "explanation": "总数不同，但各自除以总数后比例相同。",
+      "depth": "A"
+    },
+    {
+      "id": "virtual-cell-q2",
+      "type": "科研判断",
+      "prompt": "本例哪个新增观测可以区分两种候选机制？",
+      "options": [
+        "更多同分布的归一化终点细胞",
+        "经过校准的终点绝对数量",
+        "把潜在表示维度翻倍"
+      ],
+      "answer": 1,
+      "explanation": "两机制的绝对数量分别120与80；更大模型不能补回未测的总数量。",
+      "depth": "A"
+    }
+  ],
+  "lab": null,
+  "status": {
+    "eli5": true,
+    "example": true,
+    "definition": true,
+    "derivation": true,
+    "code": true,
+    "interactive": false,
+    "literature": true,
+    "audit": true
+  }
+}

@@ -1,0 +1,234 @@
+{
+  "id": "diffusion",
+  "name": "扩散模型：加噪、去噪与分布采样",
+  "nameEn": "Denoising Diffusion and Score-based Generation",
+  "module": "D2",
+  "priority": "P0",
+  "summary": "把数据逐步加噪，再学习不同噪声水平的去噪方向；用一维 Gaussian 例追踪训练目标、score 与反向采样。",
+  "prerequisites": [
+    "probability",
+    "backprop",
+    "sampling"
+  ],
+  "related": [
+    "flow-matching",
+    "ode-sde",
+    "counterfactual"
+  ],
+  "minutes": {
+    "A": 45,
+    "B": 90,
+    "C": 180
+  },
+  "sections": [
+    {
+      "id": "L0",
+      "title": "背景与需要",
+      "depth": "A",
+      "paragraphs": [
+        "高维数据的概率密度通常无法直接写出，复杂生成器也难以一次把简单噪声变成数据。扩散模型先构造一个容易模拟的加噪过程，再把复杂分布学习拆成许多噪声水平下的条件预测问题。",
+        "增加噪声会逐步降低输入与原始样本之间的信息；学习得到的逆过程利用训练数据的分布规律生成合理结果。单次去噪不能保证找回加噪前那个唯一原件。"
+      ]
+    },
+    {
+      "id": "L1",
+      "title": "直觉与对象对应",
+      "depth": "A",
+      "paragraphs": [
+        "把一维数据 x₀ 想成一个读数。先乘一个小于 1 的系数，再加入独立 Gaussian 噪声，便得到更模糊的 xₜ。这里“模糊”严格对应条件方差增大和原数据系数缩小，不是图片比喻。",
+        "训练时我们自己抽取噪声，因此知道要预测的噪声标签。模型看到 xₜ 和时间 t，输出与 xₜ 同维度的噪声预测。生成时先抽最末端噪声，再逐步使用这个模型调整位置并按采样器加入随机性，最后输出 x₀。",
+        "随机种子提供多样性，训练数据和模型结构提供方向。噪声本身不含药理机制，也不保证生成结果来自一个真实干预。"
+      ]
+    },
+    {
+      "id": "L2",
+      "title": "逐步计算",
+      "depth": "A",
+      "paragraphs": [
+        "取 x₀=2，累计信号系数 ᾱₜ=0.64，抽到噪声 ε=1。则 xₜ=√0.64×2+√0.36×1=1.6+0.6=2.2。若模型恰好预测 ε=1，可代数恢复本次 x₀；但模型输入里没有那个 ε。",
+        "进一步假设真实数据分布是 N(2,0.25)。此时 xₜ 的均值为 1.6、方差为 0.64×0.25+0.36=0.52。在 xₜ=2.2 处，score=(1.6−2.2)/0.52≈−1.153846。",
+        "平方误差最优噪声预测是 E[ε|xₜ=2.2]=−0.6×score=9/13≈0.692308，不是本次实际噪声 1。由它得到的原数据条件均值约为 2.230769。这个差异来自条件不确定性，不必归因于训练失败。"
+      ],
+      "table": {
+        "headers": [
+          "量",
+          "值",
+          "含义"
+        ],
+        "rows": [
+          [
+            "x₀",
+            "2",
+            "一次具体原始读数"
+          ],
+          [
+            "ε",
+            "1",
+            "这次实际注入的随机噪声"
+          ],
+          [
+            "xₜ",
+            "2.2",
+            "模型实际看到的噪声读数"
+          ],
+          [
+            "E[ε|xₜ]",
+            "0.692308",
+            "平方误差最优预测"
+          ],
+          [
+            "E[x₀|xₜ]",
+            "2.230769",
+            "条件均值，不是确定的原件"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "L3",
+      "title": "数学定义与假设",
+      "depth": "A",
+      "paragraphs": [
+        "x₀、xₜ、ε 都属于 Rᵈ；θ 是模型参数，t 是离散噪声步。βₜ∈(0,1) 是预先选定的噪声方差，αₜ=1−βₜ，ᾱₜ 为从第 1 步到第 t 步的 α 乘积。ε∼N(0,I) 与 x₀ 独立。",
+        "这里 q 表示给定的数据及前向过程，pθ 表示学习的生成链。训练输入为 (xₜ,t)，训练标签为 ε，输出 εθ 仍为 d 维。score 对数据坐标 x 求导；训练梯度对参数 θ 求导，两者不是同一个梯度。",
+        "训练循环依次抽取原始数据、噪声时刻和独立噪声，计算带噪输入，前向得到噪声预测，再对参数求损失梯度并更新。时间 t 必须作为输入，否则同一个数值 x 在不同噪声强度下需要的去噪方向可能不同，网络却无法区分。",
+        "生成循环不再读取训练标签 x₀：先从末端先验抽取 xT，再按 t=T 到 1 查询噪声预测器，计算反向均值、采样下一状态。每步输出和输入同维度，但其分布不同。生成成本常与查询网络的次数有关，比较采样器时要同时报告步数、计算量和样本误差。"
+      ],
+      "equations": [
+        {
+          "tex": "q(x_t\\mid x_{t-1})=\\mathcal N(\\sqrt{\\alpha_t}x_{t-1},\\beta_t I),\\quad x_t=\\sqrt{\\bar\\alpha_t}x_0+\\sqrt{1-\\bar\\alpha_t}\\epsilon",
+          "explanation": "闭式加噪允许训练时直接抽任一噪声水平，无需从第 1 步走到第 t 步。"
+        },
+        {
+          "tex": "L(\\theta)=E_{x_0,t,\\epsilon}\\|\\epsilon-\\epsilon_\\theta(x_t,t)\\|^2,\\quad s_t(x)=\\nabla_x\\log q_t(x)",
+          "explanation": "常用简化训练目标是噪声均方误差；它不是逐样本恢复全部原始信息的保证。"
+        },
+        {
+          "tex": "\\mu_\\theta(x_t,t)=\\frac1{\\sqrt{\\alpha_t}}\\left(x_t-\\frac{\\beta_t}{\\sqrt{1-\\bar\\alpha_t}}\\epsilon_\\theta(x_t,t)\\right)",
+          "explanation": "DDPM 的常见反向均值参数化；采样还需选择反向方差，并按从 T 到 1 的顺序更新。"
+        }
+      ]
+    },
+    {
+      "id": "L4",
+      "title": "关键推导",
+      "depth": "B",
+      "paragraphs": [
+        "连续代入前向递推，每一步的独立 Gaussian 噪声仍线性相加。噪声协方差满足 vₜ=αₜvₜ₋₁+βₜ，从 v₀=0 得到 vₜ=1−ᾱₜ，因而有闭式加噪式。",
+        "固定 xₜ 和 t，把平方损失按条件期望分解。任意候选 a 的条件风险等于 Var(ε|xₜ)+‖a−E[ε|xₜ]‖²，因此最优网络函数是条件噪声均值，不是每次实际噪声。",
+        "对 Gaussian 条件密度 q(xₜ|x₀) 求 xₜ 的梯度，得到 −ε/√(1−ᾱₜ)。在可交换微分与积分的条件下，对 x₀ 的后验平均即得到边缘 score。于是最优噪声预测等于 −√(1−ᾱₜ)·score。",
+        "反向采样能恢复目标分布需要：末端起始分布匹配、反向转移足够准确、采样离散误差受控。一般数据的有限步反向条件分布不必严格 Gaussian；小步近似与有限模型误差需要单独评价。不能从“训练损失小”直接跳到“任意分布精确生成”。",
+        "对本课一维Gaussian数据，记前一时刻均值与方差为 m、v，则下一时刻为 √α·m 和 αv+β。根据联合Gaussian的条件公式，反向条件均值是 m+√αv/(αv+β)·(x−√αm)，条件方差是 βv/(αv+β)。这给代码中的反向更新提供一个独立的解析检查，而非只看生成图是否好看。"
+      ],
+      "equations": [
+        {
+          "tex": "E[\\|\\epsilon-a\\|^2\\mid x_t]=\\operatorname{tr}\\operatorname{Var}(\\epsilon\\mid x_t)+\\|a-E[\\epsilon\\mid x_t]\\|^2",
+          "explanation": "此处条件等式理解为固定 t 后对 ε 的条件风险；输出有有限二阶矩。"
+        },
+        {
+          "tex": "s_t(x)=-\\frac{E[\\epsilon\\mid x_t=x]}{\\sqrt{1-\\bar\\alpha_t}}",
+          "explanation": "这是理想条件分布下的恒等式；神经网络只是估计右侧。"
+        }
+      ]
+    },
+    {
+      "id": "L5",
+      "title": "相邻技术对比",
+      "depth": "A",
+      "paragraphs": [
+        "VAE 通常编码到较低维潜变量，再解码重建并约束潜分布；GAN 用判别反馈训练生成器；扩散使用多个噪声水平的去噪目标。它们都可能生成样本，但损失、推断路径与误差来源不同。",
+        "DDPM 的常见生成链带随机项；DDIM 可以在相同去噪模型基础上设计不同采样路径，包含确定性设置。连续时间的 probability-flow ODE 与对应 SDE 可以在理想 score 等条件下共享时刻边缘分布，轨迹联合分布仍不相同。",
+        "Flow Matching 直接回归指定概率路径的速度场；扩散常回归噪声或 score。二者可在特定路径和参数化下联系，但不能把所有流匹配称为同一个 DDPM 训练目标。"
+      ]
+    },
+    {
+      "id": "L6",
+      "title": "失败情形与反例",
+      "depth": "A",
+      "paragraphs": [
+        "如果数据只有某一细胞系的静态响应，加噪再去噪不会产生人体治疗效应的识别信息。条件生成的是所学观测条件下的分布，因果生成还需要干预语义和识别假设。",
+        "若末端仍保留明显数据均值，却从标准正态开始采样，就有起点错配。少步采样还可能累积数值误差；过强的条件引导也可能以多样性换取目标评分。",
+        "本例即使使用最优去噪器，条件均值仍不等于每个样本的原始值。用均方误差评价恢复能力时，要分清不可约误差和模型估计误差。"
+      ]
+    },
+    {
+      "id": "L7",
+      "title": "最小代码复现",
+      "depth": "B",
+      "paragraphs": [
+        "用各噪声时刻的线性回归实际拟合噪声预测器，随后生成一维样本并检查均值和方差。本例数据是 Gaussian，因此可以使用精确反向条件方差；这不是直接可用于图像的完整 DDPM 实现。",
+        "这里每个时刻的预测器由最小二乘求解，不用深层网络，因为Gaussian条件均值恰为仿射函数。替换成复杂分布后，仿射类一般不足，需要扩大函数类并重新验证。教程删去大网络仍保留了加噪、监督学习和反向采样这条信息链，因此能分清核心概率结构与实现规模。"
+      ],
+      "code": {
+        "language": "r",
+        "source": "# R >= 4.4；合成的一维 Gaussian 数据，不是图像模型复现。\nset.seed(20261126)\nmu0 <- 2; var0 <- .25; T <- 30L; beta <- rep(.1,T)\nalpha <- 1-beta; abar <- cumprod(alpha)\nmt <- c(mu0,sqrt(abar)*mu0)\nvt <- c(var0,abar*var0+1-abar)\nNtrain <- 40000L\ncoef <- matrix(NA_real_,T,2)\nfor (t in 1:T) {\n  x0 <- rnorm(Ntrain,mu0,sqrt(var0)); eps <- rnorm(Ntrain)\n  xt <- sqrt(abar[t])*x0 + sqrt(1-abar[t])*eps\n  # 以线性回归学 epsilon(x_t,t)，本 Gaussian 情形的最优函数恰为仿射。\n  coef[t,] <- unname(lm.fit(cbind(1,xt),eps)$coefficients)\n}\n# 任意一步的最优 epsilon 和 score 是解析可算的，检查学到的斜率。\noptimal_slope <- sqrt(1-abar)/vt[-1]\nstopifnot(max(abs(coef[,2]-optimal_slope)) < .06)\nN <- 30000L\n# 从真实 p_T 开始以隔离反向计算误差；标准 DDPM 常用 N(0,1) 近似 p_T。\nxt <- rnorm(N,mt[T+1],sqrt(vt[T+1]))\nfor (t in T:1) {\n  eps_hat <- coef[t,1] + coef[t,2]*xt\n  mean_reverse <- (xt-beta[t]/sqrt(1-abar[t])*eps_hat)/sqrt(alpha[t])\n  # Gaussian 教学例的精确条件方差。一般数据不具有这个闭式式子。\n  variance_reverse <- beta[t]*vt[t]/vt[t+1]\n  xt <- mean_reverse + sqrt(variance_reverse)*rnorm(N)\n}\nstopifnot(abs(mean(xt)-mu0)<.08, abs(var(xt)-var0)<.06)\none_xt <- .8*2+.6*1\nscore <- -(one_xt-1.6)/.52\nepsilon_conditional_mean <- -.6*score\nstopifnot(abs(one_xt-2.2)<1e-12, abs(epsilon_conditional_mean-9/13)<1e-12)\nprint(c(hand_xt=one_xt, optimal_epsilon=epsilon_conditional_mean,\n        generated_mean=mean(xt), generated_variance=var(xt)))\n",
+        "environment": "R >= 4.4；base 与 stats；随机种子 20261126",
+        "verified": true,
+        "file": "diffusion.R"
+      }
+    },
+    {
+      "id": "L8",
+      "title": "科研连接与证据边界",
+      "depth": "A",
+      "paragraphs": [
+        "阅读扩散论文时先列出数据变量、条件变量、加噪核、网络预测对象、训练目标与采样器。架构改变、噪声路径改变、条件信息增加、采样加速分别属于不同贡献。",
+        "本课 Gaussian 推导是经典条件期望与线性 Gaussian 计算的教学应用，不能包装成新的生成理论。真正的统计研究可以进一步分析训练误差、score 误差与目标分布误差之间的联系，但需要明确距离、正则性、尾部与时间范围。"
+      ]
+    }
+  ],
+  "extension": {
+    "status": "planned",
+    "topics": [
+      "反向 SDE 与 probability-flow ODE 的适用条件和边缘等价证明",
+      "score 估计误差到 Wasserstein/KL 生成误差的界",
+      "奇异数据分布、端点噪声与有限步离散化误差"
+    ]
+  },
+  "references": [
+    "ddpm-ho-2020",
+    "ddim-song-2020",
+    "score-sde-song-2021"
+  ],
+  "questions": [
+    {
+      "id": "diffusion-q1",
+      "type": "最小计算",
+      "prompt": "x₀=2，ᾱ=0.64，ε=1。加噪后的 xₜ 是多少？",
+      "options": [
+        "1.6",
+        "2.2",
+        "2.6",
+        "3"
+      ],
+      "answer": 1,
+      "explanation": "√0.64×2+√(1−0.64)×1=1.6+0.6=2.2。",
+      "depth": "A"
+    },
+    {
+      "id": "diffusion-q2",
+      "type": "技术辨析",
+      "prompt": "平方误差训练下，理想噪声预测器估计什么？",
+      "options": [
+        "每次真实噪声必定被精确恢复",
+        "条件噪声均值 E[ε|xₜ,t]",
+        "对参数 θ 的 log 密度梯度",
+        "因果干预效应"
+      ],
+      "answer": 1,
+      "explanation": "条件风险的最小化解是条件期望；它不消除由加噪带来的条件不确定性。",
+      "depth": "A"
+    }
+  ],
+  "lab": "diffusion",
+  "status": {
+    "eli5": true,
+    "example": true,
+    "definition": true,
+    "derivation": true,
+    "code": true,
+    "interactive": true,
+    "literature": true,
+    "audit": true
+  }
+}

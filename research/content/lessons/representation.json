@@ -1,0 +1,235 @@
+{
+  "id": "representation",
+  "name": "表征学习、降维与任务相关信息",
+  "nameEn": "Representation Learning, Dimensionality Reduction and Task Information",
+  "module": "C1",
+  "priority": "P0",
+  "summary": "用一个保留 99% 方差却完全丢失标签信息的 PCA 例子，说明表征保留什么由目标函数和数据条件决定。",
+  "prerequisites": [
+    "linear-algebra",
+    "probability"
+  ],
+  "related": [
+    "multimodal",
+    "jepa",
+    "attention",
+    "fourier"
+  ],
+  "minutes": {
+    "A": 40,
+    "B": 85,
+    "C": 180
+  },
+  "sections": [
+    {
+      "id": "L0",
+      "title": "L0 · 换一种表示有助于计算，也可能丢掉目标",
+      "depth": "A",
+      "paragraphs": [
+        "图像、信号和表格的原始坐标往往冗余、尺度不同或难以直接用于预测。表征学习构造一个映射，把输入变成更便于后续计算的向量。它可能降低维数、改变距离或突出某类模式，但需要明确后续任务究竟使用什么信息。",
+        "“保留大部分信息”不是完整结论：它可能指方差、重构精度、类别区分或未来预测，各自对应不同目标。本课先用线性降维说明，压缩指标表现很好仍可能删除全部任务信号。",
+        "表示还影响有限算力下的可学习性。一个可逆变换虽没有删掉信息，也可能让简单线性分类器更容易或更难拟合。同样的最优理论风险与相同训练预算下的实际表现需要区分，不能把所有提升归因为“新增信息”。"
+      ]
+    },
+    {
+      "id": "L1",
+      "title": "L1 · 表征是一份有选择的记录",
+      "depth": "A",
+      "paragraphs": [
+        "把输入想成两项测量：第一项变化很大，第二项变化很小。若任务是尽量还原原始数值，大幅变化的第一项更值得保留；若标签完全由第二项正负决定，保留第一项却没有分类价值。",
+        "编码器 fθ 接收输入 x，输出表征 z；预测头 gβ 接收 z，输出预测；解码器 dφ 可以从 z 重构输入。θ、β、φ 是不同的可学习参数。编码器输出的隐藏坐标，不因被称为 latent 就对应真实生物状态。"
+      ]
+    },
+    {
+      "id": "L2",
+      "title": "L2 · 保留 99% 方差仍只能猜标签",
+      "depth": "A",
+      "paragraphs": [
+        "设总体只包含四个等概率点：(-10,−1)、(-10,1)、(10,−1)、(10,1)。标签 Y 在第二坐标为正时等于 1，否则为 0。均值为零，按总体概率计算的协方差矩阵是 diag(100,1)。",
+        "一维 PCA 选择第一坐标，因为其方差最大，保留比例为 100/101≈99.01%。表征 Z 只有 −10 和 10；每个值都对应一个正标签和一个负标签。因此任何只读取 Z 的分类器，最优正确率也只有 50%。"
+      ],
+      "table": {
+        "headers": [
+          "原始输入 X",
+          "标签 Y",
+          "一维表征 Z",
+          "重构 X̂"
+        ],
+        "rows": [
+          [
+            "(−10,−1)",
+            "0",
+            "−10",
+            "(−10,0)"
+          ],
+          [
+            "(−10,1)",
+            "1",
+            "−10",
+            "(−10,0)"
+          ],
+          [
+            "(10,−1)",
+            "0",
+            "10",
+            "(10,0)"
+          ],
+          [
+            "(10,1)",
+            "1",
+            "10",
+            "(10,0)"
+          ]
+        ]
+      },
+      "steps": [
+        "每个点的重构平方误差为 1，平均误差也是 1；原始平均平方长度为 101。",
+        "原始第二坐标可以无误区分标签。损失的信号来自投影本身，增加下游分类器容量不能恢复。"
+      ]
+    },
+    {
+      "id": "L3",
+      "title": "L3 · 编码、重构与充分保留目标",
+      "depth": "A",
+      "paragraphs": [
+        "一般编码器 fθ:Rᵈ→Rᵏ，将随机输入 X 映射为 Z=fθ(X)。k 可以小于、等于或大于 d；表征学习不一定是降维。对中心化样本矩阵 X_c∈Rⁿˣᵈ，线性 PCA 使用列正交矩阵 V_k∈Rᵈˣᵏ，得到 Z=X_cV_k。",
+        "如果给定 Z 后，Y 的条件分布与给定完整 X 时相同，那么 Z 保留了这个预测任务需要的信息。这是相对于指定 Y 和分布的性质，不表示可以恢复 X 的所有细节，也不等同于恢复生成机制。",
+        "本课的任务信息保留条件，不等同于经典统计模型中关于未知参数的充分统计量。后者考察统计量给定后样本分布是否仍依赖参数，目标对象不同。讨论“充分表征”时必须写明是针对标签、未来轨迹、决策还是模型参数。"
+      ],
+      "equations": [
+        {
+          "tex": "Z=X_cV_k,\\quad \\widehat X_c=ZV_k^\\top,\\quad V_k^\\top V_k=I_k",
+          "explanation": "Z 为 n×k，重构矩阵为 n×d。均值必须只由训练数据估计，再用于新样本。"
+        },
+        {
+          "tex": "P(Y\\mid X)=P(Y\\mid Z),\\qquad Z=f_\\theta(X)",
+          "explanation": "用条件分布相等表示目标信息被保留；离散情况下逐项相等，连续情况下按适当的几乎处处意义理解。"
+        }
+      ]
+    },
+    {
+      "id": "L4",
+      "title": "L4 · 最大方差来自重构平方误差",
+      "depth": "B",
+      "paragraphs": [
+        "先取一个单位方向 v。每个中心化向量 x 投影为 vvᵀx，残差与投影正交，所以 ‖x−vvᵀx‖²=‖x‖²−(vᵀx)²。对样本平均后，第一项不随 v 改变，最小化重构误差等于最大化 vᵀCv。",
+        "将 v 在对称协方差矩阵 C 的正交特征向量基中展开，目标是各特征值按系数平方加权的平均；单位长度限制使权重和为 1，最大值因此为最大特征值。多个正交方向依次选择最大特征值对应子空间。",
+        "这个推导没有使用标签 Y，所以不能推出分类误差最小。若特征值重复，最优子空间中的坐标基可以旋转；即使预测和重构完全相同，单个坐标的名字与语义也未必唯一。"
+      ],
+      "equations": [
+        {
+          "tex": "\\min_{\\|v\\|=1}\\frac1n\\sum_i\\|x_i-vv^\\top x_i\\|^2=\\operatorname{tr}(C)-\\lambda_{\\max}(C)",
+          "explanation": "C=(1/n)Σxᵢxᵢᵀ，要求数据已经中心化。这里使用有限样本代数，不需要高斯分布假设。"
+        }
+      ]
+    },
+    {
+      "id": "L5",
+      "title": "L5 · 不同训练目标保留不同关系",
+      "depth": "A",
+      "paragraphs": [
+        "PCA 优化线性重构；自动编码器允许非线性编码与解码；监督学习根据标签损失选择表征；对比学习根据正负配对关系改变相似度。采用同一编码器结构，不代表学到同一种信息。",
+        "完整正交坐标变换可逆，不丢信息；截断 PCA 不可逆。t-SNE、UMAP 等二维图强调选定的邻域结构，不能据图上距离直接认定原数据的全部几何关系或因果机制。图好看也不是任务充分性的检验。",
+        "若编码 z 与解码 d(z) 能重构输入，那么任意可逆变换 T 后的新编码 T(z)，配上解码 d(T⁻¹(z))，产生相同重构。仅靠重构损失通常不能为隐藏坐标赋予唯一语义。增加独立测量、结构约束或干预，才可能缩小这种等价类。"
+      ]
+    },
+    {
+      "id": "L6",
+      "title": "L6 · 坍缩、增广错误与评价泄漏",
+      "depth": "A",
+      "paragraphs": [
+        "常数表征把所有输入映成同一点，无法区分任何非恒定标签。但避免常数坍缩仍不够：本例 PCA 明明有很大方差，却丢失全部标签信息。非坍缩只是最低要求。",
+        "若把会改变标签的变换误当作“正样本增广”，训练可能主动删除任务信号。例如符号本身决定标签时，把正负翻转视为等价就是错误假设。先在全数据上拟合 PCA 再切训练测试，也可能让测试分布进入表征学习。",
+        "PCA 对各列单位敏感：把第二列乘十会改变协方差及主方向。标准化到单位方差是另一项建模选择，不是必然正确的修复；它可能放大小尺度测量噪声。异常点也可能主导平方误差，因此需要检查尺度、尾部和实际测量质量。"
+      ]
+    },
+    {
+      "id": "L7",
+      "title": "L7 · 重构与分类能力分别校验",
+      "depth": "B",
+      "paragraphs": [
+        "代码用四点总体直接构造协方差矩阵，计算第一主方向、表征与重构误差，再按相同 Z 分组计算可达到的最佳分类正确率。这个 50% 是精确枚举结论，不是某个分类器训练失败。",
+        "随后用 R 的 prcomp() 核对方向，并允许特征向量整体变号。最后验证完整旋转可逆，帮助区分“换坐标”与“删除坐标”。代码没有训练神经网络，也没有把合成反例当成真实任务性能。"
+      ],
+      "code": {
+        "language": "r",
+        "source": "# R >= 4.0；base R / stats。四点均匀分布，非真实实验数据。\nset.seed(20261126)\nX <- rbind(c(-10,-1),c(-10,1),c(10,-1),c(10,1))\nY <- as.integer(X[,2]>0)\ncenter <- colMeans(X)\nXc <- sweep(X,2,center)\nC <- crossprod(Xc)/nrow(Xc) # 本课使用 1/n，而不是 1/(n-1)。\ne <- eigen(C,symmetric=TRUE)\nv <- e$vectors[,1,drop=FALSE]\n# 特征向量整体符号任意；统一朝向，使打印结果与手算表相同。\nif (v[which.max(abs(v)),1]<0) v <- -v\nZ <- drop(Xc %*% v)\nreconstruction <- Z %o% drop(v)\nretained <- e$values[1]/sum(e$values)\nerror <- mean(rowSums((Xc-reconstruction)^2))\nstopifnot(max(abs(C-diag(c(100,1))))<1e-12)\nstopifnot(abs(retained-100/101)<1e-12, abs(error-1)<1e-12)\nstopifnot(max(abs(Z-X[,1]))<1e-12)\n# 每个相同 Z 内都有一正一负标签，最佳分类也只能各答对一半。\nlabel_groups <- split(Y,round(Z,10))\nbest_accuracy <- sum(vapply(label_groups,function(y)\n  max(sum(y==0),sum(y==1)),numeric(1)))/length(Y)\nstopifnot(best_accuracy==0.5, all(as.integer(X[,2]>0)==Y))\n# 与成熟实现交叉核对；特征向量允许整体变号。\nreference <- prcomp(X,center=TRUE,scale.=FALSE)\nstopifnot(abs(abs(sum(reference$rotation[,1]*v))-1)<1e-12)\n# 完整正交变换可以逆回，降维投影则不能。\nR <- matrix(c(cos(pi/4),-sin(pi/4),sin(pi/4),cos(pi/4)),2,byrow=TRUE)\nrotated <- Xc %*% R\nstopifnot(max(abs(rotated %*% t(R)-Xc))<1e-12)\nprint(list(input=X,label=Y,covariance=C,eigenvalues=e$values,\n           representation=Z,reconstruction=reconstruction))\nprint(list(retained_variance=retained,reconstruction_MSE=error,\n           best_label_accuracy_from_Z=best_accuracy))\n",
+        "environment": "R 4.0+；base R 与 stats，无附加包；合成数据",
+        "verified": true,
+        "file": "representation.R"
+      }
+    },
+    {
+      "id": "L8",
+      "title": "L8 · 围绕目标评价表征",
+      "depth": "A",
+      "paragraphs": [
+        "读一篇表征论文，先追踪数据、配对或增广信息从哪里进入损失，再确认下游评价是否检验了所声称的能力。线性探针、迁移预测、重构和干预实验回答的是不同问题。",
+        "对于部分观测动态系统，可以研究怎样压缩历史而保留目标预测或决策所需信息。可验证的进展可以是更弱条件下的任务充分性、压缩误差界或新测量设计，不必把每个坐标命名为真实机制。"
+      ]
+    }
+  ],
+  "extension": {
+    "status": "planned",
+    "topics": [
+      "目标充分表征与条件独立",
+      "信息瓶颈的估计条件与优化边界",
+      "动态系统中的预测状态与可识别坐标"
+    ]
+  },
+  "references": [
+    "shlens-pca"
+  ],
+  "questions": [
+    {
+      "id": "representation-q1",
+      "type": "最小计算",
+      "prompt": "本例一维 PCA 保留的方差比例是多少？",
+      "options": [
+        "1/101",
+        "100/101",
+        "1/2"
+      ],
+      "answer": 1,
+      "explanation": "两个方向方差为 100 与 1，第一主成分保留其中的 100。",
+      "depth": "A"
+    },
+    {
+      "id": "representation-q2",
+      "type": "科研判断",
+      "prompt": "把本例下游分类器加深，能否突破只看 Z 时的 50% 最优正确率？",
+      "options": [
+        "能，参数足够多即可",
+        "不能，相同 Z 对应两种等概率标签",
+        "只要优化器更好就能"
+      ],
+      "answer": 1,
+      "explanation": "被投影合并的输入已经不可区分；这是信息损失而非优化失败。",
+      "depth": "A"
+    },
+    {
+      "id": "representation-q3",
+      "type": "数学推导",
+      "prompt": "一维 PCA 最大化 vᵀCv 的原因是什么？",
+      "options": [
+        "它直接最大化分类正确率",
+        "单位正交投影的重构误差等于总方差减去投影方差",
+        "所有潜变量都正态"
+      ],
+      "answer": 1,
+      "explanation": "正交残差平方分解给出该等价关系，不使用标签或正态假设。",
+      "depth": "B"
+    }
+  ],
+  "status": {
+    "eli5": true,
+    "example": true,
+    "definition": true,
+    "derivation": true,
+    "code": true,
+    "interactive": false,
+    "literature": true,
+    "audit": true
+  },
+  "lab": null
+}

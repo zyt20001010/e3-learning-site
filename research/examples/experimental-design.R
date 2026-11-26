@@ -1,0 +1,22 @@
+set.seed(20261126)
+entropy <- function(p) {p <- p[p>0]; -sum(p*log2(p))}
+prior <- c(0.5,0.5)
+design_value <- function(prob_one) {
+  likelihood <- cbind(1-prob_one,prob_one)
+  joint <- sweep(likelihood,1,prior,"*")
+  predictive <- colSums(joint)
+  posterior <- sweep(joint,2,predictive,"/")
+  kl <- apply(posterior,2,function(p) sum(p[p>0]*log2(p[p>0]/prior[p>0])))
+  eig <- sum(predictive*kl)
+  entropy_drop <- entropy(prior)-sum(predictive*apply(posterior,2,entropy))
+  stopifnot(abs(eig-entropy_drop)<1e-12, abs(sum(predictive)-1)<1e-12)
+  list(EIG=eig,predictive=predictive,posterior=posterior)
+}
+uninformative <- design_value(c(0.5,0.5))
+informative <- design_value(c(0.1,0.9))
+stopifnot(abs(uninformative$EIG)<1e-12)
+stopifnot(abs(informative$EIG-(1-entropy(c(0.1,0.9))))<1e-12)
+stopifnot(abs(informative$posterior[2,2]-0.9)<1e-12)
+stopifnot(max(abs(informative$predictive-uninformative$predictive))<1e-12)
+print(c(no_information=uninformative$EIG,discriminating=informative$EIG))
+print(informative$posterior)

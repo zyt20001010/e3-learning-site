@@ -1,0 +1,238 @@
+{
+  "id": "backprop",
+  "name": "计算图、链式法则与反向传播",
+  "nameEn": "Computational Graphs and Backpropagation",
+  "module": "B2",
+  "priority": "P0",
+  "summary": "逐条追踪一个含共享中间变量的小网络：先计算损失，再累加各路径梯度，最后由优化器更新参数。",
+  "prerequisites": [
+    "linear-algebra"
+  ],
+  "related": [
+    "convolution",
+    "gnn",
+    "attention"
+  ],
+  "minutes": {
+    "A": 45,
+    "B": 90,
+    "C": 180
+  },
+  "sections": [
+    {
+      "id": "L0",
+      "title": "L0 · 从误差追到每个参数",
+      "depth": "A",
+      "paragraphs": [
+        "给网络一个输入和正确答案，只能知道最终预测偏了多少；训练还需要知道每个权重向哪个方向改变会让损失下降。逐个扰动百万个参数再重算网络，代价很高。反向传播利用一次前向计算中已经得到的中间量，把标量损失的导数按计算依赖倒序传回去。它解决的是高效求导问题。",
+        "训练包含不同操作：前向传播计算预测和损失；反向传播计算当前参数处的梯度；SGD、Adam 等优化器利用梯度更新参数。求得正确梯度并不保证优化收敛，训练损失降低也不保证新数据上的误差降低。"
+      ]
+    },
+    {
+      "id": "L1",
+      "title": "L1 · 把总变化拆成局部变化",
+      "depth": "A",
+      "paragraphs": [
+        "把网络看成一张流水账，每笔中间结果记录由哪些数算出。例如先算 z=wx+b，再算 h=max(0,z)，最后算预测值 h²+h。w 和 b 是可调旋钮，x 是给定数据，z、h 是本次计算的中间状态，正确答案 t 是监督信息。",
+        "如果 h 增加一点，h² 和 h 两个分支都会改变预测。总变化必须把两条路径的贡献相加。若一条路径遗漏，梯度就错了。这不是“误差沿网络传回来”的比喻：具体传递的量是损失对每个中间数的偏导数。"
+      ]
+    },
+    {
+      "id": "L2",
+      "title": "L2 · 一个可以逐项复算的网络",
+      "depth": "A",
+      "paragraphs": [
+        "使用合成输入 x=2，参数 w=0.5、b=−0.5，目标 t=1。激活函数为 ReLU；该点 z>0，因而此处导数等于 1。损失取预测误差平方的一半。下表每一行只用前面已经算出的数。",
+        "平方分支贡献 −0.25，恒等分支贡献 −0.25，两者相加得到损失对 h 的导数 −0.5。再乘 x=2，得到损失对 w 的导数 −1。注意没有对监督目标 t 求导来更新标签。"
+      ],
+      "table": {
+        "headers": [
+          "运算",
+          "结果"
+        ],
+        "rows": [
+          [
+            "z=wx+b=0.5×2−0.5",
+            "0.5"
+          ],
+          [
+            "h=max(0,z)",
+            "0.5"
+          ],
+          [
+            "ŷ=h²+h",
+            "0.75"
+          ],
+          [
+            "L=(ŷ−t)²/2",
+            "0.03125"
+          ],
+          [
+            "∂L/∂ŷ=ŷ−t",
+            "−0.25"
+          ],
+          [
+            "∂L/∂h=(−0.25)×(2h+1)",
+            "−0.5"
+          ],
+          [
+            "∂L/∂w=(−0.5)×1×x",
+            "−1"
+          ],
+          [
+            "∂L/∂b=(−0.5)×1",
+            "−0.5"
+          ]
+        ]
+      },
+      "steps": [
+        "学习率取 0.02，同步更新 w′=0.52，b′=−0.49。",
+        "重新前向：z′=0.55，ŷ′=0.8525，L′=0.010878125。",
+        "损失这一步下降；若同样梯度却用学习率 0.1，损失会升到 0.048828125。"
+      ]
+    },
+    {
+      "id": "L3",
+      "title": "L3 · 标量损失、向量参数与形状",
+      "depth": "A",
+      "paragraphs": [
+        "一般网络把单个输入 x∈Rᵈ 映射为预测 fθ(x)∈Rᵏ。参数 θ∈Rᵖ 是待学习的确定性向量；训练样本可以是随机变量的实现。经验损失是若干样本损失的平均，反向传播求的是这个给定样本函数对 θ 的梯度。",
+        "使用行表示的批量输入 X∈Rⁿˣᵈ，权重 W∈Rᵈˣʰ，输出 A=XW∈Rⁿˣʰ。若 G=∂L/∂A 与 A 同形，梯度 ∂L/∂W 必须与 W 同形。形状检查能够发现不少转置错误。"
+      ],
+      "equations": [
+        {
+          "tex": "L(\\theta)=\\frac1n\\sum_{i=1}^n\\ell(f_\\theta(x_i),t_i)",
+          "explanation": "n 为批大小，ℓ 为单样本标量损失，tᵢ 为观测标签。此式本身不要求样本独立；统计泛化结论另需采样假设。"
+        },
+        {
+          "tex": "\\frac{\\partial L}{\\partial W}=X^\\top G,\\qquad \\frac{\\partial L}{\\partial X}=GW^\\top",
+          "explanation": "右侧维度依次为 d×h 和 n×d。学习参数与求输入敏感性是不同用途。"
+        }
+      ]
+    },
+    {
+      "id": "L4",
+      "title": "L4 · 反向递推来自多元链式法则",
+      "depth": "B",
+      "paragraphs": [
+        "设计算图节点 v 的下游节点为 u₁,…,uₘ。先固定其他直接输入，求每条边的局部导数 ∂uⱼ/∂v，再乘已经从损失传回的 ∂L/∂uⱼ，最后求和。对向量节点，相应操作是雅可比转置乘向量，无需显式保存整个雅可比矩阵。",
+        "本例 h²+h 的两项都依赖 h，所以 ∂L/∂h=(∂L/∂ŷ)·2h+(∂L/∂ŷ)·1。沿 z 到 w 再乘 ∂z/∂w=x，得到 −1。若参数在多处共享，它在计算图中有多条出边，所有使用位置对同一参数的梯度也必须相加。",
+        "矩阵公式可从 Aᵢⱼ=ΣᵣXᵢᵣWᵣⱼ逐元素推出：∂L/∂Wᵣⱼ=ΣᵢGᵢⱼXᵢᵣ，正是 XᵀG。计算时必须使用本次前向保存的参数和中间值；不能在传播到一半时先修改某个权重。"
+      ],
+      "equations": [
+        {
+          "tex": "\\bar v=\\sum_{u\\in\\operatorname{children}(v)}\\left(\\frac{\\partial u}{\\partial v}\\right)^\\top\\bar u,\\qquad\\bar u=\\nabla_u L",
+          "explanation": "标量损失处起始导数为 1。按计算图的逆拓扑顺序执行；共享节点的贡献累加。"
+        }
+      ]
+    },
+    {
+      "id": "L5",
+      "title": "L5 · 求导、更新与收敛分别判断",
+      "depth": "A",
+      "paragraphs": [
+        "反向模式对一个标量输出、很多参数尤其合适，一次反向遍历的运算量通常与前向计算同阶，但需要保存或重算中间值。前向模式传播输入方向导数，适合输入维度较小或需要雅可比向量积的场景。",
+        "有限差分是数值近似，中心差分在足够光滑处有二阶截断误差，但步长太小会放大浮点舍入。自动微分通过局部导数计算链式法则，仍有浮点误差，并不等于符号代数求出整个函数表达式。",
+        "SGD 使用梯度，Momentum 另维护速度，Adam 维护梯度的一阶和二阶滑动统计量。它们都不替代链式法则。收敛还要声明参数、函数值或梯度范数中的哪一个趋于什么，以及步长、光滑性和随机梯度条件。"
+      ]
+    },
+    {
+      "id": "L6",
+      "title": "L6 · 三类具体失效",
+      "depth": "A",
+      "paragraphs": [
+        "ReLU 在 z<0 时局部导数为零：若所有样本都让某神经元落在负区间，单靠该路径的一阶梯度可能无法唤醒它。z=0 时不可微，程序选择一个约定导数，不应说那里存在唯一经典导数。",
+        "深层链式法则连乘许多局部雅可比。若关键方向持续缩小或放大，梯度会消失或爆炸。残差路径、初始化和归一化可以改变传播条件，但不能保证任意模型都稳定。",
+        "有限差分检查只能验证当前点附近的实现一致性。它不能检查训练集是否泄漏、损失是否符合科学目标，或优化器是否找到全局最优。"
+      ]
+    },
+    {
+      "id": "L7",
+      "title": "L7 · 从手算到可运行校验",
+      "depth": "B",
+      "paragraphs": [
+        "下面从底层运算实现同一计算图，不调用自动微分库。它同时检查解析梯度、中心差分和一次参数更新。合成例完全确定；仍显式设置种子，便于后续加入随机输入时保持实验习惯。",
+        "进一步用 PyTorch 复现时，先让参数需要梯度，再执行 loss.backward() 读取 .grad，最后才调用 optimizer.step()；多轮训练还需清理梯度累积。此处只验证标准库版本。"
+      ],
+      "code": {
+        "language": "python",
+        "source": "# Python >= 3.9；仅标准库。确定性合成例，无随机抽样。\nimport random\nrandom.seed(20261126)\nx, target, w, b = 2.0, 1.0, 0.5, -0.5\ndef forward(w, b):\n    z = w*x + b\n    h = max(0.0, z)\n    prediction = h*h + h   # 同一 h 经过平方和恒等两条路径\n    loss = 0.5*(prediction-target)**2\n    return z, h, prediction, loss\nz, h, prediction, loss = forward(w, b)\ndy = prediction-target\ndh_square, dh_identity = dy*2*h, dy\ndz = (dh_square+dh_identity)*(1.0 if z > 0 else 0.0)\ndw, db = dz*x, dz\neps = 1e-6\nfdw = (forward(w+eps,b)[3]-forward(w-eps,b)[3])/(2*eps)\nfdb = (forward(w,b+eps)[3]-forward(w,b-eps)[3])/(2*eps)\nassert abs(dw-fdw)<1e-7 and abs(db-fdb)<1e-7\nassert (z,h,prediction,loss) == (0.5,0.5,0.75,0.03125)\nassert (dw,db) == (-1.0,-0.5)\nlearning_rate = 0.02\nnew_w, new_b = w-learning_rate*dw, b-learning_rate*db\nnew_loss = forward(new_w,new_b)[3]\nassert new_loss < loss\nprint({'z':z,'h':h,'prediction':prediction,'loss':loss})\nprint({'square_path':dh_square,'identity_path':dh_identity,\n       'dw':dw,'db':db,'finite_difference_w':fdw})\nprint({'updated_w':new_w,'updated_b':new_b,'updated_loss':new_loss})\n",
+        "environment": "Python 3.9+，标准库 random；无网络、无外部数据",
+        "verified": true,
+        "file": "backprop.py"
+      }
+    },
+    {
+      "id": "L8",
+      "title": "L8 · 阅读论文时追踪真正被优化的对象",
+      "depth": "A",
+      "paragraphs": [
+        "看一篇新模型论文，可以先把训练流程写成输入、状态、输出和损失，再逐项查明参数由哪些损失获得梯度。冻结编码器意味着这些参数不更新；停止梯度意味着某条求导路径被截断，前向数值仍可以参与预测。",
+        "增加新损失是否改变了可辨识目标、只是改善优化，还是引入额外监督信息，必须另行判断。反向传播只说明如何求当前目标的导数，既不赋予网络因果语义，也不证明潜变量恢复了真实机制。"
+      ]
+    }
+  ],
+  "extension": {
+    "status": "planned",
+    "topics": [
+      "反向模式自动微分的复杂度与检查点重计算",
+      "随机梯度算法的非凸收敛条件",
+      "深层雅可比谱与梯度稳定性"
+    ]
+  },
+  "references": [
+    "d2l-backprop"
+  ],
+  "questions": [
+    {
+      "id": "backprop-q1",
+      "type": "最小计算",
+      "prompt": "本例中损失对 w 的导数是多少？",
+      "options": [
+        "−0.5",
+        "−1",
+        "0.5"
+      ],
+      "answer": 1,
+      "explanation": "两条 h 路径先累加得到 −0.5，再乘 ∂z/∂w=x=2。",
+      "depth": "A"
+    },
+    {
+      "id": "backprop-q2",
+      "type": "技术辨析",
+      "prompt": "loss.backward() 已正确执行，接下来哪项结论成立？",
+      "options": [
+        "权重必然已更新",
+        "得到了当前图上的梯度；参数更新仍需优化步骤",
+        "训练已收敛"
+      ],
+      "answer": 1,
+      "explanation": "求导与更新是两个操作，收敛还需要额外条件。",
+      "depth": "A"
+    },
+    {
+      "id": "backprop-q3",
+      "type": "数学推导",
+      "prompt": "若 h 同时进入 h² 和 h 两条路径，正确的反向操作是什么？",
+      "options": [
+        "只选导数大的路径",
+        "将两条路径贡献相乘",
+        "将两条路径贡献相加"
+      ],
+      "answer": 2,
+      "explanation": "多元链式法则对同一上游节点的不同下游依赖求和。",
+      "depth": "B"
+    }
+  ],
+  "lab": "backprop",
+  "status": {
+    "eli5": true,
+    "example": true,
+    "definition": true,
+    "derivation": true,
+    "code": true,
+    "interactive": true,
+    "literature": true,
+    "audit": true
+  }
+}

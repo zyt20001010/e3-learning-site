@@ -1,0 +1,462 @@
+[
+  {
+    "id": "d2l-backprop",
+    "title": "Dive into Deep Learning · Backpropagation",
+    "authors": "Aston Zhang, Zachary C. Lipton, Mu Li, Alexander J. Smola",
+    "year": "在线教材",
+    "url": "https://d2l.ai/chapter_multilayer-perceptrons/backprop.html",
+    "checkedOn": "2026-11-26",
+    "status": "verified",
+    "scope": "核验反向自动微分、矩阵乘法的梯度与共享路径求和。课程中的标量网络、数值和代码为独立教学构造；没有复现教材训练结果。"
+  },
+  {
+    "id": "d2l-convolution",
+    "title": "Dive into Deep Learning · Convolutions for Images",
+    "authors": "Aston Zhang, Zachary C. Lipton, Mu Li, Alexander J. Smola",
+    "year": "在线教材",
+    "url": "https://d2l.ai/chapter_convolutional-neural-networks/conv-layer.html",
+    "checkedOn": "2026-11-26",
+    "status": "verified",
+    "scope": "核验互相关与卷积约定、滑动窗口、学习核与矩阵实现。课程使用自建矩阵和有限差分验证，不沿用教材算例。"
+  },
+  {
+    "id": "gretton-rkhs",
+    "title": "Lecture 1: Introduction to RKHS · MLSS Arequipa",
+    "authors": "Arthur Gretton",
+    "year": 2016,
+    "url": "https://www.gatsby.ucl.ac.uk/~gretton/coursefiles/peru16_1.pdf",
+    "checkedOn": "2026-11-26",
+    "status": "verified",
+    "scope": "核验正半定核、再生性质、表示定理的正交分解证明及核岭回归；重点查看第 70–75 张幻灯。课程采用平均平方损失，因此正则线性系统含 nλ。"
+  },
+  {
+    "id": "vanlaarhoven-gip",
+    "title": "Gaussian interaction profile kernels for predicting drug–target interaction",
+    "authors": "Twan van Laarhoven, Sander B. Nabuurs, Elena Marchiori",
+    "year": 2011,
+    "url": "https://cs.ru.nl/~tvanlaarhoven/drugtarget2011/paper-2011-08-17.pdf",
+    "checkedOn": "2026-11-26",
+    "status": "verified",
+    "scope": "作者存档版本：核验关联画像上的 Gaussian 核及第 4 节每折重新计算 GIP 的规定。课程泄漏反例和冷启动信息分析为独立演示；未引用论文性能数值。正式论文 DOI: 10.1093/bioinformatics/btr500。"
+  },
+  {
+    "id": "kipf-gcn",
+    "title": "Semi-Supervised Classification with Graph Convolutional Networks",
+    "authors": "Thomas N. Kipf, Max Welling",
+    "year": 2017,
+    "url": "https://arxiv.org/html/1609.02907v4",
+    "checkedOn": "2026-11-26",
+    "status": "verified",
+    "scope": "核验第 2 节局部谱近似、自连接与对称重归一化，尤其公式 8。课程中的行均值算例明确与论文 GCN 区分；不把重归一化称为恒等变形。"
+  },
+  {
+    "id": "feng-hgnn",
+    "title": "Hypergraph Neural Networks",
+    "authors": "Yifan Feng, Haoxuan You, Zizhao Zhang, Rongrong Ji, Yue Gao",
+    "year": 2018,
+    "url": "https://arxiv.org/html/1809.09401v1",
+    "checkedOn": "2026-11-26",
+    "status": "verified",
+    "scope": "核验超图关联矩阵及节点—超边—节点线性传播结构。线性算子可折算为加权矩阵的说明来自直接代数分析，并非声称作者证明所有超图模型都与普通图等价。"
+  },
+  {
+    "id": "vaswani-attention",
+    "title": "Attention Is All You Need",
+    "authors": "Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones, Aidan N. Gomez, Łukasz Kaiser, Illia Polosukhin",
+    "year": 2017,
+    "url": "https://arxiv.org/html/1706.03762v7",
+    "checkedOn": "2026-11-26",
+    "status": "verified",
+    "scope": "核验第 3.2 节 QKV 形状、缩放点积公式、多头拼接与缩放的方差动机，以及解码器遮蔽。未把历史翻译性能推广为本平台结论。三 Token 数值为独立构造。"
+  },
+  {
+    "id": "dao-flashattention",
+    "title": "FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness",
+    "authors": "Tri Dao, Daniel Y. Fu, Stefano Ermon, Atri Rudra, Christopher Ré",
+    "year": 2022,
+    "url": "https://arxiv.org/html/2205.14135v2",
+    "checkedOn": "2026-11-26",
+    "status": "verified",
+    "scope": "核验作者对精确 Attention、分块和 IO 优化的定义，并区分其另行提出的块稀疏近似扩展。未复现硬件性能或宣称普遍加速。"
+  },
+  {
+    "id": "r-fft",
+    "title": "R Documentation · Fast Discrete Fourier Transform (FFT)",
+    "authors": "R Core Team",
+    "year": "在线文档",
+    "url": "https://stat.ethz.ch/R-manual/R-devel/library/stats/html/fft.html",
+    "checkedOn": "2026-11-26",
+    "status": "verified",
+    "scope": "核验 R fft 的指数符号和 inverse=TRUE 不归一化的约定；课程代码另外在本机 R 4.4.1 实跑，并用直接有限求和独立检查。"
+  },
+  {
+    "id": "osgood-fourier",
+    "title": "EE261 · The Fourier Transform and its Applications · Lecture 8",
+    "authors": "Brad Osgood",
+    "year": 2007,
+    "url": "https://see.stanford.edu/materials/lsoftaee261/transcripts/TheFourierTransformAndItsApplications-Lecture08.pdf",
+    "checkedOn": "2026-11-26",
+    "status": "verified",
+    "scope": "核验作者课程对平移、缩放及卷积的讲解。本平台四点 DFT、相位丢失和补零例均为独立有限维构造，不把有限 DFT 证明当成一般连续 Fourier 逆定理。"
+  },
+  {
+    "id": "owen-is",
+    "title": "Monte Carlo theory, methods and examples — Chapter 9: Importance sampling",
+    "authors": "Art B. Owen",
+    "year": 2013,
+    "url": "https://artowen.su.domains/mc/Ch-var-is.pdf",
+    "checkedOn": "2026-11-26",
+    "status": "verified",
+    "scope": "核验作者教材第9章的重要性采样恒等式、支持集条件、自归一化与诊断目录；网页文件标有2018年更新。三状态手算、代码和反例为本课程独立构造，未转载教材内容。"
+  },
+  {
+    "id": "r-stats-distributions",
+    "title": "R Documentation: The Uniform Distribution",
+    "authors": "R Core Team",
+    "year": 2026,
+    "url": "https://stat.ethz.ch/R-manual/R-devel/library/stats/html/Uniform.html",
+    "checkedOn": "2026-11-26",
+    "status": "verified",
+    "scope": "核验官方 runif、punif、qunif 接口及默认均匀分布；实际课程代码在本机 R 4.4.1 执行。"
+  },
+  {
+    "id": "ddpm-ho-2020",
+    "title": "Denoising Diffusion Probabilistic Models",
+    "authors": "Jonathan Ho; Ajay Jain; Pieter Abbeel",
+    "year": 2020,
+    "url": "https://arxiv.org/html/2006.11239v2",
+    "checkedOn": "2026-11-26",
+    "status": "verified",
+    "scope": "核验原文第2–3节的前向Gaussian核、累计噪声分布、反向链与噪声预测参数化。Gaussian条件均值和一维代码为独立教学例，未复现实验论文的图像结果。"
+  },
+  {
+    "id": "ddim-song-2020",
+    "title": "Denoising Diffusion Implicit Models",
+    "authors": "Jiaming Song; Chenlin Meng; Stefano Ermon",
+    "year": 2020,
+    "url": "https://arxiv.org/abs/2010.02502",
+    "checkedOn": "2026-11-26",
+    "status": "verified",
+    "scope": "核验原论文书目信息与摘要：DDIM与DDPM可共享训练目标、采样过程不同；具体ODE推导和速度实验不在本次核验范围。2020为预印本年份，正式会议为ICLR 2021。"
+  },
+  {
+    "id": "score-sde-song-2021",
+    "title": "Score-Based Generative Modeling through Stochastic Differential Equations",
+    "authors": "Yang Song; Jascha Sohl-Dickstein; Diederik P. Kingma; Abhishek Kumar; Stefano Ermon; Ben Poole",
+    "year": 2021,
+    "url": "https://arxiv.org/abs/2011.13456",
+    "checkedOn": "2026-11-26",
+    "status": "verified",
+    "scope": "核验原论文摘要关于score决定反向SDE及对应ODE可采样相同边缘分布的主张。一般反向SDE定理的完整技术条件仍列为Level C扩展。"
+  },
+  {
+    "id": "flow-matching-lipman-2023",
+    "title": "Flow Matching for Generative Modeling",
+    "authors": "Yaron Lipman; Ricky T. Q. Chen; Heli Ben-Hamu; Maximilian Nickel; Matt Le",
+    "year": 2023,
+    "url": "https://arxiv.org/html/2210.02747v2",
+    "checkedOn": "2026-11-26",
+    "status": "verified",
+    "scope": "核验原文第2节、第3.1–3.2节的速度场、概率路径、条件回归及连续性方程关系。本文使用独立构造的双Gaussian耦合算例；不将样本直线与总体最优耦合等同。预印本首发2022，所读v2为2023。"
+  },
+  {
+    "id": "ucb1-auer-2002",
+    "title": "Finite-time Analysis of the Multiarmed Bandit Problem",
+    "authors": "Peter Auer; Nicolò Cesa-Bianchi; Paul Fischer",
+    "year": 2002,
+    "url": "https://people.eecs.berkeley.edu/~russell/classes/cs294/s11/readings/Auer%2Bal%3A2002.pdf",
+    "checkedOn": "2026-11-26",
+    "status": "verified",
+    "scope": "核验原文的[0,1]独立同分布奖励设定、UCB1初始化、置信指数和有限时遗憾定理条件。三臂奖励轨迹为合成教学例；只推导探索尺度，完整遗憾证明列为Level C。"
+  },
+  {
+    "id": "thompson-russo-2018",
+    "title": "A Tutorial on Thompson Sampling",
+    "authors": "Daniel Russo; Benjamin Van Roy; Abbas Kazerouni; Ian Osband; Zheng Wen",
+    "year": 2018,
+    "url": "https://arxiv.org/abs/1707.02038",
+    "checkedOn": "2026-11-26",
+    "status": "verified",
+    "scope": "核验作者教程书目信息、Bernoulli老虎机及后验探索主题；本课Beta共轭更新直接展开似然独立推导，模拟未借用论文性能结论。"
+  },
+  {
+    "id": "uct-kocsis-2006",
+    "title": "Bandit based Monte-Carlo Planning",
+    "authors": "Levente Kocsis; Csaba Szepesvári",
+    "year": 2006,
+    "url": "https://aima.cs.berkeley.edu/~russell/classes/cs294/s11/readings/Kocsis%2BSzepesvari%3A2006.pdf",
+    "checkedOn": "2026-11-26",
+    "status": "verified",
+    "scope": "核验原文第2节的rollout、价值更新、节点UCB及下游回报漂移条件。两层数值树与R实现为本课程独立编写，不将IID bandit证明直接推广到任意树搜索。"
+  },
+  {
+    "id": "uct-coquelin-2007",
+    "title": "Bandit Algorithms for Tree Search",
+    "authors": "Pierre-Arnaud Coquelin; Rémi Munos",
+    "year": 2007,
+    "url": "https://arxiv.org/abs/cs/0703062",
+    "checkedOn": "2026-11-26",
+    "status": "verified",
+    "scope": "核验原论文摘要中UCT可能具有很差深度依赖的反例方向；课程未宣称复现其具体下界或把摘要当作完整证明。"
+  },
+  {
+    "id": "reflexion-shinn-2023",
+    "title": "Reflexion: Language Agents with Verbal Reinforcement Learning",
+    "authors": "Noah Shinn; Federico Cassano; Edward Berman; Ashwin Gopinath; Karthik Narasimhan; Shunyu Yao",
+    "year": 2023,
+    "url": "https://arxiv.org/abs/2303.11366",
+    "checkedOn": "2026-11-26",
+    "status": "verified",
+    "scope": "核验摘要中通过语言反馈与episodic memory影响后续尝试而不更新权重的机制。仅用作无参数训练反馈改进实例，不称其证明了通用RSI。"
+  },
+  {
+    "id": "adaptive-holdout-dwork-2015",
+    "title": "Generalization in Adaptive Data Analysis and Holdout Reuse",
+    "authors": "Cynthia Dwork; Vitaly Feldman; Moritz Hardt; Toniann Pitassi; Omer Reingold; Aaron Roth",
+    "year": 2015,
+    "url": "https://arxiv.org/abs/1506.02629",
+    "checkedOn": "2026-11-26",
+    "status": "verified",
+    "scope": "核验原论文摘要关于自适应重复使用留出集可能导致过拟合的结论；课程未实现或声称具备其可复用留出集算法保证。"
+  },
+  {
+    "id": "dynamics-mit-identification",
+    "title": "6.435 System Identification — Lecture 6: Parametrized Model Structures, One-step Predictor, Identifiability",
+    "authors": "Munther A. Dahleh",
+    "year": 2005,
+    "url": "https://ocw.mit.edu/courses/6-435-system-identification-spring-2005/3cd2a84f8e64c60fae99b9c09f342b86_lec6_6_435.pdf",
+    "checkedOn": "2026-11-26",
+    "status": "verified",
+    "scope": "核验 MIT 原课程第31–35页的参数化模型与可识别性区分；本课总数例子、两点平方风险下界及病态矩阵计算为独立推导。"
+  },
+  {
+    "id": "dynamics-mit-matrix-exponential",
+    "title": "Matrix-Exponentials — MIT Linear Algebra lecture notes",
+    "authors": "MIT Linear Algebra course materials",
+    "year": 2017,
+    "url": "https://web.mit.edu/~linalg/webpage/Spring17/Matrix-Exponentials.pdf",
+    "checkedOn": "2026-11-26",
+    "status": "verified",
+    "scope": "核验矩阵指数级数、线性ODE解与不对易矩阵乘积的基础性质；本课转置双系统及受限输入反例为独立构造和数值复算，并非该讲义的原创性主张。"
+  },
+  {
+    "id": "dynamics-richardson-potential-outcomes",
+    "title": "Introduction to Potential Outcomes — Simons Causal Bootcamp",
+    "authors": "Thomas Richardson",
+    "year": 2022,
+    "url": "https://sites.stat.washington.edu/tsr/simons/simons-lecture1-handout.pdf",
+    "checkedOn": "2026-11-26",
+    "status": "verified",
+    "scope": "核验潜在结果、一致性、随机化下边缘识别和第22–24页 Fréchet 界/联合分布信息损失。本课0.5边缘表和代码独立枚举。"
+  },
+  {
+    "id": "dynamics-ijepa-paper",
+    "title": "Self-Supervised Learning from Images with a Joint-Embedding Predictive Architecture",
+    "authors": "Mahmoud Assran, Quentin Duval, Ishan Misra, Piotr Bojanowski, Pascal Vincent, Michael Rabbat, Yann LeCun, Nicolas Ballas",
+    "year": 2023,
+    "url": "https://arxiv.org/pdf/2301.08243",
+    "checkedOn": "2026-11-26",
+    "status": "verified",
+    "scope": "读取原论文全文入口，重点核验第2–3节方法、图3、平方L2损失、目标编码器EMA，以及第9节和附录A的相关实现描述；未复现论文大规模实验。"
+  },
+  {
+    "id": "dynamics-ijepa-code",
+    "title": "I-JEPA official implementation — src/train.py",
+    "authors": "facebookresearch/ijepa",
+    "year": 2023,
+    "url": "https://github.com/facebookresearch/ijepa/blob/main/src/train.py",
+    "checkedOn": "2026-11-26",
+    "status": "verified",
+    "scope": "核验目标分支torch.no_grad、layer_norm、smooth_l1_loss与EMA参数更新。公开代码损失与论文公式存在差别，课程明确标出。"
+  },
+  {
+    "id": "dynamics-what-if",
+    "title": "Causal Inference: What If",
+    "authors": "Miguel A. Hernán, James M. Robins",
+    "year": 2020,
+    "url": "https://miguelhernan.org/whatifbook",
+    "checkedOn": "2026-11-26",
+    "status": "verified",
+    "scope": "核验作者官网当前版本入口；读取已下载的2026-08-19版第19章序贯可交换性、一致性/正值性及第21章g-formula。本课八格合成概率表独立设计，未使用书中患者数值。"
+  },
+  {
+    "id": "dynamics-tavare-birth-death",
+    "title": "The Linear Birth–Death Process: An Inferential Retrospective",
+    "authors": "Simon Tavaré",
+    "year": 2018,
+    "url": "https://www.columbia.edu/cu/simontavare/STpapers-pdf/BDP.pdf",
+    "checkedOn": "2026-11-26",
+    "status": "verified",
+    "scope": "核验原作者公开论文第2节常率线性生灭模型、期望和方差及独立家系性质；阶乘矩生成元推导、参数反演及代码独立复算。"
+  },
+  {
+    "id": "vae-kingma-2014",
+    "title": "Auto-Encoding Variational Bayes",
+    "authors": "Diederik P. Kingma; Max Welling",
+    "year": 2014,
+    "url": "https://arxiv.org/html/1312.6114v11",
+    "checkedOn": "2026-11-26",
+    "status": "verified",
+    "scope": "核验原文第2节生成模型、近似后验、ELBO分解及重参数化目的。原预印本2013年首发、ICLR 2014论文；所读版本为2022年v11。课程Gaussian手算和数值梯度代码独立编写。"
+  },
+  {
+    "id": "gan-goodfellow-2014",
+    "title": "Generative Adversarial Nets",
+    "authors": "Ian J. Goodfellow; Jean Pouget-Abadie; Mehdi Mirza; Bing Xu; David Warde-Farley; Sherjil Ozair; Aaron Courville; Yoshua Bengio",
+    "year": 2014,
+    "url": "https://arxiv.org/html/1406.2661v1",
+    "checkedOn": "2026-11-26",
+    "status": "verified",
+    "scope": "核验原文训练算法、命题1的理想判别器、定理1的JS关系，以及无限容量理想结论与有限参数训练的差别。两状态概率例和代码为独立教学计算。"
+  },
+  {
+    "id": "fpp3-hyndman-ar",
+    "title": "Forecasting: Principles and Practice (3rd ed.) — ARIMA models",
+    "authors": "Rob J. Hyndman; George Athanasopoulos",
+    "year": 2021,
+    "url": "https://otexts.com/fpp3/arima.html#autoregressive-models",
+    "checkedOn": "2026-11-26",
+    "status": "verified",
+    "scope": "核验作者教材第9.3节的AR定义、AR(1)平稳约束和递推展开。课程已知参数Gaussian例、条件方差及状态更新由公式独立推导并用R验证。"
+  },
+  {
+    "id": "scheduled-sampling-bengio-2015",
+    "title": "Scheduled Sampling for Sequence Prediction with Recurrent Neural Networks",
+    "authors": "Samy Bengio; Oriol Vinyals; Navdeep Jaitly; Noam Shazeer",
+    "year": 2015,
+    "url": "https://arxiv.org/abs/1506.03099",
+    "checkedOn": "2026-11-26",
+    "status": "verified",
+    "scope": "核验原文摘要关于训练时真实前项与推理时生成前项的差异。课程仅用其界定问题，不声称scheduled sampling必然一致或必定改善任意任务。"
+  },
+  {
+    "id": "strang-svd",
+    "title": "MIT 18.06SC · Lecture 29: Singular Value Decomposition",
+    "authors": "Gilbert Strang",
+    "year": 2011,
+    "url": "https://ocw.mit.edu/courses/18-06sc-linear-algebra-fall-2011/d273f75ee2552a5c3c35ccab37e5edce_MIT18_06SCF11_Ses3.5sum.pdf",
+    "scope": "核对 SVD、行列空间、零空间与非零奇异值。目标泛函的行空间充要条件在本课直接证明；2×2 数值、误差放大与代码为独立构造，不沿用讲义算例。",
+    "checkedOn": "2026-11-26",
+    "status": "verified"
+  },
+  {
+    "id": "blitzstein-conditioning",
+    "title": "Stat 110 · Strategic Practice and Homework 2",
+    "authors": "Joe Blitzstein",
+    "year": 2011,
+    "url": "https://stat110.hsites.harvard.edu/sites/g/files/omnuum10111/files/stat110/files/strategic_practice_and_homework_2.pdf",
+    "scope": "核对条件概率、贝叶斯更新、顺序更新与条件独立/边缘独立的区别，重点查看题目页 1–2 及解答页 6–9。两枚硬币参数、后验数值和模拟为独立教学构造；不转载原题。",
+    "checkedOn": "2026-11-26",
+    "status": "verified"
+  },
+  {
+    "id": "shlens-pca",
+    "title": "A Tutorial on Principal Component Analysis",
+    "authors": "Jonathon Shlens",
+    "year": 2014,
+    "url": "https://arxiv.org/html/1404.1100v1",
+    "scope": "核对 PCA 的方差目标、协方差与正交特征分解；本课以投影平方误差和 Rayleigh 商独立推导，不依赖该教程附录中关于重特征值的简化表述。99% 方差丢标签的四点反例与代码为独立构造。",
+    "checkedOn": "2026-11-26",
+    "status": "verified"
+  },
+  {
+    "id": "radford-clip",
+    "title": "Learning Transferable Visual Models From Natural Language Supervision",
+    "authors": "Alec Radford et al.",
+    "year": 2021,
+    "url": "https://arxiv.org/html/2103.00020v1",
+    "scope": "核对第 2.3 节配对图文监督、相似度矩阵与对称交叉熵。两点联合分布的对齐不可唯一性和数值损失为本课自行证明的教学例；没有复现或引用 CLIP 性能数字。",
+    "checkedOn": "2026-11-26",
+    "status": "verified"
+  },
+  {
+    "id": "sarkka-solin-sde",
+    "title": "Applied Stochastic Differential Equations",
+    "authors": "Simo Särkkä, Arno Solin",
+    "year": 2019,
+    "url": "https://users.aalto.fi/~asolin/sde-book/sde-book.pdf",
+    "scope": "核对第 4 章 Itô 积分、第 6.2 节 OU 精确离散转移、第 8 章数值模拟、第 10.6 节 Kalman 更新（例 10.19）。本课用标准布朗运动与显式 σ，参数、路径和滤波数值均自行设置；未复制书中图表或程序。",
+    "checkedOn": "2026-11-26",
+    "status": "verified"
+  },
+  {
+    "id": "hernan-whatif-foundations",
+    "title": "Causal Inference: What If",
+    "authors": "Miguel A. Hernán, James M. Robins",
+    "year": 2020,
+    "url": "https://miguelhernan.org/whatifbook",
+    "scope": "核对作者官网 2026-08-19 PDF，第 2.3–2.4 节标准化/加权及第 3 章识别条件。网页工具因文件大小受限，已读取本地作者原版 PDF 对应内容。四组数据、+0.26/−0.10 数值和结构模拟为独立构造，不是书中实际研究结果。",
+    "checkedOn": "2026-11-26",
+    "status": "verified"
+  },
+  {
+    "id": "applied-pk-course",
+    "title": "Introduction to Bioengineering — The One-Compartment Model",
+    "authors": "UC Berkeley Bioengineering course materials",
+    "year": null,
+    "url": "https://ucb-bioe.github.io/textbook/chapters/04_pharmacokinetics/02_compartment_models_1.html",
+    "checkedOn": "2026-11-26",
+    "status": "verified",
+    "scope": "核验官方课程的一室质量守恒、瞬时输入、表观分布容积、一阶清除与半衰期；课程网页未注明出版年。本课参数及对比情景独立构造，不使用原网页临床给药数值。"
+  },
+  {
+    "id": "applied-fda-exposure-response",
+    "title": "Exposure-Response Relationships — Study Design, Data Analysis, and Regulatory Applications",
+    "authors": "U.S. Food and Drug Administration",
+    "year": 2003,
+    "url": "https://www.fda.gov/media/71277/download",
+    "checkedOn": "2026-11-26",
+    "status": "verified",
+    "scope": "读取2003年原始指导文件第17–18正文页，核验PK/PD关联、经验模型不自动建立因果机制，以及应说明模型和测量假设；未把该旧文件当作当前全部监管要求。"
+  },
+  {
+    "id": "applied-huan-marzouk",
+    "title": "Simulation-based optimal Bayesian experimental design for nonlinear systems",
+    "authors": "Xun Huan, Youssef M. Marzouk",
+    "year": 2013,
+    "url": "https://arxiv.org/pdf/1108.4146",
+    "checkedOn": "2026-11-26",
+    "status": "verified",
+    "scope": "读取原论文第2节的后验更新、期望KL效用、互信息等价及序贯设计讨论。本课二元概率表、0.531004 bit计算和代码独立构造，不复现原文燃烧实验。"
+  },
+  {
+    "id": "applied-conformal",
+    "title": "A Gentle Introduction to Conformal Prediction and Distribution-Free Uncertainty Quantification",
+    "authors": "Anastasios N. Angelopoulos, Stephen Bates",
+    "year": 2022,
+    "url": "https://arxiv.org/pdf/2107.07511",
+    "checkedOn": "2026-11-26",
+    "status": "verified",
+    "scope": "读取原作者讲义附录D第50–51页的有限样本覆盖、可交换秩和无穷阈值边界。本课五秩与两群组例子独立枚举，群组反例不冒充实证校准结果。"
+  },
+  {
+    "id": "applied-dudik-ope",
+    "title": "Doubly Robust Policy Evaluation and Learning",
+    "authors": "Miroslav Dudík, John Langford, Lihong Li",
+    "year": 2011,
+    "url": "https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/double_robust.pdf",
+    "checkedOn": "2026-11-26",
+    "status": "verified",
+    "scope": "读取原论文第2–3节的直接法、逆概率加权、双重稳健估计、独立辅助拟合假设及乘积偏差。本课四日志、超范围估计值与精确枚举独立构造。"
+  },
+  {
+    "id": "applied-perturb-seq",
+    "title": "Mapping information-rich genotype-phenotype landscapes with genome-scale Perturb-seq",
+    "authors": "Joseph M. Replogle et al.",
+    "year": 2022,
+    "url": "https://ntc.hms.harvard.edu/publications/mapping-information-rich-genotype-phenotype-landscapes-genome-scale-perturb-seq",
+    "checkedOn": "2026-11-26",
+    "status": "verified",
+    "scope": "核验作者机构的原论文信息与摘要，确认CRISPR扰动连接单细胞转录读数的测量对象；未据摘要审计全文的机制或性能结论。本课转换/选择反例为独立数学构造。"
+  },
+  {
+    "id": "applied-scgen",
+    "title": "scGen predicts single-cell perturbation responses",
+    "authors": "Mohammad Lotfollahi, F. Alexander Wolf, Fabian J. Theis",
+    "year": 2019,
+    "url": "https://www.nature.com/articles/s41592-019-0494-8",
+    "checkedOn": "2026-11-26",
+    "status": "verified",
+    "scope": "核验原论文索引摘要与发表信息中VAE及潜在向量运算的输入输出定位；出版社全文入口受访问限制，未声称复现或全面审计该模型。课程未将其性能摘要作为已独立验证结论。"
+  }
+]

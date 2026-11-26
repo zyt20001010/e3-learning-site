@@ -1,0 +1,209 @@
+{
+  "id": "pkpd",
+  "name": "PK/PD：从给药输入到浓度与效应",
+  "nameEn": "Pharmacokinetics and Pharmacodynamics",
+  "module": "I2",
+  "priority": "P0",
+  "summary": "从质量守恒推导一室模型，区分剂量、浓度、暴露和效应，再检查相互作用改变的是哪一段。",
+  "prerequisites": [
+    "ode-sde",
+    "identifiability"
+  ],
+  "related": [
+    "noncommutativity",
+    "virtual-cell"
+  ],
+  "minutes": {
+    "A": 45,
+    "B": 90,
+    "C": 180
+  },
+  "sections": [
+    {
+      "id": "L0",
+      "title": "相同剂量不等于相同暴露或效应",
+      "depth": "A",
+      "paragraphs": [
+        "给药方案规定输入了多少物质，浓度曲线描述物质随后怎样分布和清除，效应曲线描述某个明确读数如何响应浓度。这三者是不同对象。只用药物名称预测联用结果，会省略给药途径、时间和观察终点等决定问题含义的信息。",
+        "药代动力学简称 PK，连接给药与浓度；药效动力学简称 PD，连接浓度与指定效应。本课用一室线性消除和即时饱和效应搭建最小桥梁。全部参数都是合成数值，仅用于核对单位和方程，不对应任何真实药物的用药方案。"
+      ]
+    },
+    {
+      "id": "L1",
+      "title": "容器中的数量与测得的浓度",
+      "depth": "A",
+      "paragraphs": [
+        "把系统暂时视为充分混合的容器。容器中药物量 M 对应质量，浓度 C=M/V 对应每单位表观分布容积的质量。清除率 CL 的单位是体积每时间，乘以浓度才得到每时间移除的质量；它不是每小时固定移除多少毫克。",
+        "表观分布容积 V 是药物量与所测浓度之比，不必等于解剖学上的实际体积。PD 则像一个逐渐饱和的读数：低浓度增加时读数变化明显，高浓度增加时变化变小。这个比喻只对应函数形状，尚未证明具体受体机制。",
+        "计算前应把浓度与时间统一到同一套单位。把微摩尔浓度直接代入毫克浓度标定的效应公式，会改变数值含义，不能靠优化器补救。"
+      ]
+    },
+    {
+      "id": "L2",
+      "title": "手算一条浓度曲线",
+      "depth": "A",
+      "paragraphs": [
+        "设合成输入量 D=100 mg，V=20 L，CL=2 L/h，瞬时输入后没有继续给药。初始浓度为100/20=5 mg/L，消除常数 k=CL/V=0.1 h⁻¹；到 t=log(2)/0.1≈6.931 h，浓度恰好减半至2.5 mg/L。",
+        "效应使用任意刻度：设基线 E₀=0、最大增量 Emax=100、半最大效应浓度 EC50=5 mg/L、Hill 指数 h=1。初始效应为100×5/(5+5)=50，浓度减半时为100×2.5/(5+2.5)=33.333。效应没有同时减半，因为浓度到效应的映射非线性。"
+      ],
+      "table": {
+        "headers": [
+          "合成设定",
+          "初始浓度",
+          "总暴露 AUC",
+          "初始效应"
+        ],
+        "rows": [
+          [
+            "基准参数",
+            "5 mg/L",
+            "50 mg·h/L",
+            "50"
+          ],
+          [
+            "仅 CL 减半",
+            "5 mg/L",
+            "100 mg·h/L",
+            "50"
+          ],
+          [
+            "仅 EC50 减半",
+            "5 mg/L",
+            "50 mg·h/L",
+            "66.667"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "L3",
+      "title": "定义输入、状态与读数",
+      "depth": "A",
+      "paragraphs": [
+        "时间 t≥0；M(t)≥0 是药物量，C(t)≥0 是浓度，u(t)≥0 是输入速率。V、CL、EC50 为正参数，h>0，Emax 表示相对基线的最大增量。给定参数和输入后，这里的状态轨迹是确定的；测量误差和个体差异需要另设概率模型。",
+        "一室假设把观测浓度与一个充分混合状态相连，线性清除假设令移除速率正比于浓度。即时 PD 假设效应只依赖当前浓度；若同浓度在上升与下降阶段给出不同效应，这个状态描述可能不够。"
+      ],
+      "equations": [
+        {
+          "tex": "\\frac{dM}{dt}=u(t)-CL\\,C(t),\\quad M(t)=VC(t),\\quad \\frac{dC}{dt}=\\frac{u(t)}{V}-\\frac{CL}{V}C(t)",
+          "explanation": "V 为常数时可将质量守恒改写成浓度方程；第一式各项单位为质量/时间，M=VC 两边为质量，最后一式各项为质量/(体积×时间)。"
+        },
+        {
+          "tex": "E(C)=E_0+E_{\\max}\\frac{C^h}{EC_{50}^{\\,h}+C^h}",
+          "explanation": "EC50 是达到最大增量一半的浓度；h 改变曲线形状，不能一般解释成结合位点数。"
+        }
+      ]
+    },
+    {
+      "id": "L4",
+      "title": "指数解、暴露积分与饱和关系",
+      "depth": "B",
+      "paragraphs": [
+        "瞬时输入写成初始条件 M(0)=D，此后 u=0。分离变量得到 dC/C=−kdt，从0到t积分，再代入 C(0)=D/V，得到 C(t)=(D/V)e⁻ᵏᵗ。设置 C(t)/C(0)=1/2 即得半衰期；该推导需要 k>0。",
+        "将浓度从0积分到无穷，指数积分等于1/k，所以 AUC=D/(Vk)=D/CL。若 CL=0，浓度不衰减且无限时域 AUC 发散。改变输入途径、吸收比例或非线性清除后，不能直接照搬这个结论。",
+        "在简化的单类结合位点平衡模型中，结合与游离的比为 C/Kd，结合比例因此为 C/(Kd+C)。若效应再正比于结合比例，会得到 h=1 的饱和式。这是附加机制假设；经验拟合的 EC50 并不普遍等于结合常数 Kd。"
+      ],
+      "equations": [
+        {
+          "tex": "C(t)=\\frac{D}{V}e^{-kt},\\quad k=\\frac{CL}{V},\\quad t_{1/2}=\\frac{\\log2}{k},\\quad AUC_{0,\\infty}=\\frac{D}{CL}",
+          "explanation": "仅在本课瞬时完全输入、固定 V 和一阶清除的模型下使用。"
+        }
+      ]
+    },
+    {
+      "id": "L5",
+      "title": "区分暴露改变和响应改变",
+      "depth": "A",
+      "paragraphs": [
+        "在本课参数化中，CL 减小使浓度消失更慢并提高 AUC；EC50 减小则使同一浓度产生更大读数。两者都可能提高某些时间的效应，却是不同层面的改变。仅有一个效应终点，通常不能唯一反推出变化来自哪里。",
+        "浓度时间数据可检验 PK，给定浓度下的响应数据可约束 PD；二者联合仍需检查测量尺度、时间滞后和参数混淆。AUC 比值是暴露指标，细胞存活率是细胞读数，患者结局又是另一个目标，不能直接互相替代。",
+        "在无噪声且 D 已知时，两个不同时间的正浓度可由对数斜率恢复 k，再由曲线幅度恢复 V，最后计算 CL=kV。若只知道一个 AUC，则本模型中可以恢复 CL，却不能同时恢复 V。需要的数据取决于目标参数，而不只取决于模型包含几个参数。"
+      ]
+    },
+    {
+      "id": "L6",
+      "title": "拟合曲线与恢复机制的区别",
+      "depth": "A",
+      "paragraphs": [
+        "低浓度 C≪EC50 且 h=1 时，效应增量近似为 (Emax/EC50)C。若实验只覆盖这个范围，数据主要约束比值，Emax 与 EC50 可能很难分别估计。加入更多同范围数据与扩展到饱和区间，提供的信息不同。",
+        "一个经验 PK/PD 模型拟合得好，不足以自动证明受体、代谢酶或因果机制。真实系统中的吸收、活性代谢物、组织分布、反馈和病程可能改变读数。应针对实际研究目标逐项增加状态，并检查新状态带来的可检验预测。",
+        "实际估计还要指定噪声：浓度加性误差和对数浓度加性误差会给出不同的似然与拟合权重。低于检测限的记录不宜随意替换成零再取对数；重复时间点也不能当成来自不同个体的独立样本。模型方程正确仍不意味着这些统计选择可以省略。"
+      ]
+    },
+    {
+      "id": "L7",
+      "title": "验证单位一致的合成计算",
+      "depth": "B",
+      "paragraphs": [
+        "代码核对半衰期、无限时域积分和三种参数情景，并用中心差分检查浓度满足微分方程。数值积分与差分只是在给定数学模型内交叉检查，不构成真实药理实验验证。"
+      ],
+      "code": {
+        "language": "r",
+        "environment": "R >= 4.4；仅 base R；合成教学数据；seed = 20261126",
+        "verified": true,
+        "source": "set.seed(20261126)\nD <- 100; V <- 20; CL <- 2\nk <- CL/V\nconcentration <- function(t, clearance=CL) D/V*exp(-clearance/V*t)\neffect <- function(C, ec50=5, emax=100, hill=1) emax*C^hill/(ec50^hill+C^hill)\nhalf <- log(2)/k\nauc_numeric <- integrate(concentration, lower=0, upper=Inf)$value\nstopifnot(abs(concentration(half)-2.5)<1e-12, abs(auc_numeric-D/CL)<1e-7)\nstopifnot(abs(effect(5)-50)<1e-12, abs(effect(2.5)-100/3)<1e-12)\nt <- 3; delta <- 1e-4\nderivative <- (concentration(t+delta)-concentration(t-delta))/(2*delta)\nstopifnot(abs(derivative+k*concentration(t))<1e-8)\nscenario <- data.frame(scenario=c(\"baseline\",\"CL_half\",\"EC50_half\"),\n  C0=c(5,5,5), AUC=c(D/CL,D/(CL/2),D/CL),\n  initial_effect=c(effect(5),effect(5),effect(5,ec50=2.5)))\nstopifnot(scenario$AUC[2]==2*scenario$AUC[1])\nprint(c(k=k,half_life=half,auc=auc_numeric,effect_at_half_life=effect(2.5)))\nprint(scenario)\n",
+        "file": "pkpd.R"
+      }
+    },
+    {
+      "id": "L8",
+      "title": "为动态相互作用研究确定观测层级",
+      "depth": "A",
+      "paragraphs": [
+        "先把目标写成指定输入下的浓度、暴露或响应，再列出现有数据能约束哪一部分。若候选解释分别改变 CL 和 EC50，可优先考虑同时记录浓度与响应的时间点，而不是只增加最终效应重复。实验可行性与噪声还会影响最佳选择。",
+        "给药顺序研究可在此基础上增加状态历史和输入切换，但即时一室模型本身没有覆盖完整药理机制。更复杂模型的价值应由新解释能力、参数信息和独立预测检验体现；本课方程只提供一个可复算的起点。"
+      ]
+    }
+  ],
+  "extension": {
+    "status": "planned",
+    "topics": [
+      "含吸收和效应室的参数可识别性",
+      "非线性混合效应模型中的个体差异与测量误差",
+      "输入设计与 PK/PD 目标反演的稳定性"
+    ]
+  },
+  "references": [
+    "applied-pk-course",
+    "applied-fda-exposure-response"
+  ],
+  "questions": [
+    {
+      "id": "pkpd-q1",
+      "type": "最小计算",
+      "prompt": "本课 D=100 mg、V=20 L、CL=2 L/h，AUC 是多少？",
+      "options": [
+        "5 mg/L",
+        "50 mg·h/L",
+        "2 L/h"
+      ],
+      "answer": 1,
+      "explanation": "AUC=D/CL；浓度、暴露与清除率有不同单位。",
+      "depth": "A"
+    },
+    {
+      "id": "pkpd-q2",
+      "type": "技术辨析",
+      "prompt": "仅将 EC50 减半而保持 PK 参数不变，本模型中哪项直接改变？",
+      "options": [
+        "浓度 AUC",
+        "相同浓度下的效应",
+        "输入药物总量"
+      ],
+      "answer": 1,
+      "explanation": "EC50 属于本课 PD 映射；改变它不会修改 PK 方程。",
+      "depth": "A"
+    }
+  ],
+  "lab": "pkpd",
+  "status": {
+    "eli5": true,
+    "example": true,
+    "definition": true,
+    "derivation": true,
+    "code": true,
+    "interactive": true,
+    "literature": true,
+    "audit": true
+  }
+}

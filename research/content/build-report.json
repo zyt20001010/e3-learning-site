@@ -1,0 +1,146 @@
+{
+  "builtOn": "2026-11-26",
+  "formatVersion": 1,
+  "modules": 10,
+  "groups": 39,
+  "nodes": 71,
+  "lessons": 31,
+  "coverageEntries": 910,
+  "coverageOccurrences": 916,
+  "routeDays": 14,
+  "questions": 75,
+  "equations": 102,
+  "interactiveLabs": 17,
+  "verifiedExamples": 31,
+  "sources": 46,
+  "comparisonsWritten": 14,
+  "comparisonsPlanned": 28,
+  "prerequisiteDAG": true,
+  "editoriallyReviewed": 31,
+  "sourceFiles": [
+    {
+      "id": "attention",
+      "sha256": "ca81b8d2c496aa7f37ec25d19b2cb3c3530fb36178d8af1f871eeecc85ff9cd7"
+    },
+    {
+      "id": "backprop",
+      "sha256": "193363d179a1c4443c57568e6d68c514245e4d7bc95413e296ff15f26d3f16c4"
+    },
+    {
+      "id": "bandit",
+      "sha256": "5a08820d2b69a40ce3711575eb014b5fff395eaac76ac864b6875004a78d887c"
+    },
+    {
+      "id": "branching",
+      "sha256": "927a9cb012946a132d09cb98ef5c55da74e5ea3a4ae8a2efa9f42929d47db705"
+    },
+    {
+      "id": "causality",
+      "sha256": "48e9b072c7ba42427cc9543a0474a855406814b96e4249df21103d6714626c18"
+    },
+    {
+      "id": "convolution",
+      "sha256": "26cfd67727b6e49f3adaad239a803d3b08f48b3930c0131079c391ea49570910"
+    },
+    {
+      "id": "counterfactual",
+      "sha256": "b64f832e405ac01d8c93d45f3ff1eb235382fb0874c691341fa2e2e63cc1f5d4"
+    },
+    {
+      "id": "diffusion",
+      "sha256": "c057ecde2c93c4d4e43fc7058d2d89c8b1d8d13106bf840a3bbeef6a24a0de6e"
+    },
+    {
+      "id": "experimental-design",
+      "sha256": "3cea1c92dddb63fb7254b150353e7945c72ddc44196c6f6cc3f9526e04e4bd36"
+    },
+    {
+      "id": "flow-matching",
+      "sha256": "8c5c285ac79f3172cc62cc5b334cb33157fff68bc1ae70017dcd03dee3070c52"
+    },
+    {
+      "id": "fourier",
+      "sha256": "12d95822c5569b06a7b289b5da18eeed1f5111b1688e399047b49452e0a238d8"
+    },
+    {
+      "id": "gnn",
+      "sha256": "c802167de1c95f9e8dcc3bfa3c89a5567a367a2999cc9448485e2346969b4f63"
+    },
+    {
+      "id": "identifiability",
+      "sha256": "b24b4737061e2af011dcb30b6dac410a5e3018d858874caa5a48cb41d0ac5cb2"
+    },
+    {
+      "id": "jepa",
+      "sha256": "3693b7a5dfefc7ac372701dbad243166e3d9f7698d46e68d47a96b4272885db2"
+    },
+    {
+      "id": "kernels",
+      "sha256": "e434971f489cc457285e757529baad1729fa72d46737e4bb1ccd24c9e4ba4131"
+    },
+    {
+      "id": "linear-algebra",
+      "sha256": "a1b16916375e52abc19730383c8994525941626a6ea3fe9a2023ae5ac1a8f43f"
+    },
+    {
+      "id": "mcts",
+      "sha256": "a60a4a14f6825ba4cbf41334fa968dd7fe4528415f97b71e3727bfd6f0d5036a"
+    },
+    {
+      "id": "multimodal",
+      "sha256": "002d841a26751a346508c5f847105a06644465d6dfa5a1b5340b2b0dfc3e5ee4"
+    },
+    {
+      "id": "noncommutativity",
+      "sha256": "51c83a58f7a09ffd22ecf95ae1f52c6debb8594908c8dee3ba4c8451b81a09ab"
+    },
+    {
+      "id": "ode-sde",
+      "sha256": "954c2894971050889f45c282d3ca0be1ae74f506d85d6ffc5c7d0cd82f709b41"
+    },
+    {
+      "id": "ope",
+      "sha256": "838d2a2bc2a735e39ca7dbb801296568d8e6a547a5e2e544eb1684ad9323d1c9"
+    },
+    {
+      "id": "pkpd",
+      "sha256": "cfd9880c47250061b7e382117e46ab60dfe3339b666169413e48d2f918112313"
+    },
+    {
+      "id": "probability",
+      "sha256": "17f8205fe2235d3cd9b1e25c6ee0a69c7cb343b379faa500e64ebebff9ddc33f"
+    },
+    {
+      "id": "reliability",
+      "sha256": "647cf7eb856544aa96142e63151cabb7aa742d5f4971c23bca74e80e30a8229b"
+    },
+    {
+      "id": "representation",
+      "sha256": "9a228b90caf3542d1195442e6ed171f96389be0b62e34b0f26fa3a87cea984ce"
+    },
+    {
+      "id": "rsi",
+      "sha256": "ff95d3adf88c3cdd964b2d2c458d3472545cfb9e58240b48f922caf7f389078c"
+    },
+    {
+      "id": "sampling",
+      "sha256": "a7a24b14508c06edc56177b4f11a429ffe0fe97da2cc5e394e378276ea29cb81"
+    },
+    {
+      "id": "sequential-causal",
+      "sha256": "8f4d64f9bc5da4afd42e46a7f286b56ed816daea409d2a281140ec548e5c7b35"
+    },
+    {
+      "id": "time-series",
+      "sha256": "0a08cc00e8fa7b3154830023b365df34709ff7603e4dfb9e88c6278c4425ec8c"
+    },
+    {
+      "id": "vae-gan",
+      "sha256": "b0673429b5f295e1c31851a36a50e4ba33b15298419e53d79dab6defbc20f5ae"
+    },
+    {
+      "id": "virtual-cell",
+      "sha256": "0d0284b65c32423e7b9e07a6b61e3038afefd608e175e9704b82cf1257be977c"
+    }
+  ]
+}

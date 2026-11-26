@@ -7,3 +7,8 @@
 !materials/*.pdf
 __pycache__/
 *.pyc
+
+# E3 Research: build-time dependencies and local QA data.
+research/node_modules/
+research/.cache/
+research/test-results/

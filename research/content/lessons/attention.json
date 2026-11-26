@@ -1,0 +1,229 @@
+{
+  "id": "attention",
+  "name": "QKV、注意力矩阵与 Transformer",
+  "nameEn": "QKV, Attention and Transformers",
+  "module": "B6",
+  "priority": "P0",
+  "summary": "从输入的线性映射算出 Q、K、V，再计算点积、缩放、逐行归一化与加权输出，辨清掩码和因果推断。",
+  "prerequisites": [
+    "linear-algebra",
+    "backprop"
+  ],
+  "related": [
+    "gnn",
+    "kernels",
+    "representation",
+    "jepa"
+  ],
+  "minutes": {
+    "A": 45,
+    "B": 90,
+    "C": 180
+  },
+  "sections": [
+    {
+      "id": "L0",
+      "title": "L0 · 让每个位置读取不同的上下文",
+      "depth": "A",
+      "paragraphs": [
+        "固定邻域平均对所有位置使用同一套邻域权重，但不同位置可能需要读取不同对象的信息。Attention 让查询位置根据当前特征与候选位置的匹配程度，决定如何汇总候选值。它解决的是输入相关的信息选择与组合问题。",
+        "Transformer 把这种计算与逐位置前馈网络、残差连接、归一化、位置信息等组成层。仅使用 Attention 并不等于完整 Transformer；这套运算也不自动具备时间或因果语义。"
+      ]
+    },
+    {
+      "id": "L1",
+      "title": "L1 · 查询、索引和被取回的内容",
+      "depth": "A",
+      "paragraphs": [
+        "可以把 Query 理解为“当前需要怎样的信息”，Key 是每个候选对象用于匹配的索引，Value 是匹配后实际被汇总的内容。三者在真实模型中都是数向量，通常由输入乘不同参数矩阵得到，而不是预先写好的语言问题。",
+        "Query 与 Key 做点积得到分数，Softmax 把同一查询下的分数转成和为 1 的非负权重，再用这些权重对 Value 求和。Key 决定怎么匹配，Value 决定拿到什么，两者功能不同。"
+      ]
+    },
+    {
+      "id": "L2",
+      "title": "L2 · 三个 Token 的逐步计算",
+      "depth": "A",
+      "paragraphs": [
+        "设三行输入 X=[[1,0],[0,1],[1,1]]。取 W_Q=W_K=I₂、W_V=[[1],[2]]，所以 Q=K=X，V=(1,2,3)ᵀ。这里所有权重都是明确指定的合成值，没有声称经过训练。",
+        "第一个查询 q₁=(1,0)，与三个键点积为 (1,0,1)。除以 √2 后为 (0.707107,0,0.707107)，取指数约为 (2.028115,1,2.028115)，和为 5.056230。归一化后权重约 (0.401112,0.197776,0.401112)，输出为 2。"
+      ],
+      "table": {
+        "headers": [
+          "查询行",
+          "缩放后的分数",
+          "归一化权重（约）",
+          "输出（约）"
+        ],
+        "rows": [
+          [
+            "1",
+            "(1,0,1)/√2",
+            "(0.401112,0.197776,0.401112)",
+            "2.000000"
+          ],
+          [
+            "2",
+            "(0,1,1)/√2",
+            "(0.197776,0.401112,0.401112)",
+            "2.203336"
+          ],
+          [
+            "3",
+            "(1,1,2)/√2",
+            "(0.248255,0.248255,0.503490)",
+            "2.255235"
+          ]
+        ]
+      },
+      "steps": [
+        "对第一行加因果掩码，只允许看第 1 个位置，权重变为 (1,0,0)，输出变为 1。",
+        "对第二行只保留位置 1、2，再重新归一化；不能先归一化再把未来权重置零而不重算。",
+        "本例 d_v=1，所以每个输出只有一个数；值向量可以使用不同于查询键的维度。"
+      ]
+    },
+    {
+      "id": "L3",
+      "title": "L3 · 矩阵形状、参数和掩码",
+      "depth": "A",
+      "paragraphs": [
+        "输入 X∈Rⁿˣᵈ，参数 W_Q、W_K∈Rᵈˣᵈᵏ、W_V∈Rᵈˣᵈᵛ。Q=XW_Q、K=XW_K、V=XW_V；分数与权重矩阵均为 n×n，输出 Y 为 n×d_v。参数是 W，权重矩阵 A 则是当前输入算出的中间量，二者不要混淆。",
+        "Self-Attention 的 Q、K、V 来自同一组输入。Cross-Attention 可由 n_q 个查询读取另一组 n_k 个键和值，权重矩阵为 n_q×n_k。掩码 M 在允许位置为 0、禁止位置为 −∞。每行至少需要一个允许位置。"
+      ],
+      "equations": [
+        {
+          "tex": "A_{ij}=\\frac{\\exp(S_{ij})}{\\sum_{r=1}^{n_k}\\exp(S_{ir})},\\quad S=\\frac{QK^\\top}{\\sqrt{d_k}}+M,\\quad Y=AV",
+          "explanation": "Softmax 沿键维逐行计算。被掩码的位置权重为零。全行均被禁止时，分母为零，必须在程序中处理。"
+        },
+        {
+          "tex": "\\operatorname{MultiHead}(X)=\\operatorname{Concat}(Y_1,\\ldots,Y_h)W_O",
+          "explanation": "每个头有自己的投影参数。拼接后用输出投影 W_O 回到所需维度；h 是头数。"
+        }
+      ]
+    },
+    {
+      "id": "L4",
+      "title": "L4 · 缩放与归一化的数学依据",
+      "depth": "B",
+      "paragraphs": [
+        "若 q 与 k 的分量相互独立、均值为 0、方差为 1，则点积 Σqᵣkᵣ 的方差为 d_k。除以 √d_k 后方差为 1，减少维度增大时分数尺度膨胀的趋势。训练后的特征未必满足这些假设，因此这是设计动机，不是所有网络上的分布定理。",
+        "Softmax 对所有分数同时加同一常数不变：分子和分母都乘同一个指数因子。因此实现时先减去每行最大值，降低上溢风险。导数 ∂aᵢ/∂sⱼ=aᵢ(δᵢⱼ−aⱼ) 表明权重接近 0 或 1 时部分梯度可能很小。",
+        "忽略掩码和位置编码，将输入行按 P 重排会让 Q、K、V 同步重排，分数变成 PSPᵀ，最终输出变成 PY。因此这种 Self-Attention 对排列等变，不能仅靠内容运算区分两个相同 Token 的先后位置。位置编码或相对位置规则提供额外顺序信息。"
+      ],
+      "equations": [
+        {
+          "tex": "\\operatorname{softmax}(s+c\\mathbf1)=\\operatorname{softmax}(s),\\qquad \\frac{\\partial a_i}{\\partial s_j}=a_i(\\mathbf1_{i=j}-a_j)",
+          "explanation": "这里 a=softmax(s)，对分数 s 求导；模型训练还需沿 QKV 投影继续传播到参数。"
+        }
+      ]
+    },
+    {
+      "id": "L5",
+      "title": "L5 · 加权聚合相似，数学条件不同",
+      "depth": "A",
+      "paragraphs": [
+        "核回归、图消息传递和 Attention 都可能做加权汇总，但权重来源不同：固定核回归常由预定距离给出，GNN 的可通信范围由图边约束，Attention 的匹配由输入和参数共同产生。它们并非普遍数学等价。",
+        "完整 Transformer 的前馈网络对每个位置分别变换通道；残差提供额外路径，LayerNorm 调整特征尺度。多头提供多套投影和汇总，不能解释成必然学习到可命名的独立语义。",
+        "朴素 Attention 构造 n×n 分数矩阵，运算约为 O(n²(d_k+d_v))，矩阵存储为 O(n²)。稀疏和线性 Attention 改变连接或计算形式；FlashAttention 主要调整精确 Attention 的分块与存储访问策略，不能把它直接称为稀疏近似。"
+      ]
+    },
+    {
+      "id": "L6",
+      "title": "L6 · 权重不等于影响，更不等于因果效应",
+      "depth": "A",
+      "paragraphs": [
+        "若全部查询和键都为零，未掩码权重是均匀分布；每个位置都收到相同的 Value 均值，原来各位置的差别可能丢失。加权平均本身通常不可逆。",
+        "一个位置的注意力权重大，并不单独决定它对最终输出的作用：Value、残差、后续网络和其他头都会影响结果。更不能从 Aᵢⱼ 大推出 j 对 i 的干预效应大，因为这里没有定义治疗、结局、混杂或识别条件。",
+        "Causal Mask 只限制信息从未来位置流向过去位置。它可以防止自回归预测偷看未来，却不能解决观察性治疗数据中的混杂。更长上下文也不会自动补足未观测变量。"
+      ]
+    },
+    {
+      "id": "L7",
+      "title": "L7 · 直接实现矩阵乘法和 Softmax",
+      "depth": "B",
+      "paragraphs": [
+        "下面不调用深度学习库，显式展示 Q、K、V、分数、权重及输出，并检查每行概率和与掩码。用同一个极大常数平移分数，再验证 Softmax 不变，检查数值稳定写法。",
+        "该小例只验证 Attention 运算，不训练完整 Transformer。正式实现还需考虑批维、多头形状、padding mask、dropout、缓存和相应测试。"
+      ],
+      "code": {
+        "language": "python",
+        "source": "# Python >= 3.9；标准库，三 Token 合成例。\nimport math, random\nrandom.seed(20261126)\nX=[[1.,0.],[0.,1.],[1.,1.]]\nWQ=WK=[[1.,0.],[0.,1.]]\nWV=[[1.],[2.]]\ndef matmul(a,b):\n    assert len(a[0])==len(b)\n    return [[sum(a[i][k]*b[k][j] for k in range(len(b)))\n             for j in range(len(b[0]))] for i in range(len(a))]\nQ,K,V=matmul(X,WQ),matmul(X,WK),matmul(X,WV)\ndef attend(causal=False):\n    scores=[[sum(q*k for q,k in zip(Q[i],K[j]))/math.sqrt(2)\n             for j in range(3)] for i in range(3)]\n    weights=[]\n    for i,row in enumerate(scores):\n        allowed=[j for j in range(3) if not causal or j<=i]\n        largest=max(row[j] for j in allowed)\n        raw=[math.exp(v-largest) if j in allowed else 0. for j,v in enumerate(row)]\n        weights.append([v/sum(raw) for v in raw])\n    return scores,weights,matmul(weights,V)\nscores,weights,Y=attend()\nassert all(abs(sum(row)-1)<1e-12 for row in weights)\nassert abs(Y[0][0]-2)<1e-12\n_,masked,MY=attend(True)\nassert MY[0][0]==1\nassert all(masked[i][j]==0 for i in range(3) for j in range(i+1,3))\n# Softmax 加同一常数不改变概率权重。\nrow=scores[0]\ndef softmax(a):\n    b=[math.exp(v-max(a)) for v in a];return [v/sum(b) for v in b]\nassert all(abs(a-b)<1e-12 for a,b in zip(softmax(row),softmax([v+1000 for v in row])))\nprint({'Q':Q,'K':K,'V':V,'scaled_scores':scores})\nprint({'weights':weights,'output':Y,'causal_weights':masked,'causal_output':MY})\n",
+        "environment": "Python 3.9+；标准库 math、random",
+        "verified": true,
+        "file": "attention.py"
+      }
+    },
+    {
+      "id": "L8",
+      "title": "L8 · 论文中逐项定位信息和计算代价",
+      "depth": "A",
+      "paragraphs": [
+        "读跨模态或分子 Attention 时，先写出查询来自哪种数据、键和值来自哪种数据、配对关系如何获得，再检查数据中是否真正存在这种匹配监督。Cross-Attention 本身不是跨模态已对齐的证明。",
+        "若论文新增一个注意力模块，比较应控制数据、参数量和计算预算，并用删除该模块后丢失的具体能力界定贡献。权重图可以帮助检查计算路径，但机制或因果主张需要另有判别性证据。"
+      ]
+    }
+  ],
+  "extension": {
+    "status": "planned",
+    "topics": [
+      "Attention 的表达能力与位置编码条件",
+      "精确分块 Attention 的在线 Softmax 推导",
+      "长序列近似误差与统计泛化"
+    ]
+  },
+  "references": [
+    "vaswani-attention",
+    "dao-flashattention"
+  ],
+  "questions": [
+    {
+      "id": "attention-q1",
+      "type": "最小计算",
+      "prompt": "本例第一个查询未加掩码时的输出是多少？",
+      "options": [
+        "1",
+        "2",
+        "3"
+      ],
+      "answer": 1,
+      "explanation": "第一和第三项权重相同、值分别为 1 与 3，第二值为 2，所以加权和恰为 2。",
+      "depth": "A"
+    },
+    {
+      "id": "attention-q2",
+      "type": "技术辨析",
+      "prompt": "Q∈R³ˣ²、K∈R⁵ˣ²、V∈R⁵ˣ⁴，输出维度是什么？",
+      "options": [
+        "3×4",
+        "5×4",
+        "3×5"
+      ],
+      "answer": 0,
+      "explanation": "QKᵀ 是 3×5，乘 5×4 的 V 得 3×4。",
+      "depth": "A"
+    },
+    {
+      "id": "attention-q3",
+      "type": "科研判断",
+      "prompt": "时间序列模型用了 Causal Mask，能否因此宣称治疗效应已识别？",
+      "options": [
+        "能，只要没有未来信息",
+        "不能，掩码不提供可交换性等因果识别条件",
+        "能，只要模型足够大"
+      ],
+      "answer": 1,
+      "explanation": "掩码控制计算依赖，不自动消除观察性数据的混杂。",
+      "depth": "A"
+    }
+  ],
+  "lab": "attention",
+  "status": {
+    "eli5": true,
+    "example": true,
+    "definition": true,
+    "derivation": true,
+    "code": true,
+    "interactive": true,
+    "literature": true,
+    "audit": true
+  }
+}

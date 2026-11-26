@@ -1,0 +1,527 @@
+[
+  {
+    "id": "lecun-jepa",
+    "title": "A Path Towards Autonomous Machine Intelligence",
+    "authors": "Yann LeCun",
+    "date": "2022（版本日期待核验）",
+    "status": "bibliography",
+    "summary": "LeCun关于自主机器智能的研究路线文稿；本条作为JEPA思想入口。",
+    "nodes": [
+      "jepa",
+      "representation",
+      "mcts"
+    ],
+    "fields": {
+      "科学问题": "自主学习、预测与规划的总体架构。",
+      "数据生成": "路线文稿，非单一数据集研究。",
+      "观测与目标": "具体问题形式待核验全文。",
+      "使用技术": "JEPA与层次世界模型的路线；细节待核验。",
+      "底层数学": "待核验全文。",
+      "采用原因": "建立表征预测与规划的阅读入口。",
+      "关键假设": "待核验全文。",
+      "研究结果": "不将研究路线表述为已完成系统。",
+      "失败与未解": "本次未取得可阅读全文。",
+      "与研究方向的关系": "方法路线入口，不决定用户的应用身份。"
+    },
+    "verification": "官方作者主页检索结果与OpenReview原始PDF检索记录确认题名作者；直接访问遭浏览器验证，未审阅正文。",
+    "url": "https://openreview.net/pdf?id=BZ5a1r-kVsf"
+  },
+  {
+    "id": "counterfactual-world-models",
+    "title": "Counterfactual World Models: JEPAs That Reason About \"What If\"",
+    "authors": "Randall Balestriero, Yann LeCun, Kerda Varaku",
+    "date": "2026-11-18",
+    "status": "reviewed",
+    "summary": "复用已观测结果的预测残差，估计同一扰动下改变动作后的结果。",
+    "nodes": [
+      "counterfactual",
+      "identifiability",
+      "ode-sde",
+      "jepa"
+    ],
+    "fields": {
+      "科学问题": "事实转移能否确定个体反事实。",
+      "数据生成": "含未观测扰动的动作条件动态系统。",
+      "观测与目标": "观测历史、动作及结果；预测同扰动下的另一动作结果。",
+      "使用技术": "结果加上两动作的条件均值预测差。",
+      "底层数学": "潜在结果、条件均值、混合导数与误差方差。",
+      "采用原因": "事实边缘分布未确定跨动作的结果对应关系。",
+      "关键假设": "动作覆盖、条件可交换性；精确性还需共享加性扰动。",
+      "研究结果": "给出加性情形的精确性与作用交互误差表达。",
+      "失败与未解": "乘性扰动、坐标折叠和不连续接触可破坏近似。",
+      "与研究方向的关系": "连接部分观测、可辨识性、动态系统与反事实。"
+    },
+    "verification": "核验 arXiv v1 第2节及第3.1—3.2节；其余理论仅见概述，未检查全部证明或复现实验。区别于视觉遮蔽领域的同名工作。",
+    "url": "https://arxiv.org/abs/2611.24778"
+  },
+  {
+    "id": "causal-jepa",
+    "title": "Causal-JEPA: Learning World Models through Object-Level Latent Masking",
+    "authors": "Heejeong Nam, Quentin Le Lidec, Lucas Maes, Yann LeCun, Randall Balestriero",
+    "date": "2026-07（ICML）",
+    "status": "reviewed",
+    "summary": "通过遮蔽物体表征，让预测器使用其他物体的信息学习动态。",
+    "nodes": [
+      "jepa",
+      "attention",
+      "representation",
+      "causality"
+    ],
+    "fields": {
+      "科学问题": "物体表征怎样学习物体间动态依赖。",
+      "数据生成": "视频编码为逐帧物体槽位。",
+      "观测与目标": "历史槽位及可用动作；预测缺失和未来槽位。",
+      "使用技术": "保留身份锚点的物体遮蔽、Transformer、平方误差。",
+      "底层数学": "集合等变性与条件预测。",
+      "采用原因": "减少只沿物体自身历史预测的捷径。",
+      "关键假设": "槽位身份可区分，其他对象含预测信息。",
+      "研究结果": "作者报告视觉问答及控制任务的改善。",
+      "失败与未解": "正文明确不声称因果可辨识性。",
+      "与研究方向的关系": "适合研究观测设计如何改变预测依赖。"
+    },
+    "verification": "核验正式PMLR书目与 arXiv v2 第4节、Remark 1。v1题名为Object-Level Latent Interventions，正式题名改为Masking；未复现实验。",
+    "url": "https://proceedings.mlr.press/v306/nam26c.html"
+  },
+  {
+    "id": "i-jepa",
+    "title": "Self-Supervised Learning from Images with a Joint-Embedding Predictive Architecture",
+    "authors": "Mahmoud Assran et al.",
+    "date": "2023-01-19；v3 2023-04-13",
+    "status": "reviewed",
+    "summary": "从图像可见区域预测目标区域的表征，学习可迁移视觉特征。",
+    "nodes": [
+      "jepa",
+      "representation",
+      "attention",
+      "backprop"
+    ],
+    "fields": {
+      "科学问题": "如何从无标签图像学习语义表征。",
+      "数据生成": "图像中采样上下文和多个目标块。",
+      "观测与目标": "可见图块；被遮区域的编码表征。",
+      "使用技术": "上下文编码器、预测器与移动平均目标编码器。",
+      "底层数学": "平方误差与梯度优化。",
+      "采用原因": "让训练预测表征，减少像素细节负担。",
+      "关键假设": "遮蔽后仍保留可预测的语义上下文。",
+      "研究结果": "作者用分类、计数和深度任务评价表征。",
+      "失败与未解": "不是动作条件系统，也不自动提供因果解释。",
+      "与研究方向的关系": "表征学习与预测目标设计的基础案例。"
+    },
+    "verification": "核验 arXiv v3 第3节（Targets/Context/Prediction/Loss）。CVF PDF本次403；已通过原始arXiv全文核验方法，未复现。",
+    "url": "https://arxiv.org/abs/2301.08243"
+  },
+  {
+    "id": "v-jepa",
+    "title": "Revisiting Feature Prediction for Learning Visual Representations from Video",
+    "authors": "Adrien Bardes et al.",
+    "date": "2024（原始V-JEPA）",
+    "status": "reviewed",
+    "summary": "从视频未遮蔽区域预测目标特征，学习运动与外观表征。",
+    "nodes": [
+      "jepa",
+      "representation",
+      "attention",
+      "time-series"
+    ],
+    "fields": {
+      "科学问题": "仅靠视频特征预测能学到哪些可迁移能力。",
+      "数据生成": "约两百万公开视频构成VideoMix2M。",
+      "观测与目标": "可见时空块；被遮块的目标表征。",
+      "使用技术": "时空块遮蔽、ViT、移动平均编码器、L1损失。",
+      "底层数学": "条件中位数与梯度优化。",
+      "采用原因": "连续跨帧遮蔽减少视频冗余造成的信息泄漏。",
+      "关键假设": "预训练视频提供足够运动和外观变化。",
+      "研究结果": "作者报告冻结表征上的多种视觉任务结果。",
+      "失败与未解": "该版本没有显式动作条件，不与V-JEPA 2混写。",
+      "与研究方向的关系": "连接时间依赖、表征学习与可靠评价。"
+    },
+    "verification": "核验原始V-JEPA arXiv v1 第3.1—3.4节。此条不涵盖V-JEPA 2/2.1；未复现。",
+    "url": "https://arxiv.org/abs/2404.08471"
+  },
+  {
+    "id": "world-machine",
+    "title": "World Machine: Towards Generative World Modeling for Time-Series",
+    "authors": "Elton Cardoso do Nascimento et al.",
+    "date": "2026-05-21",
+    "status": "bibliography",
+    "summary": "原始摘要描述以潜状态组织时间序列生成，并在Toy1D验证。",
+    "nodes": [
+      "time-series",
+      "attention",
+      "representation"
+    ],
+    "fields": {
+      "科学问题": "不同观测长度下的时间序列建模。",
+      "数据生成": "摘要列出合成数据Toy1D。",
+      "观测与目标": "观测序列及上下文；具体目标待读全文。",
+      "使用技术": "摘要说明Transformer与潜状态。",
+      "底层数学": "待核验方法正文。",
+      "采用原因": "作者意在缓解随上下文增长的成本。",
+      "关键假设": "待核验方法正文。",
+      "研究结果": "摘要报告合成数据上的可行性。",
+      "失败与未解": "真实系统泛化及控制能力未核验。",
+      "与研究方向的关系": "部分观测动态表征的候选阅读。"
+    },
+    "verification": "核验原始arXiv书目与摘要；尚未审阅方法或实验细节。",
+    "url": "https://arxiv.org/abs/2605.23025"
+  },
+  {
+    "id": "worldts",
+    "title": "WorldTS: World Modeling for Multimodal Covariate-aware Time Series Forecasting",
+    "authors": "Yuhan Zhu et al.",
+    "date": "2026-09-25",
+    "status": "bibliography",
+    "summary": "先学习多模态协变量条件下的潜状态预测，再训练观测解码器。",
+    "nodes": [
+      "time-series",
+      "multimodal",
+      "jepa"
+    ],
+    "fields": {
+      "科学问题": "外部多模态信息怎样进入时间序列预测。",
+      "数据生成": "摘要报告21个现实数据集。",
+      "观测与目标": "历史序列与协变量；未来观测。",
+      "使用技术": "两阶段潜状态学习和冻结后解码。",
+      "底层数学": "待核验损失和概率建模细节。",
+      "采用原因": "将协变量作用放在潜状态形成和演化中。",
+      "关键假设": "未来协变量可用性待核验。",
+      "研究结果": "作者报告多数据集预测评价。",
+      "失败与未解": "不能仅由协变量预测称为干预模型。",
+      "与研究方向的关系": "连接多模态观测与动态预测。"
+    },
+    "verification": "核验原始arXiv书目和摘要；不采用第三方评论中的方法、审稿判断或结果细节。",
+    "url": "https://arxiv.org/abs/2609.31162"
+  },
+  {
+    "id": "pythia",
+    "title": "Pythia: Toward Foundation World Models for Multimodal Time Series",
+    "authors": "Xilin Dai, Hongzhou Chen, Yifan Hu, Yiding Liu, Zewei Dong, Jiang-Ming Yang",
+    "date": "2026-10-04",
+    "status": "bibliography",
+    "summary": "学习跨数据集的上下文条件潜动态，并另接概率解码器。",
+    "nodes": [
+      "time-series",
+      "multimodal",
+      "jepa",
+      "model-scaling"
+    ],
+    "fields": {
+      "科学问题": "可复用的多模态时间序列预测表征。",
+      "数据生成": "跨领域序列；采样细节待核验。",
+      "观测与目标": "数值历史及上下文；未来分布。",
+      "使用技术": "摘要列出JEPA、停止梯度参照和概率解码。",
+      "底层数学": "待核验具体概率族和损失。",
+      "采用原因": "分开表征预训练与观测空间预测。",
+      "关键假设": "上下文信息可用性待核验。",
+      "研究结果": "摘要包含MUSE基准结果；本条不转述数值。",
+      "失败与未解": "跨领域迁移与校准证据待核验。",
+      "与研究方向的关系": "适合联系概率预测与表征迁移。"
+    },
+    "verification": "核验原始arXiv书目摘要；此处采用时间序列语境，区别于EleutherAI Pythia语言模型及同名边缘世界模型。",
+    "url": "https://arxiv.org/abs/2610.05240"
+  },
+  {
+    "id": "acts-wm",
+    "title": "Self-Supervised Latent Action-Conditioned World Modeling for Time Series",
+    "authors": "Chia-Han Kuo, Chengshuai Zhao, Huan Liu, Lo Pang-Yun Ting",
+    "date": "2026-10-27",
+    "status": "bibliography",
+    "summary": "从无动作标签的时间序列转移中学习潜在动作，用于表征预测。",
+    "nodes": [
+      "time-series",
+      "jepa",
+      "representation",
+      "identifiability"
+    ],
+    "fields": {
+      "科学问题": "变化信息能否改善时间序列表征。",
+      "数据生成": "观测序列；摘要列出22个数据集。",
+      "观测与目标": "序列转移及任务信息；目标表征。",
+      "使用技术": "潜在动作建模、JEPA编码器与条件预测器。",
+      "底层数学": "具体目标与潜变量约束待核验。",
+      "采用原因": "为没有显式动作标注的序列提供转移条件。",
+      "关键假设": "潜在动作语义和可辨识性待核验。",
+      "研究结果": "作者报告预测和分类等四类任务。",
+      "失败与未解": "推断出的潜在动作不自动等于可执行干预。",
+      "与研究方向的关系": "连接隐变量、时间序列和信息来源审计。"
+    },
+    "verification": "核验原始arXiv摘要及书目。与神经科学中的同名ACTS-WM工作记忆任务无关；未审阅方法正文。",
+    "url": "https://arxiv.org/abs/2610.37963"
+  },
+  {
+    "id": "divergence",
+    "title": "On the Divergence of Accuracy and Mechanism Consistency in Time Series World Models",
+    "authors": "Haochen Zhang et al.",
+    "date": "2026-10-01",
+    "status": "reviewed",
+    "summary": "分别检验预测误差与改变计划后模型响应方向的一致性。",
+    "nodes": [
+      "time-series",
+      "causality",
+      "reliability",
+      "identifiability"
+    ],
+    "fields": {
+      "科学问题": "事实预测准确能否保证计划变化的响应合理。",
+      "数据生成": "八个记录动作的工程与临床数据集。",
+      "观测与目标": "历史、动作及外源输入；未来状态。",
+      "使用技术": "比较预测空间、计划编码与融合方式。",
+      "底层数学": "风险最小化、分位数动作平移、方向一致率。",
+      "采用原因": "单独测量预测误差未覆盖的动作响应。",
+      "关键假设": "预先声明的作用方向适用于受评估窗口。",
+      "研究结果": "作者报告误差最优和方向一致性可分离。",
+      "失败与未解": "方向遵从是局部检验，不能独立证明因果机制。",
+      "与研究方向的关系": "评价目标与机制、决策主张对齐的案例。"
+    },
+    "verification": "核验原始摘要及HTML第3.1—3.2节、第4.1—4.2节；本条未审阅全部附录或复现。Divergence采用此明确语境，不是新模型名称。",
+    "url": "https://arxiv.org/abs/2610.01842"
+  },
+  {
+    "id": "timeworld",
+    "title": "TimeWorld: Towards Action-Conditioned Multimodal World Models for Time Series Forecasting",
+    "authors": "Hang Ni, Weijia Zhang, Hao Liu",
+    "date": "2026-10-26",
+    "status": "bibliography",
+    "summary": "利用文本动作调整时间序列基础模型，并建立跨领域评价。",
+    "nodes": [
+      "time-series",
+      "multimodal",
+      "attention",
+      "sequential-causal"
+    ],
+    "fields": {
+      "科学问题": "灵活表达的动作如何进入时序预测。",
+      "数据生成": "摘要列出七个现实数据集及动作—结果记录。",
+      "观测与目标": "历史序列和文本动作；未来响应。",
+      "使用技术": "原型引导潜调制与动作对比学习。",
+      "底层数学": "具体损失和采样机制待核验。",
+      "采用原因": "将文本从被动背景转为动作条件。",
+      "关键假设": "文本动作与记录行为的对应关系待核验。",
+      "研究结果": "作者报告基准比较与预训练模型适配。",
+      "失败与未解": "替代动作效果的识别与验证条件待核验。",
+      "与研究方向的关系": "连接多模态表述、干预语义与动态预测。"
+    },
+    "verification": "核验原始arXiv书目摘要；尚未审阅方法与基准构造正文。",
+    "url": "https://arxiv.org/abs/2610.34797"
+  },
+  {
+    "id": "acttime",
+    "title": "ActTime: Action-Conditioned World Modeling for Time Series",
+    "authors": "Xinxing Zhou, Xiaojie Yuan, Yanlong Wen, Ming Jin",
+    "date": "2026-10-19",
+    "status": "reviewed",
+    "summary": "交替进行动作条件转移和观测校正，再从同一末端状态比较候选计划。",
+    "nodes": [
+      "time-series",
+      "sequential-causal",
+      "ope",
+      "identifiability"
+    ],
+    "fields": {
+      "科学问题": "事实预测、干预效果和决策质量是否一致。",
+      "数据生成": "四类控制系统模拟器生成事实训练轨迹。",
+      "观测与目标": "历史观测与动作；候选计划下的未来分位数。",
+      "使用技术": "变量潜状态、注意力、转移与校正、冻结时序先验。",
+      "底层数学": "状态递推、分位数回归和针球损失。",
+      "采用原因": "对不同计划保持相同历史起点和共享动态。",
+      "关键假设": "未执行计划的可靠性需额外评价。",
+      "研究结果": "作者报告不同评价层级的排名会改变。",
+      "失败与未解": "方法节未提供从一般观察数据识别干预的定理。",
+      "与研究方向的关系": "连接部分观测动态、概率预测与策略评价。"
+    },
+    "verification": "核验 arXiv v1 第3.1—3.3节完整方法和摘要。确认两阶段均只训练事实预测；未复现四模拟器实验。",
+    "url": "https://arxiv.org/abs/2610.25764"
+  },
+  {
+    "id": "molrsi",
+    "title": "MoLRSI: A Recursive Self-Improving AI agent for Molecular Discovery",
+    "authors": "Yikun Zhang et al.",
+    "date": "2026-10-29",
+    "status": "bibliography",
+    "summary": "用跨任务记忆和执行反馈改进分子发现工作流及其搜索策略。",
+    "nodes": [
+      "rsi",
+      "experimental-design",
+      "reliability"
+    ],
+    "fields": {
+      "科学问题": "发现流程能否利用经验持续改进。",
+      "数据生成": "摘要列出抗生素筛选与肽MHC结合设计。",
+      "观测与目标": "流程性能、执行反馈；改进后续搜索。",
+      "使用技术": "工作流优化、架构搜索和持久记忆。",
+      "底层数学": "待核验搜索策略和优化目标。",
+      "采用原因": "让流程开发本身利用反馈。",
+      "关键假设": "任务间经验可迁移；检验方式待核验。",
+      "研究结果": "作者报告两个分子发现任务的湿实验结果。",
+      "失败与未解": "递归改善的归因与独立评估待核验。",
+      "与研究方向的关系": "关联序贯实验和自动化研究评价。"
+    },
+    "verification": "核验原始arXiv书目摘要；未验证实验命中率、比较公平性或复现代码。",
+    "url": "https://arxiv.org/abs/2610.39714"
+  },
+  {
+    "id": "leadflow",
+    "title": "LeadFlow learns activity-aligned molecular generation from chemical series for structure-based molecular optimization",
+    "authors": "Zhehuan Fan et al.",
+    "date": "2026-10-29",
+    "status": "bibliography",
+    "summary": "用同测定条件的化学系列及活性偏好指导结构条件分子优化。",
+    "nodes": [
+      "sampling",
+      "representation",
+      "experimental-design"
+    ],
+    "fields": {
+      "科学问题": "生成的骨架改变如何对齐实验活性。",
+      "数据生成": "测定条件一致的化学系列。",
+      "观测与目标": "分子结构与活性；优化后的分子。",
+      "使用技术": "最大公共子结构、Bayesian Flow Networks、活性DPO。",
+      "底层数学": "具体贝叶斯流与偏好目标待核验。",
+      "采用原因": "从实验活性学习优化方向。",
+      "关键假设": "活性比较具有可比性；构造细节待核验。",
+      "研究结果": "作者报告MolGenBench及ClpP前瞻合成结果。",
+      "失败与未解": "筛选贡献、对照和命中归因待核验。",
+      "与研究方向的关系": "可用于学习生成模型与实验评价如何连接。"
+    },
+    "verification": "核验原始预印本平台书目摘要，DOI:10.65215/LTSpreprints.2026.10.29.000370。Bayesian Flow Networks不可仅凭名称归为flow matching；尚未读方法正文。",
+    "url": "https://langtaosha.org.cn/lts/en/preprint/view/370"
+  },
+  {
+    "id": "spider",
+    "title": "SPIDER（多重同名，待确认具体论文）",
+    "authors": "待消歧",
+    "date": "2014 / 2024 / 2026",
+    "status": "pending",
+    "summary": "名称同时用于靶点预测、蛋白丰度预测、细胞类型网络及生物医学证据推理。",
+    "nodes": [
+      "gnn",
+      "virtual-cell",
+      "reliability"
+    ],
+    "fields": {
+      "科学问题": "待确定论文后填写。",
+      "数据生成": "候选涉及分子、单细胞或文献，不能合并。",
+      "观测与目标": "待消歧。",
+      "使用技术": "待消歧。",
+      "底层数学": "待消歧。",
+      "采用原因": "待消歧。",
+      "关键假设": "待消歧。",
+      "研究结果": "未将候选结果混入同一模型。",
+      "失败与未解": "2026证据推理论文原始页本次403。",
+      "与研究方向的关系": "待根据实际对象选择图、表征或可靠性课程。"
+    },
+    "verification": "原始候选：2014 SPiDER靶点论文 https://pmc.ncbi.nlm.nih.gov/articles/PMC3964060/ ；2024表面蛋白预测 https://pmc.ncbi.nlm.nih.gov/articles/PMC11423933/ ；2024细胞类型PPI官方论文 https://www.cs.tau.ac.il/~roded/spider.pdf ；2026证据推理候选 https://www.biorxiv.org/content/10.64898/2026.11.11.765839v1 （原始页403，仅确认检索线索，未据第三方填方法）。需用全题名/作者/链接确定。"
+  },
+  {
+    "id": "aido-cell",
+    "title": "AIDO Cell / AIDO.Cell（版本待消歧）",
+    "authors": "GenBio AI；2024论文首作者Nicholas Ho",
+    "date": "2024 / 2026",
+    "status": "pending",
+    "summary": "2024转录组表征论文与2026多尺度模拟系统是不同材料。",
+    "nodes": [
+      "virtual-cell",
+      "model-scaling",
+      "multimodal"
+    ],
+    "fields": {
+      "科学问题": "需先确定表征模型或后续模拟系统。",
+      "数据生成": "不同版本不能混写。",
+      "观测与目标": "2024论文涉及单细胞基因表达；2026待白皮书。",
+      "使用技术": "2024作者稿列出稠密Transformer；2026待核验。",
+      "底层数学": "待明确版本并阅读方法。",
+      "采用原因": "待明确版本。",
+      "关键假设": "待核验。",
+      "研究结果": "未将2026产品说明作为独立实验验证。",
+      "失败与未解": "2026技术白皮书官方页面要求申请获取。",
+      "与研究方向的关系": "适合区分细胞表征、动态预测与完整模拟。"
+    },
+    "verification": "2024原论文作者公开稿：Scaling Dense Representations for Single Cell with Transcriptome-Scale Context，https://www.cs.cmu.edu/~epxing/papers/2025/AIDO.Cell.pdf ，DOI:10.1101/2024.11.28.625303；2026官方系统说明 https://genbio.ai/aido-cell-simulator/ 仅用于版本定位，正文细节不作为论文核验。"
+  },
+  {
+    "id": "cellcompass",
+    "title": "Building virtual cell dynamics that evolve with biological measurements",
+    "authors": "Zhenyi Zhang, Zihan Wang, Qinxue Tian, Baichuan Zhou, Tianyu Zhou, Qing Nie, Peijie Zhou",
+    "date": "2026-10-27",
+    "status": "bibliography",
+    "summary": "CellCompass将科研智能体与可扩展细胞动态引擎结合，随测量约束修订模型。",
+    "nodes": [
+      "virtual-cell",
+      "ode-sde",
+      "identifiability",
+      "rsi",
+      "experimental-design"
+    ],
+    "fields": {
+      "科学问题": "新测量需要怎样扩展可表达的细胞动态。",
+      "数据生成": "摘要列出模拟动态基准及四项真实研究。",
+      "观测与目标": "单细胞测量；状态转移、群体变化与分子读数。",
+      "使用技术": "科学智能体与可扩展动态引擎。",
+      "底层数学": "动力学形式和估计目标待核验正文。",
+      "采用原因": "既复用足够模型，也按新约束修改模型。",
+      "关键假设": "不同测量的识别条件待核验。",
+      "研究结果": "作者报告DynBench100与真实数据回顾分析。",
+      "失败与未解": "模型生成的候选解释仍需独立检验。",
+      "与研究方向的关系": "直接连接动态系统、识别与实验信息价值。"
+    },
+    "verification": "核验bioRxiv原始检索记录和摘要，DOI:10.64898/2026.10.23.761350；直接全文请求403。未依据第三方摘要补充方法或实验数值。",
+    "url": "https://www.biorxiv.org/content/10.64898/2026.10.23.761350v1"
+  },
+  {
+    "id": "bonbon",
+    "title": "Emergent Biological Capabilities in a Foundation Model for Molecular Interactions",
+    "authors": "Adi Mashiach",
+    "date": "2026-11-10",
+    "status": "bibliography",
+    "summary": "Bonbon研究蛋白—配体序列预训练规模与下游能力的关系。",
+    "nodes": [
+      "model-scaling",
+      "multimodal",
+      "representation",
+      "reliability"
+    ],
+    "fields": {
+      "科学问题": "预训练损失能否预示生物任务能力。",
+      "数据生成": "配对蛋白—配体序列。",
+      "观测与目标": "序列输入；相互作用相关表征与下游预测。",
+      "使用技术": "摘要列出六种参数规模的控制实验。",
+      "底层数学": "规模律与表征评价；公式待核验。",
+      "采用原因": "比较连续训练损失与能力变化。",
+      "关键假设": "规模比较的训练控制待核验。",
+      "研究结果": "作者报告最大规模的能力跃升及湿实验。",
+      "失败与未解": "涌现结论、数据泄漏与分布外划分待核验。",
+      "与研究方向的关系": "适合研究规模效应与可靠评价。"
+    },
+    "verification": "核验原始arXiv书目摘要；区别于2024 BoNBoN Alignment。训练token量和参数比未作为已复核事实转述。",
+    "url": "https://arxiv.org/abs/2611.14504"
+  },
+  {
+    "id": "virtual-cell-medical-world-models",
+    "title": "现代虚拟细胞/细胞扰动预测/医学世界模型（专题入口，待细分）",
+    "authors": "专题；代表文献Yusuf Roohani, Kexin Huang, Jure Leskovec",
+    "date": "2023起；非单篇论文",
+    "status": "bibliography",
+    "summary": "以GEARS的基因扰动转录响应预测作为已核验入口；医学世界模型另行建库。",
+    "nodes": [
+      "virtual-cell",
+      "gnn",
+      "experimental-design",
+      "identifiability",
+      "sequential-causal"
+    ],
+    "fields": {
+      "科学问题": "专题涵盖细胞扰动和患者动态，需分别定义目标。",
+      "数据生成": "本次代表文献使用单细胞扰动筛选。",
+      "观测与目标": "GEARS预测单基因和多基因扰动后的表达。",
+      "使用技术": "代表文献摘要列出深度学习与基因关系图。",
+      "底层数学": "GEARS具体方法及医学分支待另行核验。",
+      "采用原因": "提供从基础课程进入真实扰动预测的入口。",
+      "关键假设": "跨扰动泛化不等同跨细胞或患者泛化。",
+      "研究结果": "只核验GEARS书目摘要，不代表整个领域。",
+      "失败与未解": "完整虚拟细胞与医学动态不能由此一篇覆盖。",
+      "与研究方向的关系": "将图学习、识别与实验设计映射到不同对象。"
+    },
+    "verification": "代表来源：Predicting transcriptional outcomes of novel multigene perturbations with GEARS，Nature Biotechnology，在线2023-08-17/卷期2024，原始出版页已核验；本条是专题路标，非文献综述或方法全文审阅。",
+    "url": "https://www.nature.com/articles/s41587-023-01905-6"
+  }
+]

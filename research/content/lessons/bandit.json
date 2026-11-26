@@ -1,0 +1,248 @@
+{
+  "id": "bandit",
+  "name": "多臂老虎机：探索、利用与 UCB",
+  "nameEn": "Multi-Armed Bandits, UCB and Thompson Sampling",
+  "module": "G2",
+  "priority": "P0",
+  "summary": "用三种未知收益的实验选项，逐轮计算选择、反馈和更新，并区分累计收益与最终选对最佳方案。",
+  "prerequisites": [
+    "probability",
+    "sampling"
+  ],
+  "related": [
+    "mcts",
+    "rsi",
+    "sequential-causal"
+  ],
+  "minutes": {
+    "A": 45,
+    "B": 90,
+    "C": 180
+  },
+  "sections": [
+    {
+      "id": "L0",
+      "title": "背景与需要",
+      "depth": "A",
+      "paragraphs": [
+        "当每次只能试一个选项，未选择选项的结果不可见，就不能直接按完整历史表格挑最大值。早期观测有噪声；永远选当前均值最高的选项，可能错过真正更好的方案。",
+        "多臂老虎机把这个问题拆成清晰对象：臂是可选择行动，奖励是观察到的结果，奖励分布是未知环境规律，策略根据过去选择和奖励决定下一步。它处理反馈不足下的序贯决策，并不自动处理治疗安全约束或长期疾病状态变化。"
+      ]
+    },
+    {
+      "id": "L1",
+      "title": "直觉与对象对应",
+      "depth": "A",
+      "paragraphs": [
+        "设三个实验流程 A、B、C 各有未知成功概率。每次只运行一个流程，得到成功 1 或失败 0。已有成功率是有限样本估计，不是真实概率。",
+        "利用就是选择目前看起来好的流程；探索则给了解较少的流程机会。UCB 给均值加一个因“样本少”产生的奖励，选乐观上界最大的流程。这个上界可能超过 1，它是决策指数，不是新的成功概率。",
+        "Thompson Sampling 先用后验表达每个流程成功率的不确定性，再各抽一个可能成功率，选其中最大者。抽取的是未知均值的可能值，不是为每个流程伪造一个已经观测到的真实奖励。"
+      ]
+    },
+    {
+      "id": "L2",
+      "title": "逐步计算",
+      "depth": "A",
+      "paragraphs": [
+        "前 3 轮分别选 A、B、C，观察到 1、0、1。此时次数 (1,1,1)，经验均值 (1,0,1)。本课用决策前已有总次数 n 的自然对数计算指数。",
+        "第 4 轮前 n=3，三个探索项都为 √(2log3)≈1.482304，指数为 (2.482304,1.482304,2.482304)。按预定平局规则选 A，假设得到 0，A 的均值变成 1/2。",
+        "第 5 轮前 n=4，指数约为 (1.677410,1.665109,2.665109)，故选 C，假设得到 0。第 6 轮前 n=5，指数约为 (1.768636,1.794123,1.768636)，故选 B。若这次 B 成功，则三臂都观测两次、成功一次。",
+        "在第 4 轮更新后，若独立 Beta(1,1) 先验配合 Bernoulli 似然，A、B、C 的后验依次是 Beta(2,2)、Beta(1,2)、Beta(2,1)。一轮 Thompson 抽样若为 (0.48,0.20,0.73)，便选 C。"
+      ],
+      "table": {
+        "headers": [
+          "轮次",
+          "选择",
+          "本例奖励",
+          "更新后次数 (A,B,C)",
+          "更新后均值"
+        ],
+        "rows": [
+          [
+            "1",
+            "A",
+            "1",
+            "(1,0,0)",
+            "(1,未定,未定)"
+          ],
+          [
+            "2",
+            "B",
+            "0",
+            "(1,1,0)",
+            "(1,0,未定)"
+          ],
+          [
+            "3",
+            "C",
+            "1",
+            "(1,1,1)",
+            "(1,0,1)"
+          ],
+          [
+            "4",
+            "A",
+            "0",
+            "(2,1,1)",
+            "(0.5,0,1)"
+          ],
+          [
+            "5",
+            "C",
+            "0",
+            "(2,1,2)",
+            "(0.5,0,0.5)"
+          ],
+          [
+            "6",
+            "B",
+            "1",
+            "(2,2,2)",
+            "(0.5,0.5,0.5)"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "L3",
+      "title": "数学定义与假设",
+      "depth": "A",
+      "paragraphs": [
+        "在经典随机老虎机设定中，第 a 臂潜在奖励序列独立同分布、取值在 [0,1]，均值 μₐ 固定。算法的行动 Aₜ 可以依赖已经观测的历史，但不能偷看未选择臂当轮的奖励。Nₐ(n) 是前 n 轮选择 a 的次数，μ̂ₐ 是其样本均值。",
+        "经典 UCB1 先让每臂至少被选择一次；之后选择均值加探索项最大的臂。未知均值 μ 与估计 μ̂ 分开，全部臂奖励均值的最大值记为 μ*。",
+        "期望累计遗憾和某一次带噪奖励差也要分开。若最优均值为 0.7，本轮选择均值 0.3 的臂，本轮伪遗憾为 0.4；即使碰巧得到奖励 1，也不能据此说选择比最优均值好 0.3。评价算法应利用合成环境已知的真均值，或在真实任务中使用适当的估计设计。"
+      ],
+      "equations": [
+        {
+          "tex": "A_{n+1}\\in\\arg\\max_a\\left\\{\\widehat\\mu_a(n)+\\sqrt{\\frac{2\\log n}{N_a(n)}}\\right\\}",
+          "explanation": "n 是已完成轮数；初始化保证分母非零，平局规则在实验前固定。"
+        },
+        {
+          "tex": "R_T=E\\!\\left[\\sum_{t=1}^T(\\mu^*-\\mu_{A_t})\\right],\\qquad r_T=\\mu^*-\\mu_{\\widehat a_T}",
+          "explanation": "R_T 是期望累计伪遗憾；r_T 是最终推荐臂的简单遗憾，仍是依赖数据的随机量，也可取其期望。"
+        },
+        {
+          "tex": "\\mu_a\\mid H_n\\sim\\operatorname{Beta}(\\alpha_0+S_a,\\beta_0+N_a-S_a)",
+          "explanation": "仅在 Bernoulli 奖励和 Beta 先验下成立；Sₐ 是成功次数，Hₙ 为已观察历史。"
+        }
+      ]
+    },
+    {
+      "id": "L4",
+      "title": "关键推导",
+      "depth": "B",
+      "paragraphs": [
+        "对固定臂的前 s 个 [0,1] 独立奖励，Hoeffding 不等式给出 P(μₐ−μ̂ₐ,s≥r)≤exp(−2sr²)。令右侧等于 n⁻⁴，解出 r=√(2log n/s)，便得到 UCB 的探索尺度。",
+        "选择上界使了解较少的臂因较大的 r 获得探索机会。某个次优臂样本足够多时，其区间通常缩小到不足以弥补均值差，便较少被选。",
+        "Nₐ(n) 是随机且自适应的，不能把固定 s 的不等式不加说明地代入随机停时并当作同时有效置信区间。经典遗憾证明需要对可能样本数及时间进行控制。这里推导的是指数的来源，完整有限时遗憾证明保留在 Level C。",
+        "Beta 更新来自先验密度乘似然：成功 S 次贡献 μˢ，失败 N−S 次贡献 (1−μ)ᴺ⁻ˢ，指数相加后仍是 Beta 密度。它是贝叶斯参数更新，不是反向传播。",
+        "一次选择会改变以后掌握的信息。探索一个当前均值较低的臂，可能牺牲即时收益，却降低以后长期选错的概率。反过来，如果两个臂均值完全相等，区分它们没有收益价值；如果测量成本不同，则原始奖励差还不足以决定最优分配，需要把成本写入目标或约束。"
+      ],
+      "equations": [
+        {
+          "tex": "P\\{\\mu_a-\\widehat\\mu_{a,s}\\ge r\\}\\le e^{-2sr^2},\\quad r=\\sqrt{2\\log n/s}",
+          "explanation": "每个固定 s 的单侧集中界；不能直接读成自适应过程中的常规 95% 区间。"
+        }
+      ]
+    },
+    {
+      "id": "L5",
+      "title": "相邻技术对比",
+      "depth": "A",
+      "paragraphs": [
+        "固定 ε-greedy 以概率 ε 随机探索，其余时间选经验最优臂，简单但可能持续付出不必要探索成本。UCB 让探索随样本数变化；Thompson Sampling 使用后验抽样，行为依赖先验与似然设定。",
+        "最大化试验过程中的累计奖励，与预算结束后尽量选对最佳臂，是不同目标。为精确区分两个接近的最好臂，最佳臂识别可能投入很多短期不赚钱的比较。累计遗憾低不自动等于最佳臂识别率最高。",
+        "普通 Bandit 不把行动造成的后续状态改变作为问题核心。MDP 用转移规律处理状态与未来奖励；上下文 Bandit 允许当前协变量影响奖励，但通常不把行动改变下一时刻上下文作为需规划的动态。贝叶斯优化常在结构化输入空间中用代理模型共享信息，不只是固定三个互不相关的臂。",
+        "常数ε意味着长期仍以固定概率随机选次优臂，因此在固定正均值差的环境里一般会积累线性量级的探索损失。适当衰减ε可以改变这一性质，但调度及其假设必须写清。不能把本课常数ε模拟的结论泛化到所有被称为ε-greedy的策略。"
+      ]
+    },
+    {
+      "id": "L6",
+      "title": "失败情形与反例",
+      "depth": "A",
+      "paragraphs": [
+        "真实成功率为 (0.3,0.5,0.7) 时，前三次奖励仍可能为 (1,0,0)。纯贪心可能长期选择 A，仅有一次失败的 C 得不到复试。",
+        "若奖励随时间变化，使用全部历史的均值可能滞后；若奖励重尾或超过 [0,1]，直接套本课 Hoeffding 指数会失去原依据；若行动会改变患者后续状态，普通老虎机设定可能遗漏决定问题的动态。",
+        "单次模拟中某策略胜出不构成普遍排序。比较需要相同预算、多次独立重复，同时报告累计遗憾、最终推荐质量与变异；医学决策还需另外定义约束和可接受风险。"
+      ]
+    },
+    {
+      "id": "L7",
+      "title": "最小代码复现",
+      "depth": "B",
+      "paragraphs": [
+        "代码用固定的三臂合成环境比较 ε-greedy、UCB1 和 Bernoulli Thompson Sampling，报告 60 次重复的累计伪遗憾、简单遗憾和最佳臂识别率。各策略在同一重复中共用每臂的奖励带，减少无关比较噪声。",
+        "本实现每轮遍历K个臂计算指数或后验抽样，时间约为O(TK)，只保存每臂次数和成功数时状态空间约为O(K)。课程保留奖励带是为了公平核验，不是算法必须预先知道未来奖励；运行策略只读取被选臂的下一个位置。"
+      ],
+      "code": {
+        "language": "r",
+        "source": "# R >= 4.4；三个合成 Bernoulli 臂；不是临床试验推荐。\nset.seed(20261126)\nmu <- c(.3,.5,.7); K <- length(mu); horizon <- 500L; repetitions <- 60L\nchoose_arm <- function(method,count,wins,t) {\n  if(any(count==0)) return(which(count==0)[1])\n  means <- wins/count\n  if(method==\"ucb\") return(which.max(means+sqrt(2*log(t-1)/count)))\n  if(method==\"epsilon\") {\n    if(runif(1)<.1) return(sample.int(K,1L))\n    return(which.max(means))\n  }\n  if(method==\"thompson\") return(which.max(rbeta(K,1+wins,1+count-wins)))\n  stop(\"unknown policy\")\n}\nrun_policy <- function(method,tape) {\n  count <- wins <- rep(0,K); regret <- numeric(horizon)\n  for(t in 1:horizon) {\n    arm <- choose_arm(method,count,wins,t)\n    count[arm] <- count[arm]+1\n    reward <- tape[arm,count[arm]]  # 各臂第几次被拉取，对应固定奖励带。\n    wins[arm] <- wins[arm]+reward\n    regret[t] <- max(mu)-mu[arm]    # 本次选择的伪遗憾，不用带噪奖励替代。\n  }\n  stopifnot(sum(count)==horizon,all(wins<=count),all(regret>=0))\n  chosen <- which.max(wins/count)\n  c(pseudo_regret=sum(regret),simple_regret=max(mu)-mu[chosen],\n    best_identified=as.numeric(chosen==which.max(mu)))\n}\nmethods <- c(\"epsilon\",\"ucb\",\"thompson\")\nscores <- array(NA_real_,c(repetitions,3,3))\nfor(rep in 1:repetitions) {\n  tape <- matrix(runif(K*horizon),nrow=K) < mu\n  for(j in seq_along(methods)) scores[rep,j,] <- run_policy(methods[j],tape)\n}\nresult <- t(vapply(seq_along(methods),function(j) colMeans(scores[,j,]),numeric(3)))\ncolnames(result) <- c(\"mean_pseudo_regret\",\"mean_simple_regret\",\"best_identification_rate\")\nrownames(result) <- methods\nprint(result)\n# 手算的前六轮：初始化后依次选 A,C,B，奖励依次 0,0,1。\ncount <- c(1,1,1); wins <- c(1,0,1)\nmanual <- integer(3)\nfor(j in 1:3) {\n  t <- j+3; arm <- choose_arm(\"ucb\",count,wins,t); manual[j] <- arm\n  count[arm] <- count[arm]+1; wins[arm] <- wins[arm]+c(0,0,1)[j]\n}\nstopifnot(identical(manual,c(1L,3L,2L)),all(count==2),all(wins==1))\nprint(list(manual_arms=manual,counts=count,wins=wins))\n",
+        "environment": "R >= 4.4；base 与 stats；随机种子 20261126",
+        "verified": true,
+        "file": "bandit.R"
+      }
+    },
+    {
+      "id": "L8",
+      "title": "科研连接与证据边界",
+      "depth": "A",
+      "paragraphs": [
+        "实验选项可对应候选测量条件或有限流程，但“得到最好响应”与“区分药理机制”需要不同奖励。把预测不确定性直接当奖励，通常不能保证获得目标机制信息。",
+        "有意义的扩展可能来自成本、延迟反馈、依赖奖励、非平稳性或安全约束。使用 UCB 本身不构成新理论；贡献必须说明新增设定怎样改变策略、可实现保证和需要的样本量。"
+      ]
+    }
+  ],
+  "extension": {
+    "status": "planned",
+    "topics": [
+      "UCB1 的有限时 gap-dependent 遗憾界完整证明",
+      "固定预算与固定置信度最佳臂识别的样本复杂度",
+      "自适应数据的有效推断、非平稳和安全约束"
+    ]
+  },
+  "references": [
+    "ucb1-auer-2002",
+    "thompson-russo-2018"
+  ],
+  "questions": [
+    {
+      "id": "bandit-q1",
+      "type": "最小计算",
+      "prompt": "决策前 n=3，三臂各抽一次，均值为 (1,0,1)。UCB1 的指数是什么？",
+      "options": [
+        "(1,0,1)",
+        "约 (2.4823,1.4823,2.4823)",
+        "约 (1.4823,0,1.4823)",
+        "不能计算"
+      ],
+      "answer": 1,
+      "explanation": "探索项对三臂均为 √(2log3)≈1.4823，逐项加到经验均值上。",
+      "depth": "A"
+    },
+    {
+      "id": "bandit-q2",
+      "type": "科研判断",
+      "prompt": "哪个实验目标最直接对应最佳臂识别？",
+      "options": [
+        "最大化全部轮次总奖励",
+        "预算结束时推荐臂为真正最优的概率",
+        "最大化一次观测奖励",
+        "让每臂次数永远相等"
+      ],
+      "answer": 1,
+      "explanation": "最佳臂识别关注最终推荐，累计收益是另一种目标；二者可能要求不同的采样分配。",
+      "depth": "A"
+    }
+  ],
+  "lab": "bandit",
+  "status": {
+    "eli5": true,
+    "example": true,
+    "definition": true,
+    "derivation": true,
+    "code": true,
+    "interactive": true,
+    "literature": true,
+    "audit": true
+  }
+}

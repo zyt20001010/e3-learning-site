@@ -1,0 +1,239 @@
+{
+  "id": "causality",
+  "name": "因果目标、混杂与标准化识别",
+  "nameEn": "Causal Estimands, Confounding and Standardization",
+  "module": "F1",
+  "priority": "P0",
+  "summary": "用粗比较为 +0.26、标准化结果为 −0.10 的合成分布，逐步说明关联与干预效应之间需要哪些条件。",
+  "prerequisites": [
+    "probability"
+  ],
+  "related": [
+    "counterfactual",
+    "sequential-causal",
+    "identifiability",
+    "multimodal"
+  ],
+  "minutes": {
+    "A": 40,
+    "B": 85,
+    "C": 180
+  },
+  "sections": [
+    {
+      "id": "L0",
+      "title": "L0 · 决策需要比较同一目标人群的两种行动",
+      "depth": "A",
+      "paragraphs": [
+        "接受处理的人与未接受处理的人，可能在行动发生前就不同。直接比较结局均值，同时混合了行动影响与人群构成差异。一个很准的预测模型可以描述这种差异，却未必回答“如果改变行动，结局怎样变化”。",
+        "因果推断先明确行动、结局、时间与目标人群，再判断观测资料能否确定所需的干预量。识别解决总体层面的信息问题，估计才进一步处理有限样本误差与模型拟合。"
+      ]
+    },
+    {
+      "id": "L1",
+      "title": "L1 · 比较对象要使用同一份人群构成",
+      "depth": "A",
+      "paragraphs": [
+        "设 L 表示行动前的低风险或高风险分组，A=1 表示执行一个定义明确的处理方案，A=0 表示对照，Y=1 表示随后发生不利事件。若高风险对象更常接受处理，处理组的事件率可能更高，即使处理在每组内都降低风险。",
+        "标准化先分别估计每个 L 分组在两种行动下的结局，再让两种行动都按同一目标人群的 L 比例平均。它改变的是比较时的人群权重；能否赋予干预解释，还取决于这些组内比较是否排除了混杂。"
+      ]
+    },
+    {
+      "id": "L2",
+      "title": "L2 · 粗比较为正，标准化后为负",
+      "depth": "A",
+      "paragraphs": [
+        "以下四组人数与事件数是合成教学分布。低风险与高风险各占一半；处理概率在低风险组为 0.2，在高风险组为 0.8。每个风险组内，处理后的事件率都比对照低 0.10。",
+        "处理组总事件率为 (2+56)/(20+80)=0.58，对照组为 (16+16)/(80+20)=0.32，粗差为 +0.26。按目标人群的一半低风险、一半高风险标准化，处理风险为 0.5×0.1+0.5×0.7=0.4，对照风险为 0.5×0.2+0.5×0.8=0.5，差为 −0.10。"
+      ],
+      "table": {
+        "headers": [
+          "基线分组 L",
+          "行动 A",
+          "人数",
+          "事件数",
+          "组内风险"
+        ],
+        "rows": [
+          [
+            "低风险 0",
+            "对照 0",
+            "80",
+            "16",
+            "0.20"
+          ],
+          [
+            "低风险 0",
+            "处理 1",
+            "20",
+            "2",
+            "0.10"
+          ],
+          [
+            "高风险 1",
+            "对照 0",
+            "20",
+            "16",
+            "0.80"
+          ],
+          [
+            "高风险 1",
+            "处理 1",
+            "80",
+            "56",
+            "0.70"
+          ]
+        ]
+      },
+      "steps": [
+        "+0.26 是两组现有人群的关联差。",
+        "在下述识别条件成立时，−0.10 才表示目标人群的平均因果风险差，即下降 10 个百分点。"
+      ]
+    },
+    {
+      "id": "L3",
+      "title": "L3 · 潜在结局、目标与识别条件",
+      "depth": "A",
+      "paragraphs": [
+        "Yᵃ 表示同一对象在行动设为 a 时的潜在结局，目标 ψ=E[Y¹−Y⁰] 是目标人群的平均处理效应。观测到的是 O=(L,A,Y)，一般只能看到实际行动对应的一个结局。个体差 Y¹−Y⁰与平均差 ψ 不是同一估计目标。",
+        "一致性要求实际执行 a 时 Y=Yᵃ，并需先说明处理版本及相关干扰条件；条件可交换性要求给定 L 后，行动与相应潜在结局独立；正值性要求目标人群各分组都有执行两种行动的可能。本课 L 全部发生于 A 之前。",
+        "处理方案需要包含会影响结局的版本，例如起始时刻、持续时间与执行方式。若把多种不等效方案都编码成 A=1，潜在结局的指代可能不明确。无干扰也不是默认物理事实：当一个对象的处理影响其他对象时，需重新定义联合行动及结局。"
+      ],
+      "equations": [
+        {
+          "tex": "Y=Y^A,\\quad Y^a\\perp A\\mid L,\\quad 0<P(A=1\\mid L=l)<1",
+          "explanation": "最后一项对目标人群中有正概率的 l 成立。本课无对象间干扰，处理方案定义固定。"
+        },
+        {
+          "tex": "\\psi=\\sum_l\\{E[Y\\mid A=1,L=l]-E[Y\\mid A=0,L=l]\\}P(L=l)",
+          "explanation": "这是上述条件下的标准化识别公式；不是任何观察性分组都自动成立的恒等式。"
+        }
+      ]
+    },
+    {
+      "id": "L4",
+      "title": "L4 · 每个识别步骤都有对应条件",
+      "depth": "B",
+      "paragraphs": [
+        "先由全期望公式写 E[Yᵃ]=Σ_lE[Yᵃ|L=l]P(L=l)。条件可交换性把组内均值改写为 E[Yᵃ|A=a,L=l]；一致性再把实际执行 a 的对象之潜在结局换为观测 Y。正值性保证需要的条件均值在观测分布中有对应支持。",
+        "粗均值 E[Y|A=a] 使用 P(L|A=a) 作为权重，标准化使用共同的 P(L)。本例两种权重不同，正是粗差反号的来源。出现反号本身不能证明哪个变量是充分混杂集；L 的因果角色仍需实质知识和设计支持。",
+        "逆概率加权提供同一总体目标的另一表达。给定 L 后对 A 求期望，处理指示与其发生概率抵消，得到组内结局均值；再对 L 平均，就与标准化相同。有限样本下，两种估计器不必数值完全一致。"
+      ],
+      "equations": [
+        {
+          "tex": "E[Y^a]=E\\left[\\frac{\\mathbf1(A=a)Y}{P(A=a\\mid L)}\\right]",
+          "explanation": "使用相同识别条件。极小处理概率会产生很大权重，影响有限样本稳定性。"
+        }
+      ]
+    },
+    {
+      "id": "L5",
+      "title": "L5 · 预测、干预、反事实和机制",
+      "depth": "A",
+      "paragraphs": [
+        "预测估计给定观测条件后的结局分布；干预效应比较明确行动下的总体结局；个体反事实还涉及同一对象另一行动下的结果；机制问题进一步涉及中间过程。某个层级上的成功不能自动代替其他层级的证据。",
+        "随机分配可以由设计支持处理分配的可交换性，但依从性、失访和实际处理仍需单独分析。回归、匹配、加权或双重稳健方法主要改变估计路径，不能仅凭算法名称替代识别条件。",
+        "即使两个干预下的边缘结局分布都被识别，也未必知道同一对象两种潜在结局的联合分布。平均效应由两个边缘均值之差决定，获益者比例或个体效果分布却可能需要额外条件。平均效应识别不自动解决个体反事实恢复。"
+      ]
+    },
+    {
+      "id": "L6",
+      "title": "L6 · 调整越多不一定越接近目标",
+      "depth": "A",
+      "paragraphs": [
+        "若某个基线分组从不接受对照，该分组的对照结局均值无法从现有数据直接估计。模型可以外推，但此时结果增加了函数形式等假设；更大的同分布样本不能补出一个严格不存在的行动支持。",
+        "总效应分析中随意调整处理后的中介，会改变目标；调整共同结果变量还可能引入选择偏差。即使已观测 L 调整后很平衡，也不能证明没有遗漏共同原因。狭窄置信区间只量化指定分析中的抽样误差。",
+        "例如因果结构 A→C←U→Y 中，C 是 A 与 U 的共同结果。若原来没有通过 U 打开的路径，按 C 分层反而可能让 A 与 U 产生条件关联。变量与结局相关或能提高预测精度，并不足以决定它应否进入因果调整集。"
+      ]
+    },
+    {
+      "id": "L7",
+      "title": "L7 · 精确分布与已知结构模型互查",
+      "depth": "B",
+      "paragraphs": [
+        "代码计算四组风险、粗差、标准化差与逆概率加权差，精确验证 +0.26 和 −0.10。随后定义独立外生随机数生成 L、A、Y⁰、Y¹；给定 L，行动选择与潜在结局无共同未观测来源。",
+        "只有在这个自行定义的模拟器里，程序才同时知道两个潜在结局，并能直接检查平均因果效应。现实观察资料不会提供这种完整反事实真值。固定种子和蒙特卡洛容差用于复现程序，不用于证明真实研究满足可交换性。"
+      ],
+      "code": {
+        "language": "r",
+        "source": "# R >= 4.0；base R / stats。全部数字为合成教学分布。\nset.seed(20261126)\ncells <- data.frame(L=c(0,0,1,1),A=c(0,1,0,1),\n                    n=c(80,20,20,80),events=c(16,2,16,56))\ncells$risk <- cells$events/cells$n\ncells$propensity <- c(0.2,0.2,0.8,0.8)\njoint <- cells$n/sum(cells$n)\ncrude_risks <- tapply(cells$events,cells$A,sum)/tapply(cells$n,cells$A,sum)\ncrude_difference <- unname(crude_risks[\"1\"]-crude_risks[\"0\"])\npL <- c(0.5,0.5)\nrisk0 <- c(0.2,0.8); risk1 <- c(0.1,0.7)\nmu0 <- sum(pL*risk0); mu1 <- sum(pL*risk1)\nstandardized <- mu1-mu0\nipw1 <- sum(joint*(cells$A==1)*cells$risk/cells$propensity)\nipw0 <- sum(joint*(cells$A==0)*cells$risk/(1-cells$propensity))\nstopifnot(abs(crude_difference-0.26)<1e-12)\nstopifnot(abs(standardized+0.10)<1e-12)\nstopifnot(abs(ipw1-mu1)<1e-12,abs(ipw0-mu0)<1e-12)\n# 用已知结构模型验证。现实数据不会同时给出 Y0 和 Y1。\nn_sim <- 100000\nL <- rbinom(n_sim,1,0.5)\nU_A <- runif(n_sim); U_Y <- runif(n_sim)\nA <- as.integer(U_A<c(0.2,0.8)[L+1])\nY0 <- as.integer(U_Y<risk0[L+1])\nY1 <- as.integer(U_Y<risk1[L+1])\nY <- ifelse(A==1,Y1,Y0)\ntrue_ate_sim <- mean(Y1-Y0)\ncausal_mc_se <- sqrt(0.1*0.9/n_sim)\nstopifnot(abs(true_ate_sim-standardized)<6*causal_mc_se)\ncrude_sim <- mean(Y[A==1])-mean(Y[A==0])\ncrude_mc_se <- sqrt(0.58*0.42/sum(A==1)+0.32*0.68/sum(A==0))\nstopifnot(abs(crude_sim-crude_difference)<6*crude_mc_se)\nprint(cells)\nprint(list(crude_risks=crude_risks,crude_difference=crude_difference,\n           standardized_risk0=mu0,standardized_risk1=mu1,\n           standardized_difference=standardized,IPW_difference=ipw1-ipw0))\nprint(list(simulated_ATE=true_ate_sim,simulated_crude=crude_sim))\n",
+        "environment": "R 4.0+；base R 与 stats，无附加包；合成数据",
+        "verified": true,
+        "file": "causality.R"
+      }
+    },
+    {
+      "id": "L8",
+      "title": "L8 · 围绕明确行动开展方法研究",
+      "depth": "A",
+      "paragraphs": [
+        "设计研究时，把人群、行动方案、分配时点、随访、结局和因果对比写成可执行定义，再核对数据中是否可观测。若条件不足，可研究敏感性分析、部分识别或增加哪类测量最有效，而不是直接把预测差称为因果效应。",
+        "进入序贯决策后，历史会同时影响后续行动与结局，识别条件要按时间顺序扩展。学会本课的单时点推导，是理解纵向 g 公式和离线策略评价的基础，不代表单次回归已解决动态混杂。",
+        "标准化权重还决定目标人群。换成另一地区的基线分布，得到的是另一人群下的量；只有组内因果响应能够在研究人群与目标人群之间迁移等条件成立，才可作相应推广。把数据集总体均值直接称为普遍效应，跳过了这一环节。"
+      ]
+    }
+  ],
+  "extension": {
+    "status": "planned",
+    "topics": [
+      "半参数效率与双重稳健估计",
+      "未测量混杂敏感性分析和部分识别",
+      "纵向识别、动态治疗策略与目标试验"
+    ]
+  },
+  "references": [
+    "hernan-whatif-foundations"
+  ],
+  "questions": [
+    {
+      "id": "causality-q1",
+      "type": "最小计算",
+      "prompt": "按目标人群各一半风险分组标准化，处理风险与对照风险之差是多少？",
+      "options": [
+        "+0.26",
+        "−0.10",
+        "0"
+      ],
+      "answer": 1,
+      "explanation": "处理 0.4，对照 0.5，差为 −0.10。",
+      "depth": "A"
+    },
+    {
+      "id": "causality-q2",
+      "type": "数学推导",
+      "prompt": "把 E[Yᵃ|L] 换成 E[Yᵃ|A=a,L] 主要使用哪项条件？",
+      "options": [
+        "一致性",
+        "条件可交换性",
+        "模型参数量足够大"
+      ],
+      "answer": 1,
+      "explanation": "这一替换要求给定 L 后，行动分配不再与相应潜在结局相关。",
+      "depth": "B"
+    },
+    {
+      "id": "causality-q3",
+      "type": "科研判断",
+      "prompt": "某个在目标人群中占正概率的分组 L=l，严格满足 P(A=0|L=l)=0。增加同一选择机制下的样本能否自动恢复该组的对照支持？",
+      "options": [
+        "能，只要样本足够大",
+        "不能，严格零处理支持需要设计改变或额外外推假设",
+        "只需换成神经网络"
+      ],
+      "answer": 1,
+      "explanation": "这是总体分配机制中的结构性正值性缺失；它不同于正概率下有限样本恰好没有对照对象。继续收集同分布样本不会产生概率严格为零的行动。",
+      "depth": "A"
+    }
+  ],
+  "status": {
+    "eli5": true,
+    "example": true,
+    "definition": true,
+    "derivation": true,
+    "code": true,
+    "interactive": false,
+    "literature": true,
+    "audit": true
+  },
+  "lab": null
+}

@@ -1,0 +1,248 @@
+{
+  "id": "jepa",
+  "name": "JEPA：在表征空间学习预测",
+  "nameEn": "Joint-Embedding Predictive Architecture",
+  "module": "F3",
+  "priority": "P0",
+  "summary": "追踪上下文编码、目标编码、预测器与教师更新；区分 I-JEPA 的图像预训练和需要动作、动力学、因果条件的世界模型。",
+  "prerequisites": [
+    "backprop",
+    "attention",
+    "representation"
+  ],
+  "related": [
+    "counterfactual",
+    "ode-sde"
+  ],
+  "minutes": {
+    "A": 45,
+    "B": 90,
+    "C": 180
+  },
+  "sections": [
+    {
+      "id": "L0",
+      "title": "预测任务不必重建所有细节",
+      "depth": "A",
+      "paragraphs": [
+        "一张图像包含物体结构，也包含光照纹理和传感器噪声。如果下游任务只关心物体结构，逐像素恢复全部细节可能消耗大量计算，却未必得到最合适的表征。JEPA 将预测目标放在学习得到的表征空间。它改变训练目标保留的信息，而不是凭空获得新的机制知识。",
+        "本课以已核验原论文的 I-JEPA 为具体实例。原研究是图像自监督表征学习；它不是包含治疗动作的医疗动力学模型。将思想用于世界模型时，必须另外定义状态、动作、时间转移及其评价目标。"
+      ]
+    },
+    {
+      "id": "L1",
+      "title": "两个编码器与一位预测者",
+      "depth": "A",
+      "paragraphs": [
+        "把一张图像切成小块。上下文编码器只看留下的小块，将它们变成向量；目标编码器处理整张图像，再取出待预测位置的向量；预测器根据上下文向量和目标位置生成预测向量。目标是对齐两个向量，而非直接画出缺失像素。",
+        "目标分支为当前更新提供参考答案，其参数缓慢跟随上下文编码器。参考答案来自数据和学习规则，不是额外的人类标注。位置条件告诉预测器要预测哪一块；删除它，会让同一上下文难以区分不同目标位置。"
+      ]
+    },
+    {
+      "id": "L2",
+      "title": "一个标量玩具网络的完整更新",
+      "depth": "A",
+      "paragraphs": [
+        "为手算，将编码器缩成一个乘法。合成上下文 x=2，目标输入 y=3，在线参数 θ=1、预测器参数 φ=0.5、教师参数 θ̄=0.8。上下文表征 z=θx=2，预测 φz=1，教师目标 θ̄y=2.4，残差为 −1.4。",
+        "采用本课的半平方损失，L=(1−2.4)²/2=0.98。固定教师目标求梯度：对 φ 为 −1.4×2=−2.8，对 θ 为 −1.4×0.5×2=−1.4。学习率 0.1 的一次 SGD 更新得到 φ=0.78、θ=1.14。",
+        "再用动量 0.9 更新教师：θ̄新=0.9×0.8+0.1×1.14=0.834。这是参数的指数移动平均，不是对教师分支做一次反向传播。此算例展示信息流，不代表在图像数据上复现了 I-JEPA。"
+      ],
+      "table": {
+        "headers": [
+          "量",
+          "计算",
+          "数值"
+        ],
+        "rows": [
+          [
+            "上下文表征",
+            "1×2",
+            "2"
+          ],
+          [
+            "预测",
+            "0.5×2",
+            "1"
+          ],
+          [
+            "教师目标",
+            "0.8×3",
+            "2.4"
+          ],
+          [
+            "损失",
+            "(−1.4)²/2",
+            "0.98"
+          ],
+          [
+            "SGD 后 θ,φ",
+            "旧值减学习率乘梯度",
+            "1.14, 0.78"
+          ],
+          [
+            "EMA 后 θ̄",
+            "0.9×0.8+0.1×1.14",
+            "0.834"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "L3",
+      "title": "输入、输出和学习对象",
+      "depth": "A",
+      "paragraphs": [
+        "设一张图像由 N 个小块组成，每块有 p 个实数输入。上下文位置集合为 C，目标位置集合为 T。编码器 fθ 输出每个可见位置的 d 维向量，预测器 gφ 输出 |T| 个 d 维目标表征，组成一个 |T|×d 矩阵；mT 包含目标位置条件。θ、φ、θ̄ 是参数，位置集合是训练时采样的掩码。",
+        "sg 表示停止梯度：前向数值保持不变，但这次反向传播不沿该分支更新参数。本课用按目标数归一化的半平方损失便于手算。原论文写平方 L2 距离；已核验的官方 train.py 使用 smooth_l1_loss，复现时须记录采用的版本与损失，不能把二者当成同一个实现。"
+      ],
+      "equations": [
+        {
+          "tex": "z_C=f_\\theta(x_C),\\quad t_T=\\operatorname{sg}([f_{\\bar\\theta}(x)]_T),\\quad \\widehat t_T=g_\\phi(z_C,m_T)",
+          "explanation": "目标编码器先看完整输入再选目标输出；上下文分支不能直接看目标块。各目标向量属于 ℝᵈ。"
+        },
+        {
+          "tex": "\\mathcal L_{\\rm toy}=\\frac{1}{2|T|}\\sum_{j\\in T}\\|\\widehat t_j-t_j\\|_2^2,\\qquad \\bar\\theta\\leftarrow\\tau\\bar\\theta+(1-\\tau)\\theta",
+          "explanation": "τ∈[0,1) 为教师移动平均系数；公式明确是本课平方损失版本，未声称与公开代码逐行相同。"
+        }
+      ]
+    },
+    {
+      "id": "L4",
+      "title": "梯度路径与不能单靠损失证明的性质",
+      "depth": "B",
+      "paragraphs": [
+        "固定教师时，残差先乘预测器对上下文表征的 Jacobian，再乘编码器对 θ 的 Jacobian，得到在线编码器梯度；预测器梯度沿另一条参数路径计算。教师目标被当成常数，所以不存在通过目标向量回传到 θ̄ 的这条梯度路径。",
+        "原论文采用非对称结构和 EMA 教师来稳定训练，相关消融是经验支持。它们不是对所有数据和网络保证永不坍塌的普适定理。若在线编码器和教师都输出零，预测器也输出零，平方损失同样为零；因此“损失很小”单独不能证明表征保留信息。",
+        "为检验信息保留，可以先固定表征，再测试目标任务、输入扰动和分布变化。若 h 将两个需要采取不同干预的原状态映成同一点，任何仅依赖 h 的确定性决策头都无法区分它们；这是压缩丢失信息的直接结果。"
+      ],
+      "equations": [
+        {
+          "tex": "\\nabla_\\theta\\mathcal L=J_{f,\\theta}^{\\mathsf T}J_{g,z}^{\\mathsf T}(\\widehat t-t),\\qquad \\nabla_{\\bar\\theta}^{\\rm backprop}\\mathcal L=0",
+          "explanation": "此式以单目标半平方损失为例；Jacobians 分别对参数 θ 与中间表征 z 求导，教师仍可通过 EMA 改变。"
+        }
+      ]
+    },
+    {
+      "id": "L5",
+      "title": "表征预测、生成和因果预测",
+      "depth": "A",
+      "paragraphs": [
+        "重建模型需要把表征映回输入空间；表征预测模型只需在目标空间计算误差。省去像素解码可以节省某些计算，但若任务需要图像细节，仍可能必须学习解码器。条件生成还要表达目标的随机性，单个均值表征不能代替完整分布。",
+        "动作条件预测说明模型接收动作变量，不自动说明动作可以解释为 do 干预。要从临床观测获得治疗策略效应，还要处理治疗分配、时变混杂和支持集。I-JEPA 的图像掩码只是训练任务的一部分。"
+      ],
+      "table": {
+        "headers": [
+          "方法对象",
+          "主要输出",
+          "额外需要明确的内容"
+        ],
+        "rows": [
+          [
+            "I-JEPA 图像预训练",
+            "缺失区域的表征",
+            "掩码、目标构造和表征评价"
+          ],
+          [
+            "生成式世界模型",
+            "未来观测分布或样本",
+            "随机转移、解码和多步误差"
+          ],
+          [
+            "动作条件潜动力学",
+            "未来潜状态",
+            "动作语义、状态是否充分"
+          ],
+          [
+            "因果世界模型",
+            "指定干预的目标分布",
+            "识别假设与相应验证设计"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "L6",
+      "title": "删除噪声也可能删除任务信息",
+      "depth": "A",
+      "paragraphs": [
+        "设输入为 x=(s,n)。编码器只保留 s：如果任务目标是 s，这种压缩有用；如果另一个任务需要 n，就无法仅从表征恢复它。不能因为某些下游任务表现好，就宣称表征保存了所有科学机制。",
+        "若目标块与上下文重叠，模型可能学到直接复制；若教师随预测错误迅速漂移，训练损失可能降低而目标本身也在退化。检查时要看掩码、停止梯度、教师更新和冻结表征后的评价，不能只看架构名称。"
+      ]
+    },
+    {
+      "id": "L7",
+      "title": "手写梯度并用有限差分校验",
+      "depth": "B",
+      "paragraphs": [
+        "以下 Python 只用标准库。它复现 L2 教学网络的一次更新、对在线参数做有限差分校验，并计算 Smooth L1 与半平方损失在同一残差处的差别。它不是原论文大模型的训练复现。"
+      ],
+      "code": {
+        "language": "python",
+        "environment": "Python >= 3.9；仅标准库；合成标量例；seed = 20261126",
+        "verified": true,
+        "source": "import random\nrandom.seed(20261126)\nx, y = 2.0, 3.0\ntheta, phi, teacher = 1.0, 0.5, 0.8\ntarget = teacher*y\ndef loss(th, ph):\n    return 0.5*(ph*th*x-target)**2\nresidual = phi*theta*x-target\ngrad_theta = residual*phi*x\ngrad_phi = residual*theta*x\nh = 1e-6\nfd_theta = (loss(theta+h,phi)-loss(theta-h,phi))/(2*h)\nfd_phi = (loss(theta,phi+h)-loss(theta,phi-h))/(2*h)\nassert abs(grad_theta-fd_theta)<1e-8\nassert abs(grad_phi-fd_phi)<1e-8\nassert abs(loss(theta,phi)-0.98)<1e-12\ntheta_new, phi_new = theta-0.1*grad_theta, phi-0.1*grad_phi\nteacher_new = 0.9*teacher+0.1*theta_new\nassert abs(theta_new-1.14)<1e-12 and abs(phi_new-0.78)<1e-12\nassert abs(teacher_new-0.834)<1e-12\nsmooth_l1 = 0.5*residual**2 if abs(residual)<1 else abs(residual)-0.5\nassert abs(smooth_l1-0.9)<1e-12\nprint(dict(context=theta*x,prediction=phi*theta*x,target=target,\n           square_loss=loss(theta,phi),smooth_l1=smooth_l1,\n           grad_theta=grad_theta,grad_phi=grad_phi,\n           theta_new=theta_new,phi_new=phi_new,teacher_new=teacher_new))\n",
+        "file": "jepa.py"
+      }
+    },
+    {
+      "id": "L8",
+      "title": "从 JEPA 到科研模型的实际增量",
+      "depth": "A",
+      "paragraphs": [
+        "当任务需要从部分观测提取可预测结构时，JEPA 提供一种训练设计。选择它之前，先明确哪些变化应被保留、哪些应被忽略，再设置能够检验这件事的下游任务。",
+        "将其扩展到序贯医疗模型，实质工作可能来自新的观测协议、治疗历史表示、可识别目标或误差控制，而不仅是增加动作输入。本课只核验 I-JEPA 论文与公开实现的相关部分；没有把其他同名或近期世界模型论文的未核验结论移植过来。"
+      ]
+    }
+  ],
+  "extension": {
+    "status": "planned",
+    "topics": [
+      "表征充分性与干预一致性的形式化条件",
+      "EMA 非平稳目标的优化分析",
+      "潜状态误差向多步观测与策略价值的传播"
+    ]
+  },
+  "references": [
+    "dynamics-ijepa-paper",
+    "dynamics-ijepa-code"
+  ],
+  "questions": [
+    {
+      "id": "jepa-q1",
+      "type": "最小计算",
+      "prompt": "教师旧参数0.8、在线新参数1.14，EMA动量0.9，教师新参数是多少？",
+      "options": [
+        "0.834",
+        "0.914",
+        "1.14"
+      ],
+      "answer": 0,
+      "explanation": "0.9×0.8+0.1×1.14=0.834；这一步没有计算教师损失梯度。",
+      "depth": "A"
+    },
+    {
+      "id": "jepa-q2",
+      "type": "科研判断",
+      "prompt": "一个动作条件 JEPA 的预测误差很小，直接支持哪一项？",
+      "options": [
+        "该评价数据上的潜表征预测较准",
+        "治疗因果效应已识别",
+        "个体反事实耦合已恢复"
+      ],
+      "answer": 0,
+      "explanation": "后两项需要额外的识别假设、信息和验证。动作条件输入与因果干预不是同一个结论。",
+      "depth": "A"
+    }
+  ],
+  "lab": null,
+  "status": {
+    "eli5": true,
+    "example": true,
+    "definition": true,
+    "derivation": true,
+    "code": true,
+    "interactive": false,
+    "literature": true,
+    "audit": true
+  }
+}

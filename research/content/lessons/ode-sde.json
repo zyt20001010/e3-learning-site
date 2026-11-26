@@ -1,0 +1,226 @@
+{
+  "id": "ode-sde",
+  "name": "常微分方程、随机微分方程与状态估计",
+  "nameEn": "ODEs, SDEs and State Estimation",
+  "module": "E1",
+  "priority": "P0",
+  "summary": "从一个均值回归过程计算漂移、随机增量和观测更新，区分真实过程、离散近似及部分观测下的滤波。",
+  "prerequisites": [
+    "linear-algebra",
+    "probability"
+  ],
+  "related": [
+    "noncommutativity",
+    "identifiability",
+    "branching",
+    "sequential-causal"
+  ],
+  "minutes": {
+    "A": 40,
+    "B": 85,
+    "C": 180
+  },
+  "sections": [
+    {
+      "id": "L0",
+      "title": "L0 · 描述变化与估计状态是两项工作",
+      "depth": "A",
+      "paragraphs": [
+        "同样的初始状态可能在相同外部条件下沿不同轨迹演化。常微分方程规定给定状态下的变化速度；随机微分方程再描述持续进入系统的随机扰动。测量本身还可能有噪声，因此真实状态与仪器读数需要分开。",
+        "仅凭几条平滑曲线，无法判断随机性来自系统内部还是测量误差。明确状态方程、观测方程和采样时间，才能讨论模拟、预测、参数估计与实验设计。"
+      ]
+    },
+    {
+      "id": "L1",
+      "title": "L1 · 漂移拉回，噪声扰动，仪器再测量",
+      "depth": "A",
+      "paragraphs": [
+        "考虑一个偏离零点后逐渐回落的量。漂移 −θX 表示数值越大，回落速度越快；σ 表示过程扰动强度。标准布朗运动在长度 h 内的增量方差为 h，因此随机增量的标准差按 √h 缩放，而不是按 h 缩放。",
+        "真实状态 X_t 经过动力学演化，观测 Y_k=X_(t_k)+ε_k 再加仪器误差。过程噪声会继续影响后续状态；某次独立测量误差只污染那次读数。把二者合并会改变预测不确定性的传播。"
+      ]
+    },
+    {
+      "id": "L2",
+      "title": "L2 · 两步 Euler 计算与一次观测更新",
+      "depth": "A",
+      "paragraphs": [
+        "取 θ=1、σ=0.5、初值 X₀=1、步长 h=0.25。Euler–Maruyama 使用 X_(k+1)=0.75X_k+0.25z_k，其中 z_k 是标准化噪声增量。为手算指定 z₀=1、z₁=−1，得到状态 1→1→0.5。",
+        "精确 OU 转移的系数为 exp(−0.25)≈0.778801，过程方差约 0.049184；Euler 单步系数 0.75、方差 0.0625 与之不同。离散步长是数值选择，不能不经检查就当作连续过程真值。"
+      ],
+      "table": {
+        "headers": [
+          "一次滤波的量",
+          "数值（约）",
+          "计算条件"
+        ],
+        "rows": [
+          [
+            "预测均值",
+            "0.778801",
+            "另设初始信念 N(1,0.2)，精确 OU 转移"
+          ],
+          [
+            "预测方差",
+            "0.170490",
+            "a²×0.2+过程方差"
+          ],
+          [
+            "Kalman 增益",
+            "0.809967",
+            "预测方差÷(预测方差+0.04)"
+          ],
+          [
+            "更新后均值、方差",
+            "0.714975；0.032399",
+            "收到读数 0.7，独立测量方差 0.04"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "L3",
+      "title": "L3 · 连续状态、离散观测和概率条件",
+      "depth": "A",
+      "paragraphs": [
+        "一般 Itô SDE 写为 dX_t=f(X_t,t)dt+G(X_t,t)dW_t。状态 X_t∈Rᵈ，W_t 是 r 维标准布朗运动，G∈Rᵈˣʳ；独立增量满足 W_(t+h)−W_t∼N(0,hI)。它是积分方程的简写，不是对普通可微噪声求导。",
+        "本例为一维 OU 过程，θ>0、σ≥0 为固定参数。独立高斯观测误差方差 R>0，初始状态与未来布朗增量、测量误差相互独立。若初始分布也是高斯，整个模型保持线性高斯，Kalman 更新给出精确条件分布。",
+        "积分形式为 X_t=X₀+∫₀ᵗf(X_s,s)ds+∫₀ᵗG(X_s,s)dW_s。状态必须适应当前信息，不能在随机积分的被积项中偷看未来增量。对本课线性系数及平方可积初值，满足常用全局 Lipschitz 和线性增长条件，强解存在且唯一。"
+      ],
+      "equations": [
+        {
+          "tex": "dX_t=-\\theta X_t\\,dt+\\sigma\\,dW_t,\\qquad Y_k=X_{t_k}+\\varepsilon_k,\\quad\\varepsilon_k\\sim N(0,R)",
+          "explanation": "测量误差在各时点独立。参数已知时估计状态；参数未知时还需估计 θ、σ、R，不能混为同一任务。"
+        },
+        {
+          "tex": "X_{t+h}\\mid X_t\\sim N(aX_t,Q_h),\\quad a=e^{-\\theta h},\\quad Q_h=\\frac{\\sigma^2}{2\\theta}(1-e^{-2\\theta h})",
+          "explanation": "这是 OU 的精确离散转移分布。随机转移核不等于一条固定预测轨迹。"
+        }
+      ]
+    },
+    {
+      "id": "L4",
+      "title": "L4 · 从积分解到高斯更新",
+      "depth": "B",
+      "paragraphs": [
+        "把 OU 方程乘确定性积分因子 exp(θt)，乘积规则使漂移抵消。积分后得到 X_(t+h)=exp(−θh)X_t+σ∫_t^(t+h)exp[−θ(t+h−s)]dW_s。后项均值为零，按 Itô 等距，其方差为被积函数平方的积分，得到 Q_h。",
+        "Euler 方法把区间内漂移冻结在左端点，并用真实布朗增量替代随机积分中的常系数部分，因此得到 X_(k+1)=(1−θh)X_k+σ√h z_k。它近似原方程，却有自己明确的离散分布。",
+        "若预测状态为 N(m⁻,P⁻)，将其密度与观测似然 N(y;x,R) 相乘并对 x 完全平方，后验精度为 1/P⁻+1/R，均值为精度加权平均。整理后就是 Kalman 形式。",
+        "Euler 的均值递推为 m_(k+1)=bm_k，方差递推为 v_(k+1)=b²v_k+σ²h，其中 b=1−θh。独立增量使协方差项为零；初值确定时，若 b²≠1，几何级数给出 v_n=σ²h(1−b²ⁿ)/(1−b²)。若 b²=1，应直接求和得到 v_n=nσ²h；例如 θ>0、h=2/θ 时 b=−1，方差线性增长，不能用平稳方差公式。代码采用 |b|<1 的参数，并用离散精确矩检验模拟，避免把离散误差算成抽样误差。"
+      ],
+      "equations": [
+        {
+          "tex": "K=\\frac{P^-}{P^-+R},\\quad m=m^-+K(y-m^-),\\quad P=(1-K)P^-",
+          "explanation": "本式对应观测系数为 1 的标量情形。K 由两种方差决定，不是手工指定的学习率。"
+        }
+      ]
+    },
+    {
+      "id": "L5",
+      "title": "L5 · 模拟、滤波、平滑与预测",
+      "depth": "A",
+      "paragraphs": [
+        "模拟从模型产生路径；滤波用截至当前的观测估计当前状态；平滑再使用未来观测改进过去状态估计；预测只使用预测时可得的信息。平滑曲线更接近历史状态，不代表部署时能取得同样预测效果。",
+        "ODE 在给定初值和参数后产生确定轨迹；SDE 指定路径分布；神经 ODE 或神经 SDE 用网络参数化漂移等函数。网络名称不改变测量条件，也不会自动赋予外部输入因果干预语义。",
+        "强误差比较同一布朗驱动下真实路径与数值路径的差；弱误差比较指定测试函数在两种分布下的期望差。仅看均值相近不能证明逐条路径接近，也不能证明罕见事件概率准确。本课只检查终点的一阶、二阶矩，未声称完成路径层面的验证。"
+      ]
+    },
+    {
+      "id": "L6",
+      "title": "L6 · 数值稳定与统计可辨别性",
+      "depth": "A",
+      "paragraphs": [
+        "OU 的精确转移在 θ>0 时稳定，但 Euler 的确定部分要求 |1−θh|<1；步长大于 2/θ 时会人为放大状态。增加模拟次数不能修复这个离散化错误。",
+        "稀疏读数可能难以分开过程噪声与测量噪声，因为二者都改变相邻读数的波动。多采集同一时点的独立重复测量，有时能帮助估计仪器误差；增加时间分辨率则可能帮助区分动态变化。具体能否分开仍取决于状态和观测结构。固定参数下滤波公式正确，不表示这些参数已由现有数据识别。"
+      ]
+    },
+    {
+      "id": "L7",
+      "title": "L7 · 精确矩、模拟和数值积分交叉检查",
+      "depth": "B",
+      "paragraphs": [
+        "代码复算手算路径，并用积分核对 OU 转移方差。它比较固定终点 T=1 的 Euler 精确均值、方差与连续过程真值；步长减小时该例的矩误差下降。",
+        "随后模拟五万条离散路径，用蒙特卡洛误差检查其均值方差。一次 Kalman 更新再与直接积分的后验均值方差比较。这些检查验证给定模型中的数值实现，不声称由三个步长证明了一般 SDE 收敛定理。"
+      ],
+      "code": {
+        "language": "r",
+        "source": "# R >= 4.0；base R / stats。合成 OU 过程和独立高斯观测。\nset.seed(20261126)\ntheta <- 1; sigma <- 0.5; h <- 0.25; x0 <- 1\n# 两个固定标准化增量用于逐步手算，不是拟合得到的随机样本。\nz <- c(1,-1)\npath <- c(x0,NA_real_,NA_real_)\nfor (k in 1:2) path[k+1] <- path[k]-theta*path[k]*h+sigma*sqrt(h)*z[k]\nstopifnot(max(abs(path-c(1,1,0.5)))<1e-12)\na <- exp(-theta*h)\nq <- sigma^2*(1-exp(-2*theta*h))/(2*theta)\nq_integral <- integrate(function(s) sigma^2*exp(-2*theta*(h-s)),0,h)$value\nstopifnot(abs(q-q_integral)<1e-12)\n# 比较固定 T=1 下 Euler 离散过程的精确均值/方差与 OU 真值。\nT <- 1\ntrue_mean <- exp(-theta*T)*x0\ntrue_variance <- sigma^2*(1-exp(-2*theta*T))/(2*theta)\nsteps <- c(0.25,0.125,0.0625)\nmoment_table <- t(vapply(steps,function(step) {\n  nstep <- round(T/step); b <- 1-theta*step\n  c(step=step,mean=b^nstep*x0,\n    variance=sigma^2*step*(1-b^(2*nstep))/(1-b^2))\n},numeric(3)))\nstopifnot(all(diff(abs(moment_table[,\"mean\"]-true_mean))<0))\nstopifnot(all(diff(abs(moment_table[,\"variance\"]-true_variance))<0))\n# 模拟检查针对的是 Euler 离散模型，而非宣称它就是精确 OU。\nn <- 50000; step <- 0.125; nstep <- round(T/step)\nx <- rep(x0,n)\nfor (k in seq_len(nstep)) x <- (1-theta*step)*x+sigma*sqrt(step)*rnorm(n)\nem_mean <- moment_table[2,\"mean\"]; em_var <- moment_table[2,\"variance\"]\nstopifnot(abs(mean(x)-em_mean)<6*sqrt(em_var/n))\nstopifnot(abs(var(x)-em_var)<6*em_var*sqrt(2/(n-1)))\n# 另设高斯初始信念 N(1,0.2)，采用精确 OU 转移做一次滤波。\nm0 <- 1; P0 <- 0.2; R <- 0.04; observation <- 0.7\nm_prior <- a*m0; P_prior <- a^2*P0+q\nK <- P_prior/(P_prior+R)\nm_post <- m_prior+K*(observation-m_prior)\nP_post <- (1-K)*P_prior\ndensity_product <- function(x)\n  dnorm(x,m_prior,sqrt(P_prior))*dnorm(observation,x,sqrt(R))\nnormalizer <- integrate(density_product,-Inf,Inf,rel.tol=1e-10)$value\nnumeric_mean <- integrate(function(x) x*density_product(x),-Inf,Inf,\n                          rel.tol=1e-10)$value/normalizer\nnumeric_variance <- integrate(function(x) (x-numeric_mean)^2*density_product(x),\n                              -Inf,Inf,rel.tol=1e-10)$value/normalizer\nstopifnot(abs(numeric_mean-m_post)<1e-8,abs(numeric_variance-P_post)<1e-8)\nprint(list(Euler_hand_path=path,exact_transition_a=a,exact_process_variance=q))\nprint(moment_table)\nprint(list(OU_mean_T1=true_mean,OU_variance_T1=true_variance,\n           simulated_Euler_mean=mean(x),simulated_Euler_variance=var(x)))\nprint(list(predicted_mean=m_prior,predicted_variance=P_prior,gain=K,\n           filtered_mean=m_post,filtered_variance=P_post))\n",
+        "environment": "R 4.0+；base R 与 stats，无附加包；合成数据",
+        "verified": true,
+        "file": "ode-sde.R"
+      }
+    },
+    {
+      "id": "L8",
+      "title": "L8 · 让动态模型对应可观测目标",
+      "depth": "A",
+      "paragraphs": [
+        "在科学计算、金融或生理系统中，先说明状态的物理含义、输入如何进入漂移、仪器测到哪些分量以及采样频率。目标可以是终点分布、首次到达时间或决策价值，不一定需要完整恢复每条隐状态路径。",
+        "有价值的方法问题包括部分观测下参数可辨识条件、误差传播、稳定数值算法和最优采样时间。对未来轨迹的准确预测与对真实机制的恢复，仍需要不同的验证设计。",
+        "模型中的状态维数也不等于可测量维数。若仪器只读取多个状态的总和，不同状态组合可能给出相同轨迹读数。缩小数值步长能够改善已选方程的求解精度，却不能自动区分这些隐状态；这属于观测设计和系统可辨识性问题。"
+      ]
+    }
+  ],
+  "extension": {
+    "status": "planned",
+    "topics": [
+      "SDE 强解、弱解及 Euler 强弱收敛率",
+      "非线性滤波、粒子滤波与平滑",
+      "部分观测下动力学参数识别和实验设计"
+    ]
+  },
+  "references": [
+    "sarkka-solin-sde"
+  ],
+  "questions": [
+    {
+      "id": "ode-sde-q1",
+      "type": "最小计算",
+      "prompt": "本例 Euler 更新中，h=0.25 时噪声项的标准差是多少？",
+      "options": [
+        "0.125",
+        "0.25",
+        "0.5"
+      ],
+      "answer": 1,
+      "explanation": "σ√h=0.5×0.5=0.25。",
+      "depth": "A"
+    },
+    {
+      "id": "ode-sde-q2",
+      "type": "技术辨析",
+      "prompt": "使用未来观测改进过去状态估计属于什么？",
+      "options": [
+        "滤波",
+        "平滑",
+        "无条件模拟"
+      ],
+      "answer": 1,
+      "explanation": "平滑可以使用晚于被估计状态时点的观测，部署预测通常不能。",
+      "depth": "A"
+    },
+    {
+      "id": "ode-sde-q3",
+      "type": "科研判断",
+      "prompt": "减小步长与增加模拟路径数分别主要减少什么？",
+      "options": [
+        "分别减少离散化误差与蒙特卡洛误差",
+        "都只减少测量误差",
+        "都保证参数可识别"
+      ],
+      "answer": 0,
+      "explanation": "两类数值误差不同；二者都不能自动补足测量信息。",
+      "depth": "A"
+    }
+  ],
+  "status": {
+    "eli5": true,
+    "example": true,
+    "definition": true,
+    "derivation": true,
+    "code": true,
+    "interactive": true,
+    "literature": true,
+    "audit": true
+  },
+  "lab": "ode-sde"
+}

@@ -1,0 +1,222 @@
+{
+  "id": "probability",
+  "name": "条件概率、贝叶斯更新与预测分布",
+  "nameEn": "Conditional Probability, Bayesian Updating and Prediction",
+  "module": "A2",
+  "priority": "P0",
+  "summary": "用两种硬币假设和两次观测完整计算似然、后验与预测，解释条件独立为何不等于边缘独立。",
+  "prerequisites": [],
+  "related": [
+    "sampling",
+    "ode-sde",
+    "causality",
+    "identifiability"
+  ],
+  "minutes": {
+    "A": 40,
+    "B": 85,
+    "C": 180
+  },
+  "sections": [
+    {
+      "id": "L0",
+      "title": "L0 · 同一观测可以来自不同来源",
+      "depth": "A",
+      "paragraphs": [
+        "连续出现两次正面，既可能来自公平硬币，也可能来自偏向正面的硬币。我们需要把“某种假设产生观测的概率”与“看到观测后该假设的概率”分开，同时保留无法排除的可能性。条件概率提供更新信息的统一规则。",
+        "概率分布还能描述下一次观测的不确定性。只选一个最可能参数再预测，会忽略参数或模型选择的不确定性；在可枚举的小问题中，直接对所有候选情况加权即可看清这一差别。"
+      ]
+    },
+    {
+      "id": "L1",
+      "title": "L1 · 先选一枚硬币，再重复抛掷",
+      "depth": "A",
+      "paragraphs": [
+        "假设盒子里只有两类硬币：H=0 的正面概率为 0.5，H=1 的正面概率为 0.8。先以各一半概率选择一类，再一直用选中的同一枚硬币。H 表示本次实验中未知但不随抛掷改变的类别，X₁、X₂表示随机结果。",
+        "先验记录看数据前两类硬币的权重。似然记录固定类别后这次数据有多容易出现。后验把两者相乘后重新归一化。三者不是不同名称的同一组概率，尤其似然本身通常不对假设求和为 1。"
+      ]
+    },
+    {
+      "id": "L2",
+      "title": "L2 · 两次正面怎样改变判断",
+      "depth": "A",
+      "paragraphs": [
+        "给定 H 后，两次抛掷独立。观测为 X₁=X₂=1 时，公平硬币的似然是 0.5²=0.25，偏置硬币是 0.8²=0.64。乘先验后得到 0.125 与 0.32，边缘观测概率是两者之和 0.445。",
+        "后验为 (25/89,64/89)，即偏置硬币约有 0.719101 的概率。下一次正面的预测概率为 (25/89)×0.5+(64/89)×0.8=637/890≈0.715730；它既不是后验类别概率，也不是直接取 0.8。"
+      ],
+      "table": {
+        "headers": [
+          "已看到的结果",
+          "公平硬币后验",
+          "偏置硬币后验"
+        ],
+        "rows": [
+          [
+            "尚未观察",
+            "1/2",
+            "1/2"
+          ],
+          [
+            "一次正面",
+            "5/13",
+            "8/13"
+          ],
+          [
+            "两次正面",
+            "25/89",
+            "64/89"
+          ]
+        ]
+      },
+      "steps": [
+        "先更新一次，再用第二次条件似然更新，可得到与一次使用联合似然完全相同的后验。",
+        "这种等价不允许把同一条观测复制两遍：复制记录并不是第二次独立实验。"
+      ]
+    },
+    {
+      "id": "L3",
+      "title": "L3 · 联合、条件、边缘与预测",
+      "depth": "A",
+      "paragraphs": [
+        "随机变量是从样本空间到数值空间的可测映射，分布规定它落入各集合的概率。对概率为正的事件 B，P(A|B)=P(A∩B)/P(B)。连续变量单点概率可为零，此时条件密度或正则条件分布需要另外定义，不能机械地除以 P(X=x)。",
+        "本例 H∈{0,1}、Xᵢ∈{0,1}，θ_H∈{0.5,0.8} 是类别决定的参数。给定已观测数据 x 后，后验在 H 上是一份分布，x 本身已经固定。一般连续参数模型则用积分代替有限求和。",
+        "期望是按分布加权的平均，既可写离散求和，也可写连续积分；它存在需要相应可积性。方差描述围绕均值的平方波动，协方差描述两个中心化变量的乘积平均。零协方差通常只排除线性关联，不能替代独立性。"
+      ],
+      "equations": [
+        {
+          "tex": "P(H=h\\mid x)=\\frac{P(x\\mid H=h)P(H=h)}{\\sum_gP(x\\mid H=g)P(H=g)}",
+          "explanation": "分母须为正且有限；求和覆盖模型中全部候选类别。此式来自联合概率的两种分解。"
+        },
+        {
+          "tex": "P(X_{n+1}=1\\mid x)=\\sum_h\\theta_hP(H=h\\mid x)",
+          "explanation": "使用条件独立假设：给定 H，下一次结果不再依赖已经观察到的抛掷。"
+        }
+      ]
+    },
+    {
+      "id": "L4",
+      "title": "L4 · 为什么更新和平均都要条件化",
+      "depth": "B",
+      "paragraphs": [
+        "联合概率可写 P(H=h,x)=P(x|H=h)P(H=h)，也可写 P(H=h|x)P(x)。令两式相等，再用全概率公式展开 P(x)，便得到贝叶斯公式。这里没有把“假设更可信”当作新的公理。",
+        "虽然 X₁ 与 X₂给定 H 后独立，边缘上却相关。P(Xᵢ=1)=0.65，而 P(X₁=X₂=1)=0.445，不等于 0.65²=0.4225。协方差为 0.0225：看到一次正面会提高对偏置硬币的权重，进而改变下一次预测。",
+        "全方差公式把观测变异分为给定 H 的平均随机波动，以及不同 H 的条件均值差异。这个分解用于区分来源，不能把第二项简单解释成可由任意更多数据完全消除的误差；模型设定是否正确仍需另查。",
+        "条件期望还与预测损失相连。若 Y 二阶矩有限，令 m(X)=E[Y|X]，把 Y−g(X) 写成 Y−m(X)+m(X)−g(X)，条件化后交叉项为零。因此平方预测风险等于不可再降低的条件方差，加上预测函数偏离条件均值的平方误差。"
+      ],
+      "equations": [
+        {
+          "tex": "\\operatorname{Var}(X)=E[\\operatorname{Var}(X\\mid H)]+\\operatorname{Var}(E[X\\mid H])",
+          "explanation": "要求二阶矩有限。本例两项分别为 0.205 和 0.0225，总和为 0.2275。"
+        }
+      ]
+    },
+    {
+      "id": "L5",
+      "title": "L5 · 似然、后验和频率分别针对什么",
+      "depth": "A",
+      "paragraphs": [
+        "极大似然选择使当前数据似然最大的参数；贝叶斯后验保留先验加权后的参数分布；后验预测再对该分布平均。它们可能接近，也可能给出明显不同的答案，不能仅凭同一个数值输出认定等价。",
+        "概率密度的高度不是区间概率，密度可以超过 1；离散概率质量才对单点赋概率。条件期望是关于已知信息的随机变量，实际观察后才得到一个具体数。描述观测条件下的概率，也不自动定义改变条件变量后的干预结果。",
+        "对独立同分布且绝对可积的 Xᵢ，样本均值几乎必然趋于总体均值；若方差有限且为正，中心化均值乘 √n 后依分布趋于相应正态分布。前者描述大数定律的极限，后者描述波动尺度。依赖、重尾或自适应采样时不能原样套用这些条件。"
+      ]
+    },
+    {
+      "id": "L6",
+      "title": "L6 · 错误独立性会制造过度确定",
+      "depth": "A",
+      "paragraphs": [
+        "若两份报告其实复制同一次实验，却按两次独立证据相乘，后验会被错误强化。同一硬币的重复抛掷与每次重新随机选择硬币，也对应不同联合分布；单次边缘相同不能替代对实验过程的描述。",
+        "先验给某候选精确零概率时，有限且正常的似然不能让其后验重新为正。真实机制不在候选集合内时，最大后验类别也只是在错误候选中相对更合适。后验数值精确，不等于模型已经覆盖真实世界。",
+        "显著性检验的 p 值是在零假设及检验设定下，统计量至少同样极端的概率，不是零假设的后验概率。把它倒置为“假设成立的概率”，遗漏了先验与备择模型的信息。假设检验和贝叶斯更新可以各自合理，但回答的对象不同。"
+      ]
+    },
+    {
+      "id": "L7",
+      "title": "L7 · 枚举与模拟互相核验",
+      "depth": "B",
+      "paragraphs": [
+        "程序先精确计算两类似然、归一化常数和后验，再枚举两次抛掷的四种结果，核对总概率为 1。顺序更新与批量更新一致性属于代数检查，不依赖大量模拟。",
+        "最后独立重复十万次“选硬币并抛两次”的合成实验，用蒙特卡洛标准误校验联合正面频率。随机种子固定方便复现；模拟误差检查只验证这段程序及设定，不能验证现实样本的独立性。"
+      ],
+      "code": {
+        "language": "r",
+        "source": "# R >= 4.0；base R。两种合成硬币假设，固定种子。\nset.seed(20261126)\np <- c(fair=0.5,biased=0.8); prior <- c(0.5,0.5)\nobserved <- c(1,1)\nlikelihood <- p^sum(observed)*(1-p)^(length(observed)-sum(observed))\nevidence <- sum(prior*likelihood)\nposterior <- prior*likelihood/evidence\nstopifnot(abs(evidence-0.445)<1e-12)\nstopifnot(max(abs(posterior-c(25,64)/89))<1e-12)\nstep <- prior\nfor (x in observed) {\n  step <- step*p^x*(1-p)^(1-x)\n  step <- step/sum(step)\n}\nstopifnot(max(abs(step-posterior))<1e-12)\npredictive <- sum(posterior*p)\nstopifnot(abs(predictive-637/890)<1e-12)\n# 枚举全部两次抛掷结果，直接验证联合分布归一化。\npatterns <- expand.grid(x1=0:1,x2=0:1)\npatterns$probability <- apply(patterns,1,function(x)\n  sum(prior*p^sum(x)*(1-p)^(2-sum(x))))\nstopifnot(abs(sum(patterns$probability)-1)<1e-12)\nmarginal <- sum(prior*p)\njoint_heads <- sum(prior*p^2)\ncovariance <- joint_heads-marginal^2\nstopifnot(abs(covariance-0.0225)<1e-12)\n# 独立生成“先选硬币、再抛两次”实验，检查混合分布。\nn <- 100000\nh <- sample.int(2,n,replace=TRUE,prob=prior)\nx1 <- rbinom(n,1,p[h]); x2 <- rbinom(n,1,p[h])\nempirical <- mean(x1*x2)\nmc_se <- sqrt(joint_heads*(1-joint_heads)/n)\nstopifnot(abs(empirical-joint_heads)<6*mc_se)\nprint(list(likelihood=likelihood,evidence=evidence,posterior=posterior,\n           next_head_probability=predictive))\nprint(patterns)\nprint(list(marginal=marginal,joint_heads=joint_heads,\n           covariance=covariance,simulated_joint=empirical,Monte_Carlo_SE=mc_se))\n",
+        "environment": "R 4.0+；base R 与 stats，无附加包；合成数据",
+        "verified": true,
+        "file": "probability.R"
+      }
+    },
+    {
+      "id": "L8",
+      "title": "L8 · 从不确定性进入研究设计",
+      "depth": "A",
+      "paragraphs": [
+        "在候选模型比较中，先明确类别、参数、观测噪声和采样机制分别是什么。如果两类模型对所有可观测数据给出相同分布，更新不会产生区分信息；应寻找能改变似然比的新增测量。",
+        "对生成模型和世界模型，能够抽样只表示有一个指定分布。科学问题还包括分布从何而来、条件是否可得以及预测是否校准。条件概率为推断提供语言，不代替因果识别或机制验证。"
+      ]
+    }
+  ],
+  "extension": {
+    "status": "planned",
+    "topics": [
+      "正则条件分布与测度论定义",
+      "后验一致性、模型错设与预测校准",
+      "依赖数据的条件极限定理"
+    ]
+  },
+  "references": [
+    "blitzstein-conditioning"
+  ],
+  "questions": [
+    {
+      "id": "probability-q1",
+      "type": "最小计算",
+      "prompt": "本例观察两次正面后，偏置硬币的后验是多少？",
+      "options": [
+        "0.64",
+        "64/89",
+        "0.8"
+      ],
+      "answer": 1,
+      "explanation": "0.5×0.64 除以 0.5×0.25+0.5×0.64。",
+      "depth": "A"
+    },
+    {
+      "id": "probability-q2",
+      "type": "技术辨析",
+      "prompt": "给定 H 后独立，是否保证不条件化时也独立？",
+      "options": [
+        "保证",
+        "不保证，共享 H 可产生边缘依赖",
+        "只有样本量小时不保证"
+      ],
+      "answer": 1,
+      "explanation": "本例联合正面概率 0.445 不等于边缘概率乘积 0.4225。",
+      "depth": "A"
+    },
+    {
+      "id": "probability-q3",
+      "type": "科研判断",
+      "prompt": "复制同一实验报告后再次乘相同似然，主要错误是什么？",
+      "options": [
+        "忽略两个记录的依赖，重复计算信息",
+        "后验一定超过 1",
+        "随机种子没有固定"
+      ],
+      "answer": 0,
+      "explanation": "再次更新必须使用给定已有数据后的真实条件似然。",
+      "depth": "A"
+    }
+  ],
+  "status": {
+    "eli5": true,
+    "example": true,
+    "definition": true,
+    "derivation": true,
+    "code": true,
+    "interactive": false,
+    "literature": true,
+    "audit": true
+  },
+  "lab": null
+}

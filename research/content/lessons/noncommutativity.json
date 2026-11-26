@@ -1,0 +1,225 @@
+{
+  "id": "noncommutativity",
+  "name": "非对易性与给药顺序的观测边界",
+  "nameEn": "Noncommutativity and Restricted-Input Identification",
+  "module": "E2",
+  "priority": "P0",
+  "summary": "用两阶矩阵逐步计算顺序效应，再构造恒定输入完全相同、序贯输入却不同的系统。",
+  "prerequisites": [
+    "linear-algebra",
+    "ode-sde",
+    "identifiability"
+  ],
+  "related": [
+    "pkpd",
+    "branching"
+  ],
+  "minutes": {
+    "A": 45,
+    "B": 90,
+    "C": 180
+  },
+  "sections": [
+    {
+      "id": "L0",
+      "title": "相同总暴露不必具有相同动态结果",
+      "depth": "A",
+      "paragraphs": [
+        "两个干预改变状态的方式不同，先改变哪个状态会影响后一个干预接收的输入。因此，浓度或总剂量相同，并不保证先后顺序的响应相同。这里讨论一个明确的数学可能性，不把玩具矩阵解释成已验证的药理机制。",
+        "受限输入下的辨识要同时说明可施加的输入和可取得的输出。增加恒定共暴露的宽度与增加 A 后 B 的切换实验，是两种不同的信息扩充；全轨迹定理也不能无条件替代固定终点问题。"
+      ]
+    },
+    {
+      "id": "L1",
+      "title": "两个状态之间的累加",
+      "depth": "A",
+      "paragraphs": [
+        "状态向量 x=(x₁,x₂)ᵀ 有两个无量纲分量。操作 A 以 x₂ 为速率增加 x₁；操作 B 以 x₁ 为速率增加 x₂。矩阵的行表示被改变的状态，列表示提供影响的状态。初始状态为 (1,0)。",
+        "先做 A 时，x₂=0，所以 x₁暂时不变；再做 B，x₂才增加。先做 B 时，已经生成的 x₂会让后面的 A 增加 x₁。这个历史信息存储在状态里，顺序效应不需要人为加入一个“顺序标签”。"
+      ]
+    },
+    {
+      "id": "L2",
+      "title": "手算两次矩阵指数",
+      "depth": "A",
+      "paragraphs": [
+        "取 A=[[0,1],[0,0]]，B=[[0,0],[1,0]]，两者平方都为零。因此作用 s 单位时间的 A 对应 I+sA，作用 t 单位时间的 B 对应 I+tB。后发生的操作乘在左边。",
+        "取 s=t=1。A 后 B：先得到 (1,0)，再得到 (1,1)；B 后 A：先得到 (1,1)，再得到 (2,1)。若只读 x₁，终点分别是 1 与 2。若只读 x₂，这一例子的两终点均为 1；系统非对易不保证每个读数都能看见顺序差。"
+      ],
+      "equations": [
+        {
+          "tex": "e^{sA}=I+sA,\\quad e^{tB}=I+tB,\\quad e^{tB}e^{sA}=I+sA+tB+stBA",
+          "explanation": "幂零性 A²=B²=0 使指数级数精确截断，而不是小时间近似。"
+        },
+        {
+          "tex": "AB=\\begin{pmatrix}1&0\\\\0&0\\end{pmatrix},\\quad BA=\\begin{pmatrix}0&0\\\\0&1\\end{pmatrix}",
+          "explanation": "交换次序只改变混合项；AB 与 BA 不同。"
+        }
+      ]
+    },
+    {
+      "id": "L3",
+      "title": "动态系统、输入与标量输出",
+      "depth": "A",
+      "paragraphs": [
+        "一般有限维双线性例子为 ẋ=(u(t)A+v(t)B)x，x(0)=b，y(t)=cᵀx(t)。A、B 属于 ℝᵈˣᵈ，x、b、c 属于 ℝᵈ，u、v 是已知输入，y 是标量观测；参数矩阵与随机噪声要分开。这里先分析无噪声结构，再允许添加两系统相同的观测噪声。",
+        "本课取 d=2、b=c=e₁。恒定共暴露是 u、v 在一个区间内不变；单独脉冲是其中一个输入为零；A 后 B 是分段输入。终点协议只记录 y(T)，轨迹协议记录整个 y(t)。"
+      ],
+      "equations": [
+        {
+          "tex": "\\Delta(s,t)=c^{\\mathsf T}\\!\\left(e^{tB}e^{sA}-e^{sA}e^{tB}\\right)b",
+          "explanation": "Δ 是固定初始状态、观测方向和作用时长下的顺序目标。"
+        },
+        {
+          "tex": "[A,B]=AB-BA,\\qquad \\Delta(s,t)=-st\\,c^{\\mathsf T}[A,B]b",
+          "explanation": "第二个等式对本课幂零例子精确成立；一般矩阵还存在总阶至少为三的高阶项。"
+        }
+      ]
+    },
+    {
+      "id": "L4",
+      "title": "转置对偶给出受限输入反例",
+      "depth": "B",
+      "paragraphs": [
+        "把系统换成 A*=Aᵀ、B*=Bᵀ、b*=c、c*=b。任意恒定 u、v、T 下，矩阵指数的转置等于转置矩阵的指数，标量等于自己的转置，所以两系统的读数完全相同。在本例中 b=c，初始状态和观测方向没有改变。",
+        "对分段输入，转置会反转矩阵乘积的顺序。于是对偶系统中 A 后 B 的读数，等于原系统 B 后 A 的读数：本例分别为 2 与 1。两系统可拟合所有恒定共暴露记录，却对新的给药顺序给出不同预测。",
+        "本反例甚至让每条恒定输入下的完整标量轨迹都一致。这说明此例的障碍是输入类别受限，而不只是只测终点。它不证明所有动力系统都不可识别；增加适当切换输入就能区分这里的两个候选系统。"
+      ],
+      "equations": [
+        {
+          "tex": "c^{\\mathsf T}e^{T(uA+vB)}b=b^{\\mathsf T}e^{T(uA^{\\mathsf T}+vB^{\\mathsf T})}c",
+          "explanation": "恒定输入的观测等价对所有 u、v、T 成立；加上相同观测噪声仍得到相同观测分布。"
+        },
+        {
+          "tex": "b^{\\mathsf T}e^{tB^{\\mathsf T}}e^{sA^{\\mathsf T}}c=c^{\\mathsf T}e^{sA}e^{tB}b",
+          "explanation": "对偶系统的同名序贯输入对应原系统反序乘积。"
+        },
+        {
+          "tex": "y_{u,v}(T)=\\cosh(T\\sqrt{uv})\\quad (u,v\\geq0)",
+          "explanation": "本例恒定共暴露的共同输出；uv=0 时按连续延拓取 1。"
+        }
+      ]
+    },
+    {
+      "id": "L5",
+      "title": "宽度外推、顺序外推与实现理论",
+      "depth": "A",
+      "paragraphs": [
+        "把同一恒定输入作用得更久，仍沿同一个生成矩阵的指数变化。顺序外推则涉及不同矩阵的乘积，包含恒定输入下可能无法分离的有序乘积信息。两者不能共享一个未经检验的识别结论。",
+        "最小实现通常只保证在特定完整输入输出映射下不存在多余状态；它不是受限实验协议自动识别所有目标的保证。坐标变换下等价的实现，也与本课在受限输入下等价、在目标输入下不等价的系统不同。"
+      ],
+      "table": {
+        "headers": [
+          "比较",
+          "观测信息",
+          "本例能否区分对偶系统"
+        ],
+        "rows": [
+          [
+            "恒定输入固定终点",
+            "一个时间点",
+            "不能"
+          ],
+          [
+            "同类脉冲多种宽度",
+            "同一类输入的多个时间点",
+            "不能"
+          ],
+          [
+            "恒定输入完整轨迹",
+            "所有时间点、但无输入切换",
+            "不能"
+          ],
+          [
+            "一次 A 后 B 切换",
+            "有序输入的终点",
+            "s,t>0 且读 x₁ 时能"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "L6",
+      "title": "非对易并不等于已观测到药理顺序效应",
+      "depth": "A",
+      "paragraphs": [
+        "若 c=e₂ 而 b=e₁，本课两种顺序在第二分量上的读数相等。这是“交换子非零”仍不足以保证目标输出不同的最小例子。若 A、B 对易，顺序差为零；若作用时长之一为零，差也为零。",
+        "真实实验还可能受残留浓度、洗脱不充分、测量延迟与细胞组成改变影响。需要把这些过程放进输入和观测定义，才能区分状态历史效应与实验条件变化。玩具系统未标定真实浓度与时间单位。"
+      ]
+    },
+    {
+      "id": "L7",
+      "title": "精确矩阵计算与对偶核验",
+      "depth": "B",
+      "paragraphs": [
+        "代码使用幂零矩阵的精确指数，并用收敛级数核对恒定输入的转置关系。级数只用于小范数测试矩阵，不能当作通用高精度矩阵指数库。"
+      ],
+      "code": {
+        "language": "r",
+        "environment": "R >= 4.4；仅 base R；确定性合成系统；seed = 20261126",
+        "verified": true,
+        "source": "set.seed(20261126)\nA <- matrix(c(0,1,0,0), 2, byrow=TRUE)\nB <- t(A); I <- diag(2); x0 <- c(1,0)\nstopifnot(all(A %*% A == 0), all(B %*% B == 0))\ns <- 1; tt <- 1\nAB_order <- as.vector((I+tt*B) %*% (I+s*A) %*% x0)\nBA_order <- as.vector((I+s*A) %*% (I+tt*B) %*% x0)\nstopifnot(all(AB_order == c(1,1)), all(BA_order == c(2,1)))\nexpm_small <- function(M) {\n  ans <- diag(nrow(M)); term <- ans\n  for(k in 1:80) {term <- term %*% M/k; ans <- ans+term}\n  ans\n}\nfor(u in c(0,0.4,1)) for(v in c(0,0.7,1)) for(T in c(0.2,1)) {\n  M <- T*(u*A+v*B)\n  y <- as.numeric(t(x0) %*% expm_small(M) %*% x0)\n  y_dual <- as.numeric(t(x0) %*% expm_small(t(M)) %*% x0)\n  stopifnot(abs(y-y_dual)<1e-12, abs(y-cosh(T*sqrt(u*v)))<1e-12)\n}\ndual_AB <- as.vector((I+tt*t(B)) %*% (I+s*t(A)) %*% x0)\nstopifnot(dual_AB[1] == 2, AB_order[1] == 1, AB_order[2] == BA_order[2])\nprint(rbind(A_then_B=AB_order,B_then_A=BA_order,dual_A_then_B=dual_AB))\nprint(A %*% B-B %*% A)\n",
+        "file": "noncommutativity.R"
+      }
+    },
+    {
+      "id": "L8",
+      "title": "用判别性输入补齐信息",
+      "depth": "A",
+      "paragraphs": [
+        "在已经得到一对候选机制后，直接寻找让它们输出不同的输入和观测方向，通常比盲目增大训练集更有针对性。本例一条切换实验就能区分候选；一般系统需要结合成本、噪声和可操作范围选择输入。",
+        "以上转置反例是本课独立复算的教学构造，矩阵指数与交换子均是经典工具。它对具体研究的意义是暴露所需假设，不构成原创性认证。固定终点、非负状态、稳定性等条件发生变化后，必须重新检查构造。"
+      ]
+    }
+  ],
+  "extension": {
+    "status": "planned",
+    "topics": [
+      "加入稳定漂移和守恒约束后反例的适用条件",
+      "受限输入类上的有序响应目标识别",
+      "噪声下判别输入的检验下界与设计"
+    ]
+  },
+  "references": [
+    "dynamics-mit-matrix-exponential"
+  ],
+  "questions": [
+    {
+      "id": "noncommutativity-q1",
+      "type": "最小计算",
+      "prompt": "本课 x(0)=(1,0)，s=t=1，只读 x₁。A 后 B 与 B 后 A 分别得到什么？",
+      "options": [
+        "1 与 2",
+        "2 与 1",
+        "都为 1"
+      ],
+      "answer": 0,
+      "explanation": "后发生的矩阵乘在左边；(I+B)(I+A)e₁=(1,1)，反序为 (2,1)。",
+      "depth": "A"
+    },
+    {
+      "id": "noncommutativity-q2",
+      "type": "科研判断",
+      "prompt": "恒定共暴露下的全部轨迹都被精确拟合，是否足以排除本课转置对偶？",
+      "options": [
+        "足以，因为数据无限多",
+        "不足；受限输入仍未包含有序切换",
+        "不足只因为优化器不够好"
+      ],
+      "answer": 1,
+      "explanation": "本反例在恒定输入全轨迹下也观测等价。输入类别和时间观测丰富度必须分别检查。",
+      "depth": "A"
+    }
+  ],
+  "lab": "noncommutativity",
+  "status": {
+    "eli5": true,
+    "example": true,
+    "definition": true,
+    "derivation": true,
+    "code": true,
+    "interactive": true,
+    "literature": true,
+    "audit": true
+  }
+}

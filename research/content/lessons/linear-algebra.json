@@ -1,0 +1,223 @@
+{
+  "id": "linear-algebra",
+  "name": "矩阵、子空间与可恢复信息",
+  "nameEn": "Matrices, Subspaces and Recoverable Information",
+  "module": "A1",
+  "priority": "P0",
+  "summary": "从两条重复测量开始，理解矩阵乘法、秩、零空间和奇异值，并区分恢复全部参数与恢复一个目标量。",
+  "prerequisites": [],
+  "related": [
+    "backprop",
+    "kernels",
+    "representation",
+    "identifiability"
+  ],
+  "minutes": {
+    "A": 40,
+    "B": 85,
+    "C": 180
+  },
+  "sections": [
+    {
+      "id": "L0",
+      "title": "L0 · 测量数量不等于独立信息量",
+      "depth": "A",
+      "paragraphs": [
+        "传感器读数、线性回归和网络中的线性层，都把一个向量变成另一个向量。矩阵不仅是一张数字表，还规定哪些输入方向被保留、放大、缩小或完全抹去。只检查输入输出维度，无法判断变换是否丢失信息。",
+        "两个未知量不一定能由两条记录确定：第二条记录可能只是第一条的两倍。线性代数让我们先判断信息结构，再决定求逆、拟合或追加测量；这一步常比更换优化器更关键。"
+      ]
+    },
+    {
+      "id": "L1",
+      "title": "L1 · 每一行是一条测量规则",
+      "depth": "A",
+      "paragraphs": [
+        "设两个待求量为 θ₁ 和 θ₂。第一台仪器只报告它们的和，第二台报告这个和的两倍。矩阵第一行是 (1,1)，第二行是 (2,2)；把每行与参数向量对应相乘再相加，就是该仪器的输出。",
+        "如果 θ₁ 加一、θ₂ 减一，两台仪器都没有变化。这个改变方向就是零空间中的向量。它不代表参数没有变化，而是当前测量方式看不见这种变化。矩阵的列则表示单独改变一个参数，会怎样同时改变所有读数。",
+        "内积 xᵀz 把两向量对应元素乘积相加，用于量化方向关系；欧氏范数是 xᵀx 的平方根。内积为零表示正交，但需要先约定坐标尺度。多维数组则要逐轴解释样本、特征或时间，不能仅凭都是二维表就互相相乘。"
+      ]
+    },
+    {
+      "id": "L2",
+      "title": "L2 · 同一读数对应多组参数",
+      "depth": "A",
+      "paragraphs": [
+        "取 A=[[1,1],[2,2]]、θ=(1,2)ᵀ，观测 y=Aθ=(3,6)ᵀ。改成 θ′=(2,1)ᵀ仍得到同一 y。所有 θ=(1+t,2−t)ᵀ都符合这两条无噪声记录，t 可以是任意实数。",
+        "虽然单个参数不确定，参数和 θ₁+θ₂却一定等于 3；参数差则可随 t 改变。若新增独立测量 θ₁−θ₂=−1，把和与差相加、相减后除以 2，才得到唯一解 (1,2)。"
+      ],
+      "table": {
+        "headers": [
+          "对象",
+          "本例计算",
+          "含义"
+        ],
+        "rows": [
+          [
+            "零空间方向",
+            "A(1,−1)ᵀ=(0,0)ᵀ",
+            "沿该方向无法区分"
+          ],
+          [
+            "秩",
+            "两行成比例，因此 rank(A)=1",
+            "仅有一条独立线性约束"
+          ],
+          [
+            "AᵀA",
+            "[[5,5],[5,5]]，特征值 10、0",
+            "奇异值为 √10、0"
+          ],
+          [
+            "最小范数解",
+            "(1.5,1.5)ᵀ",
+            "额外选择规则，不是新观测"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "L3",
+      "title": "L3 · 空间、维度与目标量",
+      "depth": "A",
+      "paragraphs": [
+        "令 A∈Rᵐˣᵖ、θ∈Rᵖ、y∈Rᵐ，测量模型为 y=Aθ+ε。A 是已知测量设计，θ 是未知参数，ε 是测量误差；只有指定误差分布后，才形成完整的统计模型。无噪声线性代数结论本身不需要正态假设。",
+        "列空间是所有可能的无噪声输出，零空间是映射为零的输入方向。行空间位于参数空间，包含能够由测量线性组合得到的方向。秩等于行空间和列空间的共同维数，且 rank(A)+dim ker(A)=p。",
+        "对称矩阵 M 的正半定性指 vᵀMv≥0 对所有 v 成立。协方差矩阵与 AᵀA 都具有这一性质，元素却可以为负。迹是对角元之和，对称矩阵的迹也等于全部特征值之和；这把总平方变化与各方向的变化连接起来。"
+      ],
+      "equations": [
+        {
+          "tex": "\\ker(A)=\\{v\\in\\mathbb R^p:Av=0\\},\\qquad \\psi(\\theta)=c^\\top\\theta",
+          "explanation": "c∈Rᵖ 是预先给定的目标方向。参数 θ 与目标泛函 ψ 是两个层次的对象。"
+        },
+        {
+          "tex": "A=U\\Sigma V^\\top,\\quad A^+=V\\Sigma^+U^\\top",
+          "explanation": "完整 SVD 中 U∈Rᵐˣᵐ、V∈Rᵖˣᵖ 正交，Σ∈Rᵐˣᵖ 的对角元为非负奇异值；Σ⁺ 对非零奇异值取倒数并转置形状。"
+        }
+      ]
+    },
+    {
+      "id": "L4",
+      "title": "L4 · 目标可恢复的充要条件",
+      "depth": "B",
+      "paragraphs": [
+        "若 Aθ=Aθ′，则 v=θ′−θ 属于 ker(A)。两组参数的目标差为 cᵀv。因此，目标在所有同读数参数间不变，当且仅当 c 与零空间中每个向量都正交。有限维基本子空间定理给出 ker(A) 的正交补等于 A 的行空间。",
+        "若 c=Aᵀw，则 ψ=cᵀθ=wᵀAθ=wᵀy，可直接从无噪声读数计算。反过来，只要存在 Av=0 但 cᵀv≠0，θ 与 θ+v 就构成一个无法由观测区分、目标却不同的反例。这是对目标的判定，不要求整个 θ 唯一。",
+        "有噪声时，最小二乘使残差 y−Aθ 与列空间正交：对平方损失求导得到 Aᵀ(Aθ−y)=0。若列不满秩，解仍可能不唯一；伪逆给出其中欧氏范数最小的解，并没有消除原来的不可区分性。"
+      ],
+      "equations": [
+        {
+          "tex": "c^\\top\\theta\\text{ 可由 }A\\theta\\text{ 唯一确定}\\quad\\Longleftrightarrow\\quad c\\in\\operatorname{row}(A)",
+          "explanation": "此处参数允许遍历整个 Rᵖ。非负、稀疏或其他限制会改变可行参数集合，必须重新检查。"
+        }
+      ]
+    },
+    {
+      "id": "L5",
+      "title": "L5 · 求逆、分解与正则化各解决什么",
+      "depth": "A",
+      "paragraphs": [
+        "特征分解研究方阵在同一空间中的不变方向；SVD 适用于长方阵，区分输入方向与输出方向。对称正定矩阵是两种分解关系特别简单的情况，不能据此把所有矩阵的特征值当成奇异值。",
+        "岭回归用 ‖Aθ−y‖²+λ‖θ‖²限制解的大小。λ>0 使正规方程可解，并降低小奇异值方向的噪声放大，但会产生偏差。稀疏约束也引入额外结构；这些方法选出一个解，不等于新增了可观测信息。",
+        "当 A 列满秩时，P=A(AᵀA)⁻¹Aᵀ 是到列空间的正交投影，满足 Pᵀ=P、P²=P。Py 是可由模型解释的读数部分，(I−P)y 是与该空间正交的残差。重复投影不会继续逼近另一个答案，因为第一次已经落在目标子空间。"
+      ]
+    },
+    {
+      "id": "L6",
+      "title": "L6 · 唯一性和稳定性必须分开",
+      "depth": "A",
+      "paragraphs": [
+        "B=diag(1,0.001) 满秩，所以无噪声解唯一。但第二个读数误差 0.001 会使第二个参数误差变成 1。满秩只能排除严格的零方向，不能保证有限精度、有限噪声下可靠恢复。",
+        "数值软件用阈值判断有效秩，阈值依赖尺度与精度。把单位从米改成毫米可能改变条件数的表观大小，因此应先说明变量尺度。重复相同测量可降低随机误差，却不会产生新的测量方向。"
+      ]
+    },
+    {
+      "id": "L7",
+      "title": "L7 · 用 SVD 检查信息与稳定性",
+      "depth": "B",
+      "paragraphs": [
+        "代码显式构造矩阵、两组同读数参数和零方向，再从 SVD 生成伪逆。它核验最小范数解，新增一条独立测量后重新求解，并演示满秩矩阵放大误差的情况。",
+        "R 的 %*% 是矩阵乘法，* 是逐元素乘法；drop() 仅去掉单列矩阵的维度属性。程序采用浮点容差检查等式，不把数值上很小的奇异值无条件当成数学上的零。"
+      ],
+      "code": {
+        "language": "r",
+        "source": "# R >= 4.0；base R。确定性合成测量，无外部数据。\nset.seed(20261126)\nA <- matrix(c(1,1,2,2),nrow=2,byrow=TRUE)\ntheta_a <- c(1,2); theta_b <- c(2,1)\ny <- drop(A %*% theta_a)\nnull_direction <- c(1,-1)\nstopifnot(all(y == c(3,6)), all(A %*% theta_b == y))\nstopifnot(all(A %*% null_direction == 0))\n# 从 SVD 自行构造伪逆；不对零奇异值取倒数。\ndecomp <- svd(A)\nkeep <- decomp$d > max(dim(A))*max(decomp$d)*.Machine$double.eps\nAplus <- decomp$v[,keep,drop=FALSE] %*%\n         diag(1/decomp$d[keep],nrow=sum(keep)) %*%\n         t(decomp$u[,keep,drop=FALSE])\ntheta_min <- drop(Aplus %*% y)\nstopifnot(max(abs(theta_min-c(1.5,1.5)))<1e-12)\nstopifnot(max(abs(A %*% Aplus %*% A-A))<1e-12)\n# 和在零空间上不变，差在零空间上会改变。\nstopifnot(sum(c(1,1)*null_direction)==0)\nstopifnot(sum(c(1,-1)*null_direction)==2)\n# 新测量记录两参数之差，增加独立信息。\nA_new <- rbind(A,c(1,-1)); y_new <- c(y,-1)\ntheta_new <- drop(qr.solve(A_new,y_new))\nstopifnot(max(abs(theta_new-theta_a))<1e-12)\n# 满秩也可能病态：第二个方向放大测量误差一千倍。\nB <- diag(c(1,0.001)); theta <- c(1,1)\ntruth <- drop(B %*% theta); noisy <- truth+c(0,0.001)\nrecovered <- drop(solve(B,noisy))\nstopifnot(max(abs(recovered-c(1,2)))<1e-12)\nprint(list(A=A,y=y,singular_values=decomp$d,rank=sum(keep)))\nprint(list(minimum_norm=theta_min,new_measurement_solution=theta_new))\nprint(list(measurement_error=noisy-truth,parameter_error=recovered-theta))\n",
+        "environment": "R 4.0+；base R 与 stats，无附加包；合成数据",
+        "verified": true,
+        "file": "linear-algebra.R"
+      }
+    },
+    {
+      "id": "L8",
+      "title": "L8 · 从测量设计进入统计问题",
+      "depth": "A",
+      "paragraphs": [
+        "面对一个逆问题，先写出测量算子和真正关心的目标方向。如果目标已位于可观测空间，可能无需恢复全部隐变量；若目标沿未观测方向变化，就需要新测量、可辩护约束或部分识别区间。",
+        "在线性层、低秩模型和系统辨识论文中，矩阵分解本身通常是工具。实质贡献可能在于新的可识别目标、噪声下误差界或测量设计，而不只是把伪逆换成另一个求解器。",
+        "非线性测量 y=g(θ) 可以在某点用雅可比矩阵近似，检查附近方向的局部敏感性。但一个点的雅可比满秩并不保证全局唯一：例如标量映射 θ²在 θ=1 附近导数非零，远处 θ=−1 仍给出同样观测。局部分析与全局识别应分别说明。"
+      ]
+    }
+  ],
+  "extension": {
+    "status": "planned",
+    "topics": [
+      "受限参数空间下的目标可识别性",
+      "奇异值扰动与稳定恢复误差界",
+      "高维随机矩阵与最优测量设计"
+    ]
+  },
+  "references": [
+    "strang-svd"
+  ],
+  "questions": [
+    {
+      "id": "linear-algebra-q1",
+      "type": "最小计算",
+      "prompt": "本例观测 y=(3,6)ᵀ，哪一个目标可唯一确定？",
+      "options": [
+        "θ₁",
+        "θ₁−θ₂",
+        "θ₁+θ₂"
+      ],
+      "answer": 2,
+      "explanation": "行空间由 (1,1) 张成，参数和始终为 3。",
+      "depth": "A"
+    },
+    {
+      "id": "linear-algebra-q2",
+      "type": "技术辨析",
+      "prompt": "满秩矩阵是否一定能在有噪声时稳定求逆？",
+      "options": [
+        "一定",
+        "不一定，最小奇异值可能很小",
+        "只要观测数量等于参数数量就一定"
+      ],
+      "answer": 1,
+      "explanation": "小奇异值方向可显著放大测量误差。",
+      "depth": "A"
+    },
+    {
+      "id": "linear-algebra-q3",
+      "type": "数学推导",
+      "prompt": "为何 c∈row(A) 可保证目标由无噪声读数决定？",
+      "options": [
+        "因为可写 c=Aᵀw，从而 cᵀθ=wᵀy",
+        "因为所有参数都变为零",
+        "因为任何正则化都恢复真值"
+      ],
+      "answer": 0,
+      "explanation": "目标不必依赖所有参数的独立恢复。",
+      "depth": "B"
+    }
+  ],
+  "status": {
+    "eli5": true,
+    "example": true,
+    "definition": true,
+    "derivation": true,
+    "code": true,
+    "interactive": false,
+    "literature": true,
+    "audit": true
+  },
+  "lab": null
+}

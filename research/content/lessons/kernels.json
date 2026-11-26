@@ -1,0 +1,205 @@
+{
+  "id": "kernels",
+  "name": "核函数、RKHS 与 GIP 信息来源",
+  "nameEn": "Kernels, RKHS and Gaussian Interaction Profiles",
+  "module": "B4",
+  "priority": "P0",
+  "summary": "区分相似度、再生核、平滑权重和关联画像；通过两点计算理解非线性预测及 GIP 的信息边界。",
+  "prerequisites": [
+    "linear-algebra"
+  ],
+  "related": [
+    "convolution",
+    "attention",
+    "gnn"
+  ],
+  "minutes": {
+    "A": 45,
+    "B": 90,
+    "C": 180
+  },
+  "sections": [
+    {
+      "id": "L0",
+      "title": "L0 · 用可计算的内积表示非线性规律",
+      "depth": "A",
+      "paragraphs": [
+        "线性回归只能在给定特征上做线性组合。若目标依赖弯曲或交互结构，可以先把输入映射到更丰富的特征空间，再做线性学习；困难是这个空间可能非常高维甚至无限维。核方法通过直接计算两个特征向量的内积，避免显式列出全部坐标。",
+        "核方法没有消除模型选择：特征空间、核尺度、正则化和训练信息仍决定可学的函数类别。它提供的是一套受约束的非线性建模方法，不是任何相似度都可以套用的技巧。"
+      ]
+    },
+    {
+      "id": "L1",
+      "title": "L1 · “像不像”必须说明按照什么比较",
+      "depth": "A",
+      "paragraphs": [
+        "给定两个一维输入 0 和 1，RBF 核按距离给它们打分。距离小则分数接近 1，距离大则接近 0。带宽 σ 控制多远还算相近。若把训练点的输出按这些分数加权平均，就是一个局部平滑预测。",
+        "GIP 先把每个药物表示为一行已观测相互作用记录，再在这些行向量上计算 RBF。此时相近表示“关联画像相近”，不是“分子结构相近”，更不是“药理机制已经相同”。比较对象改变，核的科学含义也改变。"
+      ]
+    },
+    {
+      "id": "L2",
+      "title": "L2 · 两个点的 Gram 矩阵与两种预测",
+      "depth": "A",
+      "paragraphs": [
+        "合成训练点 x₁=0、x₂=1，响应 y=(0,1)，σ=1。令 r=exp(−1/2)≈0.606531。Gram 矩阵 K 的对角元为 1，非对角元为 r；其特征值是 1+r 和 1−r，都为正。",
+        "在查询点 x=0，Nadaraya–Watson 权重为 (1,r)/(1+r)≈(0.622459,0.377541)，预测为 0.377541。核岭回归则先根据全部训练点共同求系数，不等于直接把核值归一化。取平均平方误差和 λ=0.5，则 nλ=1，解 (K+I)α=y。"
+      ],
+      "equations": [
+        {
+          "tex": "\\alpha=\\frac{1}{4-r^2}\\begin{pmatrix}-r\\\\2\\end{pmatrix},\\qquad\\widehat f(x)=\\sum_{i=1}^2\\alpha_i k(x_i,x)",
+          "explanation": "核岭系数可以为负，通常不构成概率权重。r 的取值来自上面的 RBF 定义。"
+        }
+      ],
+      "steps": [
+        "训练画像 p₁=(1,0)、p₂=(0,1)，γ=0.5，平方距离为 2，GIP 值为 exp(−1)。",
+        "若偷看一个待预测标签，把 p₁ 改为 (1,1)，平方距离变为 1，GIP 值变为 exp(−0.5)。",
+        "测试标签已经改变了模型输入；事后只删除训练损失中的该标签并不能消除这种泄漏。"
+      ]
+    },
+    {
+      "id": "L3",
+      "title": "L3 · 正半定核与再生性质",
+      "depth": "A",
+      "paragraphs": [
+        "实值核 k:X×X→R 对称，且对任意有限点集 x₁,…,xₙ 与实数向量 c，都有 cᵀKc≥0，才是这里使用的正半定核。等价地，它可以表示某个 Hilbert 特征空间中的内积。Gram 矩阵 K∈Rⁿˣⁿ 依赖给定样本；核函数本身定义在整个输入空间上。",
+        "再生核 Hilbert 空间 H 是一组函数组成的完备内积空间，点求值连续，k(x,·) 属于 H。再生性质把“求函数在 x 的值”改写成一个内积。函数 f 是学习对象，σ、λ 是超参数，训练输入与响应是观测量。"
+      ],
+      "equations": [
+        {
+          "tex": "k(x,z)=\\langle\\phi(x),\\phi(z)\\rangle,\\quad f(x)=\\langle f,k(x,\\cdot)\\rangle_{\\mathcal H}",
+          "explanation": "φ 把输入映射为特征；H 的范数控制在这个特定核所定义的意义下的函数复杂度。"
+        },
+        {
+          "tex": "k_\\sigma(x,z)=\\exp\\!\\left(-\\frac{\\|x-z\\|^2}{2\\sigma^2}\\right),\\qquad K^{\\rm GIP}_{ij}=\\exp(-\\gamma\\|p_i-p_j\\|^2)",
+          "explanation": "σ>0、γ>0。GIP 是 RBF 应用于关联画像 p 的一个具体实例，不是新的核空间类别。"
+        }
+      ]
+    },
+    {
+      "id": "L4",
+      "title": "L4 · 从函数优化降到有限维线性系统",
+      "depth": "B",
+      "paragraphs": [
+        "考虑平均平方损失加 λ‖f‖²_H，λ>0。把任意 f 分成训练核函数张成空间中的部分 f∥ 与正交部分 f⊥。再生性质给出 f⊥(xᵢ)=0，所以正交部分不改善训练损失，却增加范数平方。最优函数因此可写成 Σαᵢk(xᵢ,·)。",
+        "代入后，目标变成 ‖Kα−y‖²/n+λαᵀKα。求导得到 K(K+nλI)α=Ky；取 α=(K+nλI)⁻¹y 即满足最优条件。K 可以奇异，因此不能草率约去 K；但 K+nλI 在 λ>0 时正定，给出一个可用的唯一规范系数向量和唯一最优函数。",
+        "核岭回归直接分解稠密 n×n 矩阵通常需 O(n³) 运算和 O(n²) 存储。低秩近似或迭代算法减少代价，同时引入额外近似误差，应该单独检查。此处证明有限样本优化形式，不声称任何分布下都统计一致。"
+      ],
+      "equations": [
+        {
+          "tex": "\\widehat f=\\arg\\min_{f\\in\\mathcal H}\\left\\{\\frac1n\\sum_{i=1}^n(f(x_i)-y_i)^2+\\lambda\\|f\\|^2_{\\mathcal H}\\right\\}",
+          "explanation": "使用平方损失和严格正的二次范数惩罚；不同损失的表示定理条件需分别核对。"
+        }
+      ]
+    },
+    {
+      "id": "L5",
+      "title": "L5 · 同名“核”对应不同数学对象",
+      "depth": "A",
+      "paragraphs": [
+        "RKHS 核是满足正半定性的二元函数；KDE 核通常是积分为 1 的平滑函数，用来估计密度，不以正半定性为定义。卷积核是一组线性滤波权重，可有正有负。马尔可夫转移核 K(x,B) 对集合 B 返回下一状态的概率。",
+        "Attention 的归一化权重依赖查询与键，矩阵常常不对称，也未必正半定。它与核回归都可以做加权聚合，但这种运算相似不意味着所有 Attention 都是某个 RKHS 内积。",
+        "Gaussian Process 的协方差函数同样必须正半定；在相匹配的高斯先验与观测噪声设定下，后验均值可与核岭预测对应。概率模型还给出后验协方差，这是单独做核岭点估计时没有自动获得的对象。"
+      ]
+    },
+    {
+      "id": "L6",
+      "title": "L6 · 非法相似度与画像泄漏",
+      "depth": "A",
+      "paragraphs": [
+        "矩阵 [[1,2],[2,1]] 看起来对称且元素为正，但对 c=(1,−1) 有 cᵀKc=−2，因此不能作为上述正半定 Gram 矩阵。元素非负与正半定是两回事。",
+        "每个交叉验证折都应先划分可见关联，再构造 GIP 和相关图。全数据预计算 GIP 后再划分样本，会让留出的标签经相似度进入训练。未知关联填零只是编码约定，不能据此声称它们都是真阴性。",
+        "完全冷启动的两个药物若都没有任何已知关联，画像都为零，GIP 给出完全相同的表示。单靠该画像无法区分它们；增加模型参数不会创造缺失的化学或实验信息。"
+      ]
+    },
+    {
+      "id": "L7",
+      "title": "L7 · 用 base R 核对矩阵和泄漏反例",
+      "depth": "B",
+      "paragraphs": [
+        "代码分别计算核回归权重、核岭系数和 GIP。最后一段故意把一个隐藏标签加入画像，用相似度变化说明泄漏通道。这是教学反例，不是可用于正式评价的数据处理步骤。",
+        "没有外部包或真实药物数据。测试覆盖对称性、特征值、线性系统残差和具体反例；有限矩阵通过检查不等于证明一个任意候选核在所有输入集合上正半定。"
+      ],
+      "code": {
+        "language": "r",
+        "source": "# R >= 4.0；base R / stats，无附加包。合成数据。\nset.seed(20261126)\nx <- c(0,1); y <- c(0,1); sigma <- 1\nrbf <- function(a,b,s) exp(-(a-b)^2/(2*s^2))\nK <- outer(x,x,function(a,b) rbf(a,b,sigma))\nstopifnot(max(abs(K-t(K))) < 1e-12)\nstopifnot(min(eigen(K,symmetric=TRUE,only.values=TRUE)$values)>0)\nw <- rbf(0,x,sigma); w <- w/sum(w)\nnw <- sum(w*y)\nstopifnot(abs(nw-1/(1+exp(0.5)))<1e-12)\nlambda <- 0.5; n <- length(x)\nalpha <- solve(K+n*lambda*diag(n),y)\nstopifnot(max(abs((K+n*lambda*diag(n))%*%alpha-y))<1e-12)\n# GIP 只使用本训练折允许观测的关联画像。\nprofiles <- rbind(c(1,0),c(0,1))\ngip <- function(P,gamma=0.5) exp(-gamma*as.matrix(dist(P))^2)\nG <- gip(profiles)\nleaked <- profiles; leaked[1,2] <- 1 # 故意制造泄漏，仅用于反例。\nG_leaked <- gip(leaked)\nstopifnot(abs(G[1,2]-exp(-1))<1e-12)\nstopifnot(abs(G_leaked[1,2]-exp(-0.5))<1e-12)\nbad <- matrix(c(1,2,2,1),2,2)\nstopifnot(min(eigen(bad,symmetric=TRUE,only.values=TRUE)$values)<0)\nprint(list(Gram=K,NW_weights=w,NW_prediction=nw,KRR_alpha=alpha))\nprint(list(GIP_train=G,GIP_with_hidden_label=G_leaked))\n",
+        "environment": "R 4.0+；base R 与 stats，无附加包",
+        "verified": true,
+        "file": "kernels.R"
+      }
+    },
+    {
+      "id": "L8",
+      "title": "L8 · 先审计信息，再比较方法",
+      "depth": "A",
+      "paragraphs": [
+        "对药物预测论文，先标清每种核使用化学结构、靶点、文本还是历史关联，并确认这些信息在目标部署场景是否可得。以历史标签构造的核可能适合补全已有网络，却不自动适合新药冷启动。",
+        "理论问题可以研究核选择、正则化、误差率或可迁移条件；把现成 RBF 换一个名称通常没有改变这些问题。判断贡献时，应指出新核或新数据结构到底增加了什么信息或放宽了什么假设。"
+      ]
+    }
+  ],
+  "extension": {
+    "status": "planned",
+    "topics": [
+      "RBF 正半定性的谱表示证明",
+      "核岭回归的有效维数与收敛率",
+      "不完整关联画像下的统计误差和冷启动识别边界"
+    ]
+  },
+  "references": [
+    "gretton-rkhs",
+    "vanlaarhoven-gip"
+  ],
+  "questions": [
+    {
+      "id": "kernels-q1",
+      "type": "最小计算",
+      "prompt": "σ=1、x=0、z=1 时 RBF 核值是多少？",
+      "options": [
+        "exp(−1/2)",
+        "exp(−2)",
+        "1"
+      ],
+      "answer": 0,
+      "explanation": "平方距离为 1，除以 2σ² 后取负指数。",
+      "depth": "A"
+    },
+    {
+      "id": "kernels-q2",
+      "type": "科研判断",
+      "prompt": "GIP 在全数据上计算，再对标签做训练测试划分，会有什么问题？",
+      "options": [
+        "不会泄漏，因为测试标签不进 loss",
+        "测试标签可能已经通过画像影响核矩阵",
+        "只影响运行速度"
+      ],
+      "answer": 1,
+      "explanation": "删除 loss 中的标签不能撤销它对输入表示的影响。",
+      "depth": "A"
+    },
+    {
+      "id": "kernels-q3",
+      "type": "技术辨析",
+      "prompt": "哪项条件定义了这里的 RKHS 核？",
+      "options": [
+        "所有元素均为正",
+        "任意有限 Gram 矩阵对称正半定",
+        "每一行相加等于 1"
+      ],
+      "answer": 1,
+      "explanation": "非负元素、随机矩阵与正半定 Gram 矩阵是不同概念。",
+      "depth": "A"
+    }
+  ],
+  "lab": "kernels",
+  "status": {
+    "eli5": true,
+    "example": true,
+    "definition": true,
+    "derivation": true,
+    "code": true,
+    "interactive": true,
+    "literature": true,
+    "audit": true
+  }
+}

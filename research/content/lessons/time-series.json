@@ -1,0 +1,208 @@
+{
+  "id": "time-series",
+  "name": "时间序列、状态空间与多步预测",
+  "nameEn": "Time Series, State Space and Multi-step Forecasting",
+  "module": "C4",
+  "priority": "P0",
+  "summary": "从AR(1)递推计算条件均值和方差，再区分隐藏状态、一步滚动预测、多步生成与干预预测。",
+  "prerequisites": [
+    "probability",
+    "linear-algebra"
+  ],
+  "related": [
+    "ode-sde",
+    "attention",
+    "sequential-causal",
+    "jepa"
+  ],
+  "minutes": {
+    "A": 50,
+    "B": 100,
+    "C": 180
+  },
+  "sections": [
+    {
+      "id": "L0",
+      "title": "背景与需要",
+      "depth": "A",
+      "paragraphs": [
+        "时间序列的每个数据点来自一个按时间演化的过程，邻近读数通常相关。把所有行随机打散再做普通独立样本预测，可能让模型提前看到未来或同一对象的近似重复观测。",
+        "研究首先需要确定信息集：预测时已知道哪些时间点、外部变量和历史行动；预测下一步还是未来整段轨迹；真实状态是否被测量噪声遮住。模型名称不能替代这些定义。"
+      ]
+    },
+    {
+      "id": "L1",
+      "title": "直觉与对象对应",
+      "depth": "A",
+      "paragraphs": [
+        "AR(1)表示下一次状态由当前状态的一部分加一个新冲击组成。系数φ控制旧状态保留多少，新冲击表示模型中未被当前状态解释的变化。它不是把之前所有噪声清空：以前的冲击已经藏在当前状态里，会继续向未来传播。",
+        "状态空间模型把“系统真正处于什么状态”和“仪器看到什么读数”分开。状态方程描述演化，观测方程描述测量。滤波利用截至现在的观测更新当前状态，平滑还用未来观测回看过去，预测则从当前信息推向未来。"
+      ]
+    },
+    {
+      "id": "L2",
+      "title": "逐步计算",
+      "depth": "A",
+      "paragraphs": [
+        "取 xₜ=0.8xₜ₋₁+εₜ，εₜ独立服从N(0,0.25)，已知x₀=1。未来1、2、3步条件均值为0.8、0.64、0.512，条件方差为0.25、0.41、0.5124。方差随步数增加，是因为未知冲击不断累积。",
+        "若第一步实际冲击为0.5，则x₁=1.3。站在第1步观测后预测x₂，均值是0.8×1.3=1.04；站在第0步预测x₂，均值仍是0.64。两者不同是信息集不同，不能拿前者冒充固定原点两步预测。",
+        "若测到的是y₀=x₀+η₀、测量噪声方差0.04，而x₀事前服从平稳分布，不能直接设x₀=y₀。后验状态均值会对y₀适当收缩，并保留状态不确定性；后续预测方差还要包含这一项。"
+      ],
+      "table": {
+        "headers": [
+          "预测步h",
+          "E[xh|x₀=1]",
+          "Var[xh|x₀]",
+          "已知的真实未来冲击"
+        ],
+        "rows": [
+          [
+            "1",
+            "0.8",
+            "0.25",
+            "无"
+          ],
+          [
+            "2",
+            "0.64",
+            "0.41",
+            "无"
+          ],
+          [
+            "3",
+            "0.512",
+            "0.5124",
+            "无"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "L3",
+      "title": "数学定义与假设",
+      "depth": "A",
+      "paragraphs": [
+        "本课xₜ与yₜ是实值随机变量，φ是已知参数，εₜ是过程噪声，ηₜ是观测噪声。两类噪声及初始状态按设定独立。零均值、方差恒定的白噪声未必独立；本课明确使用独立Gaussian噪声以得到精确条件分布。",
+        "当|φ|<1且初始分布选择为平稳分布时，过程的均值为0、方差为σ²/(1−φ²)，自相关为φ的滞后次幂。固定x₀的有限时模拟不从第一步起就是严格平稳。φ=1时成为随机游走，下面方差公式需取相应极限。"
+      ],
+      "equations": [
+        {
+          "tex": "x_t=\\phi x_{t-1}+\\epsilon_t,\\quad \\epsilon_t\\overset{\\mathrm{iid}}\\sim\\mathcal N(0,\\sigma^2),\\qquad y_t=x_t+\\eta_t",
+          "explanation": "x为潜在系统状态，y为实际观测；无观测噪声时可以直接把状态作为读数。"
+        },
+        {
+          "tex": "E[x_{t+h}\\mid x_t]=\\phi^h x_t,\\quad \\operatorname{Var}(x_{t+h}\\mid x_t)=\\sigma^2\\sum_{j=0}^{h-1}\\phi^{2j}",
+          "explanation": "这里参数已知且未来噪声独立于当前信息；未知参数还会带来额外不确定性。"
+        }
+      ]
+    },
+    {
+      "id": "L4",
+      "title": "关键推导",
+      "depth": "B",
+      "paragraphs": [
+        "将递推反复代入，得到xₜ₊ₕ=φʰxₜ+Σⱼ₌₀ʰ⁻¹φʲεₜ₊ₕ₋ⱼ。未来冲击条件均值为0，所以条件均值只剩第一项；独立性使不同冲击协方差为0，所以方差等于各项方差之和。",
+        "当φ²≠1，等比求和给出σ²(1−φ²ʰ)/(1−φ²)。φ=1时方差为hσ²，没有稳定的有限极限。|φ|<1时条件方差趋向平稳方差，但某一次随机轨迹并不会因此收敛为一个常数。",
+        "若当前滤波状态为N(m,P)，一阶状态预测为N(φm,φ²P+σ²)。再加独立观测噪声τ²，下一次观测方差为φ²P+σ²+τ²。已知当前状态、估计当前状态和预测观测因此产生不同区间。",
+        "Gaussian假设使这些条件均值方差完整确定条件分布；只有二阶矩条件时，上述矩递推仍可能成立，但不能自动使用Gaussian的95%区间。"
+      ]
+    },
+    {
+      "id": "L5",
+      "title": "相邻技术对比",
+      "depth": "A",
+      "paragraphs": [
+        "RNN通过递归隐藏状态压缩历史；LSTM和GRU使用门控制写入、保留和输出；线性状态空间模型规定显式状态递推及噪声；Transformer通过注意力读取所提供的历史token。它们处理历史信息的方式不同，隐藏维数相同不代表保留了相同信息。",
+        "Teacher forcing在训练时提供真实前一项，而自由生成使用模型先前输出。输入分布差异可能累积错误，但训练使用真实历史不自动是错误：正确设定的AR(1)条件似然本来就利用真实滞后值。关键是评价是否匹配实际推理方式。",
+        "非线性模型中，把预测均值代回模型一般不等于真实的多步条件均值。若X以相同概率取−1和1，f(X)=X²的期望为1，但f(E X)=0。要预测分布，可传播样本或做适当积分，不能只画一条递推均值线。"
+      ]
+    },
+    {
+      "id": "L6",
+      "title": "失败情形与反例",
+      "depth": "A",
+      "paragraphs": [
+        "若把未来真实yₜ₊₁当作预测yₜ₊₂的输入，却声称系统在t时刻已经预测整段未来，就发生评价信息泄漏。滚动一步预测可以使用刚到达的新观测，但任务应明确这样命名。",
+        "结构突变、治疗规则改变、测量频率变化会使旧的转移关系失配。更长的历史和更大的网络不保证旧机制继续成立；验证应包括按时间或环境划分，并检查预测区间覆盖与误差积累。",
+        "把治疗剂量加入时间序列模型得到p(Y未来|历史,剂量)，仍是条件预测。若剂量由未记录的病情决定，替换剂量输入不自动等于实施治疗后的分布；需要序贯因果识别条件与明确干预语义。"
+      ]
+    },
+    {
+      "id": "L7",
+      "title": "最小代码复现",
+      "depth": "B",
+      "paragraphs": [
+        "代码固定已知参数，从同一个初始状态重复模拟独立未来路径，核验各步条件均值、方差和Gaussian区间覆盖；随后做一次带测量噪声的状态更新。结果只检验这个合成模型，不包含参数估计或真实患者验证。"
+      ],
+      "code": {
+        "language": "r",
+        "source": "# R >= 4.4；已知参数AR(1)合成过程，不估计真实患者规律。\nset.seed(20261126)\nphi <- .8; noise_sd <- .5; x0 <- 1; horizon <- 5L; N <- 80000L\nmu <- phi^(1:horizon)*x0\nvariance <- noise_sd^2*(1-phi^(2*(1:horizon)))/(1-phi^2)\npath <- matrix(NA_real_,N,horizon); state <- rep(x0,N)\nfor(h in 1:horizon) {\n  state <- phi*state+rnorm(N,0,noise_sd); path[,h] <- state\n}\nstopifnot(max(abs(colMeans(path)-mu))<.015)\nstopifnot(max(abs(apply(path,2,var)-variance))<.02)\nstopifnot(max(abs(variance[1:3]-c(.25,.41,.5124)))<1e-12)\n# 理论Gaussian条件区间；这里只含过程噪声，没有参数估计误差。\nlower <- mu-qnorm(.975)*sqrt(variance); upper <- mu+qnorm(.975)*sqrt(variance)\ncoverage <- colMeans(sweep(path,2,lower,\">=\") & sweep(path,2,upper,\"<=\"))\nstopifnot(max(abs(coverage-.95))<.01)\n# 等价的一维状态空间，加观测噪声后先做状态更新，不能把y0当作x0。\nobs_var <- .04; prior_var <- noise_sd^2/(1-phi^2); y0 <- 1\ngain <- prior_var/(prior_var+obs_var)\nposterior_mean <- gain*y0; posterior_var <- (1-gain)*prior_var\nforecast_y1_mean <- phi*posterior_mean\nforecast_y1_var <- phi^2*posterior_var+noise_sd^2+obs_var\nstopifnot(gain>0,gain<1,forecast_y1_var>noise_sd^2)\n# 一步滚动预测与固定原点的两步预测使用的信息不同。\nrealized_x1 <- phi*x0+.5\nrolling_mean_x2 <- phi*realized_x1\nfixed_origin_mean_x2 <- phi^2*x0\nstopifnot(abs(rolling_mean_x2-1.04)<1e-12,abs(fixed_origin_mean_x2-.64)<1e-12)\nprint(data.frame(h=1:horizon,theory_mean=mu,simulated_mean=colMeans(path),\n                 theory_variance=variance,simulated_variance=apply(path,2,var),coverage=coverage))\nprint(list(Kalman=c(gain=gain,posterior_mean=posterior_mean,posterior_var=posterior_var,\n                    next_y_mean=forecast_y1_mean,next_y_var=forecast_y1_var),\n           information_sets=c(rolling=rolling_mean_x2,fixed_origin=fixed_origin_mean_x2)))\n",
+        "environment": "R >= 4.4；base与stats；随机种子20261126",
+        "verified": true,
+        "file": "time-series.R"
+      }
+    },
+    {
+      "id": "L8",
+      "title": "科研连接与证据边界",
+      "depth": "A",
+      "paragraphs": [
+        "时间序列课首先帮助拆开观测预测、潜状态恢复和动态机制识别。若研究目标只是下个读数，良好预测可能足够；若目标是改变给药后的轨迹，则要另外检查行动、状态和未测混杂的信息来源。",
+        "新方法应说明改变了不规则时间、部分观测、长程依赖、跨环境迁移还是不确定性传播中的哪个具体问题。仅把AR换成Transformer并得到一个指标提升，不足以证明恢复了动力学机制。"
+      ]
+    }
+  ],
+  "extension": {
+    "status": "planned",
+    "topics": [
+      "弱依赖时间序列的参数渐近理论与预测区间",
+      "非线性滤波、部分观测与状态充分性",
+      "非平稳环境下的多步预测及序贯因果识别"
+    ]
+  },
+  "references": [
+    "fpp3-hyndman-ar",
+    "scheduled-sampling-bengio-2015"
+  ],
+  "questions": [
+    {
+      "id": "time-series-q1",
+      "type": "最小计算",
+      "prompt": "AR(1)中φ=0.8、σ²=0.25，已知当前状态时两步预测方差是多少？",
+      "options": [
+        "0.25",
+        "0.4",
+        "0.41",
+        "0.5"
+      ],
+      "answer": 2,
+      "explanation": "方差是0.25+0.8²×0.25=0.41。",
+      "depth": "A"
+    },
+    {
+      "id": "time-series-q2",
+      "type": "技术辨析",
+      "prompt": "固定原点两步预测与看到下一次真实观测后的滚动一步预测为什么可能不同？",
+      "options": [
+        "模型一定出错",
+        "两者使用的信息集不同",
+        "概率公式失效",
+        "训练样本数必定不同"
+      ],
+      "answer": 1,
+      "explanation": "滚动预测已经获得新信息；不能把这种评价结果当作原点未获新观测时的多步能力。",
+      "depth": "A"
+    }
+  ],
+  "status": {
+    "eli5": true,
+    "example": true,
+    "definition": true,
+    "derivation": true,
+    "code": true,
+    "interactive": false,
+    "literature": true,
+    "audit": true
+  },
+  "lab": null
+}

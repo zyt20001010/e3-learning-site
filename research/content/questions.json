@@ -1,0 +1,1069 @@
+[
+  {
+    "id": "attention-q1",
+    "type": "最小计算",
+    "prompt": "本例第一个查询未加掩码时的输出是多少？",
+    "options": [
+      "1",
+      "2",
+      "3"
+    ],
+    "answer": 1,
+    "explanation": "第一和第三项权重相同、值分别为 1 与 3，第二值为 2，所以加权和恰为 2。",
+    "depth": "A",
+    "nodeId": "attention"
+  },
+  {
+    "id": "attention-q2",
+    "type": "技术辨析",
+    "prompt": "Q∈R³ˣ²、K∈R⁵ˣ²、V∈R⁵ˣ⁴，输出维度是什么？",
+    "options": [
+      "3×4",
+      "5×4",
+      "3×5"
+    ],
+    "answer": 0,
+    "explanation": "QKᵀ 是 3×5，乘 5×4 的 V 得 3×4。",
+    "depth": "A",
+    "nodeId": "attention"
+  },
+  {
+    "id": "attention-q3",
+    "type": "科研判断",
+    "prompt": "时间序列模型用了 Causal Mask，能否因此宣称治疗效应已识别？",
+    "options": [
+      "能，只要没有未来信息",
+      "不能，掩码不提供可交换性等因果识别条件",
+      "能，只要模型足够大"
+    ],
+    "answer": 1,
+    "explanation": "掩码控制计算依赖，不自动消除观察性数据的混杂。",
+    "depth": "A",
+    "nodeId": "attention"
+  },
+  {
+    "id": "backprop-q1",
+    "type": "最小计算",
+    "prompt": "本例中损失对 w 的导数是多少？",
+    "options": [
+      "−0.5",
+      "−1",
+      "0.5"
+    ],
+    "answer": 1,
+    "explanation": "两条 h 路径先累加得到 −0.5，再乘 ∂z/∂w=x=2。",
+    "depth": "A",
+    "nodeId": "backprop"
+  },
+  {
+    "id": "backprop-q2",
+    "type": "技术辨析",
+    "prompt": "loss.backward() 已正确执行，接下来哪项结论成立？",
+    "options": [
+      "权重必然已更新",
+      "得到了当前图上的梯度；参数更新仍需优化步骤",
+      "训练已收敛"
+    ],
+    "answer": 1,
+    "explanation": "求导与更新是两个操作，收敛还需要额外条件。",
+    "depth": "A",
+    "nodeId": "backprop"
+  },
+  {
+    "id": "backprop-q3",
+    "type": "数学推导",
+    "prompt": "若 h 同时进入 h² 和 h 两条路径，正确的反向操作是什么？",
+    "options": [
+      "只选导数大的路径",
+      "将两条路径贡献相乘",
+      "将两条路径贡献相加"
+    ],
+    "answer": 2,
+    "explanation": "多元链式法则对同一上游节点的不同下游依赖求和。",
+    "depth": "B",
+    "nodeId": "backprop"
+  },
+  {
+    "id": "bandit-q1",
+    "type": "最小计算",
+    "prompt": "决策前 n=3，三臂各抽一次，均值为 (1,0,1)。UCB1 的指数是什么？",
+    "options": [
+      "(1,0,1)",
+      "约 (2.4823,1.4823,2.4823)",
+      "约 (1.4823,0,1.4823)",
+      "不能计算"
+    ],
+    "answer": 1,
+    "explanation": "探索项对三臂均为 √(2log3)≈1.4823，逐项加到经验均值上。",
+    "depth": "A",
+    "nodeId": "bandit"
+  },
+  {
+    "id": "bandit-q2",
+    "type": "科研判断",
+    "prompt": "哪个实验目标最直接对应最佳臂识别？",
+    "options": [
+      "最大化全部轮次总奖励",
+      "预算结束时推荐臂为真正最优的概率",
+      "最大化一次观测奖励",
+      "让每臂次数永远相等"
+    ],
+    "answer": 1,
+    "explanation": "最佳臂识别关注最终推荐，累计收益是另一种目标；二者可能要求不同的采样分配。",
+    "depth": "A",
+    "nodeId": "bandit"
+  },
+  {
+    "id": "branching-q1",
+    "type": "最小计算",
+    "prompt": "N=3 时，N(N−1) 与 N² 分别是多少？",
+    "options": [
+      "6 和 9",
+      "3 和 6",
+      "9 和 9"
+    ],
+    "answer": 0,
+    "explanation": "阶乘矩对应有序且不同的个体对；平方还包含三个自身配对。",
+    "depth": "A",
+    "nodeId": "branching"
+  },
+  {
+    "id": "branching-q2",
+    "type": "技术辨析",
+    "prompt": "死亡率 d 没有独立写在二阶矩方程源项 2bm₁ 中，说明什么？",
+    "options": [
+      "二阶矩不受死亡影响",
+      "d 仍通过 r=b−d 和传播影响二阶矩",
+      "二阶矩总能识别所有分支扩散参数"
+    ],
+    "answer": 1,
+    "explanation": "本课方程为m₂′=2rm₂+2bm₁；r与m₁均含死亡率。有限维识别结论也有明确条件。",
+    "depth": "A",
+    "nodeId": "branching"
+  },
+  {
+    "id": "causality-q1",
+    "type": "最小计算",
+    "prompt": "按目标人群各一半风险分组标准化，处理风险与对照风险之差是多少？",
+    "options": [
+      "+0.26",
+      "−0.10",
+      "0"
+    ],
+    "answer": 1,
+    "explanation": "处理 0.4，对照 0.5，差为 −0.10。",
+    "depth": "A",
+    "nodeId": "causality"
+  },
+  {
+    "id": "causality-q2",
+    "type": "数学推导",
+    "prompt": "把 E[Yᵃ|L] 换成 E[Yᵃ|A=a,L] 主要使用哪项条件？",
+    "options": [
+      "一致性",
+      "条件可交换性",
+      "模型参数量足够大"
+    ],
+    "answer": 1,
+    "explanation": "这一替换要求给定 L 后，行动分配不再与相应潜在结局相关。",
+    "depth": "B",
+    "nodeId": "causality"
+  },
+  {
+    "id": "causality-q3",
+    "type": "科研判断",
+    "prompt": "某个在目标人群中占正概率的分组 L=l，严格满足 P(A=0|L=l)=0。增加同一选择机制下的样本能否自动恢复该组的对照支持？",
+    "options": [
+      "能，只要样本足够大",
+      "不能，严格零处理支持需要设计改变或额外外推假设",
+      "只需换成神经网络"
+    ],
+    "answer": 1,
+    "explanation": "这是总体分配机制中的结构性正值性缺失；它不同于正概率下有限样本恰好没有对照对象。继续收集同分布样本不会产生概率严格为零的行动。",
+    "depth": "A",
+    "nodeId": "causality"
+  },
+  {
+    "id": "convolution-q1",
+    "type": "最小计算",
+    "prompt": "本例窗口左上角为 (0,1) 时，互相关输出是多少？",
+    "options": [
+      "−1",
+      "1",
+      "3"
+    ],
+    "answer": 0,
+    "explanation": "2×1+0×0+1×0+3×(−1)=−1。",
+    "depth": "A",
+    "nodeId": "convolution"
+  },
+  {
+    "id": "convolution-q2",
+    "type": "技术辨析",
+    "prompt": "两个输入通道、一个输出通道的普通卷积如何合并通道？",
+    "options": [
+      "分别输出两张图，不相加",
+      "各输入通道与对应核计算后相加，再加一个输出偏置",
+      "只使用数值最大的输入通道"
+    ],
+    "answer": 1,
+    "explanation": "C_out 决定输出图数量，C_in 是每张输出图求和的通道维。",
+    "depth": "A",
+    "nodeId": "convolution"
+  },
+  {
+    "id": "convolution-q3",
+    "type": "科研判断",
+    "prompt": "将基因列表随意排序后做一维卷积，最应先核验什么？",
+    "options": [
+      "卷积层数是否足够多",
+      "相邻列是否具有可辩护的局部关系",
+      "是否把参数量增加一倍"
+    ],
+    "answer": 1,
+    "explanation": "卷积使用局部连接假设，任意排列可能制造没有生物依据的邻接关系。",
+    "depth": "A",
+    "nodeId": "convolution"
+  },
+  {
+    "id": "counterfactual-q1",
+    "type": "最小计算",
+    "prompt": "本课 q=0.2 时，P(Y(1)=1 | Y(0)=0) 等于多少？",
+    "options": [
+      "0.2",
+      "0.4",
+      "0.6"
+    ],
+    "answer": 2,
+    "explanation": "(0.5−0.2)/0.5=0.6。边缘相同仍允许 q 改变。",
+    "depth": "A",
+    "nodeId": "counterfactual"
+  },
+  {
+    "id": "counterfactual-q2",
+    "type": "科研判断",
+    "prompt": "模型完美预测两个随机化干预组的结果分布，额外能够直接推出什么？",
+    "options": [
+      "每个人的反事实已确定",
+      "两个干预边缘均值及其差已确定",
+      "共享噪声的耦合已经被验证"
+    ],
+    "answer": 1,
+    "explanation": "均值差只依赖边缘。个人配对和条件反事实需要联合信息或额外结构。",
+    "depth": "A",
+    "nodeId": "counterfactual"
+  },
+  {
+    "id": "diffusion-q1",
+    "type": "最小计算",
+    "prompt": "x₀=2，ᾱ=0.64，ε=1。加噪后的 xₜ 是多少？",
+    "options": [
+      "1.6",
+      "2.2",
+      "2.6",
+      "3"
+    ],
+    "answer": 1,
+    "explanation": "√0.64×2+√(1−0.64)×1=1.6+0.6=2.2。",
+    "depth": "A",
+    "nodeId": "diffusion"
+  },
+  {
+    "id": "diffusion-q2",
+    "type": "技术辨析",
+    "prompt": "平方误差训练下，理想噪声预测器估计什么？",
+    "options": [
+      "每次真实噪声必定被精确恢复",
+      "条件噪声均值 E[ε|xₜ,t]",
+      "对参数 θ 的 log 密度梯度",
+      "因果干预效应"
+    ],
+    "answer": 1,
+    "explanation": "条件风险的最小化解是条件期望；它不消除由加噪带来的条件不确定性。",
+    "depth": "A",
+    "nodeId": "diffusion"
+  },
+  {
+    "id": "experimental-design-q1",
+    "type": "最小计算",
+    "prompt": "先验熵1 bit，所有可能后验熵均0.469 bit，期望信息增益是多少？",
+    "options": [
+      "1.469 bit",
+      "0.531 bit",
+      "0 bit"
+    ],
+    "answer": 1,
+    "explanation": "信息增益等于先验熵减去期望后验熵。",
+    "depth": "A",
+    "nodeId": "experimental-design"
+  },
+  {
+    "id": "experimental-design-q2",
+    "type": "科研判断",
+    "prompt": "两项实验的预测熵相同，是否说明它们区分机制的价值相同？",
+    "options": [
+      "是",
+      "否，还要扣除机制已知时的观测不确定性",
+      "只要模型更大就相同"
+    ],
+    "answer": 1,
+    "explanation": "本课两项实验的预测熵均为1，但与机制有关的信息分别为0和约0.531。",
+    "depth": "A",
+    "nodeId": "experimental-design"
+  },
+  {
+    "id": "flow-matching-q1",
+    "type": "最小计算",
+    "prompt": "独立 X₀∼N(0,1)、X₁∼N(2,1)，t=1/2 时线性插值方差为多少？",
+    "options": [
+      "1",
+      "2",
+      "0.5",
+      "0"
+    ],
+    "answer": 2,
+    "explanation": "独立性使协方差项为零，方差为 (1/2)²+(1/2)²=1/2。",
+    "depth": "A",
+    "nodeId": "flow-matching"
+  },
+  {
+    "id": "flow-matching-q2",
+    "type": "科研判断",
+    "prompt": "样本端点之间使用直线，能否直接认定是最优传输？",
+    "options": [
+      "可以，直线总是最短",
+      "不可以，还要检查端点耦合和总体成本",
+      "只有网络足够大就可以",
+      "只需损失下降"
+    ],
+    "answer": 1,
+    "explanation": "给定一对端点的直线与边缘分布之间最优耦合是不同问题；本课独立配对成本 6，大于平移配对的 4。",
+    "depth": "A",
+    "nodeId": "flow-matching"
+  },
+  {
+    "id": "fourier-q1",
+    "type": "最小计算",
+    "prompt": "本课 y=(0,1,0,−1) 的 k=1 DFT 系数是什么？",
+    "options": [
+      "2",
+      "−2i",
+      "0"
+    ],
+    "answer": 1,
+    "explanation": "按负指数约定，1×(−i)+(−1)×i=−2i。",
+    "depth": "A",
+    "nodeId": "fourier"
+  },
+  {
+    "id": "fourier-q2",
+    "type": "技术辨析",
+    "prompt": "两个信号幅度谱完全相同，能否保证原信号相同？",
+    "options": [
+      "能，因为频率相同",
+      "不能，相位可能不同",
+      "只有长度为 4 才不能"
+    ],
+    "answer": 1,
+    "explanation": "循环移位会保持幅度谱，同时改变各非零频率分量的相位。",
+    "depth": "A",
+    "nodeId": "fourier"
+  },
+  {
+    "id": "fourier-q3",
+    "type": "最小计算",
+    "prompt": "长度为 2 和 2 的序列要通过 FFT 计算线性卷积，至少补到多长？",
+    "options": [
+      "2",
+      "3",
+      "4"
+    ],
+    "answer": 1,
+    "explanation": "至少 N_a+N_b−1=3；补到 4 也可，但不是最小长度。",
+    "depth": "A",
+    "nodeId": "fourier"
+  },
+  {
+    "id": "gnn-q1",
+    "type": "最小计算",
+    "prompt": "本例均值更新一轮后，节点 2 的值是多少？",
+    "options": [
+      "2",
+      "7/3",
+      "3"
+    ],
+    "answer": 1,
+    "explanation": "加入自连接后把自身与两个邻居的数一起平均。",
+    "depth": "A",
+    "nodeId": "gnn"
+  },
+  {
+    "id": "gnn-q2",
+    "type": "技术辨析",
+    "prompt": "经典对称归一化 GCN 与逐行平均之间的关系是？",
+    "options": [
+      "任何图上完全相同",
+      "一般不同，度不同时尤其应分开计算",
+      "只差一个激活函数"
+    ],
+    "answer": 1,
+    "explanation": "D⁻¹A 与 D⁻¹ᐟ²AD⁻¹ᐟ² 是不同矩阵。",
+    "depth": "A",
+    "nodeId": "gnn"
+  },
+  {
+    "id": "gnn-q3",
+    "type": "科研判断",
+    "prompt": "建立超图后，能否直接认定模型获得了普通图无法表达的能力？",
+    "options": [
+      "能，超边超过两个节点即足够",
+      "不能，还需看具体传播算子和任务",
+      "只需画出超图即可"
+    ],
+    "answer": 1,
+    "explanation": "部分线性超图传播可折算为加权普通图；数据结构与表达能力应分开证明。",
+    "depth": "A",
+    "nodeId": "gnn"
+  },
+  {
+    "id": "identifiability-q1",
+    "type": "技术辨析",
+    "prompt": "只观测 Y=a+b+ε，噪声分布已知；哪一个结论成立？",
+    "options": [
+      "a、b 都可由无限样本唯一恢复",
+      "a+b 可以识别，但 a−b 一般不能",
+      "任何目标都不能识别"
+    ],
+    "answer": 1,
+    "explanation": "观测分布依赖总数；在同一个总数等价类内，差值可变化。",
+    "depth": "A",
+    "nodeId": "identifiability"
+  },
+  {
+    "id": "identifiability-q2",
+    "type": "最小计算",
+    "prompt": "两个观测等价机制的目标值分别为 −1 和 1，平方损失下最坏风险的本课下界是多少？",
+    "options": [
+      "0",
+      "1",
+      "4"
+    ],
+    "answer": 1,
+    "explanation": "Δ=2，Δ²/4=1。这个下界不随同类样本量增加而消失。",
+    "depth": "B",
+    "nodeId": "identifiability"
+  },
+  {
+    "id": "jepa-q1",
+    "type": "最小计算",
+    "prompt": "教师旧参数0.8、在线新参数1.14，EMA动量0.9，教师新参数是多少？",
+    "options": [
+      "0.834",
+      "0.914",
+      "1.14"
+    ],
+    "answer": 0,
+    "explanation": "0.9×0.8+0.1×1.14=0.834；这一步没有计算教师损失梯度。",
+    "depth": "A",
+    "nodeId": "jepa"
+  },
+  {
+    "id": "jepa-q2",
+    "type": "科研判断",
+    "prompt": "一个动作条件 JEPA 的预测误差很小，直接支持哪一项？",
+    "options": [
+      "该评价数据上的潜表征预测较准",
+      "治疗因果效应已识别",
+      "个体反事实耦合已恢复"
+    ],
+    "answer": 0,
+    "explanation": "后两项需要额外的识别假设、信息和验证。动作条件输入与因果干预不是同一个结论。",
+    "depth": "A",
+    "nodeId": "jepa"
+  },
+  {
+    "id": "kernels-q1",
+    "type": "最小计算",
+    "prompt": "σ=1、x=0、z=1 时 RBF 核值是多少？",
+    "options": [
+      "exp(−1/2)",
+      "exp(−2)",
+      "1"
+    ],
+    "answer": 0,
+    "explanation": "平方距离为 1，除以 2σ² 后取负指数。",
+    "depth": "A",
+    "nodeId": "kernels"
+  },
+  {
+    "id": "kernels-q2",
+    "type": "科研判断",
+    "prompt": "GIP 在全数据上计算，再对标签做训练测试划分，会有什么问题？",
+    "options": [
+      "不会泄漏，因为测试标签不进 loss",
+      "测试标签可能已经通过画像影响核矩阵",
+      "只影响运行速度"
+    ],
+    "answer": 1,
+    "explanation": "删除 loss 中的标签不能撤销它对输入表示的影响。",
+    "depth": "A",
+    "nodeId": "kernels"
+  },
+  {
+    "id": "kernels-q3",
+    "type": "技术辨析",
+    "prompt": "哪项条件定义了这里的 RKHS 核？",
+    "options": [
+      "所有元素均为正",
+      "任意有限 Gram 矩阵对称正半定",
+      "每一行相加等于 1"
+    ],
+    "answer": 1,
+    "explanation": "非负元素、随机矩阵与正半定 Gram 矩阵是不同概念。",
+    "depth": "A",
+    "nodeId": "kernels"
+  },
+  {
+    "id": "linear-algebra-q1",
+    "type": "最小计算",
+    "prompt": "本例观测 y=(3,6)ᵀ，哪一个目标可唯一确定？",
+    "options": [
+      "θ₁",
+      "θ₁−θ₂",
+      "θ₁+θ₂"
+    ],
+    "answer": 2,
+    "explanation": "行空间由 (1,1) 张成，参数和始终为 3。",
+    "depth": "A",
+    "nodeId": "linear-algebra"
+  },
+  {
+    "id": "linear-algebra-q2",
+    "type": "技术辨析",
+    "prompt": "满秩矩阵是否一定能在有噪声时稳定求逆？",
+    "options": [
+      "一定",
+      "不一定，最小奇异值可能很小",
+      "只要观测数量等于参数数量就一定"
+    ],
+    "answer": 1,
+    "explanation": "小奇异值方向可显著放大测量误差。",
+    "depth": "A",
+    "nodeId": "linear-algebra"
+  },
+  {
+    "id": "linear-algebra-q3",
+    "type": "数学推导",
+    "prompt": "为何 c∈row(A) 可保证目标由无噪声读数决定？",
+    "options": [
+      "因为可写 c=Aᵀw，从而 cᵀθ=wᵀy",
+      "因为所有参数都变为零",
+      "因为任何正则化都恢复真值"
+    ],
+    "answer": 0,
+    "explanation": "目标不必依赖所有参数的独立恢复。",
+    "depth": "B",
+    "nodeId": "linear-algebra"
+  },
+  {
+    "id": "mcts-q1",
+    "type": "最小计算",
+    "prompt": "节点已有 N=3、W=2.0，收到本轮收益 0.9 后平均值为多少？",
+    "options": [
+      "0.9",
+      "2/3",
+      "0.725",
+      "2.9"
+    ],
+    "answer": 2,
+    "explanation": "新的累计收益为 2.9，访问次数为 4，均值为 2.9/4=0.725。",
+    "depth": "A",
+    "nodeId": "mcts"
+  },
+  {
+    "id": "mcts-q2",
+    "type": "技术辨析",
+    "prompt": "树搜索中的回传主要更新什么？",
+    "options": [
+      "神经网络每层参数梯度",
+      "所访问节点的访问次数和回报统计",
+      "真实环境的转移规律",
+      "未访问分支的真实收益"
+    ],
+    "answer": 1,
+    "explanation": "本课回传只记账并更新均值，奖励不可微也能进行；网络训练需要另一个梯度计算过程。",
+    "depth": "A",
+    "nodeId": "mcts"
+  },
+  {
+    "id": "multimodal-q1",
+    "type": "最小计算",
+    "prompt": "本课同号联合分布的 E[XY] 是多少？",
+    "options": [
+      "−1",
+      "0",
+      "1"
+    ],
+    "answer": 2,
+    "explanation": "两种可能配对中的乘积都等于 1。",
+    "depth": "A",
+    "nodeId": "multimodal"
+  },
+  {
+    "id": "multimodal-q2",
+    "type": "科研判断",
+    "prompt": "两个模态的边缘分布完全匹配，是否已确定对象配对？",
+    "options": [
+      "已确定",
+      "未确定，不同联合分布可能具有同样边缘",
+      "只要嵌入维度相同就确定"
+    ],
+    "answer": 1,
+    "explanation": "本课同号与异号联合分布构成直接反例。",
+    "depth": "A",
+    "nodeId": "multimodal"
+  },
+  {
+    "id": "multimodal-q3",
+    "type": "技术辨析",
+    "prompt": "Cross-Attention 新增的主要能力是什么？",
+    "options": [
+      "直接证明两模态机制相同",
+      "根据一组特征查询并汇总另一组特征",
+      "自动修复样本身份错配"
+    ],
+    "answer": 1,
+    "explanation": "计算结构提供信息汇总路径，正确配对仍需数据或额外约束。",
+    "depth": "A",
+    "nodeId": "multimodal"
+  },
+  {
+    "id": "noncommutativity-q1",
+    "type": "最小计算",
+    "prompt": "本课 x(0)=(1,0)，s=t=1，只读 x₁。A 后 B 与 B 后 A 分别得到什么？",
+    "options": [
+      "1 与 2",
+      "2 与 1",
+      "都为 1"
+    ],
+    "answer": 0,
+    "explanation": "后发生的矩阵乘在左边；(I+B)(I+A)e₁=(1,1)，反序为 (2,1)。",
+    "depth": "A",
+    "nodeId": "noncommutativity"
+  },
+  {
+    "id": "noncommutativity-q2",
+    "type": "科研判断",
+    "prompt": "恒定共暴露下的全部轨迹都被精确拟合，是否足以排除本课转置对偶？",
+    "options": [
+      "足以，因为数据无限多",
+      "不足；受限输入仍未包含有序切换",
+      "不足只因为优化器不够好"
+    ],
+    "answer": 1,
+    "explanation": "本反例在恒定输入全轨迹下也观测等价。输入类别和时间观测丰富度必须分别检查。",
+    "depth": "A",
+    "nodeId": "noncommutativity"
+  },
+  {
+    "id": "ode-sde-q1",
+    "type": "最小计算",
+    "prompt": "本例 Euler 更新中，h=0.25 时噪声项的标准差是多少？",
+    "options": [
+      "0.125",
+      "0.25",
+      "0.5"
+    ],
+    "answer": 1,
+    "explanation": "σ√h=0.5×0.5=0.25。",
+    "depth": "A",
+    "nodeId": "ode-sde"
+  },
+  {
+    "id": "ode-sde-q2",
+    "type": "技术辨析",
+    "prompt": "使用未来观测改进过去状态估计属于什么？",
+    "options": [
+      "滤波",
+      "平滑",
+      "无条件模拟"
+    ],
+    "answer": 1,
+    "explanation": "平滑可以使用晚于被估计状态时点的观测，部署预测通常不能。",
+    "depth": "A",
+    "nodeId": "ode-sde"
+  },
+  {
+    "id": "ode-sde-q3",
+    "type": "科研判断",
+    "prompt": "减小步长与增加模拟路径数分别主要减少什么？",
+    "options": [
+      "分别减少离散化误差与蒙特卡洛误差",
+      "都只减少测量误差",
+      "都保证参数可识别"
+    ],
+    "answer": 0,
+    "explanation": "两类数值误差不同；二者都不能自动补足测量信息。",
+    "depth": "A",
+    "nodeId": "ode-sde"
+  },
+  {
+    "id": "ope-q1",
+    "type": "最小计算",
+    "prompt": "本课四条日志中动作1出现两次，其奖励均为1、权重均为4，IS估计是多少？",
+    "options": [
+      "0.5",
+      "1",
+      "2"
+    ],
+    "answer": 2,
+    "explanation": "分母为全部四条日志数量，(4+4)/4=2；该估计可超出奖励范围。",
+    "depth": "A",
+    "nodeId": "ope"
+  },
+  {
+    "id": "ope-q2",
+    "type": "科研判断",
+    "prompt": "双重稳健结论的恰当理解是什么？",
+    "options": [
+      "两个模型随便选一个就安全",
+      "在支持及识别条件下，一个辅助模型正确可消除相应总体偏差项",
+      "无需记录行为动作概率"
+    ],
+    "answer": 1,
+    "explanation": "乘积偏差结构有明确条件，且不能消除所有有限样本与未测混杂问题。",
+    "depth": "A",
+    "nodeId": "ope"
+  },
+  {
+    "id": "pkpd-q1",
+    "type": "最小计算",
+    "prompt": "本课 D=100 mg、V=20 L、CL=2 L/h，AUC 是多少？",
+    "options": [
+      "5 mg/L",
+      "50 mg·h/L",
+      "2 L/h"
+    ],
+    "answer": 1,
+    "explanation": "AUC=D/CL；浓度、暴露与清除率有不同单位。",
+    "depth": "A",
+    "nodeId": "pkpd"
+  },
+  {
+    "id": "pkpd-q2",
+    "type": "技术辨析",
+    "prompt": "仅将 EC50 减半而保持 PK 参数不变，本模型中哪项直接改变？",
+    "options": [
+      "浓度 AUC",
+      "相同浓度下的效应",
+      "输入药物总量"
+    ],
+    "answer": 1,
+    "explanation": "EC50 属于本课 PD 映射；改变它不会修改 PK 方程。",
+    "depth": "A",
+    "nodeId": "pkpd"
+  },
+  {
+    "id": "probability-q1",
+    "type": "最小计算",
+    "prompt": "本例观察两次正面后，偏置硬币的后验是多少？",
+    "options": [
+      "0.64",
+      "64/89",
+      "0.8"
+    ],
+    "answer": 1,
+    "explanation": "0.5×0.64 除以 0.5×0.25+0.5×0.64。",
+    "depth": "A",
+    "nodeId": "probability"
+  },
+  {
+    "id": "probability-q2",
+    "type": "技术辨析",
+    "prompt": "给定 H 后独立，是否保证不条件化时也独立？",
+    "options": [
+      "保证",
+      "不保证，共享 H 可产生边缘依赖",
+      "只有样本量小时不保证"
+    ],
+    "answer": 1,
+    "explanation": "本例联合正面概率 0.445 不等于边缘概率乘积 0.4225。",
+    "depth": "A",
+    "nodeId": "probability"
+  },
+  {
+    "id": "probability-q3",
+    "type": "科研判断",
+    "prompt": "复制同一实验报告后再次乘相同似然，主要错误是什么？",
+    "options": [
+      "忽略两个记录的依赖，重复计算信息",
+      "后验一定超过 1",
+      "随机种子没有固定"
+    ],
+    "answer": 0,
+    "explanation": "再次更新必须使用给定已有数据后的真实条件似然。",
+    "depth": "A",
+    "nodeId": "probability"
+  },
+  {
+    "id": "reliability-q1",
+    "type": "最小计算",
+    "prompt": "n=4、α=0.1 时，k=ceil((n+1)(1−α))=5，应如何取阈值？",
+    "options": [
+      "取四个分数的最大值即可",
+      "取无穷，得到平凡但有效的集合",
+      "删掉最大的分数"
+    ],
+    "answer": 1,
+    "explanation": "k 大于校准样本量，不能用有限最大值冒充所需的第五顺序统计量。",
+    "depth": "A",
+    "nodeId": "reliability"
+  },
+  {
+    "id": "reliability-q2",
+    "type": "科研判断",
+    "prompt": "总体覆盖率达到90%，能否据此声称每个群体都有90%覆盖？",
+    "options": [
+      "能",
+      "不能，需要对应群组目标和评价",
+      "只要模型参数足够多就能"
+    ],
+    "answer": 1,
+    "explanation": "90%常见组全覆盖、10%罕见组全失败，已构成反例。",
+    "depth": "A",
+    "nodeId": "reliability"
+  },
+  {
+    "id": "representation-q1",
+    "type": "最小计算",
+    "prompt": "本例一维 PCA 保留的方差比例是多少？",
+    "options": [
+      "1/101",
+      "100/101",
+      "1/2"
+    ],
+    "answer": 1,
+    "explanation": "两个方向方差为 100 与 1，第一主成分保留其中的 100。",
+    "depth": "A",
+    "nodeId": "representation"
+  },
+  {
+    "id": "representation-q2",
+    "type": "科研判断",
+    "prompt": "把本例下游分类器加深，能否突破只看 Z 时的 50% 最优正确率？",
+    "options": [
+      "能，参数足够多即可",
+      "不能，相同 Z 对应两种等概率标签",
+      "只要优化器更好就能"
+    ],
+    "answer": 1,
+    "explanation": "被投影合并的输入已经不可区分；这是信息损失而非优化失败。",
+    "depth": "A",
+    "nodeId": "representation"
+  },
+  {
+    "id": "representation-q3",
+    "type": "数学推导",
+    "prompt": "一维 PCA 最大化 vᵀCv 的原因是什么？",
+    "options": [
+      "它直接最大化分类正确率",
+      "单位正交投影的重构误差等于总方差减去投影方差",
+      "所有潜变量都正态"
+    ],
+    "answer": 1,
+    "explanation": "正交残差平方分解给出该等价关系，不使用标签或正态假设。",
+    "depth": "B",
+    "nodeId": "representation"
+  },
+  {
+    "id": "rsi-q1",
+    "type": "技术辨析",
+    "prompt": "模型权重固定，系统把失败总结保存在外部记忆并影响下一次工具选择，这属于什么变化？",
+    "options": [
+      "没有任何变化",
+      "外部记忆与工作流变化",
+      "必定是梯度下降",
+      "已经证明通用 RSI 收敛"
+    ],
+    "answer": 1,
+    "explanation": "参数固定不等于整个系统状态固定；但这种变化本身还不是通用改进保证。",
+    "depth": "A",
+    "nodeId": "rsi"
+  },
+  {
+    "id": "rsi-q2",
+    "type": "科研判断",
+    "prompt": "历史最好开发分数每轮都不下降，能直接证明什么？",
+    "options": [
+      "总体能力单调提高",
+      "全局最优已经找到",
+      "保存最好开发分数这个操作具有单调性",
+      "未见任务效果一定改善"
+    ],
+    "answer": 2,
+    "explanation": "取最大值或最小值会机械地产生单调记录，需要独立任务验证实际泛化改善。",
+    "depth": "A",
+    "nodeId": "rsi"
+  },
+  {
+    "id": "rsi-q3",
+    "type": "最小计算",
+    "prompt": "f(x)=sin²(2πx) 在 0、1/2、1 上都为 0，真实积分为 1/2。仅反复使用这三个值能够排除积分为 0 吗？",
+    "options": [
+      "可以，多反思几轮即可",
+      "不可以，需要新观测或额外函数类约束",
+      "提高模型参数量必然可以",
+      "随机改写答案就能证明"
+    ],
+    "answer": 1,
+    "explanation": "现有观测与零函数相同，信息不足不能由重复处理相同读数弥补。",
+    "depth": "A",
+    "nodeId": "rsi"
+  },
+  {
+    "id": "sampling-q1",
+    "type": "最小计算",
+    "prompt": "四个权重为 2.5、0.4、0.4、1，加权 h 之和为 4.2。自归一化 IS 为多少？",
+    "options": [
+      "1.05",
+      "4.2/4.3",
+      "4.2",
+      "2.4425"
+    ],
+    "answer": 1,
+    "explanation": "自归一化分母是权重和 4.3；普通 IS 的分母才是样本数 4。",
+    "depth": "A",
+    "nodeId": "sampling"
+  },
+  {
+    "id": "sampling-q2",
+    "type": "技术辨析",
+    "prompt": "一个 MH 链一直停在一个高密度峰附近，最合理的判断是什么？",
+    "options": [
+      "已经找到最优解，因此采样正确",
+      "高密度即代表整体分布",
+      "可能混合很差，需要检查跨峰探索",
+      "只需重复保存当前点"
+    ],
+    "answer": 2,
+    "explanation": "采样需要按整个目标分布分配频率；停在单一峰不能代表其他峰的质量。",
+    "depth": "A",
+    "nodeId": "sampling"
+  },
+  {
+    "id": "sequential-causal-q1",
+    "type": "最小计算",
+    "prompt": "本课两次都处理时，较差状态概率0.2；两状态的结局均值分别15与11。策略均值是多少？",
+    "options": [
+      "12.2308",
+      "14.2",
+      "13"
+    ],
+    "answer": 1,
+    "explanation": "0.8×15+0.2×11=14.2。12.2308是实际选择组的均值。",
+    "depth": "A",
+    "nodeId": "sequential-causal"
+  },
+  {
+    "id": "sequential-causal-q2",
+    "type": "科研判断",
+    "prompt": "若 A₁ 总等于 L₁，评价所有人 A₁=1 的首要问题是什么？",
+    "options": [
+      "梯度没有反向传播",
+      "部分目标历史缺少动作支持",
+      "样本均值一定不收敛"
+    ],
+    "answer": 1,
+    "explanation": "L₁=0 的历史从不出现 A₁=1，需要额外信息、约束或改变策略目标。",
+    "depth": "A",
+    "nodeId": "sequential-causal"
+  },
+  {
+    "id": "time-series-q1",
+    "type": "最小计算",
+    "prompt": "AR(1)中φ=0.8、σ²=0.25，已知当前状态时两步预测方差是多少？",
+    "options": [
+      "0.25",
+      "0.4",
+      "0.41",
+      "0.5"
+    ],
+    "answer": 2,
+    "explanation": "方差是0.25+0.8²×0.25=0.41。",
+    "depth": "A",
+    "nodeId": "time-series"
+  },
+  {
+    "id": "time-series-q2",
+    "type": "技术辨析",
+    "prompt": "固定原点两步预测与看到下一次真实观测后的滚动一步预测为什么可能不同？",
+    "options": [
+      "模型一定出错",
+      "两者使用的信息集不同",
+      "概率公式失效",
+      "训练样本数必定不同"
+    ],
+    "answer": 1,
+    "explanation": "滚动预测已经获得新信息；不能把这种评价结果当作原点未获新观测时的多步能力。",
+    "depth": "A",
+    "nodeId": "time-series"
+  },
+  {
+    "id": "vae-gan-q1",
+    "type": "技术辨析",
+    "prompt": "ELBO 与 log p(x) 的正确关系是什么？",
+    "options": [
+      "ELBO≥log p(x)",
+      "ELBO≤log p(x)，差为q到真实后验的KL",
+      "二者总相等",
+      "二者没有关系"
+    ],
+    "answer": 1,
+    "explanation": "log p(x)=ELBO+KL(q(z|x)||p(z|x))，KL非负。",
+    "depth": "A",
+    "nodeId": "vae-gan"
+  },
+  {
+    "id": "vae-gan-q2",
+    "type": "最小计算",
+    "prompt": "p=(0.8,0.2)、q=(0.2,0.8)，理想 GAN 判别器 D* 为什么？",
+    "options": [
+      "(0.5,0.5)",
+      "(0.2,0.8)",
+      "(0.8,0.2)",
+      "(1,0)"
+    ],
+    "answer": 2,
+    "explanation": "逐点 D*=p/(p+q)，这里分母两项都是1。",
+    "depth": "A",
+    "nodeId": "vae-gan"
+  },
+  {
+    "id": "virtual-cell-q1",
+    "type": "最小计算",
+    "prompt": "终点(30,90)与(20,60)的归一化组成是什么？",
+    "options": [
+      "不同",
+      "都为(0.25,0.75)",
+      "都为(0.5,0.5)"
+    ],
+    "answer": 1,
+    "explanation": "总数不同，但各自除以总数后比例相同。",
+    "depth": "A",
+    "nodeId": "virtual-cell"
+  },
+  {
+    "id": "virtual-cell-q2",
+    "type": "科研判断",
+    "prompt": "本例哪个新增观测可以区分两种候选机制？",
+    "options": [
+      "更多同分布的归一化终点细胞",
+      "经过校准的终点绝对数量",
+      "把潜在表示维度翻倍"
+    ],
+    "answer": 1,
+    "explanation": "两机制的绝对数量分别120与80；更大模型不能补回未测的总数量。",
+    "depth": "A",
+    "nodeId": "virtual-cell"
+  }
+]

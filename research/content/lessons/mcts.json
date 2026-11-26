@@ -1,0 +1,218 @@
+{
+  "id": "mcts",
+  "name": "蒙特卡洛树搜索与 UCT 回传",
+  "nameEn": "Monte Carlo Tree Search and UCT",
+  "module": "G4",
+  "priority": "P0",
+  "summary": "沿两层决策树完成选择、扩展、模拟和统计回传，追踪每个节点的访问次数与累计收益。",
+  "prerequisites": [
+    "bandit",
+    "sampling"
+  ],
+  "related": [
+    "backprop",
+    "rsi"
+  ],
+  "minutes": {
+    "A": 45,
+    "B": 90,
+    "C": 180
+  },
+  "sections": [
+    {
+      "id": "L0",
+      "title": "背景与需要",
+      "depth": "A",
+      "paragraphs": [
+        "当一项决策之后还有后续选择时，只比较下一步的即时分数可能选错。穷举深度 D、每层 B 个动作需要处理约 Bᴰ 条路径；模拟预算有限时，需要决定把计算花在哪些分支。",
+        "MCTS 通过反复试走未来路径来分配搜索计算。它需要能够模拟行动后果的环境模型、可调用的评估器或明确的终点规则。搜索不能凭空获得真实环境中没有测量或建模的后果。"
+      ]
+    },
+    {
+      "id": "L1",
+      "title": "直觉与对象对应",
+      "depth": "A",
+      "paragraphs": [
+        "把一次科研流程选择画成树：根节点是当前决定，边是动作，子节点是动作后的状态或部分方案。一次 rollout 是从某节点向下试走到终点或截断位置，返回一个收益。",
+        "每个节点记两个数：来过多少次 N，以及这些试走累计得到多少收益 W。平均值 Q=W/N 表示目前的回报估计。选择时兼顾高均值和低访问次数；回传时把这一次得到的收益沿访问路径记到账本。",
+        "这里的 backpropagation 是搜索统计回传。它没有链式法则，不要求奖励可微，也没有自动计算神经网络参数梯度。"
+      ]
+    },
+    {
+      "id": "L2",
+      "title": "逐步计算",
+      "depth": "A",
+      "paragraphs": [
+        "考虑根节点可选 A 或 B；选 A 后可选 A1、A2，终点收益分别为 0.2、0.9；选 B 后 B1、B2 的收益分别为 0.6、0.7。最佳完整路径为 A2，但一次随机 rollout 到 A1 会让 A 暂时显得差。",
+        "假设已有搜索记录：根访问 4 次，A 访问 3 次、累计收益 2.0（一次 0.2、两次 0.9），所以 Q(A)=2/3；B 访问 1 次、累计收益 0.7，所以 Q(B)=0.7。取探索系数 c=1，UCT 指数分别为 2/3+√(log4/3)≈1.346445 和 0.7+√log4≈1.877410，下一次选择 B。",
+        "另一次搜索若访问 A→A2，得到收益 0.9，回传使 A 的 N 从 3 变 4，W 从 2.0 变 2.9，Q 变 0.725；根和 A2 的相应计数也增加 1。未访问的 B 统计不改变。",
+        "上面两次计算分别展示选择规则与一次回传，不把它们伪装成同一轮的连续轨迹。实际代码逐轮完整执行四阶段。"
+      ],
+      "table": {
+        "headers": [
+          "阶段",
+          "输入",
+          "执行操作",
+          "改变的记录"
+        ],
+        "rows": [
+          [
+            "选择",
+            "现有子节点的 N、W",
+            "按 UCT 下行",
+            "本阶段只选路径"
+          ],
+          [
+            "扩展",
+            "尚未尝试的动作",
+            "新增一个子节点",
+            "树结构"
+          ],
+          [
+            "模拟",
+            "新增节点或叶节点",
+            "补完路径并计算回报",
+            "得到本轮标量 G"
+          ],
+          [
+            "回传",
+            "实际路径和 G",
+            "各访问节点 N+1、W+G",
+            "计数与均值"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "L3",
+      "title": "数学定义与假设",
+      "depth": "A",
+      "paragraphs": [
+        "节点状态记为 s，可行动作为 a，N(s) 为节点访问次数，N(s,a) 为该动作被试走次数，Q(s,a) 为沿该动作出发的模拟回报均值。未访问动作先试一次或把选择指数设为无穷，避免除零。",
+        "若每步奖励为 rₖ、折扣 γ∈[0,1]，一次截断深度 H 的回报是各步折扣收益之和；若叶节点带估值，则还需加相应折扣的叶值。教学树只有终点收益且 γ=1。",
+        "把状态放到同一个树节点之前，要判断当前状态是否保留决定未来转移和奖励的历史。如果两个相同观测对应不同隐藏状态，直接合并会混淆不同后果；部分可观测任务可能需要belief状态或历史表示。树的存储方式不能替代状态充分性的科学假设。"
+      ],
+      "equations": [
+        {
+          "tex": "\\operatorname{UCT}(s,a)=Q(s,a)+c\\sqrt{\\frac{\\log N(s)}{N(s,a)}}",
+          "explanation": "c 控制探索，尺度必须与回报范围匹配；它不是所有树都通用的置信保证。"
+        },
+        {
+          "tex": "G=\\sum_{k=0}^{H-1}\\gamma^kr_k+\\gamma^H V_{\\mathrm{leaf}},\\qquad Q_{n+1}=Q_n+\\frac{G-Q_n}{n+1}",
+          "explanation": "回传对每个节点应使用从该节点开始的剩余回报；终点奖励教学例中所有路径节点使用同一 G。"
+        }
+      ]
+    },
+    {
+      "id": "L4",
+      "title": "关键推导",
+      "depth": "B",
+      "paragraphs": [
+        "均值递推直接来自代数：(nQₙ+G)/(n+1)=Qₙ+(G−Qₙ)/(n+1)。它更新一个样本平均值；没有对搜索动作、奖励或模型参数求导。",
+        "UCT 把“经验回报加探索补偿”的思想用于每个节点。节点越少被访问，探索项越大；父节点访问增加而某个子节点长期没被选时，该子节点的探索机会也会上升。",
+        "与固定随机老虎机不同，树下游的搜索策略随时间更新，某一动作产生的 rollout 回报分布因此可能变化。不能原封不动把 IID UCB1 的证明贴到整棵树上。原始 UCT 理论处理特定有限时域或折扣 MDP、回报与漂移等条件，本课不把它扩张成任意模型、任意评估器下的全局保证。",
+        "如果真实最优行动只能通过一个极少被随机 rollout 发现的深层路径获得高收益，早期估值会很不利。增加搜索预算可能帮助发现它，但有限预算成本取决于树结构、探索规则和评估质量。"
+      ]
+    },
+    {
+      "id": "L5",
+      "title": "相邻技术对比",
+      "depth": "A",
+      "paragraphs": [
+        "Beam Search 每层只保留固定数量的高分部分解，容易较早丢弃需要晚期收益才显优势的路径；MCTS 可以根据反复模拟调整访问分配。二者都依赖评估函数，不能仅凭名称判断哪一种更可靠。",
+        "动态规划通常在已知状态转移和可枚举状态集合上做 Bellman 更新；MCTS 通过局部按需模拟避免展开整张状态表。Bandit 只决策当前臂，MCTS 要把未来行动的收益带回当前节点。",
+        "AlphaZero 一类系统可以同时使用神经网络训练和树搜索，但两种更新仍可分开：网络反向传播更新权重；树回传更新访问和价值统计。删除网络仍可以运行本课的搜索，删除环境或评估器则不能得到回报。",
+        "模拟一次动作与在现实中真正执行一次动作不同。模型中的rollout可以便宜地重复；真实湿实验或临床行动具有成本并可能不可逆。把模拟次数当作实际验证次数，会夸大证据量。搜索预算、真实评估预算和模型训练预算应分别记录。"
+      ]
+    },
+    {
+      "id": "L6",
+      "title": "失败情形与反例",
+      "depth": "A",
+      "paragraphs": [
+        "如果模拟器错误地把有毒方案的收益设得很高，搜索越充分可能越稳定地选错。搜索收敛只说明更好地优化了模拟目标，不说明模拟目标代表真实安全性。",
+        "如果评估器把长文本当作高质量代理指标，MCTS 可以通过不断扩展冗长文本提高评分。必须用独立任务结果或可以检查的约束识别这种指标投机。",
+        "把历史最好分数单调上升当作搜索已找到全局最优，也不成立。保存最大值会机械地产生单调序列，未探索分支仍可能更好。"
+      ]
+    },
+    {
+      "id": "L7",
+      "title": "最小代码复现",
+      "depth": "B",
+      "paragraphs": [
+        "实现一棵两层树，并逐阶段执行 UCT、扩展、随机补完与回传。输出选择次数、平均回报和推荐行动，同时检查根与子节点访问计数守恒。",
+        "在固定分支数和固定截断深度H下，一次遍历及回传通常与路径长度成正比；如果每步都扫描B个候选，选择开销约为O(BH)。总成本还需加上模拟器和叶评估调用。保存节点数随实际扩展次数增长，并不要求一开始分配完整指数规模树。",
+        "有些系统在根节点最终选访问次数最多的动作，有些选估计均值最大的动作。它们不是在任意有限预算下都相同的规则。本课明确使用均值最大者，并展示访问统计，以便检查推荐到底由什么规则产生。"
+      ],
+      "code": {
+        "language": "r",
+        "source": "# R >= 4.4；两层合成决策树；没有神经网络或梯度。\nset.seed(20261126)\nleaf_value <- c(A1=.2,A2=.9,B1=.6,B2=.7)\nnew_node <- function(path=\"\",parent=NULL) {\n  z <- new.env(parent=emptyenv()); z$path <- path; z$parent <- parent\n  z$children <- list(); z$n <- 0L; z$total <- 0\n  z$untried <- if(nchar(path)==0) c(\"A\",\"B\") else if(nchar(path)==1) c(\"1\",\"2\") else character()\n  z\n}\nroot <- new_node(); budget <- 500L; exploration_c <- 1\nfor(iteration in 1:budget) {\n  node <- root\n  # 1 Selection：只在已展开且没有待试动作的节点用 UCT。\n  while(length(node$untried)==0 && length(node$children)>0) {\n    scores <- vapply(node$children,function(ch) ch$total/ch$n+exploration_c*sqrt(log(node$n)/ch$n),numeric(1))\n    node <- node$children[[which.max(scores)]]\n  }\n  # 2 Expansion：增加一个还没访问过的动作节点。\n  if(length(node$untried)>0) {\n    action <- node$untried[1]; node$untried <- node$untried[-1]\n    child <- new_node(paste0(node$path,action),node)\n    node$children[[action]] <- child; node <- child\n  }\n  # 3 Simulation：新节点不足终点时随机补完；终点按定义给奖励。\n  terminal <- node$path\n  if(nchar(terminal)==1) terminal <- paste0(terminal,sample(c(\"1\",\"2\"),1))\n  reward <- unname(leaf_value[terminal])\n  # 4 Backup：沿实际访问路径累加同一终点收益。\n  while(!is.null(node)) {\n    node$n <- node$n+1L; node$total <- node$total+reward; node <- node$parent\n  }\n}\nvisits <- vapply(root$children,function(z) z$n,integer(1))\nmeans <- vapply(root$children,function(z) z$total/z$n,numeric(1))\nstopifnot(root$n==budget,sum(visits)==budget,all(means>=0),all(means<=1))\nstopifnot(names(which.max(means))==\"A\")\n# 单次回传核验：旧节点 N=3,W=2.0，再收到0.9。\nnew_mean <- (2.0+.9)/(3+1)\nstopifnot(abs(new_mean-.725)<1e-12)\nprint(list(visits=visits,mean_return=means,recommendation=names(which.max(means)),backup_mean=new_mean))\nhand_indices <- c(2/3,.7)+sqrt(log(4)/c(3,1))\nstopifnot(max(abs(hand_indices-c(1.3464446601,1.8774100225)))<1e-9)\nprint(hand_indices)\n",
+        "environment": "R >= 4.4；只用 base；随机种子 20261126",
+        "verified": true,
+        "file": "mcts.R"
+      }
+    },
+    {
+      "id": "L8",
+      "title": "科研连接与证据边界",
+      "depth": "A",
+      "paragraphs": [
+        "MCTS 可用于可模拟的实验流程、工具调用顺序或构造型搜索。科学场景中的关键成本常在真实评估而非树操作，应先明确哪些 rollout 来自真实实验、哪些来自代理模型。",
+        "可能的贡献包括预算分配、模型误差下的决策保证、延迟反馈或有效的搜索剪枝。把现有 UCT 接到一个工具接口首先是工程实现；要声称新科研能力，需独立检验被优化目标、计算预算与最终决策质量。"
+      ]
+    }
+  ],
+  "extension": {
+    "status": "planned",
+    "topics": [
+      "非平稳节点回报下的 UCT 一致性条件",
+      "深树中的有限预算失败例与最坏情况复杂度",
+      "带模型误差、随机终止和约束的搜索保证"
+    ]
+  },
+  "references": [
+    "uct-kocsis-2006",
+    "uct-coquelin-2007"
+  ],
+  "questions": [
+    {
+      "id": "mcts-q1",
+      "type": "最小计算",
+      "prompt": "节点已有 N=3、W=2.0，收到本轮收益 0.9 后平均值为多少？",
+      "options": [
+        "0.9",
+        "2/3",
+        "0.725",
+        "2.9"
+      ],
+      "answer": 2,
+      "explanation": "新的累计收益为 2.9，访问次数为 4，均值为 2.9/4=0.725。",
+      "depth": "A"
+    },
+    {
+      "id": "mcts-q2",
+      "type": "技术辨析",
+      "prompt": "树搜索中的回传主要更新什么？",
+      "options": [
+        "神经网络每层参数梯度",
+        "所访问节点的访问次数和回报统计",
+        "真实环境的转移规律",
+        "未访问分支的真实收益"
+      ],
+      "answer": 1,
+      "explanation": "本课回传只记账并更新均值，奖励不可微也能进行；网络训练需要另一个梯度计算过程。",
+      "depth": "A"
+    }
+  ],
+  "lab": "mcts",
+  "status": {
+    "eli5": true,
+    "example": true,
+    "definition": true,
+    "derivation": true,
+    "code": true,
+    "interactive": true,
+    "literature": true,
+    "audit": true
+  }
+}

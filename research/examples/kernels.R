@@ -1,0 +1,25 @@
+# R >= 4.0；base R / stats，无附加包。合成数据。
+set.seed(20261126)
+x <- c(0,1); y <- c(0,1); sigma <- 1
+rbf <- function(a,b,s) exp(-(a-b)^2/(2*s^2))
+K <- outer(x,x,function(a,b) rbf(a,b,sigma))
+stopifnot(max(abs(K-t(K))) < 1e-12)
+stopifnot(min(eigen(K,symmetric=TRUE,only.values=TRUE)$values)>0)
+w <- rbf(0,x,sigma); w <- w/sum(w)
+nw <- sum(w*y)
+stopifnot(abs(nw-1/(1+exp(0.5)))<1e-12)
+lambda <- 0.5; n <- length(x)
+alpha <- solve(K+n*lambda*diag(n),y)
+stopifnot(max(abs((K+n*lambda*diag(n))%*%alpha-y))<1e-12)
+# GIP 只使用本训练折允许观测的关联画像。
+profiles <- rbind(c(1,0),c(0,1))
+gip <- function(P,gamma=0.5) exp(-gamma*as.matrix(dist(P))^2)
+G <- gip(profiles)
+leaked <- profiles; leaked[1,2] <- 1 # 故意制造泄漏，仅用于反例。
+G_leaked <- gip(leaked)
+stopifnot(abs(G[1,2]-exp(-1))<1e-12)
+stopifnot(abs(G_leaked[1,2]-exp(-0.5))<1e-12)
+bad <- matrix(c(1,2,2,1),2,2)
+stopifnot(min(eigen(bad,symmetric=TRUE,only.values=TRUE)$values)<0)
+print(list(Gram=K,NW_weights=w,NW_prediction=nw,KRR_alpha=alpha))
+print(list(GIP_train=G,GIP_with_hidden_label=G_leaked))

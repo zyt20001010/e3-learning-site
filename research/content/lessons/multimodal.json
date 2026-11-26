@@ -1,0 +1,211 @@
+{
+  "id": "multimodal",
+  "name": "多模态对齐、配对信息与联合分布",
+  "nameEn": "Multimodal Alignment, Pairing Information and Joint Distributions",
+  "module": "C2",
+  "priority": "P0",
+  "summary": "用相同边缘分布对应相反配对的反例，说明对齐需要哪些信息，再逐项计算一个双向对比损失。",
+  "prerequisites": [
+    "representation",
+    "probability",
+    "linear-algebra"
+  ],
+  "related": [
+    "attention",
+    "jepa",
+    "identifiability",
+    "causality"
+  ],
+  "minutes": {
+    "A": 40,
+    "B": 85,
+    "C": 180
+  },
+  "sections": [
+    {
+      "id": "L0",
+      "title": "L0 · 两种测量需要建立对象之间的对应",
+      "depth": "A",
+      "paragraphs": [
+        "图像与文字、转录组与蛋白、传感器与事件记录，都可能描述同一对象的不同方面。单独把每种数据编码成向量，并不能说明哪些向量描述同一个对象，也不能保证它们具有相同坐标含义。",
+        "多模态学习可以用于跨模态检索、联合预测、补全缺失模态或解释共同变化。这些任务所需信息不同：检索依赖正确匹配，补全涉及条件分布，联合预测可能只需要互补特征。应先选任务再决定如何对齐。",
+        "配对数据记录同一对象的两个模态；未配对数据只记录两份样本集合；部分配对介于两者之间。三种数据条件具有不同的信息量。课程中的反例针对仅有边缘分布且没有额外约束的设定，不否认额外结构能帮助未配对学习。"
+      ]
+    },
+    {
+      "id": "L1",
+      "title": "L1 · 两份名单缺少配对关系",
+      "depth": "A",
+      "paragraphs": [
+        "假设两种测量各出现一半“低”和一半“高”。可以把低配低、高配高，也可以把低配高、高配低。只看各自名单，这两种情况完全一样；保留对象身份后，才知道真实配对。",
+        "在模型中，每种测量经自己的编码器产生向量。配对编号提供“哪些属于同一对象”的监督，相似度函数规定怎样比较向量，损失鼓励指定配对更相近。信息来自样本对应或结构假设，不来自把两个向量都叫 embedding。"
+      ]
+    },
+    {
+      "id": "L2",
+      "title": "L2 · 相同边缘，相反联合关系",
+      "depth": "A",
+      "paragraphs": [
+        "令两个模态 X、Y 都取 −1 或 1。模型甲给 (−1,−1) 和 (1,1) 各 1/2 概率；模型乙给 (−1,1) 和 (1,−1) 各 1/2。两者的 X、Y 边缘分布都为均匀分布，但 E[XY] 分别为 1 与 −1。",
+        "取两对同号样本，直接用其数值作为一维单位嵌入，温度 τ=1。相似度矩阵为 [[1,−1],[−1,1]]。第一行 Softmax 为 (e/(e+e⁻¹),e⁻¹/(e+e⁻¹))≈(0.880797,0.119203)。"
+      ],
+      "table": {
+        "headers": [
+          "已知配对规则",
+          "每行正确匹配概率",
+          "双向平均损失"
+        ],
+        "rows": [
+          [
+            "同号配对",
+            "0.880797",
+            "−log(0.880797)≈0.126928"
+          ],
+          [
+            "异号配对，编码不变",
+            "0.119203",
+            "−log(0.119203)≈2.126928"
+          ]
+        ]
+      },
+      "steps": [
+        "两种配对使用完全相同的边缘样本，损失差来自配对编号。",
+        "若把第二模态编码的符号反转，就能让异号配对获得低损失；单独的边缘分布无法选择正确方向。"
+      ]
+    },
+    {
+      "id": "L3",
+      "title": "L3 · 配对样本、嵌入与对比目标",
+      "depth": "A",
+      "paragraphs": [
+        "设观测配对为 (xᵢ,yᵢ)，i=1,…,n。两个编码器 fθ 与 gφ 分别输出 zᵢ、uᵢ∈Rᵈ，常再归一化到单位长度。分数 Sᵢⱼ=zᵢᵀuⱼ/τ，τ>0 控制权重尖锐程度。参数 θ、φ 可学习，配对索引是数据提供的监督。",
+        "本课一批样本只有一个指定正配对，其他位置暂作负例。双向目标分别从 X 检索 Y、从 Y 检索 X。相似度分数不是自动校准的匹配概率，Softmax 的概率含义限定在当前候选集合。",
+        "原始模态的维数可以不同，例如一个输入有 dₓ 个测量，另一个有 dᵧ 个测量。两个编码器将它们映到共同的 d 维比较空间；相同输出维度只是允许计算内积，并不证明两个坐标已经对齐。归一化前的零向量也需显式处理。"
+      ],
+      "equations": [
+        {
+          "tex": "L=-\\frac1{2n}\\sum_{i=1}^n\\left[\\log\\frac{e^{S_{ii}}}{\\sum_j e^{S_{ij}}}+\\log\\frac{e^{S_{ii}}}{\\sum_j e^{S_{ji}}}\\right]",
+          "explanation": "第一项沿行归一化，第二项沿列归一化；正配对置于对角线。重复对象或多正确答案时需要修改目标。"
+        }
+      ]
+    },
+    {
+      "id": "L4",
+      "title": "L4 · 配对为何构成额外信息",
+      "depth": "B",
+      "paragraphs": [
+        "联合分布 P(X,Y) 经求和得到两个边缘分布，但通常存在许多不同联合分布产生同一对边缘。本例两个 2×2 联合概率矩阵有相同的行和与列和，却有相反的非零位置，已经构成不可唯一恢复配对关系的严格反例。",
+        "对比损失把正配对当成候选集中的正确类别。行方向的平均交叉熵对 Sᵢⱼ 的导数为 (pᵢⱼ−1[i=j])/n；双向目标再取一半并加上列方向的贡献。正项被推动得分上升，负项按归一化权重被推动得分下降；错误配对会把这个方向也设错。",
+        "无配对方法仍可使用已知距离、时间同步、共享标记或结构约束选择一种耦合，但结论依赖这些信息。分布匹配损失降至零，并不单独排除另一个满足相同边缘约束的错误耦合。"
+      ]
+    },
+    {
+      "id": "L5",
+      "title": "L5 · 对齐、融合与条件生成分别判断",
+      "depth": "A",
+      "paragraphs": [
+        "早期融合直接拼接特征，适合两种测量在预测时都可获得的情况；后期融合组合各自预测。共享空间对齐支持检索或迁移，Cross-Attention 则允许一种特征读取另一种特征，不自动提供正确对应。",
+        "CCA 在配对样本上寻找相关线性投影；对比学习优化匹配分数；最优传输在给定成本下选择耦合。三者的目标和假设不同。条件生成还要估计给定一个模态后的分布，不能从检索准确直接推出生成样本已恢复真实个体。",
+        "高相关或高检索性能可以由共同的批次、对象身份或采样时间产生，不必表示某个模态对另一个具有因果作用。CCA 的相关目标和因果效应的干预目标尤其不同；把空间对齐解释成机制连接，需要独立于匹配任务的证据。"
+      ]
+    },
+    {
+      "id": "L6",
+      "title": "L6 · 对齐可能对准批次或错误对象",
+      "depth": "A",
+      "paragraphs": [
+        "若两种模态在同一批次同时测量，批次特征可能比研究对象更容易匹配。模型获得高检索分数，却无法迁移到新批次。评价应按真实部署中的对象、批次或机构划分，而不只随机拆分相邻记录。",
+        "“同一患者”不等于“同一时刻”，同一组织也不等于同一细胞。破坏性测量得到的不同细胞不能凭共同标签当作逐细胞真实配对。多种样本具有相同语义时，把所有非对角项当负例也会制造假负例。",
+        "如果某模态只在特定病情或实验条件下被测量，配对完整样本可能不是目标人群的代表。只在完整样本中对齐，部署到缺失模态人群时会遇到分布变化。应明确缺失依赖哪些变量，并将真实可得模态条件纳入评价。"
+      ]
+    },
+    {
+      "id": "L7",
+      "title": "L7 · 在两个联合分布上复算损失",
+      "depth": "B",
+      "paragraphs": [
+        "代码先检查两种联合分布的行和、列和完全相同，再计算交叉矩差异。随后显式实现行 Softmax、列 Softmax 和双向损失，验证同号与异号标签下损失相差 2。",
+        "这些嵌入是人工指定的合成值，没有训练图像或组学模型，也没有复现 CLIP 的性能。计算用于检查损失和信息来源；真实项目还需验证配对质量、缺失机制及独立对象上的泛化。"
+      ],
+      "code": {
+        "language": "r",
+        "source": "# R >= 4.0；base R。两个二值模态的合成联合分布。\nset.seed(20261126)\nP_same <- diag(0.5,2)\nP_opposite <- matrix(c(0,0.5,0.5,0),2,byrow=TRUE)\nstopifnot(all(rowSums(P_same)==rowSums(P_opposite)))\nstopifnot(all(colSums(P_same)==colSums(P_opposite)))\nvalues <- c(-1,1)\nproduct <- outer(values,values)\ncor_same <- sum(P_same*product)\ncor_opposite <- sum(P_opposite*product)\nstopifnot(cor_same==1,cor_opposite==-1)\n# 固定一维、单位范数嵌入，计算两向交叉熵。\nX <- matrix(values,ncol=1); Y <- matrix(values,ncol=1)\ntemperature <- 1\nscores <- X %*% t(Y)/temperature\nrow_softmax <- function(S) {\n  shifted <- sweep(S,1,apply(S,1,max))\n  raw <- exp(shifted)\n  sweep(raw,1,rowSums(raw),\"/\")\n}\nrow_prob <- row_softmax(scores)\ncolumn_prob <- t(row_softmax(t(scores)))\nsame_loss <- -mean(c(log(diag(row_prob)),log(diag(column_prob))))\nreverse <- c(2,1)\nopposite_loss <- -mean(c(log(row_prob[cbind(1:2,reverse)]),\n                        log(column_prob[cbind(1:2,reverse)])))\nstopifnot(max(abs(rowSums(row_prob)-1))<1e-12)\nstopifnot(abs(same_loss-log1p(exp(-2)))<1e-12)\nstopifnot(abs(opposite_loss-same_loss-2)<1e-12)\n# 翻转第二模态编码后可拟合相反配对；边缘分布仍一样。\nflipped_scores <- X %*% t(-Y)\nflipped_prob <- row_softmax(flipped_scores)\nstopifnot(max(abs(flipped_prob[,reverse]-row_prob))<1e-12)\nprint(list(same_joint=P_same,opposite_joint=P_opposite,\n           common_marginal=rowSums(P_same)))\nprint(list(cross_moment_same=cor_same,cross_moment_opposite=cor_opposite,\n           score_matrix=scores,row_probability=row_prob))\nprint(list(loss_for_same_pairs=same_loss,loss_for_opposite_pairs=opposite_loss))\n",
+        "environment": "R 4.0+；base R 与 stats，无附加包；合成数据",
+        "verified": true,
+        "file": "multimodal.R"
+      }
+    },
+    {
+      "id": "L8",
+      "title": "L8 · 从测量条件界定可研究的问题",
+      "depth": "A",
+      "paragraphs": [
+        "设计多模态研究时，先列出各模态测量的对象、时间、分辨率和缺失方式，再标明哪些配对实际可见。只有群体边缘分布时，应研究在什么额外条件下能确定目标关系，而不把全体潜在状态的对齐当作既成事实。",
+        "方法贡献可以来自部分配对下的误差保证、错配鲁棒性、缺失模态评价或更有信息的联合测量。将现成编码器接上 Attention 本身不足以说明这些问题已经解决。"
+      ]
+    }
+  ],
+  "extension": {
+    "status": "planned",
+    "topics": [
+      "部分配对与错误配对下的识别条件",
+      "多模态耦合的部分识别与最优实验",
+      "跨批次对齐的泛化和不确定性"
+    ]
+  },
+  "references": [
+    "radford-clip"
+  ],
+  "questions": [
+    {
+      "id": "multimodal-q1",
+      "type": "最小计算",
+      "prompt": "本课同号联合分布的 E[XY] 是多少？",
+      "options": [
+        "−1",
+        "0",
+        "1"
+      ],
+      "answer": 2,
+      "explanation": "两种可能配对中的乘积都等于 1。",
+      "depth": "A"
+    },
+    {
+      "id": "multimodal-q2",
+      "type": "科研判断",
+      "prompt": "两个模态的边缘分布完全匹配，是否已确定对象配对？",
+      "options": [
+        "已确定",
+        "未确定，不同联合分布可能具有同样边缘",
+        "只要嵌入维度相同就确定"
+      ],
+      "answer": 1,
+      "explanation": "本课同号与异号联合分布构成直接反例。",
+      "depth": "A"
+    },
+    {
+      "id": "multimodal-q3",
+      "type": "技术辨析",
+      "prompt": "Cross-Attention 新增的主要能力是什么？",
+      "options": [
+        "直接证明两模态机制相同",
+        "根据一组特征查询并汇总另一组特征",
+        "自动修复样本身份错配"
+      ],
+      "answer": 1,
+      "explanation": "计算结构提供信息汇总路径，正确配对仍需数据或额外约束。",
+      "depth": "A"
+    }
+  ],
+  "status": {
+    "eli5": true,
+    "example": true,
+    "definition": true,
+    "derivation": true,
+    "code": true,
+    "interactive": false,
+    "literature": true,
+    "audit": true
+  },
+  "lab": null
+}

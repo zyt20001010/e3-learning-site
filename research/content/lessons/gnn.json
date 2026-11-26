@@ -1,0 +1,223 @@
+{
+  "id": "gnn",
+  "name": "图消息传递、图卷积与超图",
+  "nameEn": "Graph Message Passing, GCN and Hypergraphs",
+  "module": "B5",
+  "priority": "P0",
+  "summary": "从三个节点的一轮平均开始，区分邻域聚合、对称归一化、谱滤波和超边传播，并追踪图中的信息来源。",
+  "prerequisites": [
+    "linear-algebra",
+    "backprop"
+  ],
+  "related": [
+    "convolution",
+    "attention",
+    "kernels"
+  ],
+  "minutes": {
+    "A": 45,
+    "B": 90,
+    "C": 180
+  },
+  "sections": [
+    {
+      "id": "L0",
+      "title": "L0 · 让局部计算适应不规则连接",
+      "depth": "A",
+      "paragraphs": [
+        "分子中的原子连接、文献之间的引用、实验对象之间的已知关联，都不是规则像素网格。一个节点有几个邻居、谁与谁连接，由图结构给出。若只对每个节点单独做 MLP，模型无法通过这个计算路径使用邻居的特征。",
+        "GNN 把“读取邻居、计算消息、合并、更新自身”写成可共享的局部规则。它增加的是沿已给定连接传播信息的能力。图边来自化学键、实验记录还是相似度阈值，决定这份信息的含义。"
+      ]
+    },
+    {
+      "id": "L1",
+      "title": "L1 · 节点收到的消息必须能算出来",
+      "depth": "A",
+      "paragraphs": [
+        "三个节点排成路径 1—2—3，初始数值分别是 1、2、4。最简单的一轮更新是把自己的数与邻居的数取平均。节点 1 看见 1 和 2；节点 2 看见 1、2、4；节点 3 看见 2 和 4。",
+        "节点对应研究对象，边对应允许通信的关系，节点数值对应当前特征。消息可以是原数值，也可以先经过共享矩阵 W。平均、求和或最大值是聚合规则；随后再做非线性变换是更新规则。这些操作不会凭空加入节点没有收到的信息。"
+      ]
+    },
+    {
+      "id": "L2",
+      "title": "L2 · 一跳与两跳的完整计算",
+      "depth": "A",
+      "paragraphs": [
+        "取自连接、标量特征、权重 W=1 和恒等激活，只计算行归一化平均。每层所有节点都使用上一层状态同步更新；不能先更新节点 1，再把它的新值用于同一层节点 2。"
+      ],
+      "table": {
+        "headers": [
+          "节点",
+          "第一层",
+          "第二层"
+        ],
+        "rows": [
+          [
+            "1",
+            "(1+2)/2=3/2",
+            "(3/2+7/3)/2=23/12"
+          ],
+          [
+            "2",
+            "(1+2+4)/3=7/3",
+            "(3/2+7/3+3)/3=41/18"
+          ],
+          [
+            "3",
+            "(2+4)/2=3",
+            "(7/3+3)/2=8/3"
+          ]
+        ]
+      },
+      "steps": [
+        "第一层节点 1 没有用到节点 3 的原始值；第二层才通过节点 2 间接接收到它的信息。",
+        "若删除边 2—3，节点 3 只保留自连接，更新后仍是 4；这就是图结构直接改变信息流。",
+        "若改用一条共同包含 1、2、3 的超边，先求该超边均值 7/3 再广播，一轮后三个节点都变成 7/3。"
+      ]
+    },
+    {
+      "id": "L3",
+      "title": "L3 · 邻接、度、消息与读出",
+      "depth": "A",
+      "paragraphs": [
+        "设无向非负加权图有 n 个节点，邻接 A∈Rⁿˣⁿ 对称。H⁽ˡ⁾∈Rⁿˣᵈˡ 的每一行是一个节点的特征；W⁽ˡ⁾∈Rᵈˡˣᵈˡ⁺¹ 是共享参数。加入自连接得到 Ã=A+I，对角矩阵 D̃ 的第 i 项等于 Ã 第 i 行之和。",
+        "本课手算使用 T=D̃⁻¹Ã；经典 GCN 使用 S=D̃⁻¹ᐟ²ÃD̃⁻¹ᐟ²。两者不能混写。本例 GCN 第一节点输出为 1/2+2/√6≈1.316497，不等于均值 1.5；S 的行和也不一定为 1。"
+      ],
+      "equations": [
+        {
+          "tex": "H^{(l+1)}=\\sigma\\!\\left(\\widetilde D^{-1/2}\\widetilde A\\widetilde D^{-1/2}H^{(l)}W^{(l)}\\right)",
+          "explanation": "σ 逐元素作用。此式针对无向非负邻接；有向边、边类型、负权和边属性需另作定义。"
+        },
+        {
+          "tex": "m_i^{(l)}=\\operatorname{AGG}_{j\\in\\mathcal N(i)}M_\\theta(h_i^{(l)},h_j^{(l)},e_{ij}),\\quad h_i^{(l+1)}=U_\\theta(h_i^{(l)},m_i^{(l)})",
+          "explanation": "M 为消息函数，AGG 为对邻居顺序不敏感的聚合，U 为更新。eᵢⱼ 为观测边属性；隐藏节点状态不是已恢复的物理机制。"
+        }
+      ]
+    },
+    {
+      "id": "L4",
+      "title": "L4 · 图上的谱滤波与重编号",
+      "depth": "B",
+      "paragraphs": [
+        "普通图拉普拉斯 L=D−A 满足 xᵀLx=ΣᵢⱼAᵢⱼ(xᵢ−xⱼ)²/2。它度量相连节点之间的变化。对称 L 可分解成 UΛUᵀ，把 Uᵀx 看作图傅里叶系数；谱滤波是 U g(Λ)Uᵀx。多项式 g(L) 可用邻域矩阵乘法实现，不必显式求特征向量。",
+        "GCN 的结构由局部一阶谱近似及参数约束得到动机，再加入自连接和重归一化作为具体设计。重归一化不是对原谱滤波公式的恒等变形；“数学来源”不意味着所有图上都会最优。",
+        "置换矩阵 P 表示给节点重新编号。若 A′=PAPᵀ、H′=PH，则 S′=PSPᵀ，故 σ(S′H′W)=Pσ(SHW)。输出跟着节点重排叫置换等变。再对节点求和或平均得到整图读出，才形成对编号不变的表示。"
+      ],
+      "equations": [
+        {
+          "tex": "x^\\top(D-A)x=\\frac12\\sum_{i,j}A_{ij}(x_i-x_j)^2",
+          "explanation": "要求 A 对称。求和包含每条无向边的两个方向，所以有 1/2。"
+        }
+      ]
+    },
+    {
+      "id": "L5",
+      "title": "L5 · 普通图、超图与相邻模型",
+      "depth": "A",
+      "paragraphs": [
+        "普通边连接两个节点。超图用关联矩阵 B∈{0,1}ⁿˣᵐ 表示节点是否属于一条超边，可保留“一组对象共同参与同一关系”的成员信息。节点先聚合到超边，再从超边传回节点，是一种明确的传播方式。",
+        "某些线性超图层可写成 BWBᵀ 及度归一化，因而等价于某种加权普通图运算。使用超图数据结构本身不证明获得了不可由二元传播表达的高阶能力；需要检查具体聚合函数。",
+        "CNN 对规则邻域和相对位置共享参数；GNN 对图邻域共享消息规则；Attention 根据特征计算权重，通常允许更稠密的连接。GAT 也在图邻域内学习注意力权重。知识图谱是带语义关系的数据表示，因果图则有额外干预语义，两者不可互换。"
+      ]
+    },
+    {
+      "id": "L6",
+      "title": "L6 · 平均会丢失差异，边也可能泄漏",
+      "depth": "A",
+      "paragraphs": [
+        "本例反复执行带自连接的均值算子，三个数最终都趋于 16/7。这个数是按度 (2,3,2) 加权的初始平均，不是简单均值 7/3。原来节点之间的差异逐渐消失，是一个可核算的过平滑例子。此结论针对固定连通图上的该线性平均过程，不推广为所有深层 GNN 的必然极限。",
+        "聚合 [1,3] 与 [2,2] 的邻居均值都为 2，单靠均值无法区分两组输入。远处大量信息被压入固定维向量时，还可能出现过度压缩。增加跳数不保证保留所有组合关系。",
+        "若待预测关系已经以边或 GIP 特征进入输入图，模型可能读取答案。冷启动药物缺少边时，训练时依赖邻居的路线也可能失效。应先确定评价中的可见边，再构图和计算特征。"
+      ]
+    },
+    {
+      "id": "L7",
+      "title": "L7 · 验证归一化、层数与等变性",
+      "depth": "B",
+      "paragraphs": [
+        "代码分别实现均值层和对称 GCN 层，避免把二者的数值混为一谈。还会重新编号节点检查置换等变性，并迭代验证该具体平均算子的极限。",
+        "这是确定性合成图，既不代表某个真实分子，也不提供已发现的药物机制。实际大图可以用稀疏矩阵或图学习库，但应先用这种小图核验边方向、归一化和自连接。"
+      ],
+      "code": {
+        "language": "python",
+        "source": "# Python >= 3.9；标准库，三节点合成图。\nimport math, random\nrandom.seed(20261126)\nA = [[0.,1.,0.],[1.,0.,1.],[0.,1.,0.]]\nh = [1.,2.,4.]\ndef mean_layer(a,x):\n    n=len(x)\n    return [sum((a[i][j]+(i==j))*x[j] for j in range(n)) /\n            sum(a[i][j]+(i==j) for j in range(n)) for i in range(n)]\nfirst=mean_layer(A,h); second=mean_layer(A,first)\nassert all(abs(a-b)<1e-12 for a,b in zip(first,[1.5,7/3,3]))\nassert all(abs(a-b)<1e-12 for a,b in zip(second,[23/12,41/18,8/3]))\ndegrees=[sum(row)+1 for row in A]\nS=[[(A[i][j]+(i==j))/math.sqrt(degrees[i]*degrees[j])\n    for j in range(3)] for i in range(3)]\ngcn=[sum(S[i][j]*h[j] for j in range(3)) for i in range(3)]\nassert abs(sum(S[0])-1)>0.01 # 对称归一化并非逐行均值。\n# 把节点重新编号，特征与两条邻接轴必须同时重排。\np=[2,0,1]\nAp=[[A[i][j] for j in p] for i in p]\nhp=[h[i] for i in p]\nassert all(abs(a-b)<1e-12 for a,b in zip(mean_layer(Ap,hp),[first[i] for i in p]))\nsteady=h[:]\nfor _ in range(100): steady=mean_layer(A,steady)\nassert max(abs(v-16/7) for v in steady)<1e-10\n# 一条包含三个节点的超边：先聚合到边，再广播回各节点。\nedge_value=sum(h)/3\nhypergraph=[edge_value]*3\nprint({'one_layer':first,'two_layers':second,'GCN_symmetric':gcn})\nprint({'repeated_mean_limit':steady,'single_hyperedge':hypergraph})\n",
+        "environment": "Python 3.9+；标准库 math、random",
+        "verified": true,
+        "file": "gnn.py"
+      }
+    },
+    {
+      "id": "L8",
+      "title": "L8 · 判断关系究竟增加了什么信息",
+      "depth": "A",
+      "paragraphs": [
+        "评估图方法时，对照同样节点特征的无图基线，并检查换边、删边、冷启动和图外测试。不同实验检验的是图带来的信息、局部传播结构或部署可用性，不能仅凭一个性能下降就断定某种生物机制存在。",
+        "若论文声称高阶关系、长程依赖或等变性，应分别寻找超边语义、可传递距离与结构证明。模型名字、可视化边权和节点预测性能不是这些主张的替代证据。"
+      ]
+    }
+  ],
+  "extension": {
+    "status": "planned",
+    "topics": [
+      "消息传递与 Weisfeiler–Lehman 检验的表达边界",
+      "图谱与过平滑速率的严格条件",
+      "非线性超边算子的高阶表达能力"
+    ]
+  },
+  "references": [
+    "kipf-gcn",
+    "feng-hgnn"
+  ],
+  "questions": [
+    {
+      "id": "gnn-q1",
+      "type": "最小计算",
+      "prompt": "本例均值更新一轮后，节点 2 的值是多少？",
+      "options": [
+        "2",
+        "7/3",
+        "3"
+      ],
+      "answer": 1,
+      "explanation": "加入自连接后把自身与两个邻居的数一起平均。",
+      "depth": "A"
+    },
+    {
+      "id": "gnn-q2",
+      "type": "技术辨析",
+      "prompt": "经典对称归一化 GCN 与逐行平均之间的关系是？",
+      "options": [
+        "任何图上完全相同",
+        "一般不同，度不同时尤其应分开计算",
+        "只差一个激活函数"
+      ],
+      "answer": 1,
+      "explanation": "D⁻¹A 与 D⁻¹ᐟ²AD⁻¹ᐟ² 是不同矩阵。",
+      "depth": "A"
+    },
+    {
+      "id": "gnn-q3",
+      "type": "科研判断",
+      "prompt": "建立超图后，能否直接认定模型获得了普通图无法表达的能力？",
+      "options": [
+        "能，超边超过两个节点即足够",
+        "不能，还需看具体传播算子和任务",
+        "只需画出超图即可"
+      ],
+      "answer": 1,
+      "explanation": "部分线性超图传播可折算为加权普通图；数据结构与表达能力应分开证明。",
+      "depth": "A"
+    }
+  ],
+  "lab": "gnn",
+  "status": {
+    "eli5": true,
+    "example": true,
+    "definition": true,
+    "derivation": true,
+    "code": true,
+    "interactive": true,
+    "literature": true,
+    "audit": true
+  }
+}
